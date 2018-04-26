@@ -5,16 +5,16 @@ import Card from './Card';
 
 export default class PathListSelectedCar extends Component {
     render() {
-        const { pathListSelectedCar } = this.props;
+        const { selectedCar, pathLists } = this.props;
         return (
             <div className="pathListSelectedCar" >
-                {pathListSelectedCar.map(path => {
-                        return (
-                            <Fragment key={path.dateBegin}>
-                                <Card path = {path}/>
-                            </Fragment>
-                        )
-                    })}
+                {
+                pathLists.filter(path => {
+                    return (path.name === selectedCar)
+                }).map( path =>{ return (
+                <Card path={path} key={path.dateBegin}/>
+                )})
+                }
             </div>
         )
     }

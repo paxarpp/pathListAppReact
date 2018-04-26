@@ -43,7 +43,7 @@ const initialState = {
     }],
     isNewCar: false,
     isNewPath: false,
-    pathListSelectedCar: [],
+    selectedCar: '',
     selectPathList:'',
 }
 
@@ -51,11 +51,7 @@ export const reducer = handleActions({
     [InfoCarReducer]: (state, action) => {
         return {
             ...state,
-            pathListSelectedCar: state.pathLists.filter(path => {
-                return (
-                    path.name === action.payload
-                )
-            }),
+            selectedCar: action.payload,
             pathLists: state.pathLists.slice().sort((a, b) => {
                 if (action.payload === b.name) {
                     return 1

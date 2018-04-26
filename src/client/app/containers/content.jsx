@@ -11,16 +11,15 @@ import VeiwAndEditPathList from '../components/VeiwAndEditPathList';
 
 class Content extends Component {
     render() {
-       const { isNewCar, isNewPath, pathListSelectedCar, selectPathList } = this.props;
-       
+       const { isNewCar, isNewPath, selectedCar, selectPathList, pathLists } = this.props;
         return (
             <div className="container">
                 <CarListContainer/>
                 <PathListContainer/>
                 {isNewCar && <CreateCar/>}
                 {isNewPath && <CreatePath/>}
-                {selectPathList && <VeiwAndEditPathList selectPathList={selectPathList}/>}
-                <PathListSelectedCar pathListSelectedCar = { pathListSelectedCar }/>
+                {selectPathList && <VeiwAndEditPathList selectPathList={ selectPathList }/>}
+                {selectedCar && <PathListSelectedCar selectedCar = { selectedCar } pathLists = { pathLists }/>}
             </div>
         )
     }
@@ -29,8 +28,9 @@ const mapStateToProps = (state) => {
     return{
         isNewCar: state.isNewCar,
         isNewPath: state.isNewPath,
-        pathListSelectedCar: state.pathListSelectedCar,
+        selectedCar: state.selectedCar,
         selectPathList: state.selectPathList,
+        pathLists: state.pathLists,
     }  
 }
 export default connect(mapStateToProps, null)(Content);
