@@ -12,7 +12,8 @@ import {
 import {
     deletePathReducer,
     addPathReducer,
-    setIsNewPath
+    setIsNewPath,
+    infoPathReducer
 } from '../actions/pathLists';
 
 const initialState = {
@@ -43,6 +44,7 @@ const initialState = {
     isNewCar: false,
     isNewPath: false,
     pathListSelectedCar: [],
+    selectPathList:'',
 }
 
 export const reducer = handleActions({
@@ -53,21 +55,20 @@ export const reducer = handleActions({
                 return (
                     path.name === action.payload
                 )
-            })
-            // cars: state.cars.slice().sort((a, b) => {
-            //     if (action.payload === b.name){
-            //         return 1
-            //     } else if (action.payload === a.name) {
-            //         return -1
-            //     }
-            // }),
-            // pathLists: state.pathLists.slice().sort((a, b) => {
-            //     if (action.payload === b.name) {
-            //         return 1
-            //     } else if(action.payload === a.name){
-            //         return -1
-            //     }
-            // })
+            }),
+            pathLists: state.pathLists.slice().sort((a, b) => {
+                if (action.payload === b.name) {
+                    return 1
+                } else if(action.payload === a.name){
+                    return -1
+                }
+            }),
+        }
+    },
+    [infoPathReducer]: (state, action) => {
+        return {
+            ...state,
+            selectPathList: action.payload,
         }
     },
     [deleteCarReducer]: (state, action) => {
@@ -120,11 +121,10 @@ export const reducer = handleActions({
             isNewPath: !(state.isNewPath),
         }
     },
-    [closeWindowDispatch]: (state) => {
+    [closeWindowDispatch]: (state, action) => {
         return {
             ...state,
-            isNewCar: false,
-            isNewPath: false,
+            [action.payload]: false
         }
     },
 }, initialState);

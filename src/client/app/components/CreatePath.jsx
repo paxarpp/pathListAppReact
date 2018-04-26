@@ -79,7 +79,7 @@ class CreatePath extends Component {
     handleClose = e => {
         const { close } = this.props
         e.preventDefault()
-        close()
+        close('isNewPath')
     }
     render() {
         const { cars } = this.props;
@@ -199,7 +199,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         addDataPath: (path) => savePath(dispatch, path),
-        close: () => closeWindow(dispatch),
+        close: (isNewPath) => closeWindow(dispatch, isNewPath),
     }
 }
 

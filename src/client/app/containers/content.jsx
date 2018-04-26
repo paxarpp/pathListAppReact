@@ -7,10 +7,11 @@ import PathListContainer from './pathListContainer.jsx';
 import CreateCar from '../components/CreateCar';
 import CreatePath from '../components/CreatePath';
 import PathListSelectedCar from '../components/PathListSelectedCar';
+import VeiwAndEditPathList from '../components/VeiwAndEditPathList';
 
 class Content extends Component {
     render() {
-       const { isNewCar, isNewPath, pathListSelectedCar } = this.props;
+       const { isNewCar, isNewPath, pathListSelectedCar, selectPathList } = this.props;
        
         return (
             <div className="container">
@@ -18,6 +19,7 @@ class Content extends Component {
                 <PathListContainer/>
                 {isNewCar && <CreateCar/>}
                 {isNewPath && <CreatePath/>}
+                {selectPathList && <VeiwAndEditPathList selectPathList={selectPathList}/>}
                 <PathListSelectedCar pathListSelectedCar = { pathListSelectedCar }/>
             </div>
         )
@@ -28,6 +30,7 @@ const mapStateToProps = (state) => {
         isNewCar: state.isNewCar,
         isNewPath: state.isNewPath,
         pathListSelectedCar: state.pathListSelectedCar,
+        selectPathList: state.selectPathList,
     }  
 }
 export default connect(mapStateToProps, null)(Content);

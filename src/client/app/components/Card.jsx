@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import fildNamePathList from './fildNamePathList'
+
 export default class Card extends Component {
     render() {
         const { path } = this.props;
         return (
             <div className="cardPathList">
                 <h3> {path.name}</h3>
-                <p> паспортный расход: {path.constFuelChange} л</p>
-                <p> дата: {path.dateBegin}</p>
-                <p> пробег: {path.milleage} км</p>
-                <p>топливо в начале: {path.fuelBegin} л</p>
-                <p> топливо в конце: {path.fuelEnd} л</p>
-                <p> заправлено: {path.addFuel} л</p>
-                <p> расход по листу: {path.deltaFuel} л</p>
+                <p>{fildNamePathList['constFuelChange']}: {path.constFuelChange} л</p>
+                <p>{fildNamePathList['dateBegin']}: {path.dateBegin}</p>
+                <p>{fildNamePathList['milleage']}: {path.milleage} км</p>
+                <p>{fildNamePathList['fuelBegin']}: {path.fuelBegin} л</p>
+                <p>{fildNamePathList['fuelEnd']}: {path.fuelEnd} л</p>
+                <p>{fildNamePathList['addFuel']}: {path.addFuel} л</p>
+                <p>{fildNamePathList['deltaFuel']}: {path.deltaFuel} л</p>
             </div>
         )
     }

@@ -21,7 +21,7 @@ export const saveCar = (dispatch, car) => {
     dispatch(closeWindowDispatch())
     dispatch(addCarReducer(car))
 }
-export const closeWindow = (dispatch) => {
-    dispatch(closeWindowDispatch())
+export const closeWindow = (dispatch, windowId) => {
+    dispatch(closeWindowDispatch(windowId))
    
 }

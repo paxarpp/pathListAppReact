@@ -10,6 +10,10 @@ export default class PathList extends Component {
         const { deletePathHandler } = this.props;
         deletePathHandler(path);
     }
+    handlerInfo=(path)=>()=>{
+        const { pathInfo } = this.props;
+        pathInfo(path);
+    }
     render() {
         const { pathLists } = this.props;
         return (
@@ -18,7 +22,7 @@ export default class PathList extends Component {
                     {pathLists.map(path => {
                         return (
                             <li key={path.name+ path.dateBegin}>
-                                <Path path={path}/>
+                                <Path path={path} handler={this.handlerInfo(path)}/>
                                 <Button handler={this.handler(path)} styleButton="delit">{String.fromCharCode(10006)}</Button>
                             </li>
                         )

@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 export default class Path extends Component {
     render() {
-       const { path } = this.props;
+       const { path, handler } = this.props;
         return (
-            <div>
+            <div  onClick={handler}>
                { path.name } : {path.dateBegin}
             </div>
         )

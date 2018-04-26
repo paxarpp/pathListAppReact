@@ -42,9 +42,9 @@ class CreateCar extends Component {
         }))
     }
     handleClose = e => {
-        const { close } = this.props
+        const { close, isNewCar } = this.props
         e.preventDefault()
-        close()
+        close('isNewCar')
     }
 
     render() {
@@ -109,12 +109,12 @@ class CreateCar extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         addDataCar: (car) => saveCar(dispatch, car),
-        close: () => closeWindow(dispatch)
+        close: (isNewCar) => closeWindow(dispatch, isNewCar)
     }
 }
 const mapStateToProps = (state) => {
     return {
-        cars: state.cars,
+        cars: state.cars
     }
 }
 
