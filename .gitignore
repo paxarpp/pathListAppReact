@@ -56,4 +56,9 @@ typings/
 
 # dotenv environment variables file
 .env
+*/src/client/dist/*
 
+dist/
+src/client/public/*
+
+node_modules/

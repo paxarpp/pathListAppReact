@@ -1,0 +1,164 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-size: 22px;
+}
+
+.header,
+.footer {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    min-height: 50px;
+    background-color: grey;
+    justify-content: center;
+}
+
+.header>.delit  {
+    align-self: flex-start;
+    margin-left: auto;
+    inline-size: 1em;
+}
+.header>.headerText  {
+    margin-left: auto;
+}
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    position: relative;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.pathList,
+.carList {
+    width: 300px;
+    padding: 10px;
+}
+
+.carList li,
+.pathList li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    align-items: baseline;
+}
+.carList li>div:hover,
+.pathList li>div:hover {
+    text-shadow: 1px 1px 5px grey;
+    transform: scale(1.1);
+    transition: all 0.2s linear;
+    cursor: pointer;
+}
+
+.carListContainer,
+.pathListContainer {
+    padding: 0;
+    box-shadow: 3px 3px 10px 1px grey;
+    height: 100%;
+    margin: 10px;
+}
+
+.popUpWrapp {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(202, 202, 202, 0.5);
+}
+.popUpContent{
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.popUp {
+    padding: 0;
+    box-shadow: 3px 3px 10px 1px grey;
+    position: fixed;
+    top: 10%;
+    left: 30%;
+    width: 400px;
+    box-sizing: border-box;
+    background-color: rgba(202, 202, 202, 0.8);
+}
+
+.popUp input,
+.popUp label,
+.popUp select {
+    font-size: 1.2rem;
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    border-bottom: 1px solid #80808099
+}
+.popUp label {
+    display: flex;
+}
+.popUp label input {
+    width: 20%;
+}
+.popUp .inputHeader {
+    margin: 5px 0 2px 0;
+}
+.popUp .resultHeader {
+    margin: 2px 0 5px 0;
+    border-bottom: 1px solid #00000080;
+}
+.submit {
+    background-color: #d1d1d126;;
+    color: #006d00;
+    font-weight: 700;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s linear;
+    box-shadow: 1px 2px 0px 1px #00000080;
+    
+}
+.submit:hover {
+    transform: scale(1.1);
+    transition: all 0.2s linear;
+}
+.delit {
+    color: red;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s linear;
+}
+.delit:hover {
+   transform: scale(1.2);
+   transition: all 0.2s linear;
+}
+.inputError {
+    color: red;
+    font-weight: 600;
+    text-align: center;
+}
+.pathListSelectedCar{
+    width: 100%;
+    align-self: flex-end;
+    box-shadow: 3px 3px 10px 1px grey;
+}
+.cardPathList {
+    box-shadow: 3px 3px 10px 1px grey;
+    width: 220px;
+    font-size: 1rem;
+    margin: 5px;
+    padding: 5px;
+}
+.cardPathList p {
+    margin: 0;
+}
+.cardPathList h3 {
+    margin: 0;
+    text-align: center;
+}
+
+
