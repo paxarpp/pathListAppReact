@@ -6,7 +6,7 @@ import { closeWindow } from '../actions/cars.js';
 import Button from '../components/Button';
 class CreatePath extends Component {
     state = {
-        carName: '',
+        name: '',
         dateBegin: '',
         pathBegin: '',
         pathEnd: '',
@@ -19,8 +19,8 @@ class CreatePath extends Component {
     }
     handleSubmit = e => {
         e.preventDefault()
-        const { 
-            carName,
+        const {
+            name,
             dateBegin,
             pathBegin,
             pathEnd,
@@ -30,9 +30,10 @@ class CreatePath extends Component {
             addFuel,
             deltaFuel,
             isWrong } = this.state;
-        const { addDataPath, pathLists } = this.props;
+
+        const { addDataPath, pathLists, close } = this.props;
         const path = {
-            name: carName,
+            name,
             dateBegin,
             pathBegin,
             pathEnd,
@@ -42,58 +43,63 @@ class CreatePath extends Component {
             addFuel,
             deltaFuel,
         }
-        if ( path.name === '' ){
+        const { cars } = this.props;       
+        if (path.name === '') {
             this.setState(() => ({
                 isWrong: true,
             }))
         } else {
-            if (pathLists.some(elem =>{ 
-                return ( elem.name === path.name && elem.dateBegin === path.dateBegin )
-             })) 
-            {
+            if (pathLists.some(elem => {
+                return (elem.name === path.name && elem.dateBegin === path.dateBegin)
+            })) {
                 this.setState(() => ({
                     isWrong: true,
                 }))
             } else {
-                addDataPath(path)
+                path.constFuelChange=cars.filter(car => {return car.name === path.name})[0].constFuelChange,
+                path.fuel=cars.filter(car => {return car.name === path.name})[0].fuel
+                addDataPath(path);
+                close('isNewPath');
             }
         }
     }
     handleChange = e => {
         const value = e.currentTarget.value
         const fieldName = e.currentTarget.dataset.fieldName
+
+
         this.setState(prev => ({
             ...prev,
             [fieldName]: value,
             isWrong: false
-        }))  
+        }))
         const { pathEnd, pathBegin } = this.state;
         this.setState(prev => ({
-            milleage:  prev.pathEnd-prev.pathBegin
-        }))       
+            milleage: prev.pathEnd - prev.pathBegin
+        }))
         const { fuelBegin, fuelEnd, addFuel } = this.state;
-        this.setState(prev => ({ 
+        this.setState(prev => ({
             deltaFuel: (+prev.fuelBegin + +prev.addFuel - +prev.fuelEnd)
-        }))       
+        }))
     }
     handleClose = e => {
         const { close } = this.props
-        e.preventDefault()
-        close('isNewPath')
+        e.preventDefault();
+        close('isNewPath');
     }
     render() {
         const { cars } = this.props;
-        const { 
-                carName,
-                dateBegin,
-                pathBegin,
-                pathEnd,
-                milleage,
-                fuelBegin,
-                fuelEnd,
-                addFuel,
-                deltaFuel,
-                isWrong } = this.state
+        const {
+            name,
+            dateBegin,
+            pathBegin,
+            pathEnd,
+            milleage,
+            fuelBegin,
+            fuelEnd,
+            addFuel,
+            deltaFuel,
+            isWrong } = this.state;
         return (
             <div className="popUpWrapp">
                 <div className="popUp">
@@ -104,20 +110,18 @@ class CreatePath extends Component {
                     <div className="popUpContent">
                         <h4 className="inputHeader">выберите автомобиль</h4>
                         <select
-                          data-field-name={'carName'}
-                          value={carName}
-                          onChange={this.handleChange}
+                            data-field-name={'name'}
+                            value={name}
+                            onChange={this.handleChange}
                         >
-                        <option></option>
+                            <option></option>
                             {cars.map(car => {
                                 return (
-                                    <option
-                                        key={car.name}
-                                      >
-                                      {car.name}
+                                    <option key={car.name}>
+                                        {car.name}
                                     </option>
                                 )
-                            } )}
+                            })}
                         </select>
                         <h4 className="inputHeader">выберите дату начала путевки</h4>
                         <input

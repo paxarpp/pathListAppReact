@@ -18,7 +18,6 @@ export const deletePathToName = (dispatch, path) => {
 export const addNewPath = (dispatch) => {
     dispatch(setIsNewPath())
 }
-export const savePath = (dispatch, car) => {
-    dispatch(closeWindowDispatch())
-    dispatch(addPathReducer(car))
+export const savePath = (dispatch, path) => {
+    dispatch(addPathReducer(path))
 }

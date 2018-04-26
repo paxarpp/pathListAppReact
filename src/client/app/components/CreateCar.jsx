@@ -5,19 +5,19 @@ import { saveCar, closeWindow } from '../actions/cars.js';
 import Button from '../components/Button';
 class CreateCar extends Component {
     state = {
-        carName: '',
-        constFuel: '',
-        typeFuel: 'AI',
+        name: '',
+        constFuelChange: '',
+        fuel: 'AI',
         isWrong: false
     }
     handleSubmit = e => {
         e.preventDefault()
-        const { carName, constFuel, typeFuel, isWrong } = this.state;
-        const { addDataCar, cars } = this.props;
+        const { name, constFuelChange, fuel, isWrong } = this.state;
+        const { addDataCar, cars, close } = this.props;
         const car = {
-            name: carName,
-            constFuelChange: constFuel,
-            fuel: typeFuel
+            name,
+            constFuelChange,
+            fuel
         }
         if (car.name === '') {
             this.setState(() => ({
@@ -29,7 +29,8 @@ class CreateCar extends Component {
                     isWrong: true,
                 }))
             } else {
-                addDataCar(car)
+                addDataCar(car);
+                close('isNewCar');
             }
         }
     }
@@ -48,7 +49,7 @@ class CreateCar extends Component {
     }
 
     render() {
-        const { carName, constFuel, typeFuel, isWrong } = this.state
+        const { name, constFuelChange, fuel, isWrong } = this.state
         return (
             <div className="popUpWrapp">
                 <div className="popUp">
@@ -59,28 +60,28 @@ class CreateCar extends Component {
                     <div className="popUpContent">
                         <h4 className="inputHeader">введите название автомобиля</h4>
                         <input
-                            data-field-name={'carName'}
+                            data-field-name={'name'}
                             type={'text'}
                             onChange={this.handleChange}
                             placeholder={'название'}
-                            value={carName}
+                            value={name}
                         />
                         <h4 className="inputHeader">введите паспортный расход топлива</h4>
                         <input
-                            data-field-name={'constFuel'}
+                            data-field-name={'constFuelChange'}
                             type={'number'}
                             onChange={this.handleChange}
                             placeholder={'расход по паспорту на 100 км'}
-                            value={constFuel}
+                            value={constFuelChange}
                             step={'0.01'}
                             min={'0'}
                         />
                         <h4 className="inputHeader">выберите тип топлива</h4>
                         <label>Бензин
                         <input
-                                checked={this.state.typeFuel === 'AI'}
-                                name={"typeFuel"}
-                                data-field-name={'typeFuel'}
+                                checked={this.state.fuel === 'AI'}
+                                name={"fuel"}
+                                data-field-name={'fuel'}
                                 type={'radio'}
                                 onChange={this.handleChange}
                                 value={"AI"}
@@ -88,9 +89,9 @@ class CreateCar extends Component {
                         </label>
                         <label>Дизель
                         <input
-                                checked={this.state.typeFuel === 'DT'}
-                                name={"typeFuel"}
-                                data-field-name={'typeFuel'}
+                                checked={this.state.fuel === 'DT'}
+                                name={"fuel"}
+                                data-field-name={'fuel'}
                                 type={'radio'}
                                 onChange={this.handleChange}
                                 value={"DT"}

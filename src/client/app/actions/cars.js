@@ -18,7 +18,6 @@ export const addNewCar = (dispatch) => {
     dispatch(setIsNewCar())
 }
 export const saveCar = (dispatch, car) => {
-    dispatch(closeWindowDispatch())
     dispatch(addCarReducer(car))
 }
 export const closeWindow = (dispatch, windowId) => {
