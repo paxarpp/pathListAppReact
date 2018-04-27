@@ -6,6 +6,11 @@ import Button from '../components/Button';
 
 export default class CarList extends Component {
     handler=(name)=>()=>{
+        debugger
+        console.log(this);
+        console.log(event);
+        console.log(event.target);
+        
         const { deleteCarHandler } = this.props;
         deleteCarHandler(name);
     }
