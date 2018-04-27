@@ -4,13 +4,33 @@ import { connect } from 'react-redux';
 import { closeWindow } from '../actions/cars.js';
 import Button from '../components/Button';
 import ViewPath from '../components/ViewPath';
+import { savePath, deletePathToName } from '../actions/pathLists.js';
 
 class VeiwAndEditPathList extends Component {
+    state = {
+        editPath: '',
+    }
     handleClose = e => {
         const { close } = this.props
         e.preventDefault()
         close('selectPathList')
     }
+    handleSave = () => {
+        const { editPath } = this.state;
+        const { deletePath, addDataPath } = this.props;
+        deletePath(editPath);
+        addDataPath(editPath);
+
+    }
+    saveData = (path) => {
+        // измененный путевой лист
+        // кудато его пристроить
+        const { editPath } = this.state;
+        this.setState({
+            editPath: path,
+        })
+    }
+
     render() {
         const { selectPathList } = this.props;
         return (
@@ -19,9 +39,9 @@ class VeiwAndEditPathList extends Component {
                     <h3 className="headerText">Выбран путевой лист</h3>
                     <Button handler={this.handleClose} styleButton="delit">{String.fromCharCode(10006)}</Button>
                 </div>
-                <ViewPath path={selectPathList} />
+                <ViewPath path={selectPathList} addData={this.saveData} />
                 <div className="footer">
-                    <Button styleButton="submit"></Button>
+                    <Button handler={this.handleSave} styleButton="submit">Сохранить изменения</Button>
                 </div>
             </div>
         )
@@ -29,7 +49,11 @@ class VeiwAndEditPathList extends Component {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        close: (selectPathList) => closeWindow(dispatch, selectPathList)
+        close: (selectPathList) => closeWindow(dispatch, selectPathList),
+
+        deletePath: (path) => deletePathToName(dispatch, path),// удалить старый
+
+        addDataPath: (path) => savePath(dispatch, path),// сохранить новый
     }
 }
 const mapStateToProps = (state) => {

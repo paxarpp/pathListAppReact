@@ -67,8 +67,6 @@ class CreatePath extends Component {
     handleChange = e => {
         const value = e.currentTarget.value
         const fieldName = e.currentTarget.dataset.fieldName
-
-
         this.setState(prev => ({
             ...prev,
             [fieldName]: value,
@@ -76,7 +74,7 @@ class CreatePath extends Component {
         }))
         const { pathEnd, pathBegin } = this.state;
         this.setState(prev => ({
-            milleage: prev.pathEnd - prev.pathBegin
+            milleage: +prev.pathEnd - +prev.pathBegin
         }))
         const { fuelBegin, fuelEnd, addFuel } = this.state;
         this.setState(prev => ({

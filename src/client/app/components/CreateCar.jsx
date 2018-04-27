@@ -40,7 +40,7 @@ class CreateCar extends Component {
         this.setState(prev => ({
             ...prev,
             [fieldName]: value,
-        }))
+        })) 
     }
     handleClose = e => {
         const { close, isNewCar } = this.props

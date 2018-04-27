@@ -1,13 +1,46 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import ReactDom from 'react-dom';
 
 import fildNamePathList from './fildNamePathList';
 import Button from '../components/Button';
 
 export default class ViewPath extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            disabledField: true,
+            pathBegin: this.props.path.pathBegin,
+            pathEnd: this.props.path.pathEnd,
+            milleage: this.props.path.milleage,
+            fuelBegin: this.props.path.fuelBegin,
+            fuelEnd: this.props.path.fuelEnd,
+            addFuel: this.props.path.addFuel,
+            deltaFuel: this.props.path.deltaFuel,
+        }
+    }
+  
+
+    handleEdit = (name) => () => {
+        const { disabledField } = this.state;
+        ReactDom.findDOMNode(this.refs[name]).disabled = false
+    }
+    handleChange = (e) => {
+        const { addData } = this.props;
+        const value = e.currentTarget.value;
+        const fieldName = e.currentTarget.dataset.fieldName;
+        const { pathEnd, pathBegin,fuelBegin, fuelEnd, addFuel } = this.state;
+        this.setState(prev => ({
+            ...prev,
+            [fieldName]: value,
+            milleage: +prev.pathEnd - +prev.pathBegin, 
+            deltaFuel: (+prev.fuelBegin + +prev.addFuel - +prev.fuelEnd),
+        }),() => {addData(this.state)})
+    }
 
     render() {
         const { path } = this.props;
+        const { disabledField } = this.state;
         return (
             <div className="View" >
                 {
@@ -19,7 +52,7 @@ export default class ViewPath extends Component {
                 }
                 {
                     Object.keys(path).filter(elem => {
-                        return(
+                        return (
                             elem !== 'name' && elem !== 'fuel' && elem !== 'constFuelChange' && elem !== 'ConsumptionFactoryFuel'
                         )
                     }).map(elem => {
@@ -30,18 +63,19 @@ export default class ViewPath extends Component {
                                     <input
                                         data-field-name={elem}
                                         type={'text'}
-                                        // onChange={this.handleChange}
+                                        onChange={this.handleChange}
                                         placeholder={fildNamePathList[elem]}
                                         defaultValue={path[elem]}
-                                        disabled
+                                        disabled={disabledField}
+                                        ref={elem}
                                     />
-                                    <Button handler={this.handleEdit} styleButton="edit">{String.fromCharCode(9998)}</Button>
+                                    <Button handler={this.handleEdit(elem)} styleButton="edit">{String.fromCharCode(9998)}</Button>
                                 </div>
                             </Fragment>
                         )
                     })
                 }
-                 {
+                {
                     <Fragment>
                         <label>{fildNamePathList['ConsumptionFactoryFuel']}: {path.ConsumptionFactoryFuel} л</label>
                     </Fragment>
