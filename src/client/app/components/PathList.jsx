@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
 import Path from './Path.jsx';
@@ -19,6 +20,7 @@ export default class PathList extends Component {
         return (
             <div className="pathList" >
                 <ul>
+                <ReactCSSTransitionGroup transitionName="anim" transitionAppear={false} transitionEnterTimeout={300} transitionEnter={true} transitionLeave={true}>
                     {pathLists.map(path => {
                         return (
                             <li key={path.name+ path.dateBegin}>
@@ -27,6 +29,7 @@ export default class PathList extends Component {
                             </li>
                         )
                     })}
+                </ReactCSSTransitionGroup>
                 </ul>
             </div>
         )

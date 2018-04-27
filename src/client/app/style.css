@@ -65,6 +65,7 @@ body {
     box-shadow: 3px 3px 10px 1px grey;
     height: 100%;
     margin: 10px;
+    overflow: hidden;
 }
 .pathListView {
     padding: 0;
@@ -197,5 +198,20 @@ body {
     margin: 0;
     text-align: center;
 }
-
+.anim-enter {
+    margin-left: -500px;
+}
+   
+.anim-enter.anim-enter-active {
+    margin-left: 0;
+    transition: margin .3s ease-in;
+}
+.anim-leave {
+    margin-left: 0;
+}
+   
+.anim-leave.anim-leave-active {
+    margin-left: -500px;
+    transition: margin .3s ease-in;
+}
 

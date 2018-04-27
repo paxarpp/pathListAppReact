@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Car from './Car.jsx';
 import Button from '../components/Button';
 
 export default class CarList extends Component {
-    handler=(name)=>()=>{
-        debugger
-        console.log(this);
-        console.log(event);
-        console.log(event.target);
-        
+    handler=(name)=>()=>{ 
         const { deleteCarHandler } = this.props;
         deleteCarHandler(name);
     }
@@ -24,6 +20,7 @@ export default class CarList extends Component {
         return (
             <div className="carList" >
                 <ul>
+                <ReactCSSTransitionGroup transitionName="anim" transitionAppear={false} transitionEnterTimeout={300} transitionEnter={true} transitionLeave={true}>
                     {cars.map(car => {
                         return (
                             <li key={car.name}>
@@ -32,6 +29,7 @@ export default class CarList extends Component {
                             </li>
                         )
                     })}
+                    </ReactCSSTransitionGroup>
                 </ul>
             </div>
         )
