@@ -1,7 +1,7 @@
 const fildNamePathList = {
     name: 'название',
     fuel: 'тип топлива',
-    constFuelChange: 'расход по паспорту',
+    constFuelChange: 'паспортный расход на 100км',
     dateBegin: 'дата',
     pathBegin: 'пробег в начале',
     pathEnd: 'пробег в конце',
@@ -10,5 +10,6 @@ const fildNamePathList = {
     fuelEnd: 'топливо в конце',
     addFuel: 'заправлено',
     deltaFuel: 'расход топлива',
+    ConsumptionFactoryFuel:'расход топлива по паспорту за пробег'
 }
 export default fildNamePathList;

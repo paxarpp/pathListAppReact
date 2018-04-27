@@ -20,7 +20,7 @@ export default class PathList extends Component {
         return (
             <div className="pathList" >
                 <ul>
-                <ReactCSSTransitionGroup transitionName="anim" transitionAppear={false} transitionEnterTimeout={300} transitionEnter={true} transitionLeave={true}>
+                <ReactCSSTransitionGroup transitionName="anim" transitionAppear={false} transitionEnterTimeout={300} transitionLeaveTimeout={300} transitionEnter={true} transitionLeave={true}>
                     {pathLists.map(path => {
                         return (
                             <li key={path.name+ path.dateBegin}>

@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import { savePath } from '../actions/pathLists.js';
 import { closeWindow } from '../actions/cars.js';
-import Button from '../components/Button';
+import Button from './Button';
+import calculateFieldPath from './calculateFieldPath';
 class CreatePath extends Component {
     state = {
         name: '',
@@ -56,9 +57,9 @@ class CreatePath extends Component {
                     isWrong: true,
                 }))
             } else {
-                path.constFuelChange=cars.filter(car => {return car.name === path.name})[0].constFuelChange,
-                path.fuel=cars.filter(car => {return car.name === path.name})[0].fuel
-                addDataPath(path);
+                path.constFuelChange=cars.filter(car => {return car.name === path.name})[0].constFuelChange;
+                path.fuel=cars.filter(car => {return car.name === path.name})[0].fuel;
+                addDataPath(calculateFieldPath(path));
                 close('isNewPath');
             }
         }

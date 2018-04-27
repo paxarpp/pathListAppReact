@@ -16,6 +16,7 @@ export default class Card extends Component {
                 <p>{fildNamePathList['fuelEnd']}: {path.fuelEnd} л</p>
                 <p>{fildNamePathList['addFuel']}: {path.addFuel} л</p>
                 <p>{fildNamePathList['deltaFuel']}: {path.deltaFuel} л</p>
+                <p>{fildNamePathList['ConsumptionFactoryFuel']}: {path.ConsumptionFactoryFuel} л</p>
             </div>
         )
     }

@@ -11,24 +11,40 @@ export default class ViewPath extends Component {
         return (
             <div className="View" >
                 {
-                    Object.keys(path).map(elem => {
+                    <Fragment>
+                        <label>{fildNamePathList['name']}: {path.name}</label>
+                        <label>{fildNamePathList['fuel']}: {path.fuel}</label>
+                        <label>{fildNamePathList['constFuelChange']}: {path.constFuelChange} л</label>
+                    </Fragment>
+                }
+                {
+                    Object.keys(path).filter(elem => {
+                        return(
+                            elem !== 'name' && elem !== 'fuel' && elem !== 'constFuelChange' && elem !== 'ConsumptionFactoryFuel'
+                        )
+                    }).map(elem => {
                         return (
                             <Fragment key={elem}>
                                 <label>{fildNamePathList[elem]}</label>
                                 <div>
-                                <input
-                                    data-field-name={elem}
-                                    type={'text'}
-                                    // onChange={this.handleChange}
-                                    placeholder={fildNamePathList[elem]}
-                                    defaultValue={path[elem]}
-                                    disabled
+                                    <input
+                                        data-field-name={elem}
+                                        type={'text'}
+                                        // onChange={this.handleChange}
+                                        placeholder={fildNamePathList[elem]}
+                                        defaultValue={path[elem]}
+                                        disabled
                                     />
-                                    <Button handler={this.handleClose} styleButton="edit">{String.fromCharCode(9998)}</Button>
+                                    <Button handler={this.handleEdit} styleButton="edit">{String.fromCharCode(9998)}</Button>
                                 </div>
                             </Fragment>
                         )
                     })
+                }
+                 {
+                    <Fragment>
+                        <label>{fildNamePathList['ConsumptionFactoryFuel']}: {path.ConsumptionFactoryFuel} л</label>
+                    </Fragment>
                 }
             </div>
         )

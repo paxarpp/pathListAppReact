@@ -20,7 +20,7 @@ export default class CarList extends Component {
         return (
             <div className="carList" >
                 <ul>
-                <ReactCSSTransitionGroup transitionName="anim" transitionAppear={false} transitionEnterTimeout={300} transitionEnter={true} transitionLeave={true}>
+                <ReactCSSTransitionGroup transitionName="anim" transitionAppear={false} transitionEnterTimeout={300} transitionLeaveTimeout={300} transitionEnter={true} transitionLeave={true}>
                     {cars.map(car => {
                         return (
                             <li key={car.name}>
