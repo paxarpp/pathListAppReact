@@ -12,19 +12,19 @@ class VeiwAndEditPathList extends Component {
     }
     handleClose = e => {
         const { close } = this.props
-        e.preventDefault()
-        close('selectPathList')
+        e.preventDefault();
+        close('selectPathList');
     }
     handleSave = () => {
         const { editPath } = this.state;
-        const { deletePath, addDataPath } = this.props;
-        deletePath(editPath);
-        addDataPath(editPath);
-
+        if(editPath){
+            const { deletePath, addDataPath, close } = this.props;
+            deletePath(editPath);
+            addDataPath(editPath);
+            close('selectPathList');
+        }
     }
-    saveData = (path) => {
-        // измененный путевой лист
-        // кудато его пристроить
+    saveData = ({disabledField, ...path}) => { 
         const { editPath } = this.state;
         this.setState({
             editPath: path,

@@ -5,6 +5,7 @@ import { savePath } from '../actions/pathLists.js';
 import { closeWindow } from '../actions/cars.js';
 import Button from './Button';
 import calculateFieldPath from './calculateFieldPath';
+import fildNamePathList from './fildNamePathList';
 class CreatePath extends Component {
     state = {
         name: '',
@@ -65,20 +66,18 @@ class CreatePath extends Component {
         }
     }
     handleChange = e => {
-        const value = e.currentTarget.value
-        const fieldName = e.currentTarget.dataset.fieldName
+        const value = e.currentTarget.value;
+        const fieldName = e.currentTarget.dataset.fieldName;
+        const { pathEnd, pathBegin,fuelBegin, fuelEnd, addFuel } = this.state;
         this.setState(prev => ({
             ...prev,
             [fieldName]: value,
             isWrong: false
         }))
-        const { pathEnd, pathBegin } = this.state;
         this.setState(prev => ({
-            milleage: +prev.pathEnd - +prev.pathBegin
-        }))
-        const { fuelBegin, fuelEnd, addFuel } = this.state;
-        this.setState(prev => ({
-            deltaFuel: (+prev.fuelBegin + +prev.addFuel - +prev.fuelEnd)
+            ...prev,
+            milleage: +prev.pathEnd - +prev.pathBegin,
+            deltaFuel: ((+prev.fuelBegin + +prev.addFuel) - +prev.fuelEnd),
         }))
     }
     handleClose = e => {
@@ -181,7 +180,7 @@ class CreatePath extends Component {
                             step={'0.01'}
                             min={'0'}
                         />
-                        <h4 className="resultHeader">расход топлива составил: {deltaFuel} л</h4>
+                        <h4 className="resultHeader">{fildNamePathList['deltaFuel']}: {deltaFuel} л</h4>
                     </div>
                     {isWrong && <h3 className="inputError">ошибка</h3>}
                     <div className="footer">

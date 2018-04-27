@@ -10,6 +10,11 @@ export default class ViewPath extends Component {
         super(props)
         this.state = {
             disabledField: true,
+            dateBegin: this.props.path.dateBegin,
+            name: this.props.path.name,
+            fuel: this.props.path.fuel,
+            constFuelChange: this.props.path.constFuelChange,
+            ConsumptionFactoryFuel: this.props.path.ConsumptionFactoryFuel,
             pathBegin: this.props.path.pathBegin,
             pathEnd: this.props.path.pathEnd,
             milleage: this.props.path.milleage,
@@ -19,7 +24,6 @@ export default class ViewPath extends Component {
             deltaFuel: this.props.path.deltaFuel,
         }
     }
-  
 
     handleEdit = (name) => () => {
         const { disabledField } = this.state;
@@ -29,13 +33,15 @@ export default class ViewPath extends Component {
         const { addData } = this.props;
         const value = e.currentTarget.value;
         const fieldName = e.currentTarget.dataset.fieldName;
-        const { pathEnd, pathBegin,fuelBegin, fuelEnd, addFuel } = this.state;
+        const { pathEnd, pathBegin, fuelBegin, fuelEnd, addFuel } = this.state;
         this.setState(prev => ({
             ...prev,
             [fieldName]: value,
-            milleage: +prev.pathEnd - +prev.pathBegin, 
-            deltaFuel: (+prev.fuelBegin + +prev.addFuel - +prev.fuelEnd),
-        }),() => {addData(this.state)})
+        }), () => { addData(this.state) })
+        this.setState(prev => ({
+            milleage: +prev.pathEnd - +prev.pathBegin,
+            deltaFuel: (( +prev.fuelBegin + +prev.addFuel )- +prev.fuelEnd),
+        }), () => { addData(this.state) })
     }
 
     render() {
