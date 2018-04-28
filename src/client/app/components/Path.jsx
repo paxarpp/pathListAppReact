@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 export default class Path extends Component {
     render() {
-       const { path, handler } = this.props;
+       const { path, handler, selectedCar } = this.props;
         return (
-            <div  onClick={handler}>
+            <div  onClick={handler} className={selectedCar === path.name ? 'selected': ''}>
                { path.name } : {path.dateBegin}
             </div>
         )

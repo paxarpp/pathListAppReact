@@ -79,7 +79,11 @@ body {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding: 0 20px;
+}
+.pathListView .View label {
+    margin: 0 0 5px 60px
 }
 .pathListView .View div{
     display: flex;
@@ -215,3 +219,16 @@ body {
     transition: margin .3s ease-in;
 }
 
+.selected{
+    border-bottom: 1px dotted grey;
+    transform: scale(1.05);
+    position: relative;
+}
+.selected::after{
+   content: '';
+   border: 3px solid grey;
+   border-radius: 50%;
+   position: absolute;
+   top: 10px;
+   left: -15px;
+}

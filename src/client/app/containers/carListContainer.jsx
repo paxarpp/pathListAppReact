@@ -20,14 +20,18 @@ class CarListContainer extends Component {
         addCar();
     }
     render() {
-       const { cars } = this.props;
+       const { cars, selectedCar } = this.props;
         
    return (
             <div className="carListContainer">
                 <div className="header">
                     <h3>Список Автомобилей</h3>
                 </div> 
-                <CarList cars={cars} deleteCarHandler={this.deleteCar} carInfo={this.carInfo} />
+                <CarList 
+                    selectedCar={selectedCar}
+                    cars={cars} 
+                    deleteCarHandler={this.deleteCar} 
+                    carInfo={this.carInfo} />
                 <div className="footer">
                     <Button handler={this.handlerAddCar} styleButton="submit">Добавить авто</Button>
                 </div>
@@ -37,7 +41,8 @@ class CarListContainer extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        cars: state.cars
+        cars: state.cars,
+        selectedCar: state.selectedCar
     }
 }
 const mapDispatchToProps = (dispatch) => {

@@ -16,7 +16,7 @@ export default class CarList extends Component {
         
     }
     render() {
-        const { cars } = this.props;
+        const { cars, selectedCar } = this.props;
         return (
             <div className="carList" >
                 <ul>
@@ -24,7 +24,10 @@ export default class CarList extends Component {
                     {cars.map(car => {
                         return (
                             <li key={car.name}>
-                                <Car car={car} handler={this.handlerInfo(car.name)}/>
+                                <Car 
+                                    selectedCar={selectedCar}
+                                    car={car} 
+                                    handler={this.handlerInfo(car.name)}/>
                                 <Button handler={this.handler(car.name)} styleButton="delit">{String.fromCharCode(10006)}</Button>
                             </li>
                         )

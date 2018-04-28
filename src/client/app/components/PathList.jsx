@@ -16,7 +16,7 @@ export default class PathList extends Component {
         pathInfo(path);
     }
     render() {
-        const { pathLists } = this.props;
+        const { pathLists, selectedCar } = this.props;
         return (
             <div className="pathList" >
                 <ul>
@@ -24,7 +24,10 @@ export default class PathList extends Component {
                     {pathLists.map(path => {
                         return (
                             <li key={path.name+ path.dateBegin}>
-                                <Path path={path} handler={this.handlerInfo(path)}/>
+                                <Path 
+                                    selectedCar={selectedCar}
+                                    path={path}
+                                    handler={this.handlerInfo(path)}/>
                                 <Button handler={this.handler(path)} styleButton="delit">{String.fromCharCode(10006)}</Button>
                             </li>
                         )

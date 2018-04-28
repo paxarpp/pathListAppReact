@@ -51,15 +51,21 @@ export default class ViewPath extends Component {
             <div className="View" >
                 {
                     <Fragment>
-                        <label>{fildNamePathList['name']}: {path.name}</label>
+                        <label>{path.name}</label>
                         <label>{fildNamePathList['fuel']}: {path.fuel}</label>
                         <label>{fildNamePathList['constFuelChange']}: {path.constFuelChange} л</label>
+                        <label>{fildNamePathList['dateBegin']}: {path.dateBegin}</label>
                     </Fragment>
                 }
                 {
                     Object.keys(path).filter(elem => {
                         return (
-                            elem !== 'name' && elem !== 'fuel' && elem !== 'constFuelChange' && elem !== 'ConsumptionFactoryFuel'
+                            elem !== 'name' &&
+                            elem !== 'fuel' && 
+                            elem !== 'constFuelChange' && 
+                            elem !== 'ConsumptionFactoryFuel' &&
+                            elem !== 'dateBegin' &&
+                            elem !== 'deltaFuel'
                         )
                     }).map(elem => {
                         return (
@@ -83,6 +89,7 @@ export default class ViewPath extends Component {
                 }
                 {
                     <Fragment>
+                        <label>{fildNamePathList['deltaFuel']}: {path.deltaFuel} л</label>
                         <label>{fildNamePathList['ConsumptionFactoryFuel']}: {path.ConsumptionFactoryFuel} л</label>
                     </Fragment>
                 }
