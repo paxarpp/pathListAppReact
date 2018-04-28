@@ -6,7 +6,12 @@ import CarList from '../components/CarList';
 import Button from '../components/Button';
 
 import { deleteCarToName, addNewCar, infoCarToName } from '../actions/cars.js';
+import saveToLocalStorage from '../components/saveToLocalStorage.js'
 class CarListContainer extends Component {
+    componentDidUpdate(){
+        const { cars, pathLists } = this.props;
+        saveToLocalStorage(cars, pathLists);
+    }
     deleteCar = (name) => {
         const { deleteCar } = this.props;
         deleteCar(name);
@@ -20,7 +25,7 @@ class CarListContainer extends Component {
         addCar();
     }
     render() {
-       const { cars, selectedCar } = this.props;
+       const { cars, selectedCar, pathLists } = this.props;
         
    return (
             <div className="carListContainer">
@@ -29,6 +34,7 @@ class CarListContainer extends Component {
                 </div> 
                 <CarList 
                     selectedCar={selectedCar}
+                    pathLists={pathLists}
                     cars={cars} 
                     deleteCarHandler={this.deleteCar} 
                     carInfo={this.carInfo} />
@@ -42,6 +48,7 @@ class CarListContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         cars: state.cars,
+        pathLists: state.pathLists,
         selectedCar: state.selectedCar
     }
 }
@@ -49,7 +56,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         deleteCar: (name) => deleteCarToName(dispatch, name),
         carInfo: (name) => infoCarToName(dispatch, name),
-        addCar: () => addNewCar(dispatch)
+        addCar: () => addNewCar(dispatch),
     }
 }
 

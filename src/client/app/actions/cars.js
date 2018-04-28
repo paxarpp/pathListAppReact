@@ -1,4 +1,6 @@
-import { createAction } from 'redux-actions';
+import {
+    createAction
+} from 'redux-actions';
 
 export const deleteCarReducer = createAction('DELETE_CAR_REDUCER');
 export const addCarReducer = createAction('ADD_CAR_REDUCER');
@@ -22,16 +24,11 @@ export const saveCar = (dispatch, car) => {
     dispatch(addCarReducer(car))
 }
 export const closeWindow = (dispatch, windowId) => {
-    dispatch(closeWindowDispatch(windowId)) 
+    dispatch(closeWindowDispatch(windowId))
 }
 export const loadLocalStorage = (dispatch) => {
-const obj ={};
+    const obj = {};
     obj.cars = localStorage.hasOwnProperty('cars') ? JSON.parse(localStorage.getItem('cars')) : [];
-    obj.pathLists = localStorage.hasOwnProperty('pathLists') ? JSON.parse(localStorage.getItem('pathLists')): [] ;
-
-    dispatch(loadLocalStorageDispatch(obj))  
-        
-    
-    
-
+    obj.pathLists = localStorage.hasOwnProperty('pathLists') ? JSON.parse(localStorage.getItem('pathLists')) : [];
+    dispatch(loadLocalStorageDispatch(obj))
 }

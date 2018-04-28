@@ -31,7 +31,7 @@ export default class ViewPath extends Component {
     }
     handleChange = (e) => {
         const { addData } = this.props;
-        const value = e.currentTarget.value;
+        const value = +e.currentTarget.value;
         const fieldName = e.currentTarget.dataset.fieldName;
         const { pathEnd, pathBegin, fuelBegin, fuelEnd, addFuel } = this.state;
         this.setState(prev => ({

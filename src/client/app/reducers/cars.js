@@ -16,31 +16,8 @@ import {
 } from '../actions/pathLists';
 
 const initialState = {
-    cars: [{
-            name: 'test1',
-            fuel: 'ai',
-            constFuelChange: 15
-        },
-        {
-            name: 'test2',
-            fuel: 'dt',
-            constFuelChange: 12
-        }
-    ],
-    pathLists: [{
-        name: 'test1',
-        fuel: 'ai',
-        constFuelChange: 15,
-        dateBegin: '01/02/2018',
-        pathBegin: 10,
-        pathEnd: 110,
-        milleage: 100,
-        fuelBegin: 5,
-        fuelEnd: 10,
-        addFuel: 20,
-        deltaFuel: 15,
-        ConsumptionFactoryFuel: 10,
-    }],
+    cars: [],
+    pathLists: [],
     isNewCar: false,
     isNewPath: false,
     selectedCar: '',
@@ -124,12 +101,10 @@ export const reducer = handleActions({
         }
     },
     [loadLocalStorageDispatch]: (state, action) => {
-        console.log(action.payload);
         return {
             ...state,
           cars: action.payload.cars,
-          pathLists: action.payload.pathLists,
-          
+          pathLists: action.payload.pathLists,  
         }
     },
 }, initialState);
