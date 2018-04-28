@@ -221,9 +221,9 @@ body {
 }
 
 .selected{
-    border-bottom: 1px dotted grey;
     transform: scale(1.05);
     position: relative;
+    text-decoration: underline;
 }
 .selected::after{
    content: '';

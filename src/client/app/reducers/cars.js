@@ -28,7 +28,7 @@ export const reducer = handleActions({
     [InfoCarReducer]: (state, action) => {
         return {
             ...state,
-            selectedCar: action.payload,
+            selectedCar: state.selectedCar === action.payload ? null : action.payload,
             pathLists: state.pathLists.slice().sort((a, b) => {
                 if (action.payload === b.name) {
                     return 1
