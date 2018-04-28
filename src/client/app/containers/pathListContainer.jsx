@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import Count from '../components/countPathList';
 import PathList from '../components/PathList';
 import Button from '../components/Button';
 import { deletePathToName, addNewPath, infoPathToName } from '../actions/pathLists.js';
@@ -23,6 +24,7 @@ class PathListContainer extends Component {
         
         return (
                     <div className="pathListContainer">
+                        { pathLists.length ? <Count count={pathLists.length}/> : null }
                         <div className="header">
                             <h3>Путевые листы</h3>
                         </div> 

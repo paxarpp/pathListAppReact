@@ -46,7 +46,7 @@ class CreatePath extends Component {
             deltaFuel,
         }
         const { cars } = this.props;       
-        if (path.name === '') {
+        if (path.dateBegin === '') {
             this.setState(() => ({
                 isWrong: true,
             }))

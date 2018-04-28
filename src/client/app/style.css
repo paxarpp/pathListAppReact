@@ -66,6 +66,7 @@ body {
     height: 100%;
     margin: 10px;
     overflow: hidden;
+    position: relative;
 }
 .pathListView {
     padding: 0;
@@ -231,4 +232,15 @@ body {
    position: absolute;
    top: 10px;
    left: -15px;
+}
+
+.counter {
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    top:60px;
+    right: 10px;
+    background-color: rgba(202, 202, 202, 0.8);
 }
