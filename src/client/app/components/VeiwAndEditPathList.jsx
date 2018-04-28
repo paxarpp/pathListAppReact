@@ -50,10 +50,8 @@ class VeiwAndEditPathList extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         close: (selectPathList) => closeWindow(dispatch, selectPathList),
-
-        deletePath: (path) => deletePathToName(dispatch, path),// удалить старый
-
-        addDataPath: (path) => savePath(dispatch, path),// сохранить новый
+        deletePath: (path) => deletePathToName(dispatch, path),
+        addDataPath: (path) => savePath(dispatch, path),
     }
 }
 const mapStateToProps = (state) => {

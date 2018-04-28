@@ -1,13 +1,12 @@
-import {
-    handleActions
-} from 'redux-actions';
+import { handleActions } from 'redux-actions';
 
 import {
     deleteCarReducer,
     addCarReducer,
     setIsNewCar,
     closeWindowDispatch,
-    InfoCarReducer
+    InfoCarReducer,
+    loadLocalStorageDispatch
 } from '../actions/cars';
 import {
     deletePathReducer,
@@ -122,6 +121,15 @@ export const reducer = handleActions({
         return {
             ...state,
             [action.payload]: false
+        }
+    },
+    [loadLocalStorageDispatch]: (state, action) => {
+        console.log(action.payload);
+        return {
+            ...state,
+          cars: action.payload.cars,
+          pathLists: action.payload.pathLists,
+          
         }
     },
 }, initialState);
