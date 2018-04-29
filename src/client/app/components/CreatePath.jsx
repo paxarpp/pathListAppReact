@@ -60,7 +60,7 @@ class CreatePath extends Component {
                     isWrongDuble: true,
                 }))
             } else {
-                if(path.constFuelChange){
+                if(path.name){
                     path.constFuelChange = cars.filter(car => {return car.name === path.name})[0].constFuelChange;
                     path.fuel = cars.filter(car => {return car.name === path.name})[0].fuel;
                     addDataPath(calculateFieldPath(path));
