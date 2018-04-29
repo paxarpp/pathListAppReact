@@ -27,7 +27,7 @@ export default class ViewPath extends Component {
 
     handleEdit = (name) => () => {
         const { disabledField } = this.state;
-        ReactDom.findDOMNode(this.refs[name]).disabled = false
+        name === 'milleage' ? null : ReactDom.findDOMNode(this.refs[name]).disabled = false;
     }
     handleChange = (e) => {
         const { addData } = this.props;
