@@ -27,7 +27,7 @@ export default class ViewPath extends Component {
 
     handleEdit = (name) => () => {
         const { disabledField } = this.state;
-        name === 'milleage' ? null : ReactDom.findDOMNode(this.refs[name]).disabled = false;
+        ReactDom.findDOMNode(this.refs[name]).disabled = false;
     }
     handleChange = (e) => {
         const { addData } = this.props;
@@ -46,7 +46,7 @@ export default class ViewPath extends Component {
 
     render() {
         const { path } = this.props;
-        const { disabledField } = this.state;
+        const { disabledField, milleage, deltaFuel } = this.state;
         return (
             <div className="View" >
                 {
@@ -69,7 +69,8 @@ export default class ViewPath extends Component {
                         )
                     }).map(elem => {
                         return (
-                            <Fragment key={elem}>
+                            elem === 'milleage' ? <label key={elem}>{fildNamePathList[elem]} : { milleage } км</label> 
+                            : <Fragment key={elem}>
                                 <label>{fildNamePathList[elem]}</label>
                                 <div>
                                     <input
@@ -89,7 +90,7 @@ export default class ViewPath extends Component {
                 }
                 {
                     <Fragment>
-                        <label>{fildNamePathList['deltaFuel']}: {path.deltaFuel} л</label>
+                        <label>{fildNamePathList['deltaFuel']}: {deltaFuel} л</label>
                         <label>{fildNamePathList['ConsumptionFactoryFuel']}: {path.ConsumptionFactoryFuel} л</label>
                     </Fragment>
                 }
