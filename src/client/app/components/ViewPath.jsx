@@ -33,20 +33,22 @@ export default class ViewPath extends Component {
         const { addData } = this.props;
         const value = +e.currentTarget.value;
         const fieldName = e.currentTarget.dataset.fieldName;
-        const { pathEnd, pathBegin, fuelBegin, fuelEnd, addFuel } = this.state;
         this.setState(prev => ({
             ...prev,
             [fieldName]: value,
         }), () => { addData(this.state) })
         this.setState(prev => ({
             milleage: +prev.pathEnd - +prev.pathBegin,
-            deltaFuel: (( +prev.fuelBegin + +prev.addFuel )- +prev.fuelEnd),
+            deltaFuel: Math.round((( +prev.fuelBegin + +prev.addFuel )- +prev.fuelEnd)* 100) / 100 ,
+        }), () => { addData(this.state) })
+        this.setState(prev => ({
+            ConsumptionFactoryFuel: Math.round((+prev.milleage * +prev.constFuelChange)) / 100,
         }), () => { addData(this.state) })
     }
 
     render() {
         const { path } = this.props;
-        const { disabledField, milleage, deltaFuel } = this.state;
+        const { disabledField, milleage, deltaFuel, ConsumptionFactoryFuel } = this.state;
         return (
             <div className="View" >
                 {
@@ -91,7 +93,7 @@ export default class ViewPath extends Component {
                 {
                     <Fragment>
                         <label>{fildNamePathList['deltaFuel']}: {deltaFuel} л</label>
-                        <label>{fildNamePathList['ConsumptionFactoryFuel']}: {path.ConsumptionFactoryFuel} л</label>
+                        <label>{fildNamePathList['ConsumptionFactoryFuel']}: {ConsumptionFactoryFuel} л</label>
                     </Fragment>
                 }
             </div>
