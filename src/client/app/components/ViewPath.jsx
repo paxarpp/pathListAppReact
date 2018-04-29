@@ -92,7 +92,9 @@ export default class ViewPath extends Component {
                 }
                 {
                     <Fragment>
-                        <label>{fildNamePathList['deltaFuel']}: {deltaFuel} л</label>
+                        <label
+                        className={deltaFuel === ConsumptionFactoryFuel ? null : "inputError" }
+                        >{fildNamePathList['deltaFuel']}: {deltaFuel} л</label>
                         <label>{fildNamePathList['ConsumptionFactoryFuel']}: {ConsumptionFactoryFuel} л</label>
                     </Fragment>
                 }
