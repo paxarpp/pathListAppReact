@@ -6,6 +6,7 @@ import { closeWindow } from '../actions/cars.js';
 import Button from './Button';
 import calculateFieldPath from './calculateFieldPath';
 import fildNamePathList from './fildNamePathList';
+import fildNameCheckRule from './fildNameCheckRule.js';
 class CreatePath extends Component {
     state = {
         name: '',
@@ -17,7 +18,8 @@ class CreatePath extends Component {
         fuelEnd: '',
         addFuel: '',
         deltaFuel: 0,
-        isWrong: false
+        isWrong: false,
+        isWrongDuble: false
     }
     handleSubmit = e => {
         e.preventDefault()
@@ -48,20 +50,22 @@ class CreatePath extends Component {
         const { cars } = this.props;       
         if (path.dateBegin === '') {
             this.setState(() => ({
-                isWrong: true,
+                isWrong: 'dateBegin',
             }))
         } else {
             if (pathLists.some(elem => {
                 return (elem.name === path.name && elem.dateBegin === path.dateBegin)
             })) {
                 this.setState(() => ({
-                    isWrong: true,
+                    isWrongDuble: true,
                 }))
             } else {
-                path.constFuelChange=cars.filter(car => {return car.name === path.name})[0].constFuelChange;
-                path.fuel=cars.filter(car => {return car.name === path.name})[0].fuel;
-                addDataPath(calculateFieldPath(path));
-                close('isNewPath');
+                if(path.constFuelChange){
+                    path.constFuelChange = cars.filter(car => {return car.name === path.name})[0].constFuelChange;
+                    path.fuel = cars.filter(car => {return car.name === path.name})[0].fuel;
+                    addDataPath(calculateFieldPath(path));
+                    close('isNewPath');
+                }
             }
         }
     }
@@ -72,8 +76,19 @@ class CreatePath extends Component {
         this.setState(prev => ({
             ...prev,
             [fieldName]: value,
-            isWrong: false
-        }))
+            isWrongDuble: false,
+        }), () => {
+            const { isWrong } = this.state;
+            if (fildNameCheckRule[fieldName].test(this.state[fieldName])) {         
+                this.setState({
+                    isWrong: false
+                })          
+            } else {
+                this.setState({
+                    isWrong: fieldName
+                })
+            }
+        })
         this.setState(prev => ({
             ...prev,
             milleage: +prev.pathEnd - +prev.pathBegin,
@@ -97,7 +112,8 @@ class CreatePath extends Component {
             fuelEnd,
             addFuel,
             deltaFuel,
-            isWrong } = this.state;
+            isWrong,
+            isWrongDuble } = this.state;
         return (
             <div className="popUpWrapp">
                 <div className="popUp">
@@ -123,6 +139,7 @@ class CreatePath extends Component {
                         </select>
                         <h4 className="inputHeader">выберите дату начала путевки</h4>
                         <input
+                            className={isWrong==='dateBegin' ? 'inputErrorCheck': null}
                             data-field-name={'dateBegin'}
                             type={'date'}
                             onChange={this.handleChange}
@@ -131,6 +148,7 @@ class CreatePath extends Component {
                         />
                         <h4 className="inputHeader">введите начальный пробег, км</h4>
                         <input
+                            className={isWrong==='pathBegin' ? 'inputErrorCheck': null}
                             data-field-name={'pathBegin'}
                             type={'number'}
                             onChange={this.handleChange}
@@ -141,6 +159,7 @@ class CreatePath extends Component {
                         />
                         <h4 className="inputHeader">введите конечный пробег, км</h4>
                         <input
+                            className={isWrong==='pathEnd' ? 'inputErrorCheck': null}
                             data-field-name={'pathEnd'}
                             type={'number'}
                             onChange={this.handleChange}
@@ -152,6 +171,7 @@ class CreatePath extends Component {
                         <h4 className="resultHeader">Пробег составил: {milleage} км</h4>
                         <h4 className="inputHeader">введите начальное количество топлива, л</h4>
                         <input
+                            className={isWrong==='fuelBegin' ? 'inputErrorCheck': null}
                             data-field-name={'fuelBegin'}
                             type={'number'}
                             onChange={this.handleChange}
@@ -162,6 +182,7 @@ class CreatePath extends Component {
                         />
                         <h4 className="inputHeader">введите конечное количество топлива, л</h4>
                         <input
+                            className={isWrong==='fuelEnd' ? 'inputErrorCheck': null}
                             data-field-name={'fuelEnd'}
                             type={'number'}
                             onChange={this.handleChange}
@@ -183,8 +204,9 @@ class CreatePath extends Component {
                         <h4 className="resultHeader">{fildNamePathList['deltaFuel']}: {deltaFuel} л</h4>
                     </div>
                     {isWrong && <h3 className="inputError">ошибка</h3>}
+                    {isWrongDuble && <h3 className="inputError">на эту дату лист уже есть</h3>}
                     <div className="footer">
-                        <Button handler={this.handleSubmit} styleButton="submit">Сохранить</Button>
+                        <Button handler={ isWrong === false ? this.handleSubmit : null } styleButton={ isWrong === false ? "submit" : "disableButton" }>Сохранить</Button>
                     </div>
 
                 </div>

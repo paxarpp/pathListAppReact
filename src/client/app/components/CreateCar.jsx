@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { saveCar, closeWindow } from '../actions/cars.js';
-import Button from '../components/Button';
+import Button from './Button';
+import fildNameCheckRule from './fildNameCheckRule.js';
 class CreateCar extends Component {
     state = {
         name: '',
@@ -19,7 +20,7 @@ class CreateCar extends Component {
             constFuelChange,
             fuel
         }
-        if (car.name === '') {
+        if (car.name === '' || car.constFuelChange === '') {
             this.setState(() => ({
                 isWrong: true,
             }))
@@ -35,13 +36,25 @@ class CreateCar extends Component {
         }
     }
     handleChange = e => {
-        const value = e.currentTarget.value
-        const fieldName = e.currentTarget.dataset.fieldName
+        const value = e.currentTarget.value;
+        const fieldName = e.currentTarget.dataset.fieldName;
         this.setState(prev => ({
             ...prev,
             [fieldName]: value,
-        })) 
+        }), () => {
+            const { isWrong } = this.state;
+            if (fildNameCheckRule[fieldName].test(this.state[fieldName])) {          
+                this.setState({
+                    isWrong: false
+                })          
+            } else {
+                this.setState({
+                    isWrong: fieldName
+                })
+            }
+        });
     }
+    
     handleClose = e => {
         const { close, isNewCar } = this.props
         e.preventDefault()
@@ -60,6 +73,7 @@ class CreateCar extends Component {
                     <div className="popUpContent">
                         <h4 className="inputHeader">введите название автомобиля</h4>
                         <input
+                            className={isWrong==='name' ? 'inputErrorCheck': null}
                             data-field-name={'name'}
                             type={'text'}
                             onChange={this.handleChange}
@@ -68,6 +82,7 @@ class CreateCar extends Component {
                         />
                         <h4 className="inputHeader">введите паспортный расход топлива</h4>
                         <input
+                            className={isWrong==='constFuelChange' ? 'inputErrorCheck': null}
                             data-field-name={'constFuelChange'}
                             type={'number'}
                             onChange={this.handleChange}
@@ -98,9 +113,9 @@ class CreateCar extends Component {
                             />
                         </label>
                     </div>
-                    {isWrong && <h3 className="inputError">введите правильно название авто</h3>}
+                    {isWrong && <h3 className="inputError">ошибка введеных данных</h3>}
                     <div className="footer">
-                        <Button handler={this.handleSubmit} styleButton="submit">Сохранить</Button>
+                        <Button handler={ isWrong === false ? this.handleSubmit : null } styleButton={ isWrong === false ? "submit" : "disableButton" }>Сохранить</Button>
                     </div>
                 </div>
             </div>
