@@ -84,11 +84,15 @@ body {
     padding: 0 20px;
 }
 .pathListView .View label {
-    margin: 0 0 5px 60px
+    margin: 0 0 5px 60px;
+}
+.pathListView .View input {
+    height: 1.6rem;
 }
 .pathListView .View div{
     display: flex;
     width: 100%;
+    height: 2rem;
     justify-content: space-around;
     border-bottom: 1px solid #80808030;
 }
@@ -200,8 +204,9 @@ body {
 .pathListSelectedCar{
     width: 100%;
     align-self: flex-end;
-    box-shadow: 3px 3px 10px 1px grey;
+    /* box-shadow: 3px 3px 10px 1px grey; */
     display: flex;
+    flex-flow: row wrap;
 }
 .cardPathList {
     box-shadow: 3px 3px 10px 1px grey;
