@@ -6,6 +6,7 @@ import fildNamePathList from './fildNamePathList'
 export default class Card extends Component {
     render() {
         const { path } = this.props;
+        const error = path.addFuel - path.ConsumptionFactoryFuel
         return (
             <div className="cardPathList">
                 <h3> {path.name}</h3>
@@ -15,7 +16,8 @@ export default class Card extends Component {
                 <p>{fildNamePathList['fuelBegin']}: {path.fuelBegin} л</p>
                 <p>{fildNamePathList['fuelEnd']}: {path.fuelEnd} л</p>
                 <p>{fildNamePathList['addFuel']}: {path.addFuel} л</p>
-                <p>{fildNamePathList['deltaFuel']}: {path.deltaFuel} л</p>
+                <p className={path.deltaFuel === path.ConsumptionFactoryFuel ? null : "inputError"}>
+                {fildNamePathList['deltaFuel']}: {path.deltaFuel} л</p>
                 <p>{fildNamePathList['ConsumptionFactoryFuel']}: {path.ConsumptionFactoryFuel} л</p>
             </div>
         )
