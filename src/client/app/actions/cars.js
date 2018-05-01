@@ -1,6 +1,4 @@
-import {
-    createAction
-} from 'redux-actions';
+import { createAction } from 'redux-actions';
 
 export const deleteCarReducer = createAction('DELETE_CAR_REDUCER');
 export const addCarReducer = createAction('ADD_CAR_REDUCER');
@@ -9,14 +7,12 @@ export const closeWindowDispatch = createAction('CLOSE_WINDOW_DISPATCH');
 export const InfoCarReducer = createAction('INFO_CAR_REDUCER');
 export const loadLocalStorageDispatch = createAction('LOAD_LOCAL_STORAGE_DISPATCH');
 
-
 export const infoCarToName = (dispatch, name) => {
     dispatch(InfoCarReducer(name))
 }
 export const deleteCarToName = (dispatch, name) => {
     dispatch(deleteCarReducer(name))
 }
-
 export const addNewCar = (dispatch) => {
     dispatch(setIsNewCar())
 }

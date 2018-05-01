@@ -20,25 +20,24 @@ class PathListContainer extends Component {
         pathInfo(path);
     }
     render() {
-       const { pathLists, selectedCar } = this.props;
-        
+       const { pathLists, selectedCar } = this.props;   
         return (
-                    <div className="pathListContainer">
-                        { pathLists.length ? <Count count={pathLists.length}/> : null }
-                        <div className="header">
-                            <h3>Путевые листы</h3>
-                        </div> 
-                        <PathList 
-                            selectedCar={selectedCar}
-                            pathLists={pathLists}
-                            deletePathHandler={this.deletePath}
-                            pathInfo={this.pathInfo} />
-                        <div className="footer">
-                            <Button handler={this.handlerAddPath} styleButton="submit">Добавить лист</Button>
-                        </div>
+                <div className="pathListContainer">
+                    { pathLists.length ? <Count count={pathLists.length}/> : null }
+                    <div className="header">
+                        <h3>Путевые листы</h3>
+                    </div> 
+                    <PathList 
+                        selectedCar={selectedCar}
+                        pathLists={pathLists}
+                        deletePathHandler={this.deletePath}
+                        pathInfo={this.pathInfo} />
+                    <div className="footer">
+                        <Button handler={this.handlerAddPath} styleButton="submit">Добавить лист</Button>
                     </div>
+                </div>
                 )
-            }
+    }
 }
 const mapStateToProps = (state) => {
     return {

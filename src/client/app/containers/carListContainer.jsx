@@ -25,24 +25,23 @@ class CarListContainer extends Component {
         addCar();
     }
     render() {
-       const { cars, selectedCar, pathLists } = this.props;
-        
-   return (
-            <div className="carListContainer">
-                <div className="header">
-                    <h3>Список Автомобилей</h3>
-                </div> 
-                <CarList 
-                    selectedCar={selectedCar}
-                    pathLists={pathLists}
-                    cars={cars} 
-                    deleteCarHandler={this.deleteCar} 
-                    carInfo={this.carInfo} />
-                <div className="footer">
-                    <Button handler={this.handlerAddCar} styleButton="submit">Добавить авто</Button>
+        const { cars, selectedCar, pathLists } = this.props;   
+        return (
+                <div className="carListContainer">
+                    <div className="header">
+                        <h3>Список Автомобилей</h3>
+                    </div> 
+                    <CarList 
+                        selectedCar={selectedCar}
+                        pathLists={pathLists}
+                        cars={cars} 
+                        deleteCarHandler={this.deleteCar} 
+                        carInfo={this.carInfo} />
+                    <div className="footer">
+                        <Button handler={this.handlerAddCar} styleButton="submit">Добавить авто</Button>
+                    </div>
                 </div>
-            </div>
-        )
+                )
     }
 }
 const mapStateToProps = (state) => {
