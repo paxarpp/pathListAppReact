@@ -10,6 +10,7 @@ const fildNameCheckRule = {
     fuelEnd: /\d+/,
     addFuel: /\d+/,
     deltaFuel: /\d+/,
-    ConsumptionFactoryFuel:/d+/
+    ConsumptionFactoryFuel:/\d+/,
+    addFuelWinter:/\d+/
 }
 export default fildNameCheckRule;

@@ -10,6 +10,7 @@ import fildNameCheckRule from './fildNameCheckRule.js';
 class CreatePath extends Component {
     state = {
         name: '',
+        fuel: '',
         dateBegin: '',
         pathBegin: '',
         pathEnd: '',
@@ -18,6 +19,7 @@ class CreatePath extends Component {
         fuelEnd: '',
         addFuel: '',
         deltaFuel: 0,
+        addFuelWinter: '',
         isWrong: false,
         isWrongDuble: false
     }
@@ -33,6 +35,10 @@ class CreatePath extends Component {
             fuelEnd,
             addFuel,
             deltaFuel,
+            fuel,
+            constFuelChange,
+            ConsumptionFactoryFuel,
+            addFuelWinter,
             isWrong } = this.state;
 
         const { addDataPath, pathLists, close } = this.props;
@@ -46,6 +52,10 @@ class CreatePath extends Component {
             fuelEnd,
             addFuel,
             deltaFuel,
+            fuel,
+            constFuelChange,
+            ConsumptionFactoryFuel,
+            addFuelWinter
         }
         const { cars } = this.props;       
         if (path.dateBegin === '') {
@@ -61,18 +71,31 @@ class CreatePath extends Component {
                 }))
             } else {
                 if(path.name){
-                    path.constFuelChange = cars.filter(car => {return car.name === path.name})[0].constFuelChange;
-                    path.fuel = cars.filter(car => {return car.name === path.name})[0].fuel;
                     addDataPath(calculateFieldPath(path));
+                    console.log(path)
                     close('isNewPath');
                 }
             }
         }
     }
+    handleChangeName = e => {
+        const value = e.currentTarget.value;
+        const fieldName = e.currentTarget.dataset.fieldName;
+        const { cars } = this.props; 
+            this.setState(prev => ({
+                ...prev,
+                [fieldName]: value,
+            }))   
+            this.setState(prev => ({
+                ...prev,
+                fuel: cars.filter(car => {return car.name === value})[0].fuel,
+                constFuelChange: cars.filter(car => {return car.name === value})[0].constFuelChange,
+            }))
+    }
     handleChange = e => {
         const value = e.currentTarget.value;
         const fieldName = e.currentTarget.dataset.fieldName;
-        const { pathEnd, pathBegin,fuelBegin, fuelEnd, addFuel } = this.state;
+        const { pathEnd, pathBegin,fuelBegin, fuelEnd, addFuel, addFuelWinter } = this.state;
         this.setState(prev => ({
             ...prev,
             [fieldName]: value,
@@ -92,7 +115,7 @@ class CreatePath extends Component {
         this.setState(prev => ({
             ...prev,
             milleage: +prev.pathEnd - +prev.pathBegin,
-            deltaFuel: ((+prev.fuelBegin + +prev.addFuel) - +prev.fuelEnd),
+            deltaFuel: ((+prev.fuelBegin + +prev.addFuel + +prev.addFuelWinter) - +prev.fuelEnd),
         }))
     }
     handleClose = e => {
@@ -104,6 +127,7 @@ class CreatePath extends Component {
         const { cars } = this.props;
         const {
             name,
+            fuel,
             dateBegin,
             pathBegin,
             pathEnd,
@@ -112,6 +136,7 @@ class CreatePath extends Component {
             fuelEnd,
             addFuel,
             deltaFuel,
+            addFuelWinter,
             isWrong,
             isWrongDuble } = this.state;
         return (
@@ -126,7 +151,7 @@ class CreatePath extends Component {
                         <select
                             data-field-name={'name'}
                             value={name}
-                            onChange={this.handleChange}
+                            onChange={this.handleChangeName}
                         >
                             <option></option>
                             {cars.map(car => {
@@ -201,6 +226,16 @@ class CreatePath extends Component {
                             step={'0.01'}
                             min={'0'}
                         />
+                        { fuel === 'DT' ? <h4 className="inputHeader">введите заправленное ЗИМНЕЕ топливо, л</h4> : null }
+                        { fuel === 'DT' ? <input
+                            data-field-name={'addFuelWinter'}
+                            type={'number'}
+                            onChange={this.handleChange}
+                            placeholder={'топливо, заправка ЗИМА'}
+                            value={addFuelWinter}
+                            step={'0.01'}
+                            min={'0'}
+                        /> : null }
                         <h4 className="resultHeader">{fildNamePathList['deltaFuel']}: {deltaFuel} л</h4>
                     </div>
                     {isWrong && <h3 className="inputError">ошибка</h3>}

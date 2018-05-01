@@ -22,6 +22,7 @@ export default class ViewPath extends Component {
             fuelEnd: this.props.path.fuelEnd,
             addFuel: this.props.path.addFuel,
             deltaFuel: this.props.path.deltaFuel,
+            addFuelWinter: this.props.path.addFuelWinter,
         }
     }
 
@@ -39,7 +40,7 @@ export default class ViewPath extends Component {
         }), () => { addData(this.state) })
         this.setState(prev => ({
             milleage: +prev.pathEnd - +prev.pathBegin,
-            deltaFuel: Math.round((( +prev.fuelBegin + +prev.addFuel )- +prev.fuelEnd)* 100) / 100 ,
+            deltaFuel: Math.round((( +prev.fuelBegin + +prev.addFuel + +prev.addFuelWinter )- +prev.fuelEnd)* 100) / 100 ,
         }), () => { addData(this.state) })
         this.setState(prev => ({
             ConsumptionFactoryFuel: Math.round((+prev.milleage * +prev.constFuelChange)) / 100,
