@@ -20,6 +20,8 @@ class CreatePath extends Component {
         addFuel: '',
         deltaFuel: 0,
         addFuelWinter: '',
+        constFuelChange: '',
+        ConsumptionFactoryFuel: '',
         isWrong: false,
         isWrongDuble: false
     }
@@ -72,7 +74,6 @@ class CreatePath extends Component {
             } else {
                 if(path.name){
                     addDataPath(calculateFieldPath(path));
-                    console.log(path)
                     close('isNewPath');
                 }
             }
