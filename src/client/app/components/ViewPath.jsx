@@ -73,9 +73,8 @@ export default class ViewPath extends Component {
                     }).map(elem => {
                         return (
                             elem === 'milleage' ? <label key={elem}>{fildNamePathList[elem]} : { milleage } км</label> 
-                            : <Fragment key={elem}>
+                            :  <div key={elem}>
                                 <label>{fildNamePathList[elem]}</label>
-                                <div>
                                     <input
                                         data-field-name={elem}
                                         type={'text'}
@@ -87,7 +86,6 @@ export default class ViewPath extends Component {
                                     />
                                     <Button handler={this.handleEdit(elem)} styleButton="edit">{String.fromCharCode(9998)}</Button>
                                 </div>
-                            </Fragment>
                         )
                     })
                 }
