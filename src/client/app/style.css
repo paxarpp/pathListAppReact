@@ -113,14 +113,18 @@ body {
     padding: 10px;
     box-sizing: border-box;
 }
+.popUpContentRow{
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+}
 
 .popUp {
     padding: 0;
     box-shadow: 3px 3px 10px 1px grey;
     position: fixed;
-    top: 10%;
+    top: 5%;
     left: 30%;
-    width: 400px;
     box-sizing: border-box;
     background-color: rgba(202, 202, 202, 0.8);
 }
@@ -267,4 +271,14 @@ body {
     top:60px;
     right: 10px;
     background-color: rgba(202, 202, 202, 0.8);
+}
+.switchView{
+    position: absolute;
+    top: 60px;
+    right: 0;
+    cursor: pointer;
+}
+.row{
+    flex: 1;
+    padding: 5px;
 }

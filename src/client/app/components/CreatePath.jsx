@@ -23,7 +23,8 @@ class CreatePath extends Component {
         constFuelChange: '',
         ConsumptionFactoryFuel: '',
         isWrong: false,
-        isWrongDuble: false
+        isWrongDuble: false,
+        columnView: true
     }
     handleSubmit = e => {
         e.preventDefault()
@@ -124,6 +125,12 @@ class CreatePath extends Component {
         e.preventDefault();
         close('isNewPath');
     }
+    handleChangeView = e => {
+        const { columnView } = this.state;
+        this.setState({
+            columnView: !columnView
+        })
+    }
     render() {
         const { cars } = this.props;
         const {
@@ -139,6 +146,7 @@ class CreatePath extends Component {
             deltaFuel,
             addFuelWinter,
             isWrong,
+            columnView,
             isWrongDuble } = this.state;
         return (
             <div className="popUpWrapp">
@@ -146,8 +154,13 @@ class CreatePath extends Component {
                     <div className="header">
                         <h2 className="headerText">Новый лист</h2>
                         <Button handler={this.handleClose} styleButton="delit">{String.fromCharCode(10006)}</Button>
+                        <Button handler={this.handleChangeView} 
+                                styleButton="switchView">
+                                {columnView ? String.fromCharCode(9654) : String.fromCharCode(9660)}
+                        </Button>
                     </div>
-                    <div className="popUpContent">
+                    <div className={ columnView ? "popUpContent" : "popUpContentRow" }>
+                    <div className={ columnView ? null : 'row' }>
                         <h4 className="inputHeader">выберите автомобиль</h4>
                         <select
                             data-field-name={'name'}
@@ -195,6 +208,8 @@ class CreatePath extends Component {
                             min={'0'}
                         />
                         <h4 className="resultHeader">Пробег составил: {milleage} км</h4>
+                        </div>
+                        <div className={ columnView ? null : 'row' }>
                         <h4 className="inputHeader">введите начальное количество топлива, л</h4>
                         <input
                             className={isWrong==='fuelBegin' ? 'inputErrorCheck': null}
@@ -241,6 +256,7 @@ class CreatePath extends Component {
                     </div>
                     {isWrong && <h3 className="inputError">ошибка</h3>}
                     {isWrongDuble && <h3 className="inputError">на эту дату лист уже есть</h3>}
+                    </div>
                     <div className="footer">
                         <Button handler={ isWrong === false ? this.handleSubmit : null } styleButton={ isWrong === false ? "submit" : "disableButton" }>Сохранить</Button>
                     </div>
