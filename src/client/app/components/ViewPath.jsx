@@ -73,19 +73,20 @@ export default class ViewPath extends Component {
                     }).map(elem => {
                         return (
                             elem === 'milleage' ? <label key={elem}>{fildNamePathList[elem]} : { milleage } км</label> 
-                            :  <div key={elem}>
+                            : ( path.fuel === 'AI' && elem === 'addFuelWinter' ) ? null 
+                            : <div key={elem}>
                                 <label>{fildNamePathList[elem]}</label>
-                                    <input
-                                        data-field-name={elem}
-                                        type={'text'}
-                                        onChange={this.handleChange}
-                                        placeholder={fildNamePathList[elem]}
-                                        defaultValue={path[elem]}
-                                        disabled={disabledField}
-                                        ref={elem}
-                                    />
-                                    <Button handler={this.handleEdit(elem)} styleButton="edit">{String.fromCharCode(9998)}</Button>
-                                </div>
+                                <input
+                                    data-field-name={elem}
+                                    type={'text'}
+                                    onChange={this.handleChange}
+                                    placeholder={fildNamePathList[elem]}
+                                    defaultValue={path[elem]}
+                                    disabled={disabledField}
+                                    ref={elem}
+                                />
+                                <Button handler={this.handleEdit(elem)} styleButton="edit">{String.fromCharCode(9998)}</Button>
+                            </div>
                         )
                     })
                 }
