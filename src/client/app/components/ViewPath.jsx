@@ -39,17 +39,26 @@ export default class ViewPath extends Component {
             [fieldName]: value,
         }), () => { addData(this.state) })
         this.setState(prev => ({
+            ...prev,
             milleage: +prev.pathEnd - +prev.pathBegin,
-            deltaFuel: Math.round((( +prev.fuelBegin + +prev.addFuel + +prev.addFuelWinter )- +prev.fuelEnd)* 100) / 100 ,
         }), () => { addData(this.state) })
         this.setState(prev => ({
-            ConsumptionFactoryFuel: Math.round((+prev.milleage * +prev.constFuelChange)) / 100,
+            ...prev,
+            ConsumptionFactoryFuel: Math.round((+prev.milleage * +prev.constFuelChange / 100) * 100) / 100
+        }), () => { addData(this.state) })
+        this.setState(prev => ({
+            ...prev,
+            fuelEnd: Math.round(((+prev.fuelBegin + +prev.addFuel + +prev.addFuelWinter) - +prev.ConsumptionFactoryFuel) * 100 ) / 100,
+        }), () => { addData(this.state) })
+        this.setState(prev => ({
+            ...prev,
+            deltaFuel: Math.round(((+prev.fuelBegin + +prev.addFuel + +prev.addFuelWinter) - +prev.fuelEnd) * 100 ) / 100,
         }), () => { addData(this.state) })
     }
 
     render() {
         const { path } = this.props;
-        const { disabledField, milleage, deltaFuel, ConsumptionFactoryFuel } = this.state;
+        const { disabledField, milleage, deltaFuel, ConsumptionFactoryFuel, fuelEnd } = this.state;
         return (
             <div className="View" >
                 {
@@ -68,7 +77,8 @@ export default class ViewPath extends Component {
                             elem !== 'constFuelChange' && 
                             elem !== 'ConsumptionFactoryFuel' &&
                             elem !== 'dateBegin' &&
-                            elem !== 'deltaFuel'
+                            elem !== 'deltaFuel' &&
+                            elem !== 'fuelEnd'
                         )
                     }).map(elem => {
                         return (
@@ -92,9 +102,8 @@ export default class ViewPath extends Component {
                 }
                 {
                     <Fragment>
-                        <label
-                        className={deltaFuel === ConsumptionFactoryFuel ? null : "inputError" }
-                        >{fildNamePathList['deltaFuel']}: {deltaFuel} л</label>
+                        <label>{fildNamePathList['fuelEnd']}: {fuelEnd} л</label>
+                        <label>{fildNamePathList['deltaFuel']}: {deltaFuel} л</label>
                         <label>{fildNamePathList['ConsumptionFactoryFuel']}: {ConsumptionFactoryFuel} л</label>
                     </Fragment>
                 }
