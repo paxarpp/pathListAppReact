@@ -117,7 +117,18 @@ class CreatePath extends Component {
         this.setState(prev => ({
             ...prev,
             milleage: +prev.pathEnd - +prev.pathBegin,
-            deltaFuel: ((+prev.fuelBegin + +prev.addFuel + +prev.addFuelWinter) - +prev.fuelEnd),
+        }))
+        this.setState(prev => ({
+            ...prev,
+            ConsumptionFactoryFuel: Math.round((+prev.milleage * +prev.constFuelChange / 100) * 100) / 100
+        }))
+        this.setState(prev => ({
+            ...prev,
+            fuelEnd: Math.round(((+prev.fuelBegin + +prev.addFuel + +prev.addFuelWinter) - +prev.ConsumptionFactoryFuel) * 100 ) / 100,
+        }))
+        this.setState(prev => ({
+            ...prev,
+            deltaFuel: Math.round(((+prev.fuelBegin + +prev.addFuel + +prev.addFuelWinter) - +prev.fuelEnd) * 100 ) / 100,
         }))
     }
     handleClose = e => {
@@ -221,17 +232,6 @@ class CreatePath extends Component {
                             step={'0.01'}
                             min={'0'}
                         />
-                        <h4 className="inputHeader">введите конечное количество топлива, л</h4>
-                        <input
-                            className={isWrong==='fuelEnd' ? 'inputErrorCheck': null}
-                            data-field-name={'fuelEnd'}
-                            type={'number'}
-                            onChange={this.handleChange}
-                            placeholder={'топливо, конец'}
-                            value={fuelEnd}
-                            step={'0.01'}
-                            min={'0'}
-                        />
                         <h4 className="inputHeader">введите заправленное количество топлива, л</h4>
                         <input
                             data-field-name={'addFuel'}
@@ -252,6 +252,7 @@ class CreatePath extends Component {
                             step={'0.01'}
                             min={'0'}
                         /> : null }
+                        <h4 className="inputHeader">конечное количество топлива { fuelEnd } л</h4>
                         <h4 className="resultHeader">{fildNamePathList['deltaFuel']}: {deltaFuel} л</h4>
                     </div>
                     {isWrong && <h3 className="inputError">ошибка</h3>}

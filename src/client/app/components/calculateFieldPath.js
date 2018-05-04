@@ -8,7 +8,7 @@ path.milleage = Math.round(+path.milleage);
 path.pathBegin = Math.round(+path.pathBegin);
 path.pathEnd = Math.round(+path.pathEnd);
 path.addFuelWinter = Math.round(+path.addFuelWinter * 100) / 100;
-path.ConsumptionFactoryFuel =  Math.round((+path.milleage * +path.constFuelChange)) / 100;
+path.ConsumptionFactoryFuel =  Math.round(+path.constFuelChange * 100) / 100;
     return path;
 }
 export default calculateFieldPath;
