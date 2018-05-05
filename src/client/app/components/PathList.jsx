@@ -25,8 +25,6 @@ export default class PathList extends Component {
     }
 
     handlerPagination = (page) => {
-        const { pathLists } = this.props;
-        const { stringOnPage } = this.state;
         this.setState({
             page: page,
         })
