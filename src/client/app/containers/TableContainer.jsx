@@ -16,12 +16,16 @@ export default class TableContainer extends Component {
             page,
         })
     }
-    render() {
+    lengthSelectedCarPath = () => {
         const { selectedCar, pathLists } = this.props;
-        const { page, stringOnPage } = this.state;
-        const length = pathLists.filter(path => {
+        return length = pathLists.filter(path => {
             return (path.name === selectedCar)
         }).length;
+    }
+    paginationData = () => {
+        const { selectedCar, pathLists } = this.props;
+        const { page, stringOnPage } = this.state;
+        const length = this.lengthSelectedCarPath();
         const pages = (length % stringOnPage === 0) ? length / stringOnPage : Math.ceil(length / stringOnPage);
         let tempArr = [];
         if (page > pages) {
@@ -41,15 +45,20 @@ export default class TableContainer extends Component {
                 }
             })
         }
-
+        return tempArr;
+    }
+    render() {
+        const { page, stringOnPage } = this.state;  
+        const tempArr = this.paginationData();
+        const length = this.lengthSelectedCarPath();
         return (
-            <Table  
-                page={ page }
-                stringOnPage = { stringOnPage }
-                length = { length }
-                tempArr = { tempArr }
-                handlerP = { this.handlerPagination }
-           />
+            <Table
+                page={page}
+                stringOnPage={stringOnPage}
+                length={length}
+                tempArr={tempArr}
+                handlerP={this.handlerPagination}
+            />
         )
     }
 }
