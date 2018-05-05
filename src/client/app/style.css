@@ -211,14 +211,16 @@ body {
     transition: opacity 0.5s ease-in;
 }
 .pathListSelectedCar{
+    align-self: flex-end;
+}
+.pathListSelectedCar .table{
     border: 1px solid grey;
     border-collapse: collapse;
-    align-self: flex-end;
 }
 .pathListSelectedCar th,
 .pathListSelectedCar td {
     border: 1px solid grey;
-   
+    text-align: center;
 }
 .anim-enter {
     margin-left: -500px;
