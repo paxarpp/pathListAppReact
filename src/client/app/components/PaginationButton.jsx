@@ -21,7 +21,7 @@ export default class PaginationButton extends Component {
                 {page - 10 <= 1 ? null : <span>.</span>}
                 {page - 2 <= 1 ? null : <button onClick={this.hendler(page - 2)}>{page - 2}</button>}
                 {page - 1 <= 1 ? null : <button onClick={this.hendler(page - 1)}>{page - 1}</button>}
-                {pages === 1 ? null : <button onClick={this.hendler(page)} className="selectPagination">{page}</button>}
+                {pages <= 1 ? null : <button onClick={this.hendler(page)} className="selectPagination">{page}</button>}
                 {page + 1 >= pages ? null : <button onClick={this.hendler(page + 1)}>{page + 1}</button>}
                 {page + 2 >= pages ? null : <button onClick={this.hendler(page + 2)}>{page + 2}</button>}
                 {page + 10 >= pages ? null : <span>.</span>}
