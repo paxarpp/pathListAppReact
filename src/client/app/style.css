@@ -211,25 +211,14 @@ body {
     transition: opacity 0.5s ease-in;
 }
 .pathListSelectedCar{
-    width: 100%;
+    border: 1px solid grey;
+    border-collapse: collapse;
     align-self: flex-end;
-    /* box-shadow: 3px 3px 10px 1px grey; */
-    display: flex;
-    flex-flow: row wrap;
 }
-.cardPathList {
-    box-shadow: 3px 3px 10px 1px grey;
-    width: 220px;
-    font-size: 1rem;
-    margin: 5px;
-    padding: 5px;
-}
-.cardPathList p {
-    margin: 0;
-}
-.cardPathList h3 {
-    margin: 0;
-    text-align: center;
+.pathListSelectedCar th,
+.pathListSelectedCar td {
+    border: 1px solid grey;
+   
 }
 .anim-enter {
     margin-left: -500px;
