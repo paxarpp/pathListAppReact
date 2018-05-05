@@ -35,6 +35,7 @@ export const reducer = handleActions({
                 } else if(action.payload === a.name){
                     return -1
                 }
+                return 0;
             }),
         }
     },

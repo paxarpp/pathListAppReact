@@ -18,9 +18,7 @@ export default class TableContainer extends Component {
     }
     lengthSelectedCarPath = () => {
         const { selectedCar, pathLists } = this.props;
-        return pathLists.filter(path => {
-            return (path.name === selectedCar)
-        }).length;
+        return pathLists.filter(path => (path.name === selectedCar)).length;
     }
     paginationData = () => {
         const { selectedCar, pathLists } = this.props;
@@ -29,17 +27,15 @@ export default class TableContainer extends Component {
         const pages = (length % stringOnPage === 0) ? length / stringOnPage : Math.ceil(length / stringOnPage);
         let tempArr = [];
         if (page > pages) {
-            tempArr = pathLists.filter(path => {
-                return (path.name === selectedCar)
-            }).filter((elem, idx) => {
+            tempArr = pathLists.filter(path => (path.name === selectedCar))
+            .filter((elem, idx) => {
                 if (idx >= (pages - 1) * stringOnPage && idx <= (pages * stringOnPage) - 1) {
                     return elem
                 }
             })
         } else {
-            tempArr = pathLists.filter(path => {
-                return (path.name === selectedCar)
-            }).filter((elem, idx) => {
+            tempArr = pathLists.filter(path => (path.name === selectedCar))
+            .filter((elem, idx) => {
                 if (idx >= (page - 1) * stringOnPage && idx <= (page * stringOnPage) - 1) {
                     return elem
                 }
