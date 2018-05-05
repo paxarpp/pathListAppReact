@@ -9,51 +9,72 @@ export default class TableContainer extends Component {
         this.state = {
             stringOnPage: 10,
             page: 1,
+            pathListsCar: [],
         }
     }
+    componentDidMount() {
+        const { selectedCar, pathLists } = this.props;
+        this.setState({
+            pathListsCar: pathLists.filter(path => (path.name === selectedCar))
+        })
+    }
+
     handlerPagination = (page) => {
         this.setState({
             page,
         })
     }
-    lengthSelectedCarPath = () => {
+
+    prepareArrSelectedCarPath = () => {
         const { selectedCar, pathLists } = this.props;
-        return pathLists.filter(path => (path.name === selectedCar)).length;
+        this.setState(prev => {
+            pathListsCar: pathLists.filter(path => (path.name === selectedCar))
+        })
     }
     paginationData = () => {
-        const { selectedCar, pathLists } = this.props;
-        const { page, stringOnPage } = this.state;
-        const length = this.lengthSelectedCarPath();
-        const pages = (length % stringOnPage === 0) ? length / stringOnPage : Math.ceil(length / stringOnPage);
-        let tempArr = [];
+        const { page, stringOnPage, pathListsCar } = this.state;
+        const pages = (pathListsCar.length % stringOnPage === 0) ? pathListsCar.length / stringOnPage : Math.ceil(pathListsCar.length / stringOnPage);
         if (page > pages) {
-            tempArr = pathLists.filter(path => (path.name === selectedCar))
-            .filter((elem, idx) => {
+            return pathListsCar.filter((elem, idx) => {
                 if (idx >= (pages - 1) * stringOnPage && idx <= (pages * stringOnPage) - 1) {
                     return elem
                 }
             })
         } else {
-            tempArr = pathLists.filter(path => (path.name === selectedCar))
-            .filter((elem, idx) => {
+            return pathListsCar.filter((elem, idx) => {
                 if (idx >= (page - 1) * stringOnPage && idx <= (page * stringOnPage) - 1) {
                     return elem
                 }
             })
         }
-        return tempArr;
+    }
+    handlerTableSort = (name) => {
+
+        if (name) {
+            let prevName;
+            if (prevName === name) {
+                const sortFunc = (a, b) => (b[name] - a[name]);
+            } else {
+                const sortFunc = (a, b) => (a[name] - b[name]);
+            }
+            prevName = name;
+            const { pathListsCar } = this.state;
+            this.setState({
+                pathListsCar: pathListsCar.slice().sort(this.sortFunc),
+            })
+        }
     }
     render() {
-        const { page, stringOnPage } = this.state;  
-        const tempArr = this.paginationData();
-        const length = this.lengthSelectedCarPath();
+        const { page, stringOnPage, pathListsCar } = this.state;
+        const paginationData = this.paginationData();
         return (
             <Table
                 page={page}
                 stringOnPage={stringOnPage}
-                length={length}
-                tempArr={tempArr}
+                length={pathListsCar.length}
+                tempArr={paginationData}
                 handlerP={this.handlerPagination}
+                handlerTableSort={this.handlerTableSort}
             />
         )
     }

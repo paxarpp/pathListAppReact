@@ -11,6 +11,10 @@ export default class Table extends Component {
         const { handlerP } = this.props;
         handlerP(page)
     }
+    handlerTable = (name) => {
+        const { handlerTableSort } = this.props;
+        handlerTableSort(name)
+    }
     render() {
         const { page, 
                 stringOnPage,
@@ -20,7 +24,7 @@ export default class Table extends Component {
             <div className="pathListSelectedCar">
                 <table className="table">
                     <thead>
-                        <RowTH />
+                        <RowTH handlerTable={this.handlerTable}/>
                     </thead>
                     <tbody>
                         {tempArr.map(path => {
