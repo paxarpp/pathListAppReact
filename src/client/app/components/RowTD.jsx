@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import fildNamePathList from './fildNamePathList';
-
 export default class RowTD extends Component {
     render() {
         const { path } = this.props;
