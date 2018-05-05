@@ -10,6 +10,8 @@ export default class TableContainer extends Component {
             stringOnPage: 10,
             page: 1,
             pathListsCar: [],
+            reverse: false,
+            name: '',
         }
     }
     componentDidMount() {
@@ -27,7 +29,7 @@ export default class TableContainer extends Component {
 
     prepareArrSelectedCarPath = () => {
         const { selectedCar, pathLists } = this.props;
-        this.setState(prev => {
+        this.setState({
             pathListsCar: pathLists.filter(path => (path.name === selectedCar))
         })
     }
@@ -49,26 +51,44 @@ export default class TableContainer extends Component {
         }
     }
     handlerTableSort = (name) => {
-
         if (name) {
-            let prevName;
-            if (prevName === name) {
-                const sortFunc = (a, b) => (b[name] - a[name]);
+            const { reverse } = this.state;
+            if(reverse){
+                const { pathListsCar } = this.state;
+                this.setState({
+                    pathListsCar: pathListsCar.slice().sort((a, b) => {
+                        if (b[name] > a[name]) {
+                            return 1;
+                        } else if (b[name] < a[name]) {
+                            return -1;
+                        } else return 0;
+                    }),
+                    reverse: !(reverse),
+                    name
+                })
             } else {
-                const sortFunc = (a, b) => (a[name] - b[name]);
-            }
-            prevName = name;
-            const { pathListsCar } = this.state;
-            this.setState({
-                pathListsCar: pathListsCar.slice().sort(this.sortFunc),
-            })
+                const { pathListsCar } = this.state;
+                this.setState({
+                    pathListsCar: pathListsCar.slice().sort((a, b) => {
+                        if (b[name] > a[name]) {
+                            return -1;
+                        } else if (b[name] < a[name]) {
+                            return 1;
+                        } else return 0;
+                    }),
+                    reverse: !(reverse),
+                    name
+                })
+            } 
         }
     }
     render() {
-        const { page, stringOnPage, pathListsCar } = this.state;
+        const { page, stringOnPage, pathListsCar, reverse, name } = this.state;
         const paginationData = this.paginationData();
         return (
             <Table
+                name={name}
+                reverse={reverse}
                 page={page}
                 stringOnPage={stringOnPage}
                 length={pathListsCar.length}
