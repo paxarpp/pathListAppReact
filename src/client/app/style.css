@@ -282,3 +282,10 @@ body {
     flex: 1;
     padding: 5px;
 }
+.selectPagination{
+    background-color: rgba(202, 202, 202, 0.8);
+    font-weight: 600;
+}
+.paginationBlock{
+    text-align: center;
+}
