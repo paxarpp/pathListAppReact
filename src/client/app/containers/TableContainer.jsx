@@ -18,7 +18,7 @@ export default class TableContainer extends Component {
     }
     lengthSelectedCarPath = () => {
         const { selectedCar, pathLists } = this.props;
-        return length = pathLists.filter(path => {
+        return pathLists.filter(path => {
             return (path.name === selectedCar)
         }).length;
     }
