@@ -19,12 +19,14 @@ export default class Table extends Component {
         const { page, 
                 stringOnPage,
                 length,
-                tempArr } = this.props;
+                tempArr,
+                reverse,
+                name } = this.props;
         return (
             <div className="pathListSelectedCar">
                 <table className="table">
                     <thead>
-                        <RowTH handlerTable={this.handlerTable}/>
+                        <RowTH handlerTable={this.handlerTable} reverse={ reverse } name={name} />
                     </thead>
                     <tbody>
                         {tempArr.map(path => {

@@ -5,6 +5,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Path from './Path.jsx';
 import Button from '../components/Button';
 import PaginationButton from '../components/PaginationButton';
+import paginationData from '../components/paginationData';
 
 export default class PathList extends Component {
     constructor(props) {
@@ -33,18 +34,12 @@ export default class PathList extends Component {
     render() {
         const { pathLists, selectedCar } = this.props;
         const { page, stringOnPage } = this.state;
-
-        const tempArr = pathLists.filter((elem, idx) => {
-            if (idx >= (page - 1) * stringOnPage && idx <= (page * stringOnPage) - 1) {
-                return elem
-            }
-        })
-
+        const dataArr = paginationData( page, stringOnPage, pathLists );
         return (
             <div className="pathList" >
                 <ul>
                     <ReactCSSTransitionGroup transitionName="anim" transitionAppear={false} transitionEnterTimeout={300} transitionLeaveTimeout={300} transitionEnter={true} transitionLeave={true}>
-                        {tempArr.map(path => {
+                        {dataArr.map(path => {
                             return (
                                 <li key={path.name + path.dateBegin}>
                                     <Path

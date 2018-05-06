@@ -8,8 +8,7 @@ export default class PathListSelectedCar extends Component {
         const { selectedCar, pathLists } = this.props;
         return (
             <TableContainer  className="pathListSelectedCar"
-                    selectedCar={selectedCar}
-                    pathLists={pathLists}
+                    pathLists={pathLists.filter(path => (path.name === selectedCar))}
             />
         )
     }
