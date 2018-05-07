@@ -11,11 +11,10 @@ const RowTD = ({ path }) => {
             <td>{path.pathBegin}</td>
             <td>{path.pathEnd}</td>
             <td>{path.milleage}</td>
-            <td>{path.ConsumptionFactoryFuel}</td>
             <td>{path.fuelBegin}</td>
             <td>{path.addFuel}</td>
-            <td>{path.addFuelWinter}</td>
             <td>{path.fuelEnd}</td>
+            <td>{path.deltaFuel}</td>
         </tr>
     )
 }

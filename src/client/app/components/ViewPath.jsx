@@ -78,12 +78,12 @@ export default class ViewPath extends Component {
                             elem !== 'ConsumptionFactoryFuel' &&
                             elem !== 'dateBegin' &&
                             elem !== 'deltaFuel' &&
-                            elem !== 'fuelEnd'
+                            elem !== 'fuelEnd' &&
+                            elem !== 'addFuelWinter'
                         )
                     }).map(elem => {
                         return (
-                            elem === 'milleage' ? <label key={elem}>{fildNamePathList[elem]} : { milleage } км</label> 
-                            : ( path.fuel === 'AI' && elem === 'addFuelWinter' ) ? null 
+                            elem === 'milleage' ? <label key={elem}>{fildNamePathList[elem]} : { milleage } км</label>
                             : <div key={elem}>
                                 <label>{fildNamePathList[elem]}</label>
                                 <input
@@ -104,7 +104,6 @@ export default class ViewPath extends Component {
                     <Fragment>
                         <label>{fildNamePathList['fuelEnd']}: {fuelEnd} л</label>
                         <label>{fildNamePathList['deltaFuel']}: {deltaFuel} л</label>
-                        <label>{fildNamePathList['ConsumptionFactoryFuel']}: {ConsumptionFactoryFuel} л</label>
                     </Fragment>
                 }
             </div>

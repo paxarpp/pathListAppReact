@@ -19,7 +19,7 @@ class CreatePath extends Component {
         fuelEnd: '',
         addFuel: '',
         deltaFuel: 0,
-        addFuelWinter: '',
+        addFuelWinter: 0,
         constFuelChange: '',
         ConsumptionFactoryFuel: '',
         isWrong: false,
@@ -158,7 +158,7 @@ class CreatePath extends Component {
             addFuelWinter,
             isWrong,
             columnView,
-            isWrongDuble } = this.state;
+            isWrongDuble } = this.state; 
         return (
             <div className="popUpWrapp">
                 <div className="popUp">
@@ -178,7 +178,7 @@ class CreatePath extends Component {
                             value={name}
                             onChange={this.handleChangeName}
                         >
-                            <option></option>
+                            <option disabled></option>
                             {cars.map(car => {
                                 return (
                                     <option key={car.name}>
@@ -242,7 +242,7 @@ class CreatePath extends Component {
                             step={'0.01'}
                             min={'0'}
                         />
-                        { fuel === 'DT' ? <h4 className="inputHeader">введите заправленное ЗИМНЕЕ топливо, л</h4> : null }
+                        {/* { fuel === 'DT' ? <h4 className="inputHeader">введите заправленное ЗИМНЕЕ топливо, л</h4> : null }
                         { fuel === 'DT' ? <input
                             data-field-name={'addFuelWinter'}
                             type={'number'}
@@ -251,7 +251,7 @@ class CreatePath extends Component {
                             value={addFuelWinter}
                             step={'0.01'}
                             min={'0'}
-                        /> : null }
+                        /> : null } */}
                         <h4 className="inputHeader">конечное количество топлива { fuelEnd } л</h4>
                         <h4 className="resultHeader">{fildNamePathList['deltaFuel']}: {deltaFuel} л</h4>
                     </div>

@@ -28,7 +28,7 @@ body {
     display: flex;
     flex-flow: column nowrap;
     position: relative;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -75,6 +75,8 @@ body {
     margin: 10px;
     flex: 1;
     min-width: 300px;
+    max-width: 450px;
+    margin-left: auto;
 }
 .pathListView .View {
     display: flex;
@@ -221,6 +223,7 @@ body {
 .pathListSelectedCar td {
     border: 1px solid grey;
     text-align: center;
+    z-index: -1;
 }
 .pathListSelectedCar th {
     cursor: pointer;

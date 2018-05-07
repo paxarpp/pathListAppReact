@@ -16,7 +16,7 @@ export default class RowTH extends Component {
                     {fildNamePathList['name']}
                 </th>
                 <th data-field-name={'dateBegin'} 
-                        style={{ width: "10%" }}>
+                        style={{ width: "15%" }}>
                     {fildNamePathList['dateBegin']} 
                     <SortLink name={name} nameCell={'dateBegin'} reverse={reverse} />
                 </th>
@@ -41,11 +41,6 @@ export default class RowTH extends Component {
                     {fildNamePathList['milleage']}
                     <SortLink name={name} nameCell={'milleage'} reverse={reverse} />
                 </th>
-                <th data-field-name={'ConsumptionFactoryFuel'} 
-                        style={{ width: "10%" }}>
-                        {fildNamePathList['ConsumptionFactoryFuel']}
-                    <SortLink name={name} nameCell={'ConsumptionFactoryFuel'} reverse={reverse} />   
-                </th>
                 <th data-field-name={'fuelBegin'} 
                         style={{ width: "5%" }}>
                     {fildNamePathList['fuelBegin']}
@@ -56,15 +51,15 @@ export default class RowTH extends Component {
                     {fildNamePathList['addFuel']}
                     <SortLink name={name} nameCell={'addFuel'} reverse={reverse} />
                 </th>
-                <th data-field-name={'addFuelWinter'} 
-                        style={{ width: "5%" }}>
-                    {fildNamePathList['addFuelWinter']}
-                    <SortLink name={name} nameCell={'addFuelWinter'} reverse={reverse} />
-                </th>
                 <th data-field-name={'fuelEnd'} 
                         style={{ width: "10%" }}>
                     {fildNamePathList['fuelEnd']}
                     <SortLink name={name} nameCell={'fuelEnd'} reverse={reverse} />
+                </th>
+                <th data-field-name={'deltaFuel'} 
+                        style={{ width: "10%" }}>
+                        {fildNamePathList['deltaFuel']}
+                    <SortLink name={name} nameCell={'deltaFuel'} reverse={reverse} />   
                 </th>
             </tr>
         )
