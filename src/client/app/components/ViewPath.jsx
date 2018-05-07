@@ -26,6 +26,25 @@ export default class ViewPath extends Component {
         }
     }
 
+    componentWillReceiveProps ({path}){
+        this.setState(prev => ({
+            ...prev,
+            milleage: +path.pathEnd - +path.pathBegin,
+        }))
+        this.setState(prev => ({
+            ...prev,
+            ConsumptionFactoryFuel: Math.round((+path.milleage * +path.constFuelChange / 100) * 100) / 100,
+        }))
+        this.setState(prev => ({
+            ...prev,
+            fuelEnd: Math.round(((+path.fuelBegin + +path.addFuel + +path.addFuelWinter) - +prev.ConsumptionFactoryFuel) * 100 ) / 100,
+        }))
+        this.setState(prev => ({
+            ...prev,
+            deltaFuel: Math.round(((+path.fuelBegin + +path.addFuel + +path.addFuelWinter) - +path.fuelEnd) * 100 ) / 100,
+        }))
+    }
+
     handleEdit = (name) => () => {
         const { disabledField } = this.state;
         ReactDom.findDOMNode(this.refs[name]).disabled = false;
@@ -91,7 +110,7 @@ export default class ViewPath extends Component {
                                     type={'text'}
                                     onChange={this.handleChange}
                                     placeholder={fildNamePathList[elem]}
-                                    defaultValue={path[elem]}
+                                    value={path[elem]}
                                     disabled={disabledField}
                                     ref={elem}
                                 />

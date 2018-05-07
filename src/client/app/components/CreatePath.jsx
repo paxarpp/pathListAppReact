@@ -242,16 +242,6 @@ class CreatePath extends Component {
                             step={'0.01'}
                             min={'0'}
                         />
-                        {/* { fuel === 'DT' ? <h4 className="inputHeader">введите заправленное ЗИМНЕЕ топливо, л</h4> : null }
-                        { fuel === 'DT' ? <input
-                            data-field-name={'addFuelWinter'}
-                            type={'number'}
-                            onChange={this.handleChange}
-                            placeholder={'топливо, заправка ЗИМА'}
-                            value={addFuelWinter}
-                            step={'0.01'}
-                            min={'0'}
-                        /> : null } */}
                         <h4 className="inputHeader">конечное количество топлива { fuelEnd } л</h4>
                         <h4 className="resultHeader">{fildNamePathList['deltaFuel']}: {deltaFuel} л</h4>
                     </div>
