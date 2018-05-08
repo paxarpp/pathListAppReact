@@ -41,7 +41,7 @@ class VeiwAndEditPathList extends Component {
                 </div>
                 <ViewPath path={selectPathList} addData={this.saveData} />
                 <div className="footer">
-                    <Button handler={this.handleSave} styleButton="submit">Сохранить изменения</Button>
+                    {/* <Button handler={this.handleSave} styleButton="submit">Сохранить изменения</Button> */}
                 </div>
             </div>
         )

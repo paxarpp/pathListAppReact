@@ -37,10 +37,12 @@ body {
     display: flex;
     flex-flow: row wrap;
 }
-
-.pathList,
 .carList {
     width: 300px;
+    padding: 10px;
+}
+.pathList{
+    width: 320px;
     padding: 10px;
 }
 
@@ -85,10 +87,11 @@ body {
     align-items: flex-start;
     padding: 0 20px;
 }
-.pathListView .View label {
+.pathListView .View p,
+.pathListView .View .head {
     margin: 0 0 5px 60px;
 }
-.pathListView .View input {
+/* .pathListView .View input {
     height: 1.6rem;
     width: 5rem;
     margin-left: 0.5rem;
@@ -101,7 +104,7 @@ body {
     border-right: none;
     align-items: center;
     margin-bottom: 2px;
-}
+} */
 
 .popUpWrapp {
     position: fixed;
@@ -219,6 +222,13 @@ body {
     border: 1px solid grey;
     border-collapse: collapse;
 }
+.pathListSelectedCar .table>thead>tr {
+   background-color: #80808080;
+}
+.pathListSelectedCar .table>tbody>tr:hover {
+   background-color: #80808080;
+   transition: all 0.3 linear;
+}
 .pathListSelectedCar th,
 .pathListSelectedCar td {
     border: 1px solid grey;
@@ -291,4 +301,7 @@ body {
 }
 .paginationBlock{
     text-align: center;
+}
+.paginationBlock>button {
+    margin: 0 2px;
 }
