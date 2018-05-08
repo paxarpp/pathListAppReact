@@ -100,31 +100,40 @@ class CreatePath extends Component {
         return car.name === value;
       })[0].constFuelChange
     }));
-    this.setState(prev => ({
-      ...prev,
-      pathBegin: this.props.pathLists
-        .filter(elem => {
-          return elem.name === prev.name;
-        })
-        .sort((a, b) => {
-          if (a.dateBegin > b.dateBegin) {
-            return -1;
-          } else if (a.dateBegin < b.dateBegin) {
-            return 1;
-          } else return 0;
-        })[0].pathEnd,
-      fuelBegin: this.props.pathLists
-        .filter(elem => {
-          return elem.name === prev.name;
-        })
-        .sort((a, b) => {
-          if (a.dateBegin > b.dateBegin) {
-            return -1;
-          } else if (a.dateBegin < b.dateBegin) {
-            return 1;
-          } else return 0;
-        })[0].fuelEnd
-    }));
+
+    if (this.props.pathLists.filter(elem => elem.name === value).length !== 0) {
+      this.setState(prev => ({
+        ...prev,
+        pathBegin: this.props.pathLists
+          .filter(elem => {
+            return elem.name === prev.name;
+          })
+          .sort((a, b) => {
+            if (a.dateBegin > b.dateBegin) {
+              return -1;
+            } else if (a.dateBegin < b.dateBegin) {
+              return 1;
+            } else return 0;
+          })[0].pathEnd,
+        fuelBegin: this.props.pathLists
+          .filter(elem => {
+            return elem.name === prev.name;
+          })
+          .sort((a, b) => {
+            if (a.dateBegin > b.dateBegin) {
+              return -1;
+            } else if (a.dateBegin < b.dateBegin) {
+              return 1;
+            } else return 0;
+          })[0].fuelEnd
+      }));
+    } else {
+      this.setState(prev => ({
+        ...prev,
+        pathBegin: 0,
+        fuelBegin: 0
+      }));
+    }
   };
   handleChange = e => {
     const value = e.currentTarget.value;
