@@ -37,10 +37,12 @@ body {
     display: flex;
     flex-flow: row wrap;
 }
-
-.pathList,
 .carList {
     width: 300px;
+    padding: 10px;
+}
+.pathList{
+    width: 320px;
     padding: 10px;
 }
 
@@ -85,24 +87,10 @@ body {
     align-items: flex-start;
     padding: 0 20px;
 }
-.pathListView .View label {
+.pathListView .View p,
+.pathListView .View .head {
     margin: 0 0 5px 60px;
 }
-.pathListView .View input {
-    height: 1.6rem;
-    width: 5rem;
-    margin-left: 0.5rem;
-}
-.pathListView .View div{
-    display: flex;
-    width: 100%; 
-    justify-content: flex-start;
-    border: 1px solid #80808030;
-    border-right: none;
-    align-items: center;
-    margin-bottom: 2px;
-}
-
 .popUpWrapp {
     position: fixed;
     top: 0;
@@ -153,6 +141,31 @@ body {
     margin: 2px 0 5px 0;
     border-bottom: 1px solid #00000080;
 }
+.popUpConfirm{
+    width: 140px;
+    height: 60px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px 1px grey;
+    position: absolute;
+    top: 45%;
+    right: 30%;
+    background-color: #fff;
+}
+.popUpConfirm>p {
+   margin: 0 1rem;
+}
+.confirm{
+    color: green;
+    margin: 0 1rem 0 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s linear;
+}
+.confirm:hover {
+    text-shadow: 2px 2px 1px grey;
+    transition: all 0.2s linear;
+}
+
 .disableButton {
     background-color: #d1d1d126;
     color: #006d0080;
@@ -218,6 +231,13 @@ body {
 .pathListSelectedCar .table{
     border: 1px solid grey;
     border-collapse: collapse;
+}
+.pathListSelectedCar .table>thead>tr {
+   background-color: #80808080;
+}
+.pathListSelectedCar .table>tbody>tr:hover {
+   background-color: #80808080;
+   transition: all 0.3 linear;
 }
 .pathListSelectedCar th,
 .pathListSelectedCar td {
@@ -291,4 +311,7 @@ body {
 }
 .paginationBlock{
     text-align: center;
+}
+.paginationBlock>button {
+    margin: 0 2px;
 }

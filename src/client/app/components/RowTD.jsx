@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RowTD = ({ path }) => {
+const RowTD = ({ path, handler }) => {
     return (
-        <tr>
+        <tr onClick={handler(path)}>
             <td>{path.name}</td>
             <td>{path.dateBegin}</td>
             <td>{path.fuel}</td>

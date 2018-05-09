@@ -4,17 +4,37 @@ import { connect } from 'react-redux';
 
 import CarList from '../components/CarList';
 import Button from '../components/Button';
+import Confirm from '../components/Confirm';
 
 import { deleteCarToName, addNewCar, infoCarToName } from '../actions/cars.js';
 import saveToLocalStorage from '../components/saveToLocalStorage.js'
 class CarListContainer extends Component {
+constructor(props){
+    super(props);
+    this.state={
+        popUpConfirm: false,
+        name: '',
+    }
+}
+
     componentDidUpdate(){
         const { cars, pathLists } = this.props;
         saveToLocalStorage(cars, pathLists);
     }
-    deleteCar = (name) => {
+    deleteCar = (name) => {  
+        this.setState({
+            popUpConfirm: true,
+            name
+        })
+    }
+    deleteCarConfirm = (status) => {
         const { deleteCar } = this.props;
-        deleteCar(name);
+        const { name } = this.state;
+        this.setState({
+            popUpConfirm: false,
+            name: '',
+        })
+        status ? deleteCar(name): null;
     }
     carInfo = (name) => {
         const { carInfo } = this.props;
@@ -26,11 +46,13 @@ class CarListContainer extends Component {
     }
     render() {
         const { cars, selectedCar, pathLists } = this.props;   
+        const { popUpConfirm } = this.state;   
         return (
                 <div className="carListContainer">
                     <div className="header">
                         <h3>Список Автомобилей</h3>
-                    </div> 
+                    </div>  
+                    {popUpConfirm && <Confirm handler={this.deleteCarConfirm} />}
                     <CarList 
                         selectedCar={selectedCar}
                         pathLists={pathLists}
