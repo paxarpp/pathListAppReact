@@ -150,6 +150,7 @@ body {
     top: 45%;
     right: 30%;
     background-color: #fff;
+    z-index: 999;
 }
 .popUpConfirm>p {
    margin: 0 1rem;
