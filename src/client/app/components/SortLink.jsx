@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '../components/Button';
+import IconSort from '../components/IconSort';
 
 export default class SortLink extends Component {
 
@@ -14,7 +15,7 @@ export default class SortLink extends Component {
                     styleButton="sortView">
                     {reverse ? String.fromCharCode(9660) : String.fromCharCode(9650)}
                 </Button>
-            ) : null
+            ) : <IconSort />
         )
     }
 }
