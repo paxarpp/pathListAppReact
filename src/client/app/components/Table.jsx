@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import RowTD from './RowTD';
 import RowTH from './RowTH';
 import PaginationButton from '../components/PaginationButton';
+import ChoisePaginationString from '../components/ChoisePaginationString';
 
 export default class Table extends Component {
                  handlerPagination = page => {
@@ -19,8 +20,9 @@ export default class Table extends Component {
                      handlerTableSelect(select);
                  };
                  render() {
-                   const { page, stringOnPage, length, tempArr, reverse, name } = this.props;
+                   const { page, stringOnPage, length, tempArr, reverse, name, choisePaginationString } = this.props;
                    return <div className="pathListSelectedCar">
+                   <ChoisePaginationString handler={choisePaginationString}/>
                        <table className="table">
                          <thead>
                            <RowTH handlerTable={this.handlerTable} reverse={reverse} name={name} />

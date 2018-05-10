@@ -64,6 +64,12 @@ class TableContainer extends Component {
       }
     }
   };
+  choisePaginationString = (e) => {
+    const value = e.currentTarget.value;
+    this.setState({
+        stringOnPage: +value,
+    })
+}
   render() {
     const { page, stringOnPage, pathListsCar, reverse, name } = this.state;
     const dataArr = paginationData(page, stringOnPage, pathListsCar);
@@ -78,6 +84,7 @@ class TableContainer extends Component {
         handlerP={this.handlerPagination}
         handlerTableSort={this.handlerTableSort}
         handlerTableSelect={this.handlerTableSelect}
+        choisePaginationString={this.choisePaginationString}
       />
     );
   }

@@ -6,6 +6,7 @@ import Path from './Path.jsx';
 import Button from '../components/Button';
 import PaginationButton from '../components/PaginationButton';
 import paginationData from '../components/paginationData';
+import ChoisePaginationString from '../components/ChoisePaginationString';
 
 export default class PathList extends Component {
     constructor(props) {
@@ -30,13 +31,19 @@ export default class PathList extends Component {
             page: page,
         })
     }
-
+    choisePaginationString = (e) => {
+        const value = e.currentTarget.value;
+        this.setState({
+            stringOnPage: +value,
+        })
+    }
     render() {
         const { pathLists, selectedCar } = this.props;
         const { page, stringOnPage } = this.state;
         const dataArr = paginationData( page, stringOnPage, pathLists );
         return (
             <div className="pathList" >
+            <ChoisePaginationString handler={this.choisePaginationString}/>
                 <ul>
                     <ReactCSSTransitionGroup transitionName="anim" transitionAppear={false} transitionEnterTimeout={300} transitionLeaveTimeout={300} transitionEnter={true} transitionLeave={true}>
                         {dataArr.map(path => {
