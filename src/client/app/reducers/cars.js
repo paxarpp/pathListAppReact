@@ -1,5 +1,7 @@
 import { handleActions } from 'redux-actions';
 
+import checkCorrectData from '../components/checkCorrectData';
+
 import {
     deleteCarReducer,
     addCarReducer,
@@ -12,12 +14,14 @@ import {
     deletePathReducer,
     addPathReducer,
     setIsNewPath,
-    infoPathReducer
+    infoPathReducer,
+    checkErrorPath
 } from '../actions/pathLists';
 
 const initialState = {
     cars: [],
     pathLists: [],
+    error: [],
     isNewCar: false,
     isNewPath: false,
     selectedCar: '',
@@ -25,18 +29,31 @@ const initialState = {
 }
 
 export const reducer = handleActions({
+    [checkErrorPath]: (state) => {
+        return {
+            ...state,
+            error: checkCorrectData(state.cars, state.pathLists)
+        }
+    },
     [InfoCarReducer]: (state, action) => {
         return {
             ...state,
             selectedCar: state.selectedCar === action.payload ? null : action.payload,
-            pathLists: state.pathLists.slice().sort((a, b) => {
-                if (action.payload === b.name) {
-                    return 1
-                } else if(action.payload === a.name){
+            pathLists: state.pathLists.filter(path => {
+                return (
+                    path.name === action.payload
+                ) 
+            }).sort((a,b) => {
+                if(a.dateBegin < b.dateBegin){
                     return -1
-                }
-                return 0;
-            }),
+                }else if(a.dateBegin > b.dateBegin){
+                    return 1
+                } else return 0
+                }) .concat(state.pathLists.filter(path => {
+                return (
+                    path.name !== action.payload
+                ) 
+            }))
         }
     },
     [infoPathReducer]: (state, action) => {

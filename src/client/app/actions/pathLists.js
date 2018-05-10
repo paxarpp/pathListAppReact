@@ -6,6 +6,7 @@ export const deletePathReducer = createAction('DELETE_PATH_REDUCER');
 export const addPathReducer = createAction('ADD_PATH_REDUCER');
 export const setIsNewPath = createAction('SET_IS_NEW_PATH');
 export const infoPathReducer = createAction('INFO_PATH_REDUCER');
+export const checkErrorPath = createAction('CHECK_ERROR_PATH');
 
 export const infoPathToName = (dispatch, name) => {
     dispatch(infoPathReducer(name))
@@ -18,4 +19,7 @@ export const addNewPath = (dispatch) => {
 }
 export const savePath = (dispatch, path) => {
     dispatch(addPathReducer(path))
+}
+export const checkError = (dispatch) => {
+    dispatch(checkErrorPath())
 }

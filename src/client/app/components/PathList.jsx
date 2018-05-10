@@ -16,29 +16,19 @@ export default class PathList extends Component {
             page: 1,
         }
     }
-
-    handler = (path) => () => {
-        const { deletePathHandler } = this.props;
-        deletePathHandler(path);
-    }
-    handlerInfo = (path) => () => {
-        const { pathInfo } = this.props;
-        pathInfo(path);
-    }
-
-    handlerPagination = (page) => {
+    handlerPagination = page => {
         this.setState({
             page: page,
         })
     }
-    choisePaginationString = (e) => {
+    choisePaginationString = e => {
         const value = e.currentTarget.value;
         this.setState({
             stringOnPage: +value,
         })
     }
     render() {
-        const { pathLists, selectedCar } = this.props;
+        const { pathLists, selectedCar, error } = this.props;
         const { page, stringOnPage } = this.state;
         const dataArr = paginationData( page, stringOnPage, pathLists );
         return (
@@ -48,12 +38,14 @@ export default class PathList extends Component {
                     <ReactCSSTransitionGroup transitionName="anim" transitionAppear={false} transitionEnterTimeout={300} transitionLeaveTimeout={300} transitionEnter={true} transitionLeave={true}>
                         {dataArr.map(path => {
                             return (
-                                <li key={path.name + path.dateBegin}>
+                                <li key={path.name + path.dateBegin} className={error.filter(elem=>(
+                                    elem.name === path.name && elem.dateBegin === path.dateBegin
+                                )).length>0 ? "inputError" : null}>
                                     <Path
                                         selectedCar={selectedCar}
                                         path={path}
-                                        handler={this.handlerInfo(path)} />
-                                    <Button handler={this.handler(path)} styleButton="delit">{String.fromCharCode(10006)}</Button>
+                                        handler={this.props.pathInfo(path)} />
+                                    <Button handler={this.props.deletePathHandler(path)} styleButton="delit">{String.fromCharCode(10006)}</Button>
                                 </li>
                             )
                         })}

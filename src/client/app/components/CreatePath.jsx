@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { savePath } from "../actions/pathLists.js";
+import { savePath, checkError } from "../actions/pathLists.js";
 import { closeWindow } from "../actions/cars.js";
 import Button from "./Button";
 import calculateFieldPath from "./calculateFieldPath";
 import fildNamePathList from "./fildNamePathList";
 import fildNameCheckRule from "./fildNameCheckRule.js";
+
 class CreatePath extends Component {
   state = {
     name: "",
@@ -45,7 +46,7 @@ class CreatePath extends Component {
       isWrong
     } = this.state;
 
-    const { addDataPath, pathLists, close } = this.props;
+    const { addDataPath, pathLists, close, chError } = this.props;
     const path = {
       name,
       dateBegin,
@@ -79,6 +80,8 @@ class CreatePath extends Component {
         if (path.name) {
           addDataPath(calculateFieldPath(path));
           close("isNewPath");
+          chError();
+
         }
       }
     }
@@ -346,7 +349,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addDataPath: path => savePath(dispatch, path),
-    close: isNewPath => closeWindow(dispatch, isNewPath)
+    close: isNewPath => closeWindow(dispatch, isNewPath),
+    chError: () => checkError(dispatch)
   };
 };
 

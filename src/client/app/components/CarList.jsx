@@ -6,15 +6,6 @@ import Car from './Car.jsx';
 import Button from '../components/Button';
 
 export default class CarList extends Component {
-
-    handler=(name)=>()=>{ 
-        const { deleteCarHandler } = this.props;
-        deleteCarHandler(name);
-    }
-    handlerInfo=(name)=>()=>{
-        const { carInfo } = this.props;
-        carInfo(name);  
-    }
     render() {
         const { cars, selectedCar } = this.props;
         return (
@@ -27,8 +18,8 @@ export default class CarList extends Component {
                                 <Car 
                                     selectedCar={selectedCar}
                                     car={car} 
-                                    handler={this.handlerInfo(car.name)}/>
-                                <Button handler={this.handler(car.name)} styleButton="delit">{String.fromCharCode(10006)}</Button>
+                                    handler={this.props.carInfo(car.name)}/>
+                                <Button handler={this.props.deleteCarHandler(car.name)} styleButton="delit">{String.fromCharCode(10006)}</Button>
                             </li>
                         )
                     })}

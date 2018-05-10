@@ -280,16 +280,27 @@ body {
    top: 10px;
    left: -15px;
 }
-
+.counterWrap{
+    overflow: hidden;
+    position: absolute;
+    right: 10px;
+    font-size: 0.7rem;
+    line-height: 2.5rem;
+}
 .counter {
     text-align: center;
     padding: 4px 10px;
     border-radius: 50%;
-    overflow: hidden;
-    position: absolute;
-    top:60px;
-    right: 10px;
+    font-size: 1.5rem;
     background-color: rgba(202, 202, 202, 0.8);
+}
+.top{
+    top:60px;
+}
+.bottom{
+    bottom: 0;
+    color: red;
+    font-weight: 900;
 }
 .switchView{
     position: absolute;

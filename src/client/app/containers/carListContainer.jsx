@@ -21,7 +21,7 @@ class CarListContainer extends Component {
     const { cars, pathLists } = this.props;
     saveToLocalStorage(cars, pathLists);
   }
-  deleteCar = name => {
+  deleteCar = name => () => {
     this.setState({
       popUpConfirm: true,
       name
@@ -36,7 +36,7 @@ class CarListContainer extends Component {
     });
     status ? deleteCar(name) : null;
   };
-  carInfo = name => {
+  carInfo = name=> () => {
     const { carInfo } = this.props;
     carInfo(name);
   };

@@ -9,11 +9,13 @@ import CreatePath from '../components/CreatePath';
 import PathListSelectedCar from '../components/PathListSelectedCar';
 import VeiwAndEditPathList from '../components/VeiwAndEditPathList';
 import { loadLocalStorage } from '../actions/cars';
+import { checkError } from '../actions/pathLists';
 
 class Content extends Component {
     componentDidMount() {
-        const { load } = this.props;
+        const { load, chError } = this.props;
         load();
+        chError();
     }
     render() {
         const { isNewCar, isNewPath, selectedCar, selectPathList, pathLists } = this.props;
@@ -41,6 +43,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         load: () => loadLocalStorage(dispatch),
+        chError: () => checkError(dispatch),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Content);
