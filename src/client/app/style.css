@@ -299,8 +299,10 @@ body {
 }
 .bottom{
     bottom: 0;
+    font-weight: 600;
+}
+.bottom>span{
     color: red;
-    font-weight: 900;
 }
 .switchView{
     position: absolute;
