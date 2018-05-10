@@ -20,7 +20,7 @@ export default class Table extends Component {
       handlerTableSelect(select);
   };
   render() {
-    const { page, stringOnPage, length, tempArr, reverse, name, choisePaginationString } = this.props;
+    const { page, stringOnPage, length, tempArr, reverse, name, choisePaginationString, error } = this.props;
     return <div className="pathListSelectedCar">
     <ChoisePaginationString handler={choisePaginationString}/>
         <table className="table">
@@ -29,7 +29,7 @@ export default class Table extends Component {
           </thead>
           <tbody>
             {tempArr.map(path => {
-              return <RowTD path={path} key={path.dateBegin} handler={this.handlerSelect} />;
+              return <RowTD path={path} key={path.dateBegin} handler={this.handlerSelect} error={error}/>;
             })}
           </tbody>
         </table>

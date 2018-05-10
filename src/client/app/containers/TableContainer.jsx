@@ -75,6 +75,7 @@ class TableContainer extends Component {
     const dataArr = paginationData(page, stringOnPage, pathListsCar);
     return (
       <Table
+        error={this.props.error}
         name={name}
         reverse={reverse}
         page={page}
@@ -90,10 +91,15 @@ class TableContainer extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+      error: state.error,
+  }
+}
 const mapDispatchToProps = (dispatch) => {
     return {
         pathInfo: (path) => infoPathToName(dispatch, path),
     }
 }
 
-export default connect(null, mapDispatchToProps)(TableContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TableContainer);

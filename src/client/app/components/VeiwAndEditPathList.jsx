@@ -12,24 +12,29 @@ class VeiwAndEditPathList extends Component {
         close('selectPathList');
     }
     render() {
-        const { selectPathList } = this.props;
+        const { selectPathList, error } = this.props;
         return (
             <div className="pathListView">
                 <div className="header">
                     <h3 className="headerText">Выбран путевой лист</h3>
                     <Button handler={this.handleClose} styleButton="delit">{String.fromCharCode(10006)}</Button>
                 </div>
-                <ViewPath path={selectPathList} />
+                <ViewPath path={selectPathList} error={error}/>
                 <div className="footer">
                 </div>
             </div>
         )
     }
 }
+const mapStateToProps = state => {
+    return {
+        error: state.error
+    };
+  };
 const mapDispatchToProps = (dispatch) => {
     return {
         close: (selectPathList) => closeWindow(dispatch, selectPathList),
     }
 }
 
-export default connect(null, mapDispatchToProps)(VeiwAndEditPathList);
+export default connect(mapStateToProps, mapDispatchToProps)(VeiwAndEditPathList);
