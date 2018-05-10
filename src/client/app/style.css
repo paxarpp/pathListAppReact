@@ -70,6 +70,18 @@ body {
     overflow: hidden;
     position: relative;
 }
+.carListContainerMinimal{
+    padding: 0;
+    box-shadow: 3px 3px 10px 1px grey;
+    height: 100px;
+    width: 50px;
+    margin: 10px;
+    overflow: hidden;
+    position: relative;
+}
+.carListHeadMin{
+    font-size: 1rem;
+}
 .pathListView {
     padding: 0;
     box-shadow: 3px 3px 10px 1px grey;

@@ -7,78 +7,91 @@ import Button from '../components/Button';
 import Confirm from '../components/Confirm';
 
 import { deleteCarToName, addNewCar, infoCarToName } from '../actions/cars.js';
-import saveToLocalStorage from '../components/saveToLocalStorage.js'
+import saveToLocalStorage from '../components/saveToLocalStorage.js';
 class CarListContainer extends Component {
-constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-        popUpConfirm: false,
-        name: '',
-    }
+    this.state = {
+      popUpConfirm: false,
+      name: '',
+      minView: false
+    };
+  }
+  componentDidUpdate() {
+    const { cars, pathLists } = this.props;
+    saveToLocalStorage(cars, pathLists);
+  }
+  deleteCar = name => {
+    this.setState({
+      popUpConfirm: true,
+      name
+    });
+  };
+  deleteCarConfirm = status => {
+    const { deleteCar } = this.props;
+    const { name } = this.state;
+    this.setState({
+      popUpConfirm: false,
+      name: '',
+    });
+    status ? deleteCar(name) : null;
+  };
+  carInfo = name => {
+    const { carInfo } = this.props;
+    carInfo(name);
+  };
+  handlerAddCar = () => {
+    const { addCar } = this.props;
+    addCar();
+  };
+  handleChangeView = () => {
+    const { minView } = this.state;
+    this.setState({
+        minView: !minView
+    });
+  }
+  render() {
+    const { cars, selectedCar, pathLists } = this.props;
+    const { popUpConfirm, minView } = this.state;
+    return (
+      <div className={minView ? "carListContainerMinimal":"carListContainer"}>
+        <div className="header">
+          <h3  className={minView ? "carListHeadMin": null}>
+                {minView ? "Авто":"Список Автомобилей"}
+          </h3>
+          <Button handler={this.handleChangeView} styleButton="switchView">
+            {minView ? String.fromCharCode(9654) : String.fromCharCode(9668)}
+          </Button>
+        </div>
+        {popUpConfirm && <Confirm handler={this.deleteCarConfirm} />}
+        <CarList
+          selectedCar={selectedCar}
+          pathLists={pathLists}
+          cars={cars}
+          deleteCarHandler={this.deleteCar}
+          carInfo={this.carInfo}
+        />
+        <div className="footer">
+          <Button handler={this.handlerAddCar} styleButton="submit">
+            Добавить авто
+          </Button>
+        </div>
+      </div>
+    );
+  }
 }
-
-    componentDidUpdate(){
-        const { cars, pathLists } = this.props;
-        saveToLocalStorage(cars, pathLists);
-    }
-    deleteCar = (name) => {  
-        this.setState({
-            popUpConfirm: true,
-            name
-        })
-    }
-    deleteCarConfirm = (status) => {
-        const { deleteCar } = this.props;
-        const { name } = this.state;
-        this.setState({
-            popUpConfirm: false,
-            name: '',
-        })
-        status ? deleteCar(name): null;
-    }
-    carInfo = (name) => {
-        const { carInfo } = this.props;
-        carInfo(name);
-    }
-    handlerAddCar = () => {
-        const { addCar } = this.props;
-        addCar();
-    }
-    render() {
-        const { cars, selectedCar, pathLists } = this.props;   
-        const { popUpConfirm } = this.state;   
-        return (
-                <div className="carListContainer">
-                    <div className="header">
-                        <h3>Список Автомобилей</h3>
-                    </div>  
-                    {popUpConfirm && <Confirm handler={this.deleteCarConfirm} />}
-                    <CarList 
-                        selectedCar={selectedCar}
-                        pathLists={pathLists}
-                        cars={cars} 
-                        deleteCarHandler={this.deleteCar} 
-                        carInfo={this.carInfo} />
-                    <div className="footer">
-                        <Button handler={this.handlerAddCar} styleButton="submit">Добавить авто</Button>
-                    </div>
-                </div>
-                )
-    }
-}
-const mapStateToProps = (state) => {
-    return {
-        cars: state.cars,
-        pathLists: state.pathLists,
-        selectedCar: state.selectedCar
-    }
-}
-const mapDispatchToProps = (dispatch) => {
-    return {
-        deleteCar: (name) => deleteCarToName(dispatch, name),
-        carInfo: (name) => infoCarToName(dispatch, name),
-        addCar: () => addNewCar(dispatch),
-    }
-}
-
+const mapStateToProps = state => {
+  return {
+    cars: state.cars,
+    pathLists: state.pathLists,
+    selectedCar: state.selectedCar
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteCar: name => deleteCarToName(dispatch, name),
+    carInfo: name => infoCarToName(dispatch, name),
+    addCar: () => addNewCar(dispatch)
+  };
+};
 export default connect(mapStateToProps, mapDispatchToProps)(CarListContainer);
