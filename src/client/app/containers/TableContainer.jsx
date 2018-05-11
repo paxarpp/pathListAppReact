@@ -16,7 +16,6 @@ class TableContainer extends Component {
       name: ""
     };
   }
-
   handlerPagination = page => {
     this.setState({ page });
   };
@@ -24,14 +23,16 @@ class TableContainer extends Component {
       const { pathInfo } = this.props;
       pathInfo(select);
   };
-
   componentWillReceiveProps({ pathLists }) {
-    this.setState(prev => ({
-      ...prev,
-      pathListsCar: pathLists
-    }));
-  }
-
+    const prevValue = this.state.pathListsCar.length === 0 ? null : this.state.pathListsCar[0].name;
+    const newValue = pathLists.length === 0 ? null : pathLists[0].name;
+    if (prevValue !== newValue || this.state.pathListsCar.length !== pathLists.length) {
+      this.setState(prev => ({
+        ...prev,
+        pathListsCar: pathLists
+      }));
+    }
+  } 
   handlerTableSort = name => {
     if (name) {
       const { reverse } = this.state;
@@ -69,7 +70,7 @@ class TableContainer extends Component {
     this.setState({
         stringOnPage: +value,
     })
-}
+  }
   render() {
     const { page, stringOnPage, pathListsCar, reverse, name } = this.state;
     const dataArr = paginationData(page, stringOnPage, pathListsCar);

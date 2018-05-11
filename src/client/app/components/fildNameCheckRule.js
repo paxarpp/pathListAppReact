@@ -5,7 +5,7 @@ const fildNameCheckRule = {
     dateBegin: /\S/,
     pathBegin: /\d+/,
     pathEnd: /\d+/,
-    milleage: /\d+/,
+    milleage: /^\d+$/,
     fuelBegin: /\d+/,
     fuelEnd: /\d+/,
     addFuel: /\d+/,

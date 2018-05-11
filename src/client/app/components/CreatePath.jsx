@@ -170,7 +170,7 @@ class CreatePath extends Component {
     );
     this.setState(prev => ({
       ...prev,
-      milleage: +prev.pathEnd - +prev.pathBegin
+      milleage: Math.round((+prev.pathEnd - +prev.pathBegin) *100) / 100 
     }));
     this.setState(prev => ({
       ...prev,
