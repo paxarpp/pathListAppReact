@@ -64,24 +64,33 @@ class CreatePath extends Component {
     };
     const { cars } = this.props;
     if (path.dateBegin === "") {
-      this.setState(() => ({
+      this.setState({
         isWrong: "dateBegin"
-      }));
+      });
     } else {
       if (
         pathLists.some(elem => {
           return elem.name === path.name && elem.dateBegin === path.dateBegin;
         })
       ) {
-        this.setState(() => ({
+        this.setState({
           isWrongDuble: true
-        }));
-      } else {
+        });
+      } else  if(path.milleage >= 0 && path.fuelEnd >= 0){
         if (path.name) {
           addDataPath(calculateFieldPath(path));
           close("isNewPath");
           chError();
-
+        }
+      } else {  
+        if (path.milleage < 0) {
+          this.setState({
+            isWrong: 'milleage'
+            })
+        } else {
+          this.setState({
+            isWrong: 'fuelEnd'
+          })
         }
       }
     }
@@ -287,7 +296,7 @@ class CreatePath extends Component {
                 step={"1"}
                 min={"0"}
               />
-              <h4 className="resultHeader">Пробег составил: {milleage} км</h4>
+              <h4 className={isWrong === "milleage" ? "inputErrorCheck" : "resultHeader"}>Пробег составил: {milleage} км</h4>
             </div>
             <div className={columnView ? null : "row"}>
               <h4 className="inputHeader">
@@ -315,7 +324,7 @@ class CreatePath extends Component {
                 step={"0.01"}
                 min={"0"}
               />
-              <h4 className="inputHeader">
+              <h4 className={isWrong === "fuelEnd" ? "inputErrorCheck" : "inputHeader"}>
                 конечное количество топлива {fuelEnd} л
               </h4>
               <h4 className="resultHeader">

@@ -7,6 +7,7 @@ import Button from '../components/Button';
 import Confirm from '../components/Confirm';
 
 import { deleteCarToName, addNewCar, infoCarToName } from '../actions/cars.js';
+import { checkError } from '../actions/pathLists.js';
 import saveToLocalStorage from '../components/saveToLocalStorage.js';
 class CarListContainer extends Component {
   constructor(props) {
@@ -28,13 +29,14 @@ class CarListContainer extends Component {
     });
   };
   deleteCarConfirm = status => {
-    const { deleteCar } = this.props;
+    const { deleteCar, chError } = this.props;
     const { name } = this.state;
     this.setState({
       popUpConfirm: false,
       name: '',
     });
     status ? deleteCar(name) : null;
+    status ? chError() : null;
   };
   carInfo = name=> () => {
     const { carInfo } = this.props;
@@ -91,7 +93,8 @@ const mapDispatchToProps = dispatch => {
   return {
     deleteCar: name => deleteCarToName(dispatch, name),
     carInfo: name => infoCarToName(dispatch, name),
-    addCar: () => addNewCar(dispatch)
+    addCar: () => addNewCar(dispatch),
+    chError: () => checkError(dispatch),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CarListContainer);
