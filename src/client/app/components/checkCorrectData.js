@@ -15,11 +15,16 @@ const checkCorrectData = (cars, pathLists) => {
             arrPath.forEach((path, indx, arr) => {
                 if(arr[indx + 1]){
                     if (path.fuelEnd !== arr[indx + 1].fuelBegin){
-                        error.push(Object.assign({}, path, {first: true}, {errorFuel: true}));
-                        error.push(Object.assign({}, arr[indx + 1], {first: false}, {errorFuel: true}));
+                        if (path.pathEnd !== arr[indx + 1].pathBegin){
+                            error.push(Object.assign({}, path, {first: true}, {errorFuel: true}, {errorPath: true}));
+                            error.push(Object.assign({}, arr[indx + 1], {first: false}, {errorFuel: true}, {errorPath: true}));
+                        } else{
+                            error.push(Object.assign({}, path, {first: true}, {errorFuel: true}, {errorPath: false}));
+                            error.push(Object.assign({}, arr[indx + 1], {first: false}, {errorFuel: true}, {errorPath: false}));
+                        }
                     } else if (path.pathEnd !== arr[indx + 1].pathBegin){
-                        error.push(Object.assign({}, path, {first: true},  {errorFuel: false}));
-                        error.push(Object.assign({}, arr[indx + 1], {errorFuel: false}));
+                        error.push(Object.assign({}, path, {first: true},  {errorPath: true}, {errorFuel: false}));
+                        error.push(Object.assign({}, arr[indx + 1], {first: false}, {errorPath: true}, {errorFuel: false}));
                     }
                 }
             });
