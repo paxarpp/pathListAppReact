@@ -81,15 +81,19 @@ body {
 .carListContainerMinimal{
     padding: 0;
     box-shadow: 3px 3px 10px 1px grey;
-    height: 100px;
+    height: 50px;
+    border-radius: 0 50% 50% 0;
     width: 50px;
     margin: 10px;
     overflow: hidden;
     position: relative;
     transition: all 0.3s linear;
 }
-.carListHeadMin{
-    font-size: 1rem;
+.switchMin{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
 }
 .pathListView {
     padding: 0;
@@ -283,7 +287,6 @@ h4.inputErrorCheck{
     margin-left: -500px;
     transition: margin .3s ease-in;
 }
-
 .selected{
     transform: scale(1.05);
     position: relative;
@@ -323,8 +326,8 @@ h4.inputErrorCheck{
 }
 .switchView{
     position: absolute;
-    top: 60px;
-    right: 0;
+    top: 55px;
+    right: 5px;
     cursor: pointer;
 }
 .sortView {

@@ -75,7 +75,8 @@ class TableContainer extends Component {
     const { page, stringOnPage, pathListsCar, reverse, name } = this.state;
     const dataArr = paginationData(page, stringOnPage, pathListsCar);
     return (
-      <Table
+        dataArr.length === 0 ? null :
+        <Table
         error={this.props.error}
         name={name}
         reverse={reverse}

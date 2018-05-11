@@ -58,10 +58,8 @@ class CarListContainer extends Component {
     return (
       <div className={minView ? "carListContainerMinimal":"carListContainer"}>
         <div className="header">
-          <h3  className={minView ? "carListHeadMin": null}>
-                {minView ? "Авто":"Список Автомобилей"}
-          </h3>
-          <Button handler={this.handleChangeView} styleButton="switchView">
+          <h3>{minView ? null : "Список Автомобилей"}</h3>
+          <Button handler={this.handleChangeView} styleButton={minView ? "switchMin" : "switchView"}>
             {minView ? String.fromCharCode(9654) : String.fromCharCode(9668)}
           </Button>
         </div>
