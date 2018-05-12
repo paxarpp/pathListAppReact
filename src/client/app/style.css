@@ -395,9 +395,13 @@ h4.inputErrorCheck{
 .editable{
     cursor: pointer;
     transition: all 0.2s linear;
+    user-select: none;
 }
 .editable::after{
-    content: " \21BB";
+        color: green;
+        content: "изменить";
+        margin-left: 20px;
+        font-size: 0.7rem;
 }
 .editable:hover {
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);

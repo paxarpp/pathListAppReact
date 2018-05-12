@@ -43,12 +43,11 @@ export const reducer = handleActions({
                        +nextPath.addFuel +
                        +nextPath.addFuelWinter -
                        +nextPath.ConsumptionFactoryFuel) * 100) / 100
-                    nextPath.deltaFuel = Math.round((
-                            +nextPath.fuelBegin +
-                            +nextPath.addFuel +
-                            +nextPath.addFuelWinter -
-                            +nextPath.fuelEnd) *
-                             100 ) / 100
+                   nextPath.deltaFuel = Math.round((
+                       +nextPath.fuelBegin +
+                       +nextPath.addFuel +
+                       +nextPath.addFuelWinter -
+                       +nextPath.fuelEnd) * 100 ) / 100
                    return nextPath
                } else return path
            })
