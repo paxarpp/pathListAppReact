@@ -19,7 +19,7 @@ class Content extends Component {
     coordX: null,
     coordY: null,
     field: null,
-    value: null
+    value: null,
   };
   doubleClick = (field, value) => event => {
     const coordX = event.clientX;

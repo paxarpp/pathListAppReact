@@ -33,9 +33,25 @@ export const reducer = handleActions({
     [saveUpdateDataR]: (state, action) => {
         return {
             ...state,
-           pathLists: state.pathLists.map(path=>(
-            path.name === state.selectPathList.name && path.dateBegin === state.selectPathList.dateBegin ?
-            Object.assign(path, action.payload) : path ))
+           pathLists: state.pathLists.map(path => {
+               if (path.name === state.selectPathList.name && path.dateBegin === state.selectPathList.dateBegin) {
+                   const nextPath = Object.assign(path, action.payload)
+                   nextPath.milleage = Math.round((+nextPath.pathEnd - +nextPath.pathBegin) * 100) / 100
+                   nextPath.ConsumptionFactoryFuel = Math.round(+nextPath.milleage * +nextPath.constFuelChange / 100 * 100) / 100
+                   nextPath.fuelEnd = Math.round((
+                       +nextPath.fuelBegin +
+                       +nextPath.addFuel +
+                       +nextPath.addFuelWinter -
+                       +nextPath.ConsumptionFactoryFuel) * 100) / 100
+                    nextPath.deltaFuel = Math.round((
+                            +nextPath.fuelBegin +
+                            +nextPath.addFuel +
+                            +nextPath.addFuelWinter -
+                            +nextPath.fuelEnd) *
+                             100 ) / 100
+                   return nextPath
+               } else return path
+           })
         }
     },
     [checkErrorPath]: (state) => {
