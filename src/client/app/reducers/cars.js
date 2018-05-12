@@ -33,16 +33,9 @@ export const reducer = handleActions({
     [saveUpdateDataR]: (state, action) => {
         return {
             ...state,
-           pathLists: state.pathLists.filter(path=>{
-               return(
-                path.name === state.selectPathList.name && path.dateBegin === state.selectPathList.dateBegin
-               ) 
-           }).map(path=>(Object.assign(path, action.payload)))
-           .concat(state.pathLists.filter(path=>{
-               return(
-                path.name !== state.selectPathList.name || path.dateBegin !== state.selectPathList.dateBegin
-               )
-        }) )
+           pathLists: state.pathLists.map(path=>(
+            path.name === state.selectPathList.name && path.dateBegin === state.selectPathList.dateBegin ?
+            Object.assign(path, action.payload) : path ))
         }
     },
     [checkErrorPath]: (state) => {
