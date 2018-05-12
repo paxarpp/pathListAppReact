@@ -19,7 +19,7 @@ class VeiwAndEditPathList extends Component {
                     <h3 className="headerText">Выбран путевой лист</h3>
                     <Button handler={this.handleClose} styleButton="delit">{String.fromCharCode(10006)}</Button>
                 </div>
-                <ViewPath path={selectPathList} error={error}/>
+                <ViewPath path={selectPathList} error={error}  doubleClick={this.props.doubleClick} />
                 <div className="footer">
                 </div>
             </div>

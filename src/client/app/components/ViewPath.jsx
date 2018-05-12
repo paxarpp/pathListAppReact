@@ -1,12 +1,15 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
 import fildNamePathList from "./fildNamePathList";
 import createObjectError from "./createObjectError";
 
-const ViewPath = ({ path, error }) => {
+export default class ViewPath extends PureComponent {
+  render() {
+    const { path, error, doubleClick } = this.props;
     const matchNames = createObjectError(path, error);
-    return <div className="View">
+    return (
+      <div className="View">
         <h4 className="head">{path.name}</h4>
         <p>
           {fildNamePathList["fuel"]}: {path.fuel}
@@ -17,27 +20,49 @@ const ViewPath = ({ path, error }) => {
         <p>
           {fildNamePathList["dateBegin"]}: {path.dateBegin}
         </p>
-        <p className={!(matchNames.first) && matchNames.path ? "inputError" : null}>
-          {fildNamePathList["pathBegin"]}: {path.pathBegin}
+        <p
+          onDoubleClick={doubleClick("pathBegin", path.pathBegin)}
+          className={!matchNames.first && matchNames.path ? "inputError" : null}
+        >
+          <span className="editable">
+          {fildNamePathList["pathBegin"]}: {path.pathBegin} км
+          </span>
         </p>
-        <p className={matchNames.first && matchNames.path ? "inputError" : null}>
-          {fildNamePathList["pathEnd"]}: {path.pathEnd}
+        <p
+          onDoubleClick={doubleClick("pathEnd", path.pathEnd)}
+          className={matchNames.first && matchNames.path ? "inputError" : null}
+        >
+          <span className="editable">
+          {fildNamePathList["pathEnd"]}: {path.pathEnd} км
+          </span>
         </p>
         <p>
-          {fildNamePathList["milleage"]}: {path.milleage}
+          {fildNamePathList["milleage"]}: {path.milleage} км
         </p>
-        <p className={!(matchNames.first) && matchNames.fuel ? "inputError" : null}>
+        <p
+          onDoubleClick={doubleClick("fuelBegin", path.fuelBegin)}
+          className={!matchNames.first && matchNames.fuel ? "inputError" : null}
+        >
+          <span className="editable">
           {fildNamePathList["fuelBegin"]}: {path.fuelBegin} л
+          </span>
         </p>
-        <p>
+        <p
+          onDoubleClick={doubleClick("addFuel", path.addFuel)}
+        >
+        <span className="editable">
           {fildNamePathList["addFuel"]}: {path.addFuel} л
+          </span>
         </p>
-        <p className={matchNames.first && matchNames.fuel ? "inputError" : null}>
+        <p
+          className={matchNames.first && matchNames.fuel ? "inputError" : null}
+        >
           {fildNamePathList["fuelEnd"]}: {path.fuelEnd} л
         </p>
         <p>
           {fildNamePathList["deltaFuel"]}: {path.deltaFuel} л
         </p>
-      </div>;
+      </div>
+    );
+  }
 }
-export default ViewPath;

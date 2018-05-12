@@ -15,7 +15,8 @@ import {
     addPathReducer,
     setIsNewPath,
     infoPathReducer,
-    checkErrorPath
+    checkErrorPath,
+    saveUpdateDataR
 } from '../actions/pathLists';
 
 const initialState = {
@@ -29,6 +30,21 @@ const initialState = {
 }
 
 export const reducer = handleActions({
+    [saveUpdateDataR]: (state, action) => {
+        return {
+            ...state,
+           pathLists: state.pathLists.filter(path=>{
+               return(
+                path.name === state.selectPathList.name && path.dateBegin === state.selectPathList.dateBegin
+               ) 
+           }).map(path=>(Object.assign(path, action.payload)))
+           .concat(state.pathLists.filter(path=>{
+               return(
+                path.name !== state.selectPathList.name || path.dateBegin !== state.selectPathList.dateBegin
+               )
+        }) )
+        }
+    },
     [checkErrorPath]: (state) => {
         return {
             ...state,
