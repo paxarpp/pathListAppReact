@@ -6,7 +6,7 @@ import CarListContainer from './carListContainer.jsx';
 import PathListContainer from './pathListContainer.jsx';
 import CreateCar from '../components/CreateCar';
 import CreatePath from '../components/CreatePath';
-import PathListSelectedCar from '../components/PathListSelectedCar';
+import TableContainer from "./TableContainer";
 import VeiwAndEditPathList from '../components/VeiwAndEditPathList';
 
 import PopUpInput from '../components/PopUpInput';
@@ -72,35 +72,20 @@ class Content extends Component {
       pathLists
     } = this.props;
     const { field } = this.state;
-    return (
-      <div className="container" onContextMenu={this.clearClick}>
+    return <div className="container" onContextMenu={this.clearClick}>
         <CarListContainer />
         <PathListContainer />
         {isNewCar && <CreateCar />}
         {isNewPath && <CreatePath />}
-        {selectPathList && (
-          <VeiwAndEditPathList
-            selectPathList={selectPathList}
-            doubleClick={this.doubleClick}
-          />
-        )}
-        {selectedCar && (
-          <PathListSelectedCar
-            selectedCar={selectedCar}
-            pathLists={pathLists}
-          />
-        )}
-        {field && (
-          <PopUpInput
-            coordX={this.state.coordX}
-            coordy={this.state.coordY}
-            onChange={this.onChange}
-            handlerConf={this.handlerConf}
-            value={this.state.value}
-          />
-        )}
-      </div>
-    );
+        {selectPathList && <VeiwAndEditPathList 
+                            selectPathList={selectPathList} 
+                            doubleClick={this.doubleClick} />}
+        {selectedCar && <TableContainer className="pathListSelectedCar" 
+                            selectedCar={selectedCar} 
+                            pathLists={pathLists.filter(path => path.name === selectedCar)} 
+                            />}
+        {field && <PopUpInput coordX={this.state.coordX} coordy={this.state.coordY} onChange={this.onChange} handlerConf={this.handlerConf} value={this.state.value} />}
+      </div>;
   }
 }
 const mapStateToProps = state => {
