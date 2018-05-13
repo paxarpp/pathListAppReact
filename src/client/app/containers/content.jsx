@@ -81,6 +81,7 @@ class Content extends Component {
                             selectPathList={selectPathList} 
                             doubleClick={this.doubleClick} />}
         {selectedCar && <TableContainer className="pathListSelectedCar" 
+                            doubleClick={this.doubleClick}
                             selectedCar={selectedCar} 
                             pathLists={pathLists.filter(path => path.name === selectedCar)} 
                             />}

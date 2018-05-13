@@ -392,7 +392,8 @@ h4.inputErrorCheck{
     font-size: 1.5rem;
     text-align: center;
 }
-.editable{
+.editableTd,
+.editable {
     cursor: pointer;
     transition: all 0.2s linear;
     user-select: none;
@@ -407,3 +408,9 @@ h4.inputErrorCheck{
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     transition: all 0.2s linear;
 }
+.editableTd::after {
+        color: green;
+        content: "...";
+        margin-left: 10px;
+}
+

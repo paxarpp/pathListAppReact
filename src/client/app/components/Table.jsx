@@ -29,7 +29,7 @@ export default class Table extends Component {
           </thead>
           <tbody>
             {tempArr.map(path => {
-              return <RowTD path={path} key={path.dateBegin} handler={this.handlerSelect} error={error}/>;
+            return <RowTD path={path} key={path.dateBegin} handler={this.handlerSelect} error={error} doubleClick={this.props.doubleClick} />;
             })}
           </tbody>
         </table>

@@ -88,6 +88,7 @@ class TableContainer extends Component {
         handlerTableSort={this.handlerTableSort}
         handlerTableSelect={this.handlerTableSelect}
         choisePaginationString={this.choisePaginationString}
+        doubleClick={this.props.doubleClick}
       />
     );
   }
