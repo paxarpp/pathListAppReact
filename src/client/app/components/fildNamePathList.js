@@ -10,7 +10,7 @@ const fildNamePathList = {
     fuelEnd: 'топливо в конце',
     addFuel: 'заправлено',
     deltaFuel: 'расход топлива за пробег',
-    ConsumptionFactoryFuel:'!!!',
-    addFuelWinter:'заправлено ЗИМНЕЕ',
+    ConsumptionFactoryFuel: '!!!',
+    addFuelWinter: 'заправлено ЗИМНЕЕ',
 }
 export default fildNamePathList;

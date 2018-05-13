@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import Table from "../components/Table";
-import paginationData from "../components/paginationData";
-import prepareNullstringForTable from "../components/prepareNullstringForTable";
-import { infoPathToName } from "../actions/pathLists.js";
+import Table from '../components/Table';
+import paginationData from '../components/paginationData';
+import prepareNullstringForTable from '../components/prepareNullstringForTable';
+import { infoPathToName } from '../actions/pathLists.js';
 class TableContainer extends Component {
   constructor(props) {
     super(props);
@@ -14,26 +14,32 @@ class TableContainer extends Component {
       page: 1,
       pathListsCar: this.props.pathLists,
       reverse: false,
-      name: ""
+      name: ''
     };
   }
   handlerPagination = page => {
     this.setState({ page });
   };
   handlerTableSelect = path => () => {
-      const { pathInfo } = this.props;
-      pathInfo(path);
+    const { pathInfo } = this.props;
+    pathInfo(path);
   };
   componentWillReceiveProps({ pathLists }) {
-    const prevValue = this.state.pathListsCar.length === 0 ? null : this.state.pathListsCar[0].name;
+    const prevValue =
+      this.state.pathListsCar.length === 0
+        ? null
+        : this.state.pathListsCar[0].name;
     const newValue = pathLists.length === 0 ? null : pathLists[0].name;
-    if (prevValue !== newValue || this.state.pathListsCar.length !== pathLists.length) {
+    if (
+      prevValue !== newValue ||
+      this.state.pathListsCar.length !== pathLists.length
+    ) {
       this.setState(prev => ({
         ...prev,
         pathListsCar: pathLists
       }));
     }
-  } 
+  }
   handlerTableSort = name => {
     if (name) {
       const { reverse } = this.state;
@@ -66,18 +72,20 @@ class TableContainer extends Component {
       }
     }
   };
-  choisePaginationString = (e) => {
+  choisePaginationString = e => {
     const value = e.currentTarget.value;
     this.setState({
-        stringOnPage: +value,
-    })
-  }
+      stringOnPage: +value
+    });
+  };
   render() {
     const { page, stringOnPage, pathListsCar, reverse, name } = this.state;
-    const dataArr = prepareNullstringForTable( paginationData(page, stringOnPage, pathListsCar), stringOnPage );
-    return (
-        dataArr.length === 0 ? null :
-        <Table
+    const dataArr = prepareNullstringForTable(
+      paginationData(page, stringOnPage, pathListsCar),
+      stringOnPage
+    );
+    return dataArr.length === 0 ? null : (
+      <Table
         error={this.props.error}
         name={name}
         reverse={reverse}
@@ -95,15 +103,15 @@ class TableContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-      error: state.error,
-  }
-}
-const mapDispatchToProps = (dispatch) => {
-    return {
-        pathInfo: (path) => infoPathToName(dispatch, path),
-    }
-}
+    error: state.error
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    pathInfo: path => infoPathToName(dispatch, path)
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableContainer);

@@ -33,12 +33,12 @@ class CarListContainer extends Component {
     const { name } = this.state;
     this.setState({
       popUpConfirm: false,
-      name: '',
+      name: ''
     });
     status ? deleteCar(name) : null;
     status ? chError() : null;
   };
-  carInfo = name=> () => {
+  carInfo = name => () => {
     const { carInfo } = this.props;
     carInfo(name);
   };
@@ -49,17 +49,20 @@ class CarListContainer extends Component {
   handleChangeView = () => {
     const { minView } = this.state;
     this.setState({
-        minView: !minView
+      minView: !minView
     });
-  }
+  };
   render() {
     const { cars, selectedCar, pathLists } = this.props;
     const { popUpConfirm, minView } = this.state;
     return (
-      <div className={minView ? "carListContainerMinimal":"carListContainer"}>
+      <div className={minView ? 'carListContainerMinimal' : 'carListContainer'}>
         <div className="header">
-          <h3>{minView ? null : "Список Автомобилей"}</h3>
-          <Button handler={this.handleChangeView} styleButton={minView ? "switchMin" : "switchView"}>
+          <h3>{minView ? null : 'Список Автомобилей'}</h3>
+          <Button
+            handler={this.handleChangeView}
+            styleButton={minView ? 'switchMin' : 'switchView'}
+          >
             {minView ? String.fromCharCode(9654) : String.fromCharCode(9668)}
           </Button>
         </div>
@@ -92,7 +95,7 @@ const mapDispatchToProps = dispatch => {
     deleteCar: name => deleteCarToName(dispatch, name),
     carInfo: name => infoCarToName(dispatch, name),
     addCar: () => addNewCar(dispatch),
-    chError: () => checkError(dispatch),
+    chError: () => checkError(dispatch)
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CarListContainer);

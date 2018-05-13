@@ -1,6 +1,10 @@
-import { createAction } from 'redux-actions';
+import {
+    createAction
+} from 'redux-actions';
 
-import { closeWindowDispatch } from './cars'
+import {
+    closeWindowDispatch
+} from './cars'
 
 export const deletePathReducer = createAction('DELETE_PATH_REDUCER');
 export const addPathReducer = createAction('ADD_PATH_REDUCER');

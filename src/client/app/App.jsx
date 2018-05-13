@@ -6,12 +6,12 @@ import Footer from './components/footer';
 import Content from './containers/content';
 
 const App = () => {
-    return (
-        <div className="wrapper">
-            <Header />
-            <Content/>
-            <Footer />
-        </div>
-        )
-}
+  return (
+    <div className="wrapper">
+      <Header />
+      <Content />
+      <Footer />
+    </div>
+  );
+};
 export default App;

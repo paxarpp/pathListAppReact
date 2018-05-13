@@ -1,28 +1,28 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { savePath, checkError } from "../actions/pathLists.js";
-import { closeWindow } from "../actions/cars.js";
-import Button from "./Button";
-import calculateFieldPath from "./calculateFieldPath";
-import fildNamePathList from "./fildNamePathList";
-import fildNameCheckRule from "./fildNameCheckRule.js";
+import { savePath, checkError } from '../actions/pathLists.js';
+import { closeWindow } from '../actions/cars.js';
+import Button from './Button';
+import calculateFieldPath from './calculateFieldPath';
+import fildNamePathList from './fildNamePathList';
+import fildNameCheckRule from './fildNameCheckRule.js';
 
 class CreatePath extends Component {
   state = {
-    name: "",
-    fuel: "",
-    dateBegin: "",
-    pathBegin: "",
-    pathEnd: "",
+    name: '',
+    fuel: '',
+    dateBegin: '',
+    pathBegin: '',
+    pathEnd: '',
     milleage: 0,
-    fuelBegin: "",
-    fuelEnd: "",
-    addFuel: "",
+    fuelBegin: '',
+    fuelEnd: '',
+    addFuel: '',
     deltaFuel: 0,
     addFuelWinter: 0,
-    constFuelChange: "",
-    ConsumptionFactoryFuel: "",
+    constFuelChange: '',
+    ConsumptionFactoryFuel: '',
     isWrong: false,
     isWrongDuble: false,
     columnView: true
@@ -63,9 +63,9 @@ class CreatePath extends Component {
       addFuelWinter
     };
     const { cars } = this.props;
-    if (path.dateBegin === "") {
+    if (path.dateBegin === '') {
       this.setState({
-        isWrong: "dateBegin"
+        isWrong: 'dateBegin'
       });
     } else {
       if (
@@ -76,21 +76,21 @@ class CreatePath extends Component {
         this.setState({
           isWrongDuble: true
         });
-      } else  if(path.milleage >= 0 && path.fuelEnd >= 0){
+      } else if (path.milleage >= 0 && path.fuelEnd >= 0) {
         if (path.name) {
           addDataPath(calculateFieldPath(path));
-          close("isNewPath");
+          close('isNewPath');
           chError();
         }
-      } else {  
+      } else {
         if (path.milleage < 0) {
           this.setState({
             isWrong: 'milleage'
-            })
+          });
         } else {
           this.setState({
             isWrong: 'fuelEnd'
-          })
+          });
         }
       }
     }
@@ -179,7 +179,7 @@ class CreatePath extends Component {
     );
     this.setState(prev => ({
       ...prev,
-      milleage: Math.round((+prev.pathEnd - +prev.pathBegin) *100) / 100 
+      milleage: Math.round((+prev.pathEnd - +prev.pathBegin) * 100) / 100
     }));
     this.setState(prev => ({
       ...prev,
@@ -212,7 +212,7 @@ class CreatePath extends Component {
   handleClose = e => {
     const { close } = this.props;
     e.preventDefault();
-    close("isNewPath");
+    close('isNewPath');
   };
   handleChangeView = e => {
     const { columnView } = this.state;
@@ -252,11 +252,11 @@ class CreatePath extends Component {
                 : String.fromCharCode(9660)}
             </Button>
           </div>
-          <div className={columnView ? "popUpContent" : "popUpContentRow"}>
-            <div className={columnView ? null : "row"}>
+          <div className={columnView ? 'popUpContent' : 'popUpContentRow'}>
+            <div className={columnView ? null : 'row'}>
               <h4 className="inputHeader">выберите автомобиль</h4>
               <select
-                data-field-name={"name"}
+                data-field-name={'name'}
                 value={name}
                 onChange={this.handleChangeName}
               >
@@ -267,68 +267,78 @@ class CreatePath extends Component {
               </select>
               <h4 className="inputHeader">выберите дату начала путевки</h4>
               <input
-                className={isWrong === "dateBegin" ? "inputErrorCheck" : null}
-                data-field-name={"dateBegin"}
-                type={"date"}
+                className={isWrong === 'dateBegin' ? 'inputErrorCheck' : null}
+                data-field-name={'dateBegin'}
+                type={'date'}
                 onChange={this.handleChange}
-                placeholder={"начало"}
+                placeholder={'начало'}
                 value={dateBegin}
               />
               <h4 className="inputHeader">введите начальный пробег, км</h4>
               <input
-                className={isWrong === "pathBegin" ? "inputErrorCheck" : null}
-                data-field-name={"pathBegin"}
-                type={"number"}
+                className={isWrong === 'pathBegin' ? 'inputErrorCheck' : null}
+                data-field-name={'pathBegin'}
+                type={'number'}
                 onChange={this.handleChange}
-                placeholder={"пробег, начало"}
+                placeholder={'пробег, начало'}
                 value={pathBegin}
-                step={"1"}
-                min={"0"}
+                step={'1'}
+                min={'0'}
               />
               <h4 className="inputHeader">введите конечный пробег, км</h4>
               <input
-                className={isWrong === "pathEnd" ? "inputErrorCheck" : null}
-                data-field-name={"pathEnd"}
-                type={"number"}
+                className={isWrong === 'pathEnd' ? 'inputErrorCheck' : null}
+                data-field-name={'pathEnd'}
+                type={'number'}
                 onChange={this.handleChange}
-                placeholder={"пробег, конец"}
+                placeholder={'пробег, конец'}
                 value={pathEnd}
-                step={"1"}
-                min={"0"}
+                step={'1'}
+                min={'0'}
               />
-              <h4 className={isWrong === "milleage" ? "inputErrorCheck" : "resultHeader"}>Пробег составил: {milleage} км</h4>
+              <h4
+                className={
+                  isWrong === 'milleage' ? 'inputErrorCheck' : 'resultHeader'
+                }
+              >
+                Пробег составил: {milleage} км
+              </h4>
             </div>
-            <div className={columnView ? null : "row"}>
+            <div className={columnView ? null : 'row'}>
               <h4 className="inputHeader">
                 введите начальное количество топлива, л
               </h4>
               <input
-                className={isWrong === "fuelBegin" ? "inputErrorCheck" : null}
-                data-field-name={"fuelBegin"}
-                type={"number"}
+                className={isWrong === 'fuelBegin' ? 'inputErrorCheck' : null}
+                data-field-name={'fuelBegin'}
+                type={'number'}
                 onChange={this.handleChange}
-                placeholder={"топливо, начало"}
+                placeholder={'топливо, начало'}
                 value={fuelBegin}
-                step={"0.01"}
-                min={"0"}
+                step={'0.01'}
+                min={'0'}
               />
               <h4 className="inputHeader">
                 введите заправленное количество топлива, л
               </h4>
               <input
-                data-field-name={"addFuel"}
-                type={"number"}
+                data-field-name={'addFuel'}
+                type={'number'}
                 onChange={this.handleChange}
-                placeholder={"топливо, заправка"}
+                placeholder={'топливо, заправка'}
                 value={addFuel}
-                step={"0.01"}
-                min={"0"}
+                step={'0.01'}
+                min={'0'}
               />
-              <h4 className={isWrong === "fuelEnd" ? "inputErrorCheck" : "inputHeader"}>
+              <h4
+                className={
+                  isWrong === 'fuelEnd' ? 'inputErrorCheck' : 'inputHeader'
+                }
+              >
                 конечное количество топлива {fuelEnd} л
               </h4>
               <h4 className="resultHeader">
-                {fildNamePathList["deltaFuel"]}: {deltaFuel} л
+                {fildNamePathList['deltaFuel']}: {deltaFuel} л
               </h4>
             </div>
             {isWrong && <h3 className="inputError">ошибка</h3>}
@@ -339,7 +349,7 @@ class CreatePath extends Component {
           <div className="footer">
             <Button
               handler={isWrong === false ? this.handleSubmit : null}
-              styleButton={isWrong === false ? "submit" : "disableButton"}
+              styleButton={isWrong === false ? 'submit' : 'disableButton'}
             >
               Сохранить
             </Button>

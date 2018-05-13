@@ -1,4 +1,6 @@
-import { createAction } from 'redux-actions';
+import {
+    createAction
+} from 'redux-actions';
 
 export const deleteCarReducer = createAction('DELETE_CAR_REDUCER');
 export const addCarReducer = createAction('ADD_CAR_REDUCER');

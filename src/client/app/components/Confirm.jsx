@@ -1,16 +1,16 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import Button from "../components/Button";
+import Button from '../components/Button';
 
 export default class Confirm extends Component {
-  handlerConf=(status) =>() => {
+  handlerConf = status => () => {
     const { handler } = this.props;
-    handler(status)
-  }
+    handler(status);
+  };
   render() {
     return (
       <div className="popUpConfirm">
-      <p>Уверены ?</p>
+        <p>Уверены ?</p>
         <Button handler={this.handlerConf(true)} styleButton="confirm">
           {String.fromCharCode(10003)}
         </Button>

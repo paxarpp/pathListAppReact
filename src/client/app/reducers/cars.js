@@ -1,4 +1,6 @@
-import { handleActions } from 'redux-actions';
+import {
+    handleActions
+} from 'redux-actions';
 
 import checkCorrectData from '../components/checkCorrectData';
 
@@ -26,31 +28,29 @@ const initialState = {
     isNewCar: false,
     isNewPath: false,
     selectedCar: '',
-    selectPathList:'',
+    selectPathList: '',
 }
 
 export const reducer = handleActions({
     [saveUpdateDataR]: (state, action) => {
         return {
             ...state,
-           pathLists: state.pathLists.map(path => {
-               if (path.name === state.selectPathList.name && path.dateBegin === state.selectPathList.dateBegin) {
-                   const nextPath = Object.assign(path, action.payload)
-                   nextPath.milleage = Math.round((+nextPath.pathEnd - +nextPath.pathBegin) * 100) / 100
-                   nextPath.ConsumptionFactoryFuel = Math.round(+nextPath.milleage * +nextPath.constFuelChange / 100 * 100) / 100
-                   nextPath.fuelEnd = Math.round((
-                       +nextPath.fuelBegin +
-                       +nextPath.addFuel +
-                       +nextPath.addFuelWinter -
-                       +nextPath.ConsumptionFactoryFuel) * 100) / 100
-                   nextPath.deltaFuel = Math.round((
-                       +nextPath.fuelBegin +
-                       +nextPath.addFuel +
-                       +nextPath.addFuelWinter -
-                       +nextPath.fuelEnd) * 100 ) / 100
-                   return nextPath
-               } else return path
-           })
+            pathLists: state.pathLists.map(path => {
+                if (path.name === state.selectPathList.name && path.dateBegin === state.selectPathList.dateBegin) {
+                    const nextPath = Object.assign(path, action.payload)
+                    nextPath.milleage = Math.round((+nextPath.pathEnd - +nextPath.pathBegin) * 100) / 100
+                    nextPath.ConsumptionFactoryFuel = Math.round(+nextPath.milleage * +nextPath.constFuelChange / 100 * 100) / 100
+                    nextPath.fuelEnd = Math.round((+nextPath.fuelBegin +
+                        +nextPath.addFuel +
+                        +nextPath.addFuelWinter -
+                        +nextPath.ConsumptionFactoryFuel) * 100) / 100
+                    nextPath.deltaFuel = Math.round((+nextPath.fuelBegin +
+                        +nextPath.addFuel +
+                        +nextPath.addFuelWinter -
+                        +nextPath.fuelEnd) * 100) / 100
+                    return nextPath
+                } else return path
+            })
         }
     },
     [checkErrorPath]: (state) => {
@@ -66,17 +66,17 @@ export const reducer = handleActions({
             pathLists: state.pathLists.filter(path => {
                 return (
                     path.name === action.payload
-                ) 
-            }).sort((a,b) => {
-                if(a.dateBegin < b.dateBegin){
+                )
+            }).sort((a, b) => {
+                if (a.dateBegin < b.dateBegin) {
                     return -1
-                }else if(a.dateBegin > b.dateBegin){
+                } else if (a.dateBegin > b.dateBegin) {
                     return 1
                 } else return 0
-                }) .concat(state.pathLists.filter(path => {
+            }).concat(state.pathLists.filter(path => {
                 return (
                     path.name !== action.payload
-                ) 
+                )
             }))
         }
     },
@@ -145,8 +145,8 @@ export const reducer = handleActions({
     [loadLocalStorageDispatch]: (state, action) => {
         return {
             ...state,
-          cars: action.payload.cars,
-          pathLists: action.payload.pathLists,  
+            cars: action.payload.cars,
+            pathLists: action.payload.pathLists,
         }
     },
 }, initialState);

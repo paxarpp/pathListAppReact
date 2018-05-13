@@ -6,7 +6,7 @@ import CarListContainer from './carListContainer.jsx';
 import PathListContainer from './pathListContainer.jsx';
 import CreateCar from '../components/CreateCar';
 import CreatePath from '../components/CreatePath';
-import TableContainer from "./TableContainer";
+import TableContainer from './TableContainer';
 import VeiwAndEditPathList from '../components/VeiwAndEditPathList';
 
 import PopUpInput from '../components/PopUpInput';
@@ -19,7 +19,7 @@ class Content extends Component {
     coordX: null,
     coordY: null,
     field: null,
-    value: null,
+    value: null
   };
   doubleClick = (field, value) => event => {
     const coordX = event.clientX;
@@ -36,8 +36,8 @@ class Content extends Component {
       const { saveUpdate } = this.props;
       const { field, value } = this.state;
       const result = {
-          [field]: value
-      }
+        [field]: value
+      };
       saveUpdate(result);
       this.clearClick(e);
     } else {
@@ -74,19 +74,35 @@ class Content extends Component {
     const { field } = this.state;
     return (
       <div className="container" onContextMenu={this.clearClick}>
-          <CarListContainer />
-          <PathListContainer />
-          {isNewCar && <CreateCar />}
-          {isNewPath && <CreatePath />}
-          {<VeiwAndEditPathList selectPathList={selectPathList} doubleClick={this.doubleClick} />}
-          {selectedCar && <TableContainer className="pathListSelectedCar" 
-                              doubleClick={this.doubleClick}
-                              selectedCar={selectedCar} 
-                              pathLists={pathLists.filter(path => path.name === selectedCar)} 
-                              />}
-          {field && <PopUpInput coordX={this.state.coordX} coordy={this.state.coordY} onChange={this.onChange} handlerConf={this.handlerConf} value={this.state.value} />}
+        <CarListContainer />
+        <PathListContainer />
+        {isNewCar && <CreateCar />}
+        {isNewPath && <CreatePath />}
+        {
+          <VeiwAndEditPathList
+            selectPathList={selectPathList}
+            doubleClick={this.doubleClick}
+          />
+        }
+        {selectedCar && (
+          <TableContainer
+            className="pathListSelectedCar"
+            doubleClick={this.doubleClick}
+            selectedCar={selectedCar}
+            pathLists={pathLists.filter(path => path.name === selectedCar)}
+          />
+        )}
+        {field && (
+          <PopUpInput
+            coordX={this.state.coordX}
+            coordy={this.state.coordY}
+            onChange={this.onChange}
+            handlerConf={this.handlerConf}
+            value={this.state.value}
+          />
+        )}
       </div>
-    )
+    );
   }
 }
 const mapStateToProps = state => {
@@ -102,7 +118,7 @@ const mapDispatchToProps = dispatch => {
   return {
     load: () => loadLocalStorage(dispatch),
     chError: () => checkError(dispatch),
-    saveUpdate: (result) => saveUpdateData(dispatch, result)
+    saveUpdate: result => saveUpdateData(dispatch, result)
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

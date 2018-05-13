@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 
-import Button from "../components/Button";
+import Button from '../components/Button';
 
 export default class PopUpInput extends Component {
-  
   render() {
-      const left = this.props.coordX-150;
-      const top = this.props.coordy-60; 
+    const left = this.props.coordX - 150;
+    const top = this.props.coordy - 60;
     return (
-      <div style={{"top":top, "left":left}} className="popUpInput">
+      <div style={{ top: top, left: left }} className="popUpInput">
         <input
-            type="number"
-            defaultValue={this.props.value}
-            min={"0"}
-            onChange={this.props.onChange}
+          type="number"
+          defaultValue={this.props.value}
+          min={'0'}
+          onChange={this.props.onChange}
         />
         <Button handler={this.props.handlerConf(true)} styleButton="confirm">
           {String.fromCharCode(10003)}
@@ -22,6 +21,6 @@ export default class PopUpInput extends Component {
           {String.fromCharCode(10006)}
         </Button>
       </div>
-    )
+    );
   }
 }

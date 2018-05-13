@@ -1,4 +1,4 @@
-const paginationData = ( page, stringOnPage, pathListsCar ) => {
+const paginationData = (page, stringOnPage, pathListsCar) => {
     const pages = (pathListsCar.length % stringOnPage === 0) ? pathListsCar.length / stringOnPage : Math.ceil(pathListsCar.length / stringOnPage);
     if (page > pages) {
         return pathListsCar.filter((elem, idx) => {
