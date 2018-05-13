@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import Table from "../components/Table";
 import paginationData from "../components/paginationData";
+import prepareNullstringForTable from "../components/prepareNullstringForTable";
 import { infoPathToName } from "../actions/pathLists.js";
 class TableContainer extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class TableContainer extends Component {
   }
   render() {
     const { page, stringOnPage, pathListsCar, reverse, name } = this.state;
-    const dataArr = paginationData(page, stringOnPage, pathListsCar);
+    const dataArr = prepareNullstringForTable( paginationData(page, stringOnPage, pathListsCar), stringOnPage );
     return (
         dataArr.length === 0 ? null :
         <Table

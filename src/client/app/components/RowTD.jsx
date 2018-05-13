@@ -6,40 +6,40 @@ import createObjectError from "./createObjectError";
 const RowTD = ({ path, handler, error, doubleClick }) => {
   const matchNames = createObjectError(path, error);
   return (
-    <tr onClick={handler(path)}>
+    <tr onClick={path.name !== null ? handler(path) : null}>
       <td>{path.name}</td>
       <td>{path.dateBegin}</td>
       <td>{path.fuel}</td>
       <td>{path.constFuelChange}</td>
       <td
         className={!matchNames.first && matchNames.path ? "inputError" : null}
-        onDoubleClick={doubleClick("pathBegin", path.pathBegin)}
+        onDoubleClick={path.name !== null ? doubleClick("pathBegin", path.pathBegin) : null}
       >
-        <span className="editableTd">
+        {path.name !== null ? <span className="editableTd">
         {path.pathBegin}
-        </span>
+        </span> : null}
       </td>
       <td
         className={matchNames.first && matchNames.path ? "inputError" : null}
-        onDoubleClick={doubleClick("pathEnd", path.pathEnd)}
+        onDoubleClick={path.name !== null ? doubleClick("pathEnd", path.pathEnd) : null}
       >
-        <span className="editableTd">
+        {path.name !== null ? <span className="editableTd">
         {path.pathEnd}
-        </span>
+        </span> : null}
       </td>
       <td>{path.milleage}</td>
       <td
         className={!matchNames.first && matchNames.fuel ? "inputError" : null}
-        onDoubleClick={doubleClick("fuelBegin", path.fuelBegin)}
+        onDoubleClick={path.name !== null ? doubleClick("fuelBegin", path.fuelBegin) : null}
       >
-        <span className="editableTd">
+        {path.name !== null ? <span className="editableTd">
         {path.fuelBegin}
-        </span>
+        </span> : null}
       </td>
-      <td onDoubleClick={doubleClick("fuelBegin", path.fuelBegin)}>
-        <span>
+      <td onDoubleClick={path.name !== null ? doubleClick("addFuel", path.addFuel) : null}>
+        {path.name !== null ? <span className="editableTd">
         {path.addFuel}
-        </span>
+        </span> : <span style={{"opacity":"0"}}>{'-'}</span>}
       </td>
       <td className={matchNames.first && matchNames.fuel ? "inputError" : null}>
         {path.fuelEnd}

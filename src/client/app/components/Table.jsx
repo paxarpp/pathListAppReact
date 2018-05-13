@@ -16,8 +16,8 @@ export default class Table extends Component {
           <RowTH handlerTable={handlerTableSort} reverse={reverse} name={name} />
           </thead>
           <tbody>
-            {tempArr.map(path => {
-            return <RowTD path={path} key={path.dateBegin} handler={handlerTableSelect} error={error} doubleClick={this.props.doubleClick} />;
+            {tempArr.map((path, indx) => {
+            return <RowTD path={path} key={path.dateBegin + indx} handler={handlerTableSelect} error={error} doubleClick={this.props.doubleClick} />;
             })}
           </tbody>
         </table>
