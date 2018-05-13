@@ -14,7 +14,8 @@ body {
     justify-content: center;
 }
 
-.header>.delit  {
+.header>.delit,
+.header>.clear {
     align-self: flex-start;
     margin-left: auto;
     inline-size: 1em;
@@ -101,7 +102,7 @@ body {
     height: 100%;
     margin: 10px;
     flex: 1;
-    min-width: 300px;
+    min-width: 330px;
     max-width: 450px;
     margin-left: auto;
 }
@@ -111,6 +112,9 @@ body {
     justify-content: center;
     align-items: flex-start;
     padding: 0 20px;
+}
+.pathListView .emptyList {
+    height: 21.2rem;
 }
 .pathListView .View p,
 .pathListView .View .head {
@@ -229,6 +233,16 @@ body {
 }
 .delit:hover {
    transform: rotate(90deg) scale(1.2);
+   transition: all 0.2s linear;
+}
+.clear {
+    color: red;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s linear;
+}
+.clear:hover {
+   transform: scale(1.1);
    transition: all 0.2s linear;
 }
 .inputError {

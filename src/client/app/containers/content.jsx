@@ -72,21 +72,21 @@ class Content extends Component {
       pathLists
     } = this.props;
     const { field } = this.state;
-    return <div className="container" onContextMenu={this.clearClick}>
-        <CarListContainer />
-        <PathListContainer />
-        {isNewCar && <CreateCar />}
-        {isNewPath && <CreatePath />}
-        {selectPathList && <VeiwAndEditPathList 
-                            selectPathList={selectPathList} 
-                            doubleClick={this.doubleClick} />}
-        {selectedCar && <TableContainer className="pathListSelectedCar" 
-                            doubleClick={this.doubleClick}
-                            selectedCar={selectedCar} 
-                            pathLists={pathLists.filter(path => path.name === selectedCar)} 
-                            />}
-        {field && <PopUpInput coordX={this.state.coordX} coordy={this.state.coordY} onChange={this.onChange} handlerConf={this.handlerConf} value={this.state.value} />}
-      </div>;
+    return (
+      <div className="container" onContextMenu={this.clearClick}>
+          <CarListContainer />
+          <PathListContainer />
+          {isNewCar && <CreateCar />}
+          {isNewPath && <CreatePath />}
+          {<VeiwAndEditPathList selectPathList={selectPathList} doubleClick={this.doubleClick} />}
+          {selectedCar && <TableContainer className="pathListSelectedCar" 
+                              doubleClick={this.doubleClick}
+                              selectedCar={selectedCar} 
+                              pathLists={pathLists.filter(path => path.name === selectedCar)} 
+                              />}
+          {field && <PopUpInput coordX={this.state.coordX} coordy={this.state.coordY} onChange={this.onChange} handlerConf={this.handlerConf} value={this.state.value} />}
+      </div>
+    )
   }
 }
 const mapStateToProps = state => {
