@@ -7,33 +7,21 @@ import PaginationButton from '../components/PaginationButton';
 import ChoisePaginationString from '../components/ChoisePaginationString';
 
 export default class Table extends Component {
-  handlerPagination = page => {
-    const { handlerP } = this.props;
-    handlerP(page);
-  };
-  handlerTable = name => {
-    const { handlerTableSort } = this.props;
-    handlerTableSort(name);
-  };
-  handlerSelect = select => () => {
-      const { handlerTableSelect } = this.props;
-      handlerTableSelect(select);
-  };
   render() {
-    const { page, stringOnPage, length, tempArr, reverse, name, choisePaginationString, error } = this.props;
+    const { page, stringOnPage, length, tempArr, reverse, name, choisePaginationString, error, handlerTableSelect, handlerTableSort, handlerPagination } = this.props;
     return <div className="pathListSelectedCar">
     <ChoisePaginationString handler={choisePaginationString}/>
         <table className="table">
           <thead>
-            <RowTH handlerTable={this.handlerTable} reverse={reverse} name={name} />
+          <RowTH handlerTable={handlerTableSort} reverse={reverse} name={name} />
           </thead>
           <tbody>
             {tempArr.map(path => {
-            return <RowTD path={path} key={path.dateBegin} handler={this.handlerSelect} error={error} doubleClick={this.props.doubleClick} />;
+            return <RowTD path={path} key={path.dateBegin} handler={handlerTableSelect} error={error} doubleClick={this.props.doubleClick} />;
             })}
           </tbody>
         </table>
-        <PaginationButton length={length} page={page} stringOnPage={stringOnPage} handlerPagination={this.handlerPagination} />
+        <PaginationButton length={length} page={page} stringOnPage={stringOnPage} handlerPagination={handlerPagination} />
       </div>;
   }
 }

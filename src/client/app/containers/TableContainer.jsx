@@ -19,9 +19,9 @@ class TableContainer extends Component {
   handlerPagination = page => {
     this.setState({ page });
   };
-  handlerTableSelect = select => {
+  handlerTableSelect = path => () => {
       const { pathInfo } = this.props;
-      pathInfo(select);
+      pathInfo(path);
   };
   componentWillReceiveProps({ pathLists }) {
     const prevValue = this.state.pathListsCar.length === 0 ? null : this.state.pathListsCar[0].name;
@@ -84,7 +84,7 @@ class TableContainer extends Component {
         stringOnPage={stringOnPage}
         length={pathListsCar.length}
         tempArr={dataArr}
-        handlerP={this.handlerPagination}
+        handlerPagination={this.handlerPagination}
         handlerTableSort={this.handlerTableSort}
         handlerTableSelect={this.handlerTableSelect}
         choisePaginationString={this.choisePaginationString}
