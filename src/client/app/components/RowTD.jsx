@@ -53,10 +53,10 @@ const RowTD = ({ path, handler, error, doubleClick }) => {
           <span style={{ opacity: '0' }}>{'-'}</span>
         )}
       </td>
+      <td>{path.deltaFuel}</td>
       <td className={matchNames.first && matchNames.fuel ? 'inputError' : null}>
         {path.fuelEnd}
       </td>
-      <td>{path.deltaFuel}</td>
     </tr>
   );
 };

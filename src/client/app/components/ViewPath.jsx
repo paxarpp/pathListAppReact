@@ -54,13 +54,13 @@ export default class ViewPath extends PureComponent {
             {fildNamePathList['addFuel']}: {path.addFuel} л
           </span>
         </p>
+        <p>
+          {fildNamePathList['deltaFuel']}: {path.deltaFuel} л
+        </p>
         <p
           className={matchNames.first && matchNames.fuel ? 'inputError' : null}
         >
           {fildNamePathList['fuelEnd']}: {path.fuelEnd} л
-        </p>
-        <p>
-          {fildNamePathList['deltaFuel']}: {path.deltaFuel} л
         </p>
       </div>
     );
