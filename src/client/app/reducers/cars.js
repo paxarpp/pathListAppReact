@@ -146,7 +146,7 @@ export const reducer = handleActions({
         return {
             ...state,
             cars: action.payload.cars,
-            pathLists: action.payload.pathLists,
+            pathLists: action.payload.pathLists
         }
     },
 }, initialState);

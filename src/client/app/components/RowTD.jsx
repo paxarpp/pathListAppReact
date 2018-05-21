@@ -8,7 +8,7 @@ const RowTD = ({ path, handler, error, doubleClick }) => {
   return (
     <tr onClick={path.name !== null ? handler(path) : null}>
       <td>{path.name}</td>
-      <td>{path.dateBegin}</td>
+      {path.dateBegin === null ? <td></td> : <td>{new Date(path.dateBegin).toLocaleDateString()}</td>}
       <td>{path.fuel}</td>
       <td>{path.constFuelChange}</td>
       <td

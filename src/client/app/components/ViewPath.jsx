@@ -6,8 +6,11 @@ import createObjectError from './createObjectError';
 
 export default class ViewPath extends PureComponent {
   render() {
+    
+    
     const { path, error, doubleClick } = this.props;
     const matchNames = createObjectError(path, error);
+    console.log(new Date(path.dateBegin).toLocaleDateString() );
     return path.name === null || path.name === undefined ? (
       <div className="emptyList" />
     ) : (
@@ -20,7 +23,7 @@ export default class ViewPath extends PureComponent {
           {fildNamePathList['constFuelChange']}: {path.constFuelChange} л
         </p>
         <p>
-          {fildNamePathList['dateBegin']}: {path.dateBegin}
+          {fildNamePathList['dateBegin']}: {new Date(path.dateBegin).toLocaleDateString()}
         </p>
         <p
           onDoubleClick={doubleClick('pathBegin', path.pathBegin)}

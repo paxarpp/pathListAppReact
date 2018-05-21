@@ -7,7 +7,7 @@ const Path = ({ path, handler, selectedCar }) => {
       onClick={handler}
       className={selectedCar === path.name ? 'selected' : null}
     >
-      {path.name} : {path.dateBegin}
+      {path.name} : {new Date(path.dateBegin).toLocaleDateString()}
     </div>
   );
 };
