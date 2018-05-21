@@ -27,10 +27,17 @@ body {
 .wrapper {
     min-height: 100vh;
     display: flex;
+    flex-flow: row nowrap;
+    position: relative;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+.wrapperContent {
+    min-height: 100vh;
+    display: flex;
     flex-flow: column nowrap;
     position: relative;
-    max-width: 1400px;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .container {
@@ -40,40 +47,60 @@ body {
 }
 .carList {
     width: 300px;
-    padding: 10px;
+    padding:  50px 0 10px 20px;
+    background-color: #80808099;
 }
+.carList .list {
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    height: 2.5rem;
+}
+.carList .list>div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding-left: 1rem;
+}
+.selected {
+    background-color: #fff;
+    width: 100%;
+    border-radius: 20px 0 0 20px
+}
+
 .pathList{
     width: 320px;
     padding: 10px;
 }
 
-.carList li,
+
 .pathList li {
     display: flex;
     justify-content: space-between;
     padding: 5px 0;
     align-items: baseline;
 }
-.carList li>div:hover,
+.carList .list:hover,
 .pathList li>div:hover {
     text-shadow: 1px 1px 5px grey;
-    transform: scale(1.1);
+    transform: scale(1.01);
     transition: all 0.2s linear;
     cursor: pointer;
 }
 .pathListContainer {
     padding: 0;
-    box-shadow: 3px 3px 10px 1px grey;
+   
     height: 100%;
-    margin: 10px;
+    
     overflow: hidden;
     position: relative;
+    width: 320px;
+    transition: all 0.3s linear;
 }
 .carListContainer {
     padding: 0;
-    box-shadow: 3px 3px 10px 1px grey;
     height: 100%;
-    margin: 10px;
     overflow: hidden;
     position: relative;
     width: 320px;
@@ -99,12 +126,13 @@ body {
 .pathListView {
     padding: 0;
     box-shadow: 3px 3px 10px 1px grey;
-    height: 100%;
     margin: 10px;
     flex: 1;
-    min-width: 330px;
-    max-width: 450px;
+    width: 320px;
     margin-left: auto;
+    position: absolute;
+    bottom: 0;
+    left: -320px;
 }
 .pathListView .View {
     display: flex;
@@ -260,13 +288,15 @@ h4.inputErrorCheck{
     margin: 5px 0 2px 0;
 }
 .pathListSelectedCar{
-    align-self: flex-end;
     position: relative;
     z-index: 0;
 }
 .pathListSelectedCar .table{
     border: 1px solid grey;
     border-collapse: collapse;
+}
+.pathListSelectedCar .table tr>td:first-child {
+    border-left: 1px solid #fff;
 }
 .pathListSelectedCar .table>thead>tr {
    background-color: #80808080;
@@ -301,19 +331,7 @@ h4.inputErrorCheck{
     margin-left: -500px;
     transition: margin .3s ease-in;
 }
-.selected{
-    transform: scale(1.05);
-    position: relative;
-    text-decoration: underline;
-}
-.selected::after{
-   content: '';
-   border: 3px solid grey;
-   border-radius: 50%;
-   position: absolute;
-   top: 10px;
-   left: -15px;
-}
+
 .counterWrap{
     overflow: hidden;
     position: absolute;

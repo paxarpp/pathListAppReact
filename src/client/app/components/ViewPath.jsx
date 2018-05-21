@@ -10,7 +10,6 @@ export default class ViewPath extends PureComponent {
     
     const { path, error, doubleClick } = this.props;
     const matchNames = createObjectError(path, error);
-    console.log(new Date(path.dateBegin).toLocaleDateString() );
     return path.name === null || path.name === undefined ? (
       <div className="emptyList" />
     ) : (

@@ -73,9 +73,8 @@ class Content extends Component {
     } = this.props;
     const { field } = this.state;
     return (
-      <div className="container" onContextMenu={this.clearClick}>
-        <CarListContainer />
-        <PathListContainer />
+      <div className="container" onContextMenu={this.clearClick}>    
+        {/* <PathListContainer /> */}
         {isNewCar && <CreateCar />}
         {isNewPath && <CreatePath />}
         {
@@ -84,14 +83,12 @@ class Content extends Component {
             doubleClick={this.doubleClick}
           />
         }
-        {selectedCar && (
           <TableContainer
             className="pathListSelectedCar"
             doubleClick={this.doubleClick}
             selectedCar={selectedCar}
             pathLists={pathLists.filter(path => path.name === selectedCar)}
           />
-        )}
         {field && (
           <PopUpInput
             coordX={this.state.coordX}
