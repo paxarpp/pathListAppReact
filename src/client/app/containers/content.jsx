@@ -77,8 +77,7 @@ class Content extends Component {
         {/* <PathListContainer /> */}
         {isNewCar && <CreateCar />}
         {isNewPath && <CreatePath />}
-        {
-          <VeiwAndEditPathList
+        {selectPathList && <VeiwAndEditPathList
             selectPathList={selectPathList}
             doubleClick={this.doubleClick}
           />
@@ -115,7 +114,8 @@ const mapDispatchToProps = dispatch => {
   return {
     load: () => loadLocalStorage(dispatch),
     chError: () => checkError(dispatch),
-    saveUpdate: result => saveUpdateData(dispatch, result)
+    saveUpdate: result => saveUpdateData(dispatch, result),
+    
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

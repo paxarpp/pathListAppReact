@@ -17,8 +17,8 @@ class VeiwAndEditPathList extends Component {
       <div className="pathListView">
         <div className="header">
           <h3 className="headerText">Выбран путевой лист</h3>
-          <Button handler={this.handleClose} styleButton="clear">
-            {String.fromCharCode(8416)}
+          <Button handler={this.handleClose} styleButton="delit">
+            {String.fromCharCode(10006)}
           </Button>
         </div>
         <ViewPath
