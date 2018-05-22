@@ -43,7 +43,7 @@ export default class RowTH extends Component {
           {fildNamePathList['deltaFuel']}
           <SortLink name={name} nameCell={'deltaFuel'} reverse={reverse} />
         </th>
-        <th data-field-name={'fuelEnd'} style={{ width: '10%' }}>
+        <th data-field-name={'fuelEnd'} style={{ width: '10%' }} colSpan={2}>
           {fildNamePathList['fuelEnd']}
           <SortLink name={name} nameCell={'fuelEnd'} reverse={reverse} />
         </th>

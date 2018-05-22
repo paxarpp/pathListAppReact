@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Table from '../components/Table';
 import paginationData from '../components/paginationData';
 import prepareNullstringForTable from '../components/prepareNullstringForTable';
-import { infoPathToName } from '../actions/pathLists.js';
+import { infoPathToName, deletePathToName, checkError } from '../actions/pathLists.js';
 class TableContainer extends Component {
   constructor(props) {
     super(props);
@@ -78,6 +78,11 @@ class TableContainer extends Component {
       stringOnPage: +value
     });
   };
+  deletePath = path => () => {
+    const { deletePath, chError } = this.props;
+    deletePath(path);
+    chError();
+  };
   render() {
     const { page, stringOnPage, pathListsCar, reverse, name } = this.state;
     const dataArr = prepareNullstringForTable(
@@ -98,6 +103,7 @@ class TableContainer extends Component {
         handlerTableSelect={this.handlerTableSelect}
         choisePaginationString={this.choisePaginationString}
         doubleClick={this.props.doubleClick}
+        deletePath={this.deletePath}
       />
     );
   }
@@ -110,7 +116,9 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    pathInfo: path => infoPathToName(dispatch, path)
+    pathInfo: path => infoPathToName(dispatch, path),
+    deletePath: name => deletePathToName(dispatch, name),
+    chError: () => checkError(dispatch)
   };
 };
 

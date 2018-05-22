@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import createObjectError from './createObjectError';
+import Button from '../components/Button';
 
-const RowTD = ({ path, handler, error, doubleClick }) => {
+const RowTD = ({ path, handler, error, doubleClick, deletePath }) => {
   const matchNames = createObjectError(path, error);
   return (
     <tr onClick={path.name !== null ? handler(path) : null}>
@@ -56,6 +57,18 @@ const RowTD = ({ path, handler, error, doubleClick }) => {
       <td className={matchNames.first && matchNames.fuel ? 'inputError' : null}>
         {path.fuelEnd}
       </td>
+      <td>
+      {path.name !== null ? (
+          <Button
+          handler={deletePath(path)}
+          styleButton="delit"
+        >
+          {String.fromCharCode(10006)}
+      </Button>
+        ) : null}
+        
+      </td>
+      
     </tr>
   );
 };
