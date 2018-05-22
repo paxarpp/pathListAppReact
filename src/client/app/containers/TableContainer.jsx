@@ -104,6 +104,7 @@ class TableContainer extends Component {
         choisePaginationString={this.choisePaginationString}
         doubleClick={this.props.doubleClick}
         deletePath={this.deletePath}
+        pathLists={this.props.pathLists}
       />
     );
   }

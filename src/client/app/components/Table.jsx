@@ -5,6 +5,7 @@ import RowTD from './RowTD';
 import RowTH from './RowTH';
 import PaginationButton from '../components/PaginationButton';
 import ChoisePaginationString from '../components/ChoisePaginationString';
+import Count from '../components/countPathList';
 
 export default class Table extends Component {
   render() {
@@ -20,7 +21,8 @@ export default class Table extends Component {
       handlerTableSelect,
       handlerTableSort,
       handlerPagination,
-      deletePath
+      deletePath,
+      pathLists
     } = this.props;
     return (
       <div className="pathListSelectedCar">
@@ -54,6 +56,16 @@ export default class Table extends Component {
           stringOnPage={stringOnPage}
           handlerPagination={handlerPagination}
         />
+        {pathLists.length ? (
+          <Count count={pathLists.length} position="top" />
+        ) : null}
+        {error.length ? (
+            <Count
+              text={'ошибок: '}
+              count={error.length / 2}
+              position="bottom"
+            />
+          ) : null}
       </div>
     );
   }

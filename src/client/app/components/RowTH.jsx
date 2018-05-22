@@ -13,7 +13,7 @@ export default class RowTH extends Component {
     return (
       <tr onClick={this.handler}>
         
-        <th data-field-name={'dateBegin'} style={{ width: '15%' }}>
+        <th data-field-name={'dateBegin'} style={{ width: '10%' }}>
           {fildNamePathList['dateBegin']}
           <SortLink name={name} nameCell={'dateBegin'} reverse={reverse} />
         </th>

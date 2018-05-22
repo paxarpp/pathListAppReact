@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import CarListContainer from './carListContainer.jsx';
-import PathListContainer from './pathListContainer.jsx';
 import CreateCar from '../components/CreateCar';
 import CreatePath from '../components/CreatePath';
 import TableContainer from './TableContainer';
@@ -73,8 +72,7 @@ class Content extends Component {
     } = this.props;
     const { field } = this.state;
     return (
-      <div className="container" onContextMenu={this.clearClick}>    
-        {/* <PathListContainer /> */}
+      <div className="container" onContextMenu={this.clearClick}>  
         {isNewCar && <CreateCar />}
         {isNewPath && <CreatePath />}
         {selectPathList && <VeiwAndEditPathList
