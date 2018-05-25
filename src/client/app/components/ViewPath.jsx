@@ -6,8 +6,6 @@ import createObjectError from './createObjectError';
 
 export default class ViewPath extends PureComponent {
   render() {
-    
-    
     const { path, error, doubleClick } = this.props;
     const matchNames = createObjectError(path, error);
     return path.name === null || path.name === undefined ? (
