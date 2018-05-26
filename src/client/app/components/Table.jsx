@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import RowTD from './RowTD';
 import RowTH from './RowTH';
@@ -29,11 +28,7 @@ export default class Table extends Component {
         <ChoisePaginationString handler={choisePaginationString} />
         <table className="table">
           <thead>
-            <RowTH
-              handlerTable={handlerTableSort}
-              reverse={reverse}
-              name={name}
-            />
+            <RowTH handlerTable={handlerTableSort} reverse={reverse} name={name} />
           </thead>
           <tbody>
             {tempArr.map((path, indx) => {
@@ -56,16 +51,8 @@ export default class Table extends Component {
           stringOnPage={stringOnPage}
           handlerPagination={handlerPagination}
         />
-        {pathLists.length ? (
-          <Count count={pathLists.length} position="top" />
-        ) : null}
-        {error.length ? (
-            <Count
-              text={'ошибок: '}
-              count={error.length / 2}
-              position="bottom"
-            />
-          ) : null}
+        {pathLists.length ? <Count count={pathLists.length} position="top" /> : null}
+        {error.length ? <Count text={'ошибок: '} count={error.length / 2} position="bottom" /> : null}
       </div>
     );
   }

@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import CarListContainer from './carListContainer.jsx';
 import CreateCar from '../components/CreateCar';
 import CreatePath from '../components/CreatePath';
 import TableContainer from './TableContainer';
 import VeiwAndEditPathList from '../components/VeiwAndEditPathList';
-
 import PopUpInput from '../components/PopUpInput';
-
 import { loadLocalStorage } from '../actions/cars';
 import { checkError, saveUpdateData } from '../actions/pathLists';
 
@@ -63,29 +59,19 @@ class Content extends Component {
     chError();
   }
   render() {
-    const {
-      isNewCar,
-      isNewPath,
-      selectedCar,
-      selectPathList,
-      pathLists
-    } = this.props;
+    const { isNewCar, isNewPath, selectedCar, selectPathList, pathLists } = this.props;
     const { field } = this.state;
     return (
-      <div className="container" onContextMenu={this.clearClick}>  
+      <div className="container" onContextMenu={this.clearClick}>
         {isNewCar && <CreateCar />}
         {isNewPath && <CreatePath />}
-        {selectPathList && <VeiwAndEditPathList
-            selectPathList={selectPathList}
-            doubleClick={this.doubleClick}
-          />
-        }
-          <TableContainer
-            className="pathListSelectedCar"
-            doubleClick={this.doubleClick}
-            selectedCar={selectedCar}
-            pathLists={pathLists.filter(path => path.name === selectedCar)}
-          />
+        {selectPathList && <VeiwAndEditPathList selectPathList={selectPathList} doubleClick={this.doubleClick} />}
+        <TableContainer
+          className="pathListSelectedCar"
+          doubleClick={this.doubleClick}
+          selectedCar={selectedCar}
+          pathLists={pathLists.filter(path => path.name === selectedCar)}
+        />
         {field && (
           <PopUpInput
             coordX={this.state.coordX}
@@ -112,8 +98,7 @@ const mapDispatchToProps = dispatch => {
   return {
     load: () => loadLocalStorage(dispatch),
     chError: () => checkError(dispatch),
-    saveUpdate: result => saveUpdateData(dispatch, result),
-    
+    saveUpdate: result => saveUpdateData(dispatch, result)
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

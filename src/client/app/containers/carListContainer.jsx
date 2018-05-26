@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import CarList from '../components/CarList';
@@ -63,10 +62,7 @@ class CarListContainer extends Component {
       <div className={minView ? 'carListContainerMinimal' : 'carListContainer'}>
         <div className="header">
           <h3>{minView ? null : 'Список Автомобилей'}</h3>
-          <Button
-            handler={this.handleChangeView}
-            styleButton={minView ? 'switchMin' : 'switchView'}
-          >
+          <Button handler={this.handleChangeView} styleButton={minView ? 'switchMin' : 'switchView'}>
             {minView ? String.fromCharCode(9654) : String.fromCharCode(9668)}
           </Button>
         </div>
@@ -105,7 +101,7 @@ const mapDispatchToProps = dispatch => {
     carInfo: name => infoCarToName(dispatch, name),
     addCar: () => addNewCar(dispatch),
     chError: () => checkError(dispatch),
-    addPath: () => addNewPath(dispatch),
+    addPath: () => addNewPath(dispatch)
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CarListContainer);

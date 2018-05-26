@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 
 import fildNamePathList from './fildNamePathList';
 import createObjectError from './createObjectError';
@@ -57,9 +56,7 @@ export default class ViewPath extends PureComponent {
         <p>
           {fildNamePathList['deltaFuel']}: {path.deltaFuel} л
         </p>
-        <p
-          className={matchNames.first && matchNames.fuel ? 'inputError' : null}
-        >
+        <p className={matchNames.first && matchNames.fuel ? 'inputError' : null}>
           {fildNamePathList['fuelEnd']}: {path.fuelEnd} л
         </p>
       </div>

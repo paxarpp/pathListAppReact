@@ -13,7 +13,7 @@ class CreateCar extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    const { name, constFuelChange, fuel, isWrong } = this.state;
+    const { name, constFuelChange, fuel } = this.state;
     const { addDataCar, cars, close } = this.props;
     const car = {
       name,
@@ -44,7 +44,6 @@ class CreateCar extends Component {
         [fieldName]: value
       }),
       () => {
-        const { isWrong } = this.state;
         if (fildNameCheckRule[fieldName].test(this.state[fieldName])) {
           this.setState({
             isWrong: false
@@ -59,13 +58,13 @@ class CreateCar extends Component {
   };
 
   handleClose = e => {
-    const { close, isNewCar } = this.props;
+    const { close } = this.props;
     e.preventDefault();
     close('isNewCar');
   };
 
   render() {
-    const { name, constFuelChange, fuel, isWrong } = this.state;
+    const { name, constFuelChange, isWrong } = this.state;
     return (
       <div className="popUpWrapp">
         <div className="popUp">
@@ -87,9 +86,7 @@ class CreateCar extends Component {
             />
             <h4 className="inputHeader">введите паспортный расход топлива</h4>
             <input
-              className={
-                isWrong === 'constFuelChange' ? 'inputErrorCheck' : null
-              }
+              className={isWrong === 'constFuelChange' ? 'inputErrorCheck' : null}
               data-field-name={'constFuelChange'}
               type={'number'}
               onChange={this.handleChange}

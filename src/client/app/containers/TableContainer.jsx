@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import Table from '../components/Table';
 import paginationData from '../components/paginationData';
@@ -24,16 +23,10 @@ class TableContainer extends Component {
     const { pathInfo } = this.props;
     pathInfo(path);
   };
-  componentWillReceiveProps({ pathLists }) {
-    const prevValue =
-      this.state.pathListsCar.length === 0
-        ? null
-        : this.state.pathListsCar[0].name;
+  UNSAFE_componentWillReceiveProps({ pathLists }) {
+    const prevValue = this.state.pathListsCar.length === 0 ? null : this.state.pathListsCar[0].name;
     const newValue = pathLists.length === 0 ? null : pathLists[0].name;
-    if (
-      prevValue !== newValue ||
-      this.state.pathListsCar.length !== pathLists.length
-    ) {
+    if (prevValue !== newValue || this.state.pathListsCar.length !== pathLists.length) {
       this.setState(prev => ({
         ...prev,
         pathListsCar: pathLists
@@ -51,7 +44,9 @@ class TableContainer extends Component {
               return 1;
             } else if (b[name] < a[name]) {
               return -1;
-            } else return 0;
+            } else {
+              return 0;
+            }
           }),
           reverse: !reverse,
           name
@@ -64,7 +59,9 @@ class TableContainer extends Component {
               return -1;
             } else if (b[name] < a[name]) {
               return 1;
-            } else return 0;
+            } else {
+              return 0;
+            }
           }),
           reverse: !reverse,
           name
@@ -85,10 +82,7 @@ class TableContainer extends Component {
   };
   render() {
     const { page, stringOnPage, pathListsCar, reverse, name } = this.state;
-    const dataArr = prepareNullstringForTable(
-      paginationData(page, stringOnPage, pathListsCar),
-      stringOnPage
-    );
+    const dataArr = prepareNullstringForTable(paginationData(page, stringOnPage, pathListsCar), stringOnPage);
     return dataArr.length === 0 ? null : (
       <Table
         error={this.props.error}

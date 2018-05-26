@@ -89,34 +89,13 @@ body {
     right: 0;
 }
 
-/* .pathList{
-    width: 320px;
-    padding: 10px;
-}
-
-
-.pathList li {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 0;
-    align-items: baseline;
-} */
 .carList .list:hover {
     text-shadow: 1px 1px 5px grey;
     transform: scale(1.01);
     transition: all 0.2s linear;
     cursor: pointer;
 }
-/* .pathListContainer {
-    padding: 0;
-   
-    height: 100%;
-    
-    overflow: hidden;
-    position: relative;
-    width: 320px;
-    transition: all 0.3s linear;
-} */
+
 .carListContainer {
     padding: 0;
     height: 100%;

@@ -12,7 +12,6 @@ export default class RowTH extends Component {
     const { reverse, name } = this.props;
     return (
       <tr onClick={this.handler}>
-        
         <th data-field-name={'dateBegin'} style={{ width: '10%' }}>
           {fildNamePathList['dateBegin']}
           <SortLink name={name} nameCell={'dateBegin'} reverse={reverse} />
@@ -47,7 +46,6 @@ export default class RowTH extends Component {
           {fildNamePathList['fuelEnd']}
           <SortLink name={name} nameCell={'fuelEnd'} reverse={reverse} />
         </th>
-        
       </tr>
     );
   }
