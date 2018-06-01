@@ -59,6 +59,7 @@ typings/
 */src/client/dist/*
 
 dist/
-src/client/public/*
+src/client/public/*.js
+src/client/public/*.css
 
 node_modules/
