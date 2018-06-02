@@ -1,3 +1,3 @@
 # SPA_React
 
-![Image alt](https://github.com/paxarpp/pathListAppReact/raw/master/image/1.png)
+![Image alt](https://github.com/paxarpp/pathListAppReact/raw/UI/image/1.png)
