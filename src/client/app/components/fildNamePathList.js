@@ -11,6 +11,8 @@ const fildNamePathList = {
   addFuel: 'заправлено',
   deltaFuel: 'расход топлива за пробег',
   ConsumptionFactoryFuel: '!!!',
-  addFuelWinter: 'заправлено ЗИМНЕЕ'
+  addFuelWinter: 'заправлено ЗИМНЕЕ',
+  constFuelChangeExt: 'паспортный расход на 100км с прицепом',
+  extension: 'возможно наличие прицепа'
 };
 export default fildNamePathList;

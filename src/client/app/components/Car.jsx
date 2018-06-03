@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Button from '../components/Button';
 
@@ -12,4 +13,11 @@ const Car = ({ car, handler, selectedCar, deleteCarHandler }) => {
     </div>
   );
 };
+Car.propTypes = {
+  car: PropTypes.object,
+  selectedCar: PropTypes.string,
+  handler: PropTypes.func,
+  deleteCarHandler: PropTypes.func
+};
+
 export default Car;
