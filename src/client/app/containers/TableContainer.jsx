@@ -9,7 +9,7 @@ class TableContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stringOnPage: 20,
+      stringOnPage: 22,
       page: 1,
       pathListsCar: this.props.pathLists,
       reverse: false,
