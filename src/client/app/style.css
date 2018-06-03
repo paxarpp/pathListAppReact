@@ -139,6 +139,14 @@ body {
     justify-content: center;
     align-items: flex-start;
     padding: 0 20px;
+    position: relative;
+}
+.View .head_ext {
+    position: absolute;
+    top: -12%;
+    left: 2%;
+    color: #a30000;
+    font-size: 1rem;
 }
 .pathListView .emptyList {
     height: 21.2rem;
