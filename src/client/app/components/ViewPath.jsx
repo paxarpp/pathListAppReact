@@ -1,21 +1,18 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 
 import fildNamePathList from './fildNamePathList';
 import createObjectError from './createObjectError';
 
 export default class ViewPath extends PureComponent {
   render() {
-    
-    
     const { path, error, doubleClick } = this.props;
     const matchNames = createObjectError(path, error);
-    console.log(new Date(path.dateBegin).toLocaleDateString() );
     return path.name === null || path.name === undefined ? (
       <div className="emptyList" />
     ) : (
       <div className="View">
         <h4 className="head">{path.name}</h4>
+        <h6 className="head_ext">{path.extension === 'true' ? 'с прицепом' : ''}</h6>
         <p>
           {fildNamePathList['fuel']}: {path.fuel}
         </p>
@@ -60,9 +57,7 @@ export default class ViewPath extends PureComponent {
         <p>
           {fildNamePathList['deltaFuel']}: {path.deltaFuel} л
         </p>
-        <p
-          className={matchNames.first && matchNames.fuel ? 'inputError' : null}
-        >
+        <p className={matchNames.first && matchNames.fuel ? 'inputError' : null}>
           {fildNamePathList['fuelEnd']}: {path.fuelEnd} л
         </p>
       </div>

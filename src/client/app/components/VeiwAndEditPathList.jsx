@@ -17,15 +17,11 @@ class VeiwAndEditPathList extends Component {
       <div className="pathListView">
         <div className="header">
           <h3 className="headerText">Выбран путевой лист</h3>
-          <Button handler={this.handleClose} styleButton="clear">
-            {String.fromCharCode(8416)}
+          <Button handler={this.handleClose} styleButton="delit">
+            {String.fromCharCode(10006)}
           </Button>
         </div>
-        <ViewPath
-          path={selectPathList}
-          error={error}
-          doubleClick={this.props.doubleClick}
-        />
+        <ViewPath path={selectPathList} error={error} doubleClick={this.props.doubleClick} />
         <div className="footer" />
       </div>
     );
@@ -42,6 +38,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  VeiwAndEditPathList
-);
+export default connect(mapStateToProps, mapDispatchToProps)(VeiwAndEditPathList);

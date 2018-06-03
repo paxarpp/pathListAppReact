@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { saveCar, closeWindow } from '../actions/cars.js';
 import Button from './Button';
 import fildNameCheckRule from './fildNameCheckRule.js';
+
 class CreateCar extends Component {
   state = {
     name: '',
     constFuelChange: '',
     fuel: 'AI',
+    extension: 'false',
+    constFuelChangeExt: '',
     isWrong: false
   };
   handleSubmit = e => {
     e.preventDefault();
-    const { name, constFuelChange, fuel, isWrong } = this.state;
+    const { name, constFuelChange, fuel, extension, constFuelChangeExt } = this.state;
     const { addDataCar, cars, close } = this.props;
     const car = {
       name,
       constFuelChange,
-      fuel
+      fuel,
+      extension,
+      constFuelChangeExt
     };
     if (car.name === '' || car.constFuelChange === '') {
       this.setState(() => ({
@@ -44,7 +50,6 @@ class CreateCar extends Component {
         [fieldName]: value
       }),
       () => {
-        const { isWrong } = this.state;
         if (fildNameCheckRule[fieldName].test(this.state[fieldName])) {
           this.setState({
             isWrong: false
@@ -59,13 +64,13 @@ class CreateCar extends Component {
   };
 
   handleClose = e => {
-    const { close, isNewCar } = this.props;
+    const { close } = this.props;
     e.preventDefault();
     close('isNewCar');
   };
 
   render() {
-    const { name, constFuelChange, fuel, isWrong } = this.state;
+    const { name, constFuelChange, isWrong, constFuelChangeExt, extension } = this.state;
     return (
       <div className="popUpWrapp">
         <div className="popUp">
@@ -87,9 +92,7 @@ class CreateCar extends Component {
             />
             <h4 className="inputHeader">введите паспортный расход топлива</h4>
             <input
-              className={
-                isWrong === 'constFuelChange' ? 'inputErrorCheck' : null
-              }
+              className={isWrong === 'constFuelChange' ? 'inputErrorCheck' : null}
               data-field-name={'constFuelChange'}
               type={'number'}
               onChange={this.handleChange}
@@ -121,6 +124,41 @@ class CreateCar extends Component {
                 value={'DT'}
               />
             </label>
+            <h4 className="inputHeader">возможено добавление прицепа ?</h4>
+            <label>
+              Да
+              <input
+                checked={this.state.extension === 'true'}
+                name={'extension'}
+                data-field-name={'extension'}
+                type={'radio'}
+                onChange={this.handleChange}
+                value={'true'}
+              />
+            </label>
+            <label>
+              Нет
+              <input
+                checked={this.state.extension === 'false'}
+                name={'extension'}
+                data-field-name={'extension'}
+                type={'radio'}
+                onChange={this.handleChange}
+                value={'false'}
+              />
+            </label>
+            {extension === 'true' ? (
+              <input
+                className={isWrong === 'constFuelChangeExt' ? 'inputErrorCheck' : null}
+                data-field-name={'constFuelChangeExt'}
+                type={'number'}
+                onChange={this.handleChange}
+                placeholder={'расход по паспорту на 100 км с прицепом'}
+                value={constFuelChangeExt}
+                step={'0.01'}
+                min={'0'}
+              />
+            ) : null}
           </div>
           {isWrong && <h3 className="inputError">ошибка введеных данных</h3>}
           <div className="footer">
@@ -146,6 +184,11 @@ const mapStateToProps = state => {
   return {
     cars: state.cars
   };
+};
+CreateCar.propTypes = {
+  addDataCar: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  cars: PropTypes.array
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateCar);

@@ -27,10 +27,17 @@ body {
 .wrapper {
     min-height: 100vh;
     display: flex;
+    flex-flow: row nowrap;
+    position: relative;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+.wrapperContent {
+    min-height: 100vh;
+    display: flex;
     flex-flow: column nowrap;
     position: relative;
-    max-width: 1400px;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .container {
@@ -40,43 +47,63 @@ body {
 }
 .carList {
     width: 300px;
-    padding: 10px;
+    padding:  50px 0 10px 20px;
+    background-color: #80808099;
+    flex: 1;
 }
-.pathList{
-    width: 320px;
-    padding: 10px;
+.carList .list {
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    height: 2.5rem;
 }
-
-.carList li,
-.pathList li {
+.carList .list>div {
     display: flex;
     justify-content: space-between;
-    padding: 5px 0;
-    align-items: baseline;
+    width: 100%;
+    align-items: center;
+    padding-left: 1rem;
 }
-.carList li>div:hover,
-.pathList li>div:hover {
+.selected {
+    background-color: #fff;
+    width: 100%;
+    border-radius: 20px 0 0 20px;
+    position: relative;
+}
+.selected::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 0;
+    border: 5px solid transparent;
+    border-right: 5px solid #fff;
+    border-bottom: 5px solid #fff;
+}
+.selected::before {
+    content: '';
+    border: 5px solid transparent;
+    border-top: 5px solid #fff;
+    border-right: 5px solid #fff;
+    position: absolute;
+    bottom: -10px;
+    right: 0;
+}
+
+.carList .list:hover {
     text-shadow: 1px 1px 5px grey;
-    transform: scale(1.1);
+    transform: scale(1.01);
     transition: all 0.2s linear;
     cursor: pointer;
 }
-.pathListContainer {
-    padding: 0;
-    box-shadow: 3px 3px 10px 1px grey;
-    height: 100%;
-    margin: 10px;
-    overflow: hidden;
-    position: relative;
-}
+
 .carListContainer {
     padding: 0;
-    box-shadow: 3px 3px 10px 1px grey;
     height: 100%;
-    margin: 10px;
     overflow: hidden;
     position: relative;
     width: 320px;
+    display: flex;
+    flex-flow: column nowrap;
     transition: all 0.3s linear;
 }
 .carListContainerMinimal{
@@ -99,12 +126,12 @@ body {
 .pathListView {
     padding: 0;
     box-shadow: 3px 3px 10px 1px grey;
-    height: 100%;
-    margin: 10px;
     flex: 1;
-    min-width: 330px;
-    max-width: 450px;
-    margin-left: auto;
+    width: 320px;
+    position: absolute;
+    bottom: 0;
+    left: -320px;
+    background-color: rgb(200, 200, 200);
 }
 .pathListView .View {
     display: flex;
@@ -112,6 +139,14 @@ body {
     justify-content: center;
     align-items: flex-start;
     padding: 0 20px;
+    position: relative;
+}
+.View .head_ext {
+    position: absolute;
+    top: -12%;
+    left: 2%;
+    color: #a30000;
+    font-size: 1rem;
 }
 .pathListView .emptyList {
     height: 21.2rem;
@@ -260,13 +295,21 @@ h4.inputErrorCheck{
     margin: 5px 0 2px 0;
 }
 .pathListSelectedCar{
-    align-self: flex-end;
     position: relative;
     z-index: 0;
 }
 .pathListSelectedCar .table{
     border: 1px solid grey;
     border-collapse: collapse;
+}
+.pathListSelectedCar .table tr>td:first-child {
+    border-left: 1px solid #fff;;
+}
+.pathListSelectedCar .table tr>td:last-child {
+    border-left: none;
+}
+.pathListSelectedCar .table tr>td:nth-last-child(2) {
+    border-right: none;
 }
 .pathListSelectedCar .table>thead>tr {
    background-color: #80808080;
@@ -301,19 +344,7 @@ h4.inputErrorCheck{
     margin-left: -500px;
     transition: margin .3s ease-in;
 }
-.selected{
-    transform: scale(1.05);
-    position: relative;
-    text-decoration: underline;
-}
-.selected::after{
-   content: '';
-   border: 3px solid grey;
-   border-radius: 50%;
-   position: absolute;
-   top: 10px;
-   left: -15px;
-}
+
 .counterWrap{
     overflow: hidden;
     position: absolute;
@@ -427,4 +458,17 @@ h4.inputErrorCheck{
         content: "...";
         margin-left: 10px;
 }
-
+.selectTableRow{
+    background-color: antiquewhite;
+}
+.extension{
+    font-size: 0.7rem;
+    color: #920000;
+}
+.extensionChoise{
+    display: block;
+    background-color: #80808080;
+}
+.extensionChoiseNone{
+    display: none;
+}

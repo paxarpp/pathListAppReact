@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import Table from '../components/Table';
 import paginationData from '../components/paginationData';
 import prepareNullstringForTable from '../components/prepareNullstringForTable';
-import { infoPathToName } from '../actions/pathLists.js';
+import { infoPathToName, deletePathToName, checkError } from '../actions/pathLists.js';
 class TableContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stringOnPage: 10,
+      stringOnPage: 22,
       page: 1,
       pathListsCar: this.props.pathLists,
       reverse: false,
@@ -24,16 +23,10 @@ class TableContainer extends Component {
     const { pathInfo } = this.props;
     pathInfo(path);
   };
-  componentWillReceiveProps({ pathLists }) {
-    const prevValue =
-      this.state.pathListsCar.length === 0
-        ? null
-        : this.state.pathListsCar[0].name;
+  UNSAFE_componentWillReceiveProps({ pathLists }) {
+    const prevValue = this.state.pathListsCar.length === 0 ? null : this.state.pathListsCar[0].name;
     const newValue = pathLists.length === 0 ? null : pathLists[0].name;
-    if (
-      prevValue !== newValue ||
-      this.state.pathListsCar.length !== pathLists.length
-    ) {
+    if (prevValue !== newValue || this.state.pathListsCar.length !== pathLists.length) {
       this.setState(prev => ({
         ...prev,
         pathListsCar: pathLists
@@ -51,7 +44,9 @@ class TableContainer extends Component {
               return 1;
             } else if (b[name] < a[name]) {
               return -1;
-            } else return 0;
+            } else {
+              return 0;
+            }
           }),
           reverse: !reverse,
           name
@@ -64,7 +59,9 @@ class TableContainer extends Component {
               return -1;
             } else if (b[name] < a[name]) {
               return 1;
-            } else return 0;
+            } else {
+              return 0;
+            }
           }),
           reverse: !reverse,
           name
@@ -78,12 +75,14 @@ class TableContainer extends Component {
       stringOnPage: +value
     });
   };
+  deletePath = path => () => {
+    const { deletePath, chError } = this.props;
+    deletePath(path);
+    chError();
+  };
   render() {
-    const { page, stringOnPage, pathListsCar, reverse, name } = this.state;
-    const dataArr = prepareNullstringForTable(
-      paginationData(page, stringOnPage, pathListsCar),
-      stringOnPage
-    );
+    const { page, stringOnPage, pathListsCar, reverse, name, path } = this.state;
+    const dataArr = prepareNullstringForTable(paginationData(page, stringOnPage, pathListsCar), stringOnPage);
     return dataArr.length === 0 ? null : (
       <Table
         error={this.props.error}
@@ -98,6 +97,9 @@ class TableContainer extends Component {
         handlerTableSelect={this.handlerTableSelect}
         choisePaginationString={this.choisePaginationString}
         doubleClick={this.props.doubleClick}
+        deletePath={this.deletePath}
+        pathLists={this.props.pathLists}
+        selectPath={this.props.selectPathList}
       />
     );
   }
@@ -105,12 +107,15 @@ class TableContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    error: state.error
+    error: state.error,
+    selectPathList: state.selectPathList
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    pathInfo: path => infoPathToName(dispatch, path)
+    pathInfo: path => infoPathToName(dispatch, path),
+    deletePath: name => deletePathToName(dispatch, name),
+    chError: () => checkError(dispatch)
   };
 };
 

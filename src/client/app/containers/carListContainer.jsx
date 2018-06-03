@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import CarList from '../components/CarList';
@@ -7,7 +6,7 @@ import Button from '../components/Button';
 import Confirm from '../components/Confirm';
 
 import { deleteCarToName, addNewCar, infoCarToName } from '../actions/cars.js';
-import { checkError } from '../actions/pathLists.js';
+import { checkError, addNewPath } from '../actions/pathLists.js';
 import saveToLocalStorage from '../components/saveToLocalStorage.js';
 class CarListContainer extends Component {
   constructor(props) {
@@ -46,6 +45,10 @@ class CarListContainer extends Component {
     const { addCar } = this.props;
     addCar();
   };
+  handlerAddPath = () => {
+    const { addPath } = this.props;
+    addPath();
+  };
   handleChangeView = () => {
     const { minView } = this.state;
     this.setState({
@@ -59,10 +62,7 @@ class CarListContainer extends Component {
       <div className={minView ? 'carListContainerMinimal' : 'carListContainer'}>
         <div className="header">
           <h3>{minView ? null : 'Список Автомобилей'}</h3>
-          <Button
-            handler={this.handleChangeView}
-            styleButton={minView ? 'switchMin' : 'switchView'}
-          >
+          <Button handler={this.handleChangeView} styleButton={minView ? 'switchMin' : 'switchView'}>
             {minView ? String.fromCharCode(9654) : String.fromCharCode(9668)}
           </Button>
         </div>
@@ -78,6 +78,10 @@ class CarListContainer extends Component {
           <Button handler={this.handlerAddCar} styleButton="submit">
             Добавить авто
           </Button>
+
+          <Button handler={this.handlerAddPath} styleButton="submit">
+            Добавить лист
+          </Button>
         </div>
       </div>
     );
@@ -87,7 +91,8 @@ const mapStateToProps = state => {
   return {
     cars: state.cars,
     pathLists: state.pathLists,
-    selectedCar: state.selectedCar
+    selectedCar: state.selectedCar,
+    error: state.error
   };
 };
 const mapDispatchToProps = dispatch => {
@@ -95,7 +100,8 @@ const mapDispatchToProps = dispatch => {
     deleteCar: name => deleteCarToName(dispatch, name),
     carInfo: name => infoCarToName(dispatch, name),
     addCar: () => addNewCar(dispatch),
-    chError: () => checkError(dispatch)
+    chError: () => checkError(dispatch),
+    addPath: () => addNewPath(dispatch)
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CarListContainer);

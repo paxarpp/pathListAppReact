@@ -8,12 +8,7 @@ export default class PopUpInput extends Component {
     const top = this.props.coordy - 60;
     return (
       <div style={{ top: top, left: left }} className="popUpInput">
-        <input
-          type="number"
-          defaultValue={this.props.value}
-          min={'0'}
-          onChange={this.props.onChange}
-        />
+        <input type="number" defaultValue={this.props.value} min={'0'} onChange={this.props.onChange} />
         <Button handler={this.props.handlerConf(true)} styleButton="confirm">
           {String.fromCharCode(10003)}
         </Button>

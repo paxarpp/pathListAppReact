@@ -12,8 +12,7 @@ export default class RowTH extends Component {
     const { reverse, name } = this.props;
     return (
       <tr onClick={this.handler}>
-        <th style={{ width: '15%' }}>{fildNamePathList['name']}</th>
-        <th data-field-name={'dateBegin'} style={{ width: '15%' }}>
+        <th data-field-name={'dateBegin'} style={{ width: '10%' }}>
           {fildNamePathList['dateBegin']}
           <SortLink name={name} nameCell={'dateBegin'} reverse={reverse} />
         </th>
@@ -31,11 +30,11 @@ export default class RowTH extends Component {
           {fildNamePathList['milleage']}
           <SortLink name={name} nameCell={'milleage'} reverse={reverse} />
         </th>
-        <th data-field-name={'fuelBegin'} style={{ width: '5%' }}>
+        <th data-field-name={'fuelBegin'} style={{ width: '10%' }}>
           {fildNamePathList['fuelBegin']}
           <SortLink name={name} nameCell={'fuelBegin'} reverse={reverse} />
         </th>
-        <th data-field-name={'addFuel'} style={{ width: '5%' }}>
+        <th data-field-name={'addFuel'} style={{ width: '10%' }}>
           {fildNamePathList['addFuel']}
           <SortLink name={name} nameCell={'addFuel'} reverse={reverse} />
         </th>
@@ -43,11 +42,10 @@ export default class RowTH extends Component {
           {fildNamePathList['deltaFuel']}
           <SortLink name={name} nameCell={'deltaFuel'} reverse={reverse} />
         </th>
-        <th data-field-name={'fuelEnd'} style={{ width: '10%' }}>
+        <th data-field-name={'fuelEnd'} style={{ width: '10%' }} colSpan={2}>
           {fildNamePathList['fuelEnd']}
           <SortLink name={name} nameCell={'fuelEnd'} reverse={reverse} />
         </th>
-        
       </tr>
     );
   }
