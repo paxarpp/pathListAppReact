@@ -23,8 +23,12 @@ export const closeWindow = (dispatch, windowId) => {
   dispatch(closeWindowDispatch(windowId));
 };
 export const loadLocalStorage = dispatch => {
-  const obj = {};
-  obj.cars = localStorage.hasOwnProperty('cars') ? JSON.parse(localStorage.getItem('cars')) : [];
-  obj.pathLists = localStorage.hasOwnProperty('pathLists') ? JSON.parse(localStorage.getItem('pathLists')) : [];
-  dispatch(loadLocalStorageDispatch(obj));
+  try {
+    const obj = {};
+    obj.cars = localStorage.hasOwnProperty('cars') ? JSON.parse(localStorage.getItem('cars')) : [];
+    obj.pathLists = localStorage.hasOwnProperty('pathLists') ? JSON.parse(localStorage.getItem('pathLists')) : [];
+    dispatch(loadLocalStorageDispatch(obj));
+  } catch (err) {
+    alert('ошибка при загрузке данных, попробуйте перезапустить программу', err);
+  }
 };
