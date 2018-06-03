@@ -81,7 +81,7 @@ class TableContainer extends Component {
     chError();
   };
   render() {
-    const { page, stringOnPage, pathListsCar, reverse, name } = this.state;
+    const { page, stringOnPage, pathListsCar, reverse, name, path } = this.state;
     const dataArr = prepareNullstringForTable(paginationData(page, stringOnPage, pathListsCar), stringOnPage);
     return dataArr.length === 0 ? null : (
       <Table
@@ -99,6 +99,7 @@ class TableContainer extends Component {
         doubleClick={this.props.doubleClick}
         deletePath={this.deletePath}
         pathLists={this.props.pathLists}
+        selectPath={this.props.selectPathList}
       />
     );
   }
@@ -106,7 +107,8 @@ class TableContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    error: state.error
+    error: state.error,
+    selectPathList: state.selectPathList
   };
 };
 const mapDispatchToProps = dispatch => {

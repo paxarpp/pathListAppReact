@@ -3,10 +3,13 @@ import React from 'react';
 import createObjectError from './createObjectError';
 import Button from '../components/Button';
 
-const RowTD = ({ path, handler, error, doubleClick, deletePath }) => {
+const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) => {
   const matchNames = createObjectError(path, error);
   return (
-    <tr onClick={path.name !== null ? handler(path) : null}>
+    <tr
+      onClick={path.name !== null ? handler(path) : null}
+      className={selectPath.dateBegin === path.dateBegin ? 'selectTableRow' : null}
+    >
       {path.dateBegin === null ? <td /> : <td>{new Date(path.dateBegin).toLocaleDateString()}</td>}
       <td>{path.fuel}</td>
       <td>{path.constFuelChange}</td>

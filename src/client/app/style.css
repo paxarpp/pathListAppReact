@@ -131,6 +131,7 @@ body {
     position: absolute;
     bottom: 0;
     left: -320px;
+    background-color: rgb(200, 200, 200);
 }
 .pathListView .View {
     display: flex;
@@ -448,5 +449,8 @@ h4.inputErrorCheck{
         color: green;
         content: "...";
         margin-left: 10px;
+}
+.selectTableRow{
+    background-color: antiquewhite;
 }
 

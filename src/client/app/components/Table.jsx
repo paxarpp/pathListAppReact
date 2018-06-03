@@ -21,7 +21,8 @@ export default class Table extends Component {
       handlerTableSort,
       handlerPagination,
       deletePath,
-      pathLists
+      pathLists,
+      selectPath
     } = this.props;
     return (
       <div className="pathListSelectedCar">
@@ -40,6 +41,7 @@ export default class Table extends Component {
                   error={error}
                   doubleClick={this.props.doubleClick}
                   deletePath={deletePath}
+                  selectPath={selectPath}
                 />
               );
             })}
