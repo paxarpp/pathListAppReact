@@ -1,6 +1,7 @@
 const calculateFieldPath = path => {
   path.addFuel = Math.round(+path.addFuel * 100) / 100;
   path.constFuelChange = Math.round(+path.constFuelChange * 100) / 100;
+  path.constFuelChangeExt = Math.round(+path.constFuelChangeExt * 100) / 100;
   path.deltaFuel = Math.round(+path.deltaFuel * 100) / 100;
   path.fuelBegin = Math.round(+path.fuelBegin * 100) / 100;
   path.fuelEnd = Math.round(+path.fuelEnd * 100) / 100;
