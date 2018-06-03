@@ -11,7 +11,7 @@ class CreateCar extends Component {
     name: '',
     constFuelChange: '',
     fuel: 'AI',
-    extension: false,
+    extension: 'false',
     constFuelChangeExt: '',
     isWrong: false
   };
@@ -133,7 +133,7 @@ class CreateCar extends Component {
                 data-field-name={'extension'}
                 type={'radio'}
                 onChange={this.handleChange}
-                value={true}
+                value={'true'}
               />
             </label>
             <label>
@@ -144,7 +144,7 @@ class CreateCar extends Component {
                 data-field-name={'extension'}
                 type={'radio'}
                 onChange={this.handleChange}
-                value={false}
+                value={'false'}
               />
             </label>
             {extension === 'true' ? (

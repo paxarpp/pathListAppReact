@@ -12,7 +12,10 @@ const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) =>
     >
       {path.dateBegin === null ? <td /> : <td>{new Date(path.dateBegin).toLocaleDateString()}</td>}
       <td>{path.fuel}</td>
-      <td>{path.constFuelChange}</td>
+      <td>
+        {path.constFuelChange}
+        <span className="extension">{path.extension === 'true' ? ' прицеп' : ''}</span>
+      </td>
       <td
         className={!matchNames.first && matchNames.path ? 'inputError' : null}
         onDoubleClick={path.name !== null ? doubleClick('pathBegin', path.pathBegin) : null}

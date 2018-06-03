@@ -25,7 +25,9 @@ class CreatePath extends Component {
     ConsumptionFactoryFuel: '',
     isWrong: false,
     isWrongDuble: false,
-    columnView: true
+    columnView: true,
+    extension: 'false',
+    constFuelChangeExt: ''
   };
   handleSubmit = e => {
     e.preventDefault();
@@ -41,6 +43,8 @@ class CreatePath extends Component {
       deltaFuel,
       fuel,
       constFuelChange,
+      constFuelChangeExt,
+      extension,
       ConsumptionFactoryFuel,
       addFuelWinter,
       isWrong
@@ -58,7 +62,8 @@ class CreatePath extends Component {
       addFuel,
       deltaFuel,
       fuel,
-      constFuelChange,
+      constFuelChange: extension === 'true' ? constFuelChangeExt : constFuelChange, // ??????????????
+      extension,
       ConsumptionFactoryFuel,
       addFuelWinter
     };
@@ -93,6 +98,7 @@ class CreatePath extends Component {
         }
       }
     }
+    console.log(path);
   };
   handleChangeName = e => {
     const value = e.currentTarget.value;
@@ -109,7 +115,10 @@ class CreatePath extends Component {
       })[0].fuel,
       constFuelChange: cars.filter(car => {
         return car.name === value;
-      })[0].constFuelChange
+      })[0].constFuelChange,
+      constFuelChangeExt: cars.filter(car => {
+        return car.name === value;
+      })[0].constFuelChangeExt
     }));
 
     if (this.props.pathLists.filter(elem => elem.name === value).length !== 0) {
@@ -124,7 +133,9 @@ class CreatePath extends Component {
               return -1;
             } else if (a.dateBegin < b.dateBegin) {
               return 1;
-            } else {return 0;}
+            } else {
+              return 0;
+            }
           })[0].pathEnd,
         fuelBegin: this.props.pathLists
           .filter(elem => {
@@ -135,7 +146,9 @@ class CreatePath extends Component {
               return -1;
             } else if (a.dateBegin < b.dateBegin) {
               return 1;
-            } else {return 0;}
+            } else {
+              return 0;
+            }
           })[0].fuelEnd
       }));
     } else {
@@ -173,7 +186,10 @@ class CreatePath extends Component {
     }));
     this.setState(prev => ({
       ...prev,
-      ConsumptionFactoryFuel: Math.round(+prev.milleage * +prev.constFuelChange / 100 * 100) / 100
+      ConsumptionFactoryFuel:
+        prev.extension === 'true'
+          ? Math.round(+prev.milleage * +prev.constFuelChangeExt / 100 * 100) / 100
+          : Math.round(+prev.milleage * +prev.constFuelChange / 100 * 100) / 100
     }));
     this.setState(prev => ({
       ...prev,
@@ -210,7 +226,9 @@ class CreatePath extends Component {
       deltaFuel,
       isWrong,
       columnView,
-      isWrongDuble
+      isWrongDuble,
+      extension,
+      constFuelChangeExt
     } = this.state;
     return (
       <div className="popUpWrapp">
@@ -233,6 +251,32 @@ class CreatePath extends Component {
                   return <option key={car.name}>{car.name}</option>;
                 })}
               </select>
+              <div className="extensionChoise">
+                <h4 className="inputHeader">поездка с прицепом ?</h4>
+                <label>
+                  Да
+                  <input
+                    checked={extension === 'true'}
+                    name={'extension'}
+                    data-field-name={'extension'}
+                    type={'radio'}
+                    onChange={this.handleChange}
+                    value={'true'}
+                  />
+                </label>
+                <label>
+                  Нет
+                  <input
+                    checked={extension === 'false'}
+                    name={'extension'}
+                    data-field-name={'extension'}
+                    type={'radio'}
+                    onChange={this.handleChange}
+                    value={'false'}
+                  />
+                </label>
+              </div>
+
               <h4 className="inputHeader">выберите дату начала путевки</h4>
               <input
                 className={isWrong === 'dateBegin' ? 'inputErrorCheck' : null}

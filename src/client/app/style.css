@@ -453,4 +453,7 @@ h4.inputErrorCheck{
 .selectTableRow{
     background-color: antiquewhite;
 }
-
+.extension{
+    font-size: 0.7rem;
+    color: #920000;
+}
