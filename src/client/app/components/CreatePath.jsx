@@ -62,7 +62,7 @@ class CreatePath extends Component {
       addFuel,
       deltaFuel,
       fuel,
-      constFuelChange: extension === 'true' ? constFuelChangeExt : constFuelChange, // ??????????????
+      constFuelChange: extension === 'true' ? constFuelChangeExt : constFuelChange,
       extension,
       ConsumptionFactoryFuel,
       addFuelWinter
@@ -98,7 +98,6 @@ class CreatePath extends Component {
         }
       }
     }
-    console.log(path);
   };
   handleChangeName = e => {
     const value = e.currentTarget.value;
@@ -251,7 +250,7 @@ class CreatePath extends Component {
                   return <option key={car.name}>{car.name}</option>;
                 })}
               </select>
-              <div className="extensionChoise">
+              <div className={constFuelChangeExt > 0 ? 'extensionChoise' : 'extensionChoiseNone'}>
                 <h4 className="inputHeader">поездка с прицепом ?</h4>
                 <label>
                   Да
@@ -276,7 +275,6 @@ class CreatePath extends Component {
                   />
                 </label>
               </div>
-
               <h4 className="inputHeader">выберите дату начала путевки</h4>
               <input
                 className={isWrong === 'dateBegin' ? 'inputErrorCheck' : null}
