@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { savePath, checkError } from '../actions/pathLists.js';
 import { closeWindow } from '../actions/cars.js';
@@ -46,8 +47,7 @@ class CreatePath extends Component {
       constFuelChangeExt,
       extension,
       ConsumptionFactoryFuel,
-      addFuelWinter,
-      isWrong
+      addFuelWinter
     } = this.state;
 
     const { addDataPath, pathLists, close, chError } = this.props;
@@ -368,5 +368,11 @@ const mapDispatchToProps = dispatch => {
     chError: () => checkError(dispatch)
   };
 };
-
+CreatePath.propTypes = {
+  addDataPath: PropTypes.func.isRequired,
+  pathLists: PropTypes.arrayOf(PropTypes.object).isRequired,
+  close: PropTypes.func.isRequired,
+  chError: PropTypes.func.isRequired,
+  cars: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePath);

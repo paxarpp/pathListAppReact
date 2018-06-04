@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class PaginationButton extends Component {
   hendler = page => () => {
     const { handlerPagination } = this.props;
     handlerPagination(page);
   };
-
   render() {
     const { length, page, stringOnPage } = this.props;
     const pages = length % stringOnPage === 0 ? length / stringOnPage : Math.ceil(length / stringOnPage);
-
     return (
       <div className="paginationBlock">
         {page <= 1 ? null : <button onClick={this.hendler(1)}>1</button>}
@@ -31,3 +30,9 @@ export default class PaginationButton extends Component {
     );
   }
 }
+PaginationButton.propTypes = {
+  length: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  stringOnPage: PropTypes.number.isRequired,
+  handlerPagination: PropTypes.func.isRequired
+};
