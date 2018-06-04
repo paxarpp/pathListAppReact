@@ -13,8 +13,7 @@ class CarListContainer extends Component {
     super(props);
     this.state = {
       popUpConfirm: false,
-      name: '',
-      minView: false
+      name: ''
     };
   }
   componentDidUpdate() {
@@ -49,22 +48,13 @@ class CarListContainer extends Component {
     const { addPath } = this.props;
     addPath();
   };
-  handleChangeView = () => {
-    const { minView } = this.state;
-    this.setState({
-      minView: !minView
-    });
-  };
   render() {
-    const { cars, selectedCar, pathLists } = this.props;
-    const { popUpConfirm, minView } = this.state;
+    const { cars, selectedCar, pathLists, error } = this.props;
+    const { popUpConfirm } = this.state;
     return (
-      <div className={minView ? 'carListContainerMinimal' : 'carListContainer'}>
+      <div className="carListContainer">
         <div className="header">
-          <h3>{minView ? null : 'Список Автомобилей'}</h3>
-          <Button handler={this.handleChangeView} styleButton={minView ? 'switchMin' : 'switchView'}>
-            {minView ? String.fromCharCode(9654) : String.fromCharCode(9668)}
-          </Button>
+          <h3>Список Автомобилей</h3>
         </div>
         {popUpConfirm && <Confirm handler={this.deleteCarConfirm} />}
         <CarList
@@ -73,6 +63,7 @@ class CarListContainer extends Component {
           cars={cars}
           deleteCarHandler={this.deleteCar}
           carInfo={this.carInfo}
+          error={error}
         />
         <div className="footer">
           <Button handler={this.handlerAddCar} styleButton="submit">

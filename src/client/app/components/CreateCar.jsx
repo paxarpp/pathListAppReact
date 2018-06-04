@@ -24,7 +24,7 @@ class CreateCar extends Component {
       constFuelChange,
       fuel,
       extension,
-      constFuelChangeExt
+      constFuelChangeExt: extension === 'true' ? constFuelChangeExt : ''
     };
     if (car.name === '' || car.constFuelChange === '') {
       this.setState(() => ({

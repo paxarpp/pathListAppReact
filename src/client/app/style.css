@@ -56,6 +56,7 @@ body {
     cursor: pointer;
     width: 100%;
     height: 2.5rem;
+    position: relative;
 }
 .carList .list>div {
     display: flex;
@@ -104,24 +105,6 @@ body {
     width: 320px;
     display: flex;
     flex-flow: column nowrap;
-    transition: all 0.3s linear;
-}
-.carListContainerMinimal{
-    padding: 0;
-    box-shadow: 3px 3px 10px 1px grey;
-    height: 50px;
-    border-radius: 0 50% 50% 0;
-    width: 50px;
-    margin: 10px;
-    overflow: hidden;
-    position: relative;
-    transition: all 0.3s linear;
-}
-.switchMin{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
 }
 .pathListView {
     padding: 0;
@@ -138,12 +121,12 @@ body {
     flex-flow: column nowrap;
     justify-content: center;
     align-items: flex-start;
-    padding: 0 20px;
+    padding: 0 2px;
     position: relative;
 }
 .View .head_ext {
     position: absolute;
-    top: -12%;
+    top: -15%;
     left: 2%;
     color: #a30000;
     font-size: 1rem;
@@ -153,7 +136,7 @@ body {
 }
 .pathListView .View p,
 .pathListView .View .head {
-    margin: 0 0 5px 60px;
+    margin: 0 0 5px 5px;
 }
 .popUpWrapp {
     position: fixed;
@@ -254,7 +237,8 @@ body {
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s linear;
-    box-shadow: 1px 2px 0px 1px #00000080; 
+    box-shadow: 1px 2px 0px 1px #00000080;
+    z-index: 9;
 }
 .submit:hover {
     box-shadow: 0px 0px 1px 0px #00000080;
@@ -352,6 +336,15 @@ h4.inputErrorCheck{
     font-size: 0.7rem;
     line-height: 2.5rem;
 }
+.counterWrapError{
+    overflow: hidden;
+    position: absolute;
+    left: -18px;
+    top: 0;
+    color: red;
+    font-size: 0.7rem;
+    line-height: 2.5rem;
+}
 .counter {
     text-align: center;
     padding: 4px 10px;
@@ -368,12 +361,6 @@ h4.inputErrorCheck{
 }
 .bottom>span{
     color: red;
-}
-.switchView{
-    position: absolute;
-    top: 55px;
-    right: 5px;
-    cursor: pointer;
 }
 .sortView {
     position: absolute;
@@ -433,7 +420,7 @@ h4.inputErrorCheck{
 .popUpInput>input{
     border: none;
     border-bottom: 1px solid grey;
-    width: 60%;
+    width: 80%;
     font-size: 1.5rem;
     text-align: center;
 }
