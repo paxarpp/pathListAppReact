@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Table from '../components/Table';
 import paginationData from '../components/paginationData';
@@ -81,7 +82,7 @@ class TableContainer extends Component {
     chError();
   };
   render() {
-    const { page, stringOnPage, pathListsCar, reverse, name, path } = this.state;
+    const { page, stringOnPage, pathListsCar, reverse, name } = this.state;
     const dataArr = prepareNullstringForTable(paginationData(page, stringOnPage, pathListsCar), stringOnPage);
     return dataArr.length === 0 ? null : (
       <Table
@@ -104,7 +105,6 @@ class TableContainer extends Component {
     );
   }
 }
-
 const mapStateToProps = state => {
   return {
     error: state.error,
@@ -117,6 +117,22 @@ const mapDispatchToProps = dispatch => {
     deletePath: name => deletePathToName(dispatch, name),
     chError: () => checkError(dispatch)
   };
+};
+TableContainer.propTypes = {
+  error: PropTypes.arrayOf(
+    PropTypes.shape({
+      path: PropTypes.object,
+      first: PropTypes.bool,
+      errorPath: PropTypes.bool,
+      errorFuel: PropTypes.bool
+    })
+  ),
+  pathLists: PropTypes.array,
+  selectPathList: PropTypes.object,
+  doubleClick: PropTypes.func,
+  pathInfo: PropTypes.func,
+  deletePath: PropTypes.func,
+  chError: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableContainer);

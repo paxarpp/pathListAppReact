@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import createObjectError from './createObjectError';
 import Button from '../components/Button';
@@ -53,5 +54,13 @@ const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) =>
       </td>
     </tr>
   );
+};
+RowTD.propTypes = {
+  path: PropTypes.object,
+  handler: PropTypes.func,
+  error: PropTypes.arrayOf(PropTypes.object),
+  doubleClick: PropTypes.func,
+  deletePath: PropTypes.func,
+  selectPath: PropTypes.func
 };
 export default RowTD;

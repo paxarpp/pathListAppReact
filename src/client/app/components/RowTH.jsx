@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import fildNamePathList from './fildNamePathList';
 import SortLink from './SortLink';
@@ -50,3 +51,8 @@ export default class RowTH extends Component {
     );
   }
 }
+RowTH.propTypes = {
+  handlerTable: PropTypes.func,
+  reverse: PropTypes.bool,
+  name: PropTypes.string
+};

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import fildNamePathList from './fildNamePathList';
 import createObjectError from './createObjectError';
@@ -64,3 +65,8 @@ export default class ViewPath extends PureComponent {
     );
   }
 }
+ViewPath.propTypes = {
+  path: PropTypes.object,
+  doubleClick: PropTypes.func,
+  error: PropTypes.arrayOf(PropTypes.object)
+};

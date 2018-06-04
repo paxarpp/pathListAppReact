@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import RowTD from './RowTD';
 import RowTH from './RowTH';
@@ -59,3 +60,20 @@ export default class Table extends Component {
     );
   }
 }
+Table.propTypes = {
+  error: PropTypes.arrayOf(PropTypes.object),
+  page: PropTypes.number,
+  stringOnPage: PropTypes.number,
+  length: PropTypes.number,
+  tempArr: PropTypes.array,
+  reverse: PropTypes.bool,
+  name: PropTypes.string,
+  choisePaginationString: PropTypes.func,
+  handlerTableSelect: PropTypes.func,
+  handlerTableSort: PropTypes.func,
+  handlerPagination: PropTypes.func,
+  deletePath: PropTypes.func,
+  pathLists: PropTypes.arrayOf(PropTypes.object),
+  selectPath: PropTypes.func,
+  doubleClick: PropTypes.func
+};

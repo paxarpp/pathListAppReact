@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { closeWindow } from '../actions/cars.js';
 import Button from '../components/Button';
@@ -36,6 +37,12 @@ const mapDispatchToProps = dispatch => {
   return {
     close: selectPathList => closeWindow(dispatch, selectPathList)
   };
+};
+VeiwAndEditPathList.propTypes = {
+  close: PropTypes.func,
+  selectPathList: PropTypes.func,
+  doubleClick: PropTypes.func,
+  error: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeiwAndEditPathList);

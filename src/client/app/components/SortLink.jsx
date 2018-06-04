@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Button from '../components/Button';
 import IconSort from '../components/IconSort';
@@ -15,3 +16,8 @@ export default class SortLink extends Component {
     );
   }
 }
+SortLink.propTypes = {
+  nameCell: PropTypes.string,
+  reverse: PropTypes.bool,
+  name: PropTypes.string
+};

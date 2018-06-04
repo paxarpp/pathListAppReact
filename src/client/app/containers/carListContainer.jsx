@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import CarList from '../components/CarList';
 import Button from '../components/Button';
@@ -33,8 +34,10 @@ class CarListContainer extends Component {
       popUpConfirm: false,
       name: ''
     });
-    status ? deleteCar(name) : null;
-    status ? chError() : null;
+    if (status) {
+      deleteCar(name);
+      chError();
+    }
   };
   carInfo = name => () => {
     const { carInfo } = this.props;
@@ -94,5 +97,16 @@ const mapDispatchToProps = dispatch => {
     chError: () => checkError(dispatch),
     addPath: () => addNewPath(dispatch)
   };
+};
+CarListContainer.propTypes = {
+  cars: PropTypes.arrayOf(PropTypes.object),
+  pathLists: PropTypes.object,
+  selectedCar: PropTypes.object,
+  deleteCar: PropTypes.func,
+  chError: PropTypes.func,
+  error: PropTypes.arrayOf(PropTypes.object),
+  carInfo: PropTypes.func,
+  addCar: PropTypes.func,
+  addPath: PropTypes.func
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CarListContainer);

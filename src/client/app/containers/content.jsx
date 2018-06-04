@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import CreateCar from '../components/CreateCar';
 import CreatePath from '../components/CreatePath';
@@ -100,5 +101,15 @@ const mapDispatchToProps = dispatch => {
     chError: () => checkError(dispatch),
     saveUpdate: result => saveUpdateData(dispatch, result)
   };
+};
+Content.propTypes = {
+  isNewCar: PropTypes.bool,
+  isNewPath: PropTypes.bool,
+  selectedCar: PropTypes.object,
+  pathLists: PropTypes.array,
+  selectPathList: PropTypes.object,
+  saveUpdate: PropTypes.func,
+  load: PropTypes.func,
+  chError: PropTypes.func
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Content);
