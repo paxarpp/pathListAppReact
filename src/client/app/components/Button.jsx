@@ -11,6 +11,6 @@ const Button = ({ handler, styleButton, children }) => {
 Button.propTypes = {
   handler: PropTypes.func,
   styleButton: PropTypes.string,
-  children: PropTypes.object
+  children: PropTypes.string
 };
 export default Button;
