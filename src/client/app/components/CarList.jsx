@@ -28,7 +28,7 @@ export default class CarList extends Component {
                   deleteCarHandler={deleteCarHandler}
                 />
                 {error.find(elem => elem.name === car.name) ? (
-                  <CountErr text={'ошибок: '} count={error.filter(elem => elem.name === car.name).length / 2} />
+                  <CountErr count={error.filter(elem => elem.name === car.name).length / 2} />
                 ) : null}
               </div>
             );
@@ -40,7 +40,7 @@ export default class CarList extends Component {
 }
 CarList.propTypes = {
   cars: PropTypes.arrayOf(PropTypes.object),
-  selectedCar: PropTypes.object,
+  selectedCar: PropTypes.string,
   deleteCarHandler: PropTypes.func,
   carInfo: PropTypes.func,
   error: PropTypes.arrayOf(PropTypes.object)
