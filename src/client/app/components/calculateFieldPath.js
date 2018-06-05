@@ -9,7 +9,7 @@ const calculateFieldPath = path => {
   path.pathBegin = Math.round(+path.pathBegin);
   path.pathEnd = Math.round(+path.pathEnd);
   path.addFuelWinter = Math.round(+path.addFuelWinter * 100) / 100;
-  path.ConsumptionFactoryFuel = Math.round(+path.constFuelChange * 100) / 100;
+  path.ConsumptionFactoryFuel = Math.round(+path.ConsumptionFactoryFuel * 100) / 100;
   return path;
 };
 export default calculateFieldPath;
