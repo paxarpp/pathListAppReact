@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewPath correct 1`] = `
+<div
+  className="View"
+>
+  <h4
+    className="head"
+  >
+    уаз
+  </h4>
+  <h6
+    className="head_ext"
+  >
+    
+  </h6>
+  <p>
+    тип топлива
+    : 
+    AI
+  </p>
+  <p>
+    паспортный расход на 100км
+    : 
+    15.4
+     л
+  </p>
+  <p>
+    дата
+    : 
+    2018-5-10
+  </p>
+  <p
+    className={null}
+  >
+    <span
+      className="editable"
+    >
+      пробег в начале
+      : 
+      117479
+       км
+    </span>
+  </p>
+  <p
+    className={null}
+  >
+    <span
+      className="editable"
+    >
+      пробег в конце
+      : 
+      117552
+       км
+    </span>
+  </p>
+  <p>
+    пробег
+    : 
+    73
+     км
+  </p>
+  <p
+    className={null}
+  >
+    <span
+      className="editable"
+    >
+      топливо в начале
+      : 
+      30.48
+       л
+    </span>
+  </p>
+  <p>
+    <span
+      className="editable"
+    >
+      заправлено
+      : 
+      0
+       л
+    </span>
+  </p>
+  <p>
+    расход топлива за пробег
+    : 
+    11.24
+     л
+  </p>
+  <p
+    className={null}
+  >
+    топливо в конце
+    : 
+    19.24
+     л
+  </p>
+</div>
+`;
+
+exports[`ViewPath this error 1`] = `
+<div
+  className="View"
+>
+  <h4
+    className="head"
+  >
+    уаз
+  </h4>
+  <h6
+    className="head_ext"
+  >
+    
+  </h6>
+  <p>
+    тип топлива
+    : 
+    AI
+  </p>
+  <p>
+    паспортный расход на 100км
+    : 
+    15.4
+     л
+  </p>
+  <p>
+    дата
+    : 
+    2018-5-3
+  </p>
+  <p
+    className={null}
+  >
+    <span
+      className="editable"
+    >
+      пробег в начале
+      : 
+      116239
+       км
+    </span>
+  </p>
+  <p
+    className={null}
+  >
+    <span
+      className="editable"
+    >
+      пробег в конце
+      : 
+      116312
+       км
+    </span>
+  </p>
+  <p>
+    пробег
+    : 
+    73
+     км
+  </p>
+  <p
+    className={null}
+  >
+    <span
+      className="editable"
+    >
+      топливо в начале
+      : 
+      40.47
+       л
+    </span>
+  </p>
+  <p>
+    <span
+      className="editable"
+    >
+      заправлено
+      : 
+      0
+       л
+    </span>
+  </p>
+  <p>
+    расход топлива за пробег
+    : 
+    11.24
+     л
+  </p>
+  <p
+    className="inputError"
+  >
+    топливо в конце
+    : 
+    29.23
+     л
+  </p>
+</div>
+`;
