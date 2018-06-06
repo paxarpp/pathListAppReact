@@ -1,4 +1,4 @@
-const pathLists = [
+export const pathLists = [
   {
     ConsumptionFactoryFuel: 15.4,
     addFuel: 0,
@@ -75,7 +75,7 @@ const pathLists = [
     pathEnd: 117552
   }
 ];
-const cars = [
+export const cars = [
   {
     constFuelChange: '30.0',
     fuel: 'DT',
@@ -107,7 +107,7 @@ const cars = [
     name: 'волга'
   }
 ];
-const error = [
+export const error = [
   {
     ConsumptionFactoryFuel: 15.4,
     addFuel: 0,

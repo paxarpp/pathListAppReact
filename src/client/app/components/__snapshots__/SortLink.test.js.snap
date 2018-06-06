@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SortLink noview 1`] = `
+<div
+  className="iconSort"
+>
+  <div>
+    ▲
+  </div>
+  <div>
+    ▼
+  </div>
+</div>
+`;
+
+exports[`SortLink view, reverse false 1`] = `
+<a
+  className="sortView"
+  onClick={null}
+>
+  ▲
+</a>
+`;
+
+exports[`SortLink view, reverse true 1`] = `
+<a
+  className="sortView"
+  onClick={null}
+>
+  ▼
+</a>
+`;
