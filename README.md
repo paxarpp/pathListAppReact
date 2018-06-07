@@ -1,3 +1,8 @@
 # SPA_React
 
 ![Image alt](https://github.com/paxarpp/pathListAppReact/raw/master/image/1.png)
+
+npm i
+
+npm  start
+
