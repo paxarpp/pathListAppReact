@@ -1,0 +1,551 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RowTH view, reverse false 1`] = `
+<tr
+  onClick={[Function]}
+>
+  <th
+    data-field-name="dateBegin"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    дата
+    <a
+      className="sortView"
+      onClick={null}
+    >
+      ▲
+    </a>
+  </th>
+  <th
+    style={
+      Object {
+        "width": "5%",
+      }
+    }
+  >
+    тип топлива
+  </th>
+  <th
+    style={
+      Object {
+        "width": "5%",
+      }
+    }
+  >
+    паспортный расход на 100км
+  </th>
+  <th
+    data-field-name="pathBegin"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    пробег в начале
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    data-field-name="pathEnd"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    пробег в конце
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    data-field-name="milleage"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    пробег
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    data-field-name="fuelBegin"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    топливо в начале
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    data-field-name="addFuel"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    заправлено
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    data-field-name="deltaFuel"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    расход топлива за пробег
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    colSpan={2}
+    data-field-name="fuelEnd"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    топливо в конце
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+</tr>
+`;
+
+exports[`RowTH view, reverse false not name 1`] = `
+<tr
+  onClick={[Function]}
+>
+  <th
+    data-field-name="dateBegin"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    дата
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    style={
+      Object {
+        "width": "5%",
+      }
+    }
+  >
+    тип топлива
+  </th>
+  <th
+    style={
+      Object {
+        "width": "5%",
+      }
+    }
+  >
+    паспортный расход на 100км
+  </th>
+  <th
+    data-field-name="pathBegin"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    пробег в начале
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    data-field-name="pathEnd"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    пробег в конце
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    data-field-name="milleage"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    пробег
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    data-field-name="fuelBegin"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    топливо в начале
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    data-field-name="addFuel"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    заправлено
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    data-field-name="deltaFuel"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    расход топлива за пробег
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    colSpan={2}
+    data-field-name="fuelEnd"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    топливо в конце
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+</tr>
+`;
+
+exports[`RowTH view, reverse true 1`] = `
+<tr
+  onClick={[Function]}
+>
+  <th
+    data-field-name="dateBegin"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    дата
+    <a
+      className="sortView"
+      onClick={null}
+    >
+      ▲
+    </a>
+  </th>
+  <th
+    style={
+      Object {
+        "width": "5%",
+      }
+    }
+  >
+    тип топлива
+  </th>
+  <th
+    style={
+      Object {
+        "width": "5%",
+      }
+    }
+  >
+    паспортный расход на 100км
+  </th>
+  <th
+    data-field-name="pathBegin"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    пробег в начале
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    data-field-name="pathEnd"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    пробег в конце
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    data-field-name="milleage"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    пробег
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    data-field-name="fuelBegin"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    топливо в начале
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    data-field-name="addFuel"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    заправлено
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    data-field-name="deltaFuel"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    расход топлива за пробег
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+  <th
+    colSpan={2}
+    data-field-name="fuelEnd"
+    style={
+      Object {
+        "width": "10%",
+      }
+    }
+  >
+    топливо в конце
+    <div
+      className="iconSort"
+    >
+      <div>
+        ▲
+      </div>
+      <div>
+        ▼
+      </div>
+    </div>
+  </th>
+</tr>
+`;

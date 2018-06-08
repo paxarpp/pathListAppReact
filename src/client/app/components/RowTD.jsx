@@ -61,6 +61,6 @@ RowTD.propTypes = {
   error: PropTypes.arrayOf(PropTypes.object),
   doubleClick: PropTypes.func,
   deletePath: PropTypes.func,
-  selectPath: PropTypes.func
+  selectPath: PropTypes.object
 };
 export default RowTD;

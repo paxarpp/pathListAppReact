@@ -1,0 +1,220 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RowTD view, error not select 1`] = `
+<tr
+  className={null}
+>
+  <td>
+    2018-5-3
+  </td>
+  <td>
+    AI
+  </td>
+  <td>
+    15.4
+    <span
+      className="extension"
+    >
+      
+    </span>
+  </td>
+  <td
+    className={null}
+  >
+    <span
+      className="editableTd"
+    >
+      116239
+    </span>
+  </td>
+  <td
+    className={null}
+  >
+    <span
+      className="editableTd"
+    >
+      116312
+    </span>
+  </td>
+  <td>
+    73
+  </td>
+  <td
+    className={null}
+  >
+    <span
+      className="editableTd"
+    >
+      40.47
+    </span>
+  </td>
+  <td>
+    <span
+      className="editableTd"
+    >
+      0
+    </span>
+  </td>
+  <td>
+    11.24
+  </td>
+  <td
+    className="inputError"
+  >
+    29.23
+  </td>
+  <td>
+    <a
+      className="delit"
+    >
+      ✖
+    </a>
+  </td>
+</tr>
+`;
+
+exports[`RowTD view, error select 1`] = `
+<tr
+  className="selectTableRow"
+>
+  <td>
+    2018-5-3
+  </td>
+  <td>
+    AI
+  </td>
+  <td>
+    15.4
+    <span
+      className="extension"
+    >
+      
+    </span>
+  </td>
+  <td
+    className={null}
+  >
+    <span
+      className="editableTd"
+    >
+      116239
+    </span>
+  </td>
+  <td
+    className={null}
+  >
+    <span
+      className="editableTd"
+    >
+      116312
+    </span>
+  </td>
+  <td>
+    73
+  </td>
+  <td
+    className={null}
+  >
+    <span
+      className="editableTd"
+    >
+      40.47
+    </span>
+  </td>
+  <td>
+    <span
+      className="editableTd"
+    >
+      0
+    </span>
+  </td>
+  <td>
+    11.24
+  </td>
+  <td
+    className="inputError"
+  >
+    29.23
+  </td>
+  <td>
+    <a
+      className="delit"
+    >
+      ✖
+    </a>
+  </td>
+</tr>
+`;
+
+exports[`RowTD view, not error not select 1`] = `
+<tr
+  className={null}
+>
+  <td>
+    2018-5-3
+  </td>
+  <td>
+    AI
+  </td>
+  <td>
+    15.4
+    <span
+      className="extension"
+    >
+      
+    </span>
+  </td>
+  <td
+    className={null}
+  >
+    <span
+      className="editableTd"
+    >
+      116239
+    </span>
+  </td>
+  <td
+    className={null}
+  >
+    <span
+      className="editableTd"
+    >
+      116312
+    </span>
+  </td>
+  <td>
+    73
+  </td>
+  <td
+    className={null}
+  >
+    <span
+      className="editableTd"
+    >
+      40.47
+    </span>
+  </td>
+  <td>
+    <span
+      className="editableTd"
+    >
+      0
+    </span>
+  </td>
+  <td>
+    11.24
+  </td>
+  <td
+    className={null}
+  >
+    29.23
+  </td>
+  <td>
+    <a
+      className="delit"
+    >
+      ✖
+    </a>
+  </td>
+</tr>
+`;
