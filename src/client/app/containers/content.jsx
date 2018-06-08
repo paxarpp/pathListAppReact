@@ -70,7 +70,6 @@ class Content extends Component {
         <TableContainer
           className="pathListSelectedCar"
           doubleClick={this.doubleClick}
-          selectedCar={selectedCar}
           pathLists={pathLists.filter(path => path.name === selectedCar)}
         />
         {field && (
@@ -105,7 +104,7 @@ const mapDispatchToProps = dispatch => {
 Content.propTypes = {
   isNewCar: PropTypes.bool,
   isNewPath: PropTypes.bool,
-  selectedCar: PropTypes.object,
+  selectedCar: PropTypes.string,
   pathLists: PropTypes.array,
   selectPathList: PropTypes.object,
   saveUpdate: PropTypes.func,
