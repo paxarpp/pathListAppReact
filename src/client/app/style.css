@@ -232,6 +232,7 @@ h4.inputErrorCheck{
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 9;
 }
 .choisePaginationString>select{
     background-color: #00000000;

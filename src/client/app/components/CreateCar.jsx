@@ -7,7 +7,9 @@ import { saveCar, closeWindow } from '../actions/cars.js';
 import Icon from './Icon';
 import Input from './Input';
 import { Primary } from './ButtonNew';
+import RadioButton from './RadioButton';
 import Header from './header';
+import Footer from './footer';
 import fildNameCheckRule from './fildNameCheckRule.js';
 
 class CreateCar extends Component {
@@ -30,7 +32,12 @@ class CreateCar extends Component {
       extension,
       constFuelChangeExt: extension === 'true' ? constFuelChangeExt : ''
     };
-    if (car.name === '' || car.constFuelChange === '') {
+    if (
+      car.name === '' ||
+      car.constFuelChange === '' ||
+      +car.constFuelChange === 0 ||
+      (extension && +constFuelChangeExt === 0)
+    ) {
       this.setState(() => ({
         isWrong: true
       }));
@@ -84,8 +91,8 @@ class CreateCar extends Component {
           </WrapHeader>
           <PopUpContent>
             <InputHeader>введите название автомобиля</InputHeader>
-            <Input
-              className={isWrong === 'name' ? 'inputErrorCheck' : null}
+            <WrapInput
+              error={isWrong === 'name'}
               data-field-name={'name'}
               type={'text'}
               handler={this.handleChange}
@@ -94,7 +101,7 @@ class CreateCar extends Component {
             />
             <InputHeader>введите паспортный расход топлива</InputHeader>
             <Input
-              className={isWrong === 'constFuelChange' ? 'inputErrorCheck' : null}
+              error={isWrong === 'constFuelChange'}
               data-field-name={'constFuelChange'}
               type={'number'}
               handler={this.handleChange}
@@ -106,7 +113,7 @@ class CreateCar extends Component {
             <InputHeader>выберите тип топлива</InputHeader>
             <label>
               Бензин
-              <input
+              <RadioButton
                 checked={this.state.fuel === 'AI'}
                 name={'fuel'}
                 data-field-name={'fuel'}
@@ -117,7 +124,7 @@ class CreateCar extends Component {
             </label>
             <label>
               Дизель
-              <input
+              <RadioButton
                 checked={this.state.fuel === 'DT'}
                 name={'fuel'}
                 data-field-name={'fuel'}
@@ -129,7 +136,7 @@ class CreateCar extends Component {
             <InputHeader>возможено добавление прицепа ?</InputHeader>
             <label>
               Да
-              <input
+              <RadioButton
                 checked={this.state.extension === 'true'}
                 name={'extension'}
                 data-field-name={'extension'}
@@ -140,7 +147,7 @@ class CreateCar extends Component {
             </label>
             <label>
               Нет
-              <input
+              <RadioButton
                 checked={this.state.extension === 'false'}
                 name={'extension'}
                 data-field-name={'extension'}
@@ -150,11 +157,11 @@ class CreateCar extends Component {
               />
             </label>
             {extension === 'true' ? (
-              <input
-                className={isWrong === 'constFuelChangeExt' ? 'inputErrorCheck' : null}
+              <Input
+                error={isWrong === 'constFuelChangeExt'}
                 data-field-name={'constFuelChangeExt'}
                 type={'number'}
-                onChange={this.handleChange}
+                handler={this.handleChange}
                 placeholder={'расход по паспорту на 100 км с прицепом'}
                 value={constFuelChangeExt}
                 step={'0.01'}
@@ -163,11 +170,11 @@ class CreateCar extends Component {
             ) : null}
           </PopUpContent>
           {isWrong && <h3 className="inputError">ошибка введеных данных</h3>}
-          <div className="footer">
+          <Footer>
             <Primary handlerClick={this.handleSubmit} disable={isWrong != false}>
               Сохранить
             </Primary>
-          </div>
+          </Footer>
         </PopUp>
       </PopUpWrap>
     );
@@ -231,5 +238,13 @@ const PopUpContent = styled.div`
   box-sizing: border-box;
   width: 470px;
   transition: all 0.3s linear;
+`;
+const error = `
+  outline: 1px solid red;
+  opacity: 0.7;
+  transition: opacity 0.5s ease-in;
+`;
+const WrapInput = styled(Input)`
+  ${props => props.error && error};
 `;
 export default connect(mapStateToProps, mapDispatchToProps)(CreateCar);
