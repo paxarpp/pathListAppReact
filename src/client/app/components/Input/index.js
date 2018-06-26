@@ -6,13 +6,7 @@ const Input = ({ placeholder, handler, value, ...props }) => {
   let inputRef = {};
   return (
     <Wrapper>
-      <InpWrap
-        {...props}
-        onChange={handler}
-        innerRef={input => {
-          inputRef = input;
-        }}
-      />
+      <InpWrap {...props} onChange={handler} innerRef={input => (inputRef = input)} />
       <LabelWrap onClick={() => inputRef.focus()} value={value}>
         {placeholder}
       </LabelWrap>
