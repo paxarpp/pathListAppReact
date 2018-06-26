@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { saveCar, closeWindow } from '../actions/cars.js';
-import Button from './Button';
+import Icon from './Icon';
 import { Primary } from './ButtonNew';
 import Header from './header';
 import fildNameCheckRule from './fildNameCheckRule.js';
@@ -77,12 +77,10 @@ class CreateCar extends Component {
     return (
       <div className="popUpWrapp">
         <div className="popUp">
-          <Header className="header">
+          <WrapHeader>
             <HeaderText>Новая машина</HeaderText>
-            <Button handler={this.handleClose} styleButton="delit">
-              {String.fromCharCode(10006)}
-            </Button>
-          </Header>
+            <WrapIcon onClick={this.handleClose} name="Clear" color="red" />
+          </WrapHeader>
           <div className="popUpContent">
             <h4 className="inputHeader">введите название автомобиля</h4>
             <input
@@ -191,6 +189,14 @@ CreateCar.propTypes = {
   cars: PropTypes.array
 };
 const HeaderText = styled.h2`
-  margin-left: auto;
+  align-text: center;
+`;
+const WrapHeader = styled(Header)`
+  position: relative;
+`;
+const WrapIcon = styled(Icon)`
+  position: absolute;
+  top: 5px;
+  right: 5px;
 `;
 export default connect(mapStateToProps, mapDispatchToProps)(CreateCar);

@@ -7,6 +7,7 @@ import { savePath, checkError } from '../actions/pathLists.js';
 import { closeWindow } from '../actions/cars.js';
 import Button from './Button';
 import { Primary } from './ButtonNew';
+import Icon from './Icon';
 import Header from './header';
 import calculateFieldPath from './calculateFieldPath';
 import fildNamePathList from './fildNamePathList';
@@ -235,15 +236,13 @@ class CreatePath extends Component {
     return (
       <div className="popUpWrapp">
         <div className="popUp">
-          <Header className="header">
+          <WrapHeader className="header">
             <HeaderText>Новый лист</HeaderText>
-            <Button handler={this.handleClose} styleButton="delit">
-              {String.fromCharCode(10006)}
-            </Button>
+            <WrapIcon onClick={this.handleClose} name="Clear" color="red" />
             <Button handler={this.handleChangeView} styleButton="switchView">
               {columnView ? String.fromCharCode(9654) : String.fromCharCode(9660)}
             </Button>
-          </Header>
+          </WrapHeader>
           <div className={columnView ? 'popUpContent' : 'popUpContentRow'}>
             <div className={columnView ? null : 'row'}>
               <h4 className="inputHeader">выберите автомобиль</h4>
@@ -377,5 +376,13 @@ CreatePath.propTypes = {
 };
 const HeaderText = styled.h2`
   margin-left: auto;
+`;
+const WrapHeader = styled(Header)`
+  position: relative;
+`;
+const WrapIcon = styled(Icon)`
+  position: absolute;
+  top: 5px;
+  right: 5px;
 `;
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePath);
