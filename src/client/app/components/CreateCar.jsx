@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { saveCar, closeWindow } from '../actions/cars.js';
 import Icon from './Icon';
+import Input from './Input';
 import { Primary } from './ButtonNew';
 import Header from './header';
 import fildNameCheckRule from './fildNameCheckRule.js';
@@ -75,34 +76,34 @@ class CreateCar extends Component {
   render() {
     const { name, constFuelChange, isWrong, constFuelChangeExt, extension } = this.state;
     return (
-      <div className="popUpWrapp">
-        <div className="popUp">
+      <PopUpWrap>
+        <PopUp>
           <WrapHeader>
             <HeaderText>Новая машина</HeaderText>
             <WrapIcon onClick={this.handleClose} name="Clear" color="red" />
           </WrapHeader>
-          <div className="popUpContent">
-            <h4 className="inputHeader">введите название автомобиля</h4>
-            <input
+          <PopUpContent>
+            <InputHeader>введите название автомобиля</InputHeader>
+            <Input
               className={isWrong === 'name' ? 'inputErrorCheck' : null}
               data-field-name={'name'}
               type={'text'}
-              onChange={this.handleChange}
+              handler={this.handleChange}
               placeholder={'название'}
               value={name}
             />
-            <h4 className="inputHeader">введите паспортный расход топлива</h4>
-            <input
+            <InputHeader>введите паспортный расход топлива</InputHeader>
+            <Input
               className={isWrong === 'constFuelChange' ? 'inputErrorCheck' : null}
               data-field-name={'constFuelChange'}
               type={'number'}
-              onChange={this.handleChange}
+              handler={this.handleChange}
               placeholder={'расход по паспорту на 100 км'}
               value={constFuelChange}
               step={'0.01'}
               min={'0'}
             />
-            <h4 className="inputHeader">выберите тип топлива</h4>
+            <InputHeader>выберите тип топлива</InputHeader>
             <label>
               Бензин
               <input
@@ -125,7 +126,7 @@ class CreateCar extends Component {
                 value={'DT'}
               />
             </label>
-            <h4 className="inputHeader">возможено добавление прицепа ?</h4>
+            <InputHeader>возможено добавление прицепа ?</InputHeader>
             <label>
               Да
               <input
@@ -160,15 +161,15 @@ class CreateCar extends Component {
                 min={'0'}
               />
             ) : null}
-          </div>
+          </PopUpContent>
           {isWrong && <h3 className="inputError">ошибка введеных данных</h3>}
           <div className="footer">
             <Primary handlerClick={this.handleSubmit} disable={isWrong != false}>
               Сохранить
             </Primary>
           </div>
-        </div>
-      </div>
+        </PopUp>
+      </PopUpWrap>
     );
   }
 }
@@ -198,5 +199,37 @@ const WrapIcon = styled(Icon)`
   position: absolute;
   top: 5px;
   right: 5px;
+`;
+const PopUp = styled.div`
+  padding: 0;
+  box-shadow: 3px 3px 10px 1px grey;
+  position: fixed;
+  top: 5%;
+  left: 30%;
+  box-sizing: border-box;
+  background-color: rgba(202, 202, 202, 0.8);
+  & input,
+  & label,
+  & select {
+    box-sizing: border-box;
+  }
+`;
+const InputHeader = styled.h4`
+  margin: 5px 0 2px 0;
+`;
+const PopUpWrap = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(202, 202, 202, 0.5);
+  z-index: 999;
+`;
+const PopUpContent = styled.div`
+  padding: 10px;
+  box-sizing: border-box;
+  width: 470px;
+  transition: all 0.3s linear;
 `;
 export default connect(mapStateToProps, mapDispatchToProps)(CreateCar);

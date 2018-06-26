@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { closeWindow } from '../actions/cars.js';
 import Button from '../components/Button';
 import Header from '../components/header';
-import Footer from '../components/footer';
 import ViewPath from '../components/ViewPath';
 
 class VeiwAndEditPathList extends Component {
@@ -26,7 +25,6 @@ class VeiwAndEditPathList extends Component {
           </Button>
         </Header>
         <ViewPath path={selectPathList} error={error} doubleClick={this.props.doubleClick} />
-        <Footer />
       </PathListView>
     );
   }
@@ -56,7 +54,7 @@ const PathListView = styled.div`
   flex: 1;
   width: 320px;
   position: absolute;
-  bottom: 0;
+  bottom: 50px;
   left: -320px;
   background-color: rgb(200, 200, 200);
 `;

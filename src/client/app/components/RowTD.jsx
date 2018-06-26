@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import createObjectError from './createObjectError';
-import Button from './Button';
 import Icon from './Icon';
 
 const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) => {
@@ -25,7 +25,7 @@ const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) =>
         {path.name !== null ? (
           <span className="editableTd">
             {path.pathBegin}
-            <Icon name="Create" color="green" size="16px" />
+            <WrapIcon name="Create" color="green" size="16px" />
           </span>
         ) : null}
       </td>
@@ -36,7 +36,7 @@ const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) =>
         {path.name !== null ? (
           <span className="editableTd">
             {path.pathEnd}
-            <Icon name="Create" color="green" size="16px" />
+            <WrapIcon name="Create" color="green" size="16px" />
           </span>
         ) : null}
       </td>
@@ -48,7 +48,7 @@ const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) =>
         {path.name !== null ? (
           <span className="editableTd">
             {path.fuelBegin}
-            <Icon name="Create" color="green" size="16px" />
+            <WrapIcon name="Create" color="green" size="16px" />
           </span>
         ) : null}
       </td>
@@ -56,7 +56,7 @@ const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) =>
         {path.name !== null ? (
           <span className="editableTd">
             {path.addFuel}
-            <Icon name="Create" color="green" size="16px" />
+            <WrapIcon name="Create" color="green" size="16px" />
           </span>
         ) : (
           <span style={{ opacity: '0' }}>{'-'}</span>
@@ -76,4 +76,9 @@ RowTD.propTypes = {
   deletePath: PropTypes.func,
   selectPath: PropTypes.object
 };
+const WrapIcon = styled(Icon)`
+  position: absolute;
+  top: 2px;
+  right: 2px;
+`;
 export default RowTD;

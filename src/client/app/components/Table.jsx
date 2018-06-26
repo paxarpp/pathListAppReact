@@ -97,7 +97,7 @@ const WrapTable = styled.table`
   td {
     border: 1px solid grey;
     text-align: center;
-    z-index: -1;
+    position: relative;
   }
   th {
     cursor: pointer;
