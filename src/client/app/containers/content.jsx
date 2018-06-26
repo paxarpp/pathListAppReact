@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import CreateCar from '../components/CreateCar';
 import CreatePath from '../components/CreatePath';
@@ -63,12 +64,11 @@ class Content extends Component {
     const { isNewCar, isNewPath, selectedCar, selectPathList, pathLists } = this.props;
     const { field } = this.state;
     return (
-      <div className="container" onContextMenu={this.clearClick}>
+      <Container onContextMenu={this.clearClick}>
         {isNewCar && <CreateCar />}
         {isNewPath && <CreatePath />}
         {selectPathList && <VeiwAndEditPathList selectPathList={selectPathList} doubleClick={this.doubleClick} />}
         <TableContainer
-          className="pathListSelectedCar"
           doubleClick={this.doubleClick}
           pathLists={pathLists.filter(path => path.name === selectedCar)}
         />
@@ -81,7 +81,7 @@ class Content extends Component {
             value={this.state.value}
           />
         )}
-      </div>
+      </Container>
     );
   }
 }
@@ -111,4 +111,9 @@ Content.propTypes = {
   load: PropTypes.func,
   chError: PropTypes.func
 };
+const Container = styled.div`
+  flex: 1;
+  display: flex;
+  flex-flow: row wrap;
+`;
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import { savePath, checkError } from '../actions/pathLists.js';
 import { closeWindow } from '../actions/cars.js';
 import Button from './Button';
+import Header from './header';
 import calculateFieldPath from './calculateFieldPath';
 import fildNamePathList from './fildNamePathList';
 import fildNameCheckRule from './fildNameCheckRule.js';
@@ -232,15 +234,15 @@ class CreatePath extends Component {
     return (
       <div className="popUpWrapp">
         <div className="popUp">
-          <div className="header">
-            <h2 className="headerText">Новый лист</h2>
+          <Header className="header">
+            <HeaderText>Новый лист</HeaderText>
             <Button handler={this.handleClose} styleButton="delit">
               {String.fromCharCode(10006)}
             </Button>
             <Button handler={this.handleChangeView} styleButton="switchView">
               {columnView ? String.fromCharCode(9654) : String.fromCharCode(9660)}
             </Button>
-          </div>
+          </Header>
           <div className={columnView ? 'popUpContent' : 'popUpContentRow'}>
             <div className={columnView ? null : 'row'}>
               <h4 className="inputHeader">выберите автомобиль</h4>
@@ -375,4 +377,7 @@ CreatePath.propTypes = {
   chError: PropTypes.func.isRequired,
   cars: PropTypes.arrayOf(PropTypes.object).isRequired
 };
+const HeaderText = styled.h2`
+  margin-left: auto;
+`;
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePath);

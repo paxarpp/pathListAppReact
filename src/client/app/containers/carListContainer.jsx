@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import CarList from '../components/CarList';
 import Button from '../components/Button';
+import Header from '../components/header';
 import Confirm from '../components/Confirm';
 
 import { deleteCarToName, addNewCar, infoCarToName } from '../actions/cars.js';
@@ -55,10 +57,10 @@ class CarListContainer extends Component {
     const { cars, selectedCar, pathLists, error } = this.props;
     const { popUpConfirm } = this.state;
     return (
-      <div className="carListContainer">
-        <div className="header">
+      <WrapperCarListContainer>
+        <Header className="header">
           <h3>Список Автомобилей</h3>
-        </div>
+        </Header>
         {popUpConfirm && <Confirm handler={this.deleteCarConfirm} />}
         <CarList
           selectedCar={selectedCar}
@@ -77,7 +79,7 @@ class CarListContainer extends Component {
             Добавить лист
           </Button>
         </div>
-      </div>
+      </WrapperCarListContainer>
     );
   }
 }
@@ -109,4 +111,13 @@ CarListContainer.propTypes = {
   addCar: PropTypes.func,
   addPath: PropTypes.func
 };
+const WrapperCarListContainer = styled.div`
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 320px;
+  display: flex;
+  flex-flow: column nowrap;
+`;
 export default connect(mapStateToProps, mapDispatchToProps)(CarListContainer);

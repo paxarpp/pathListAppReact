@@ -1,143 +1,10 @@
-body {
-    padding: 0;
-    margin: 0;
-    font-size: 22px;
-}
-
-.header,
-.footer {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    min-height: 50px;
-    background-color: grey;
-    justify-content: center;
-}
-
 .header>.delit,
 .header>.clear {
     align-self: flex-start;
     margin-left: auto;
     inline-size: 1em;
 }
-.header>.headerText  {
-    margin-left: auto;
-}
 
-.wrapper {
-    min-height: 100vh;
-    display: flex;
-    flex-flow: row nowrap;
-    position: relative;
-    max-width: 1920px;
-    margin: 0 auto;
-}
-.wrapperContent {
-    min-height: 100vh;
-    display: flex;
-    flex-flow: column nowrap;
-    position: relative;
-    width: 100%;
-}
-
-.container {
-    flex: 1;
-    display: flex;
-    flex-flow: row wrap;
-}
-.carList {
-    width: 300px;
-    padding:  50px 0 10px 20px;
-    background-color: #80808099;
-    flex: 1;
-}
-.carList .list {
-    display: flex;
-    cursor: pointer;
-    width: 100%;
-    height: 2.5rem;
-    position: relative;
-}
-.carList .list>div {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-    padding-left: 1rem;
-}
-.selected {
-    background-color: #fff;
-    width: 100%;
-    border-radius: 20px 0 0 20px;
-    position: relative;
-}
-.selected::after {
-    content: '';
-    position: absolute;
-    top: -10px;
-    right: 0;
-    border: 5px solid transparent;
-    border-right: 5px solid #fff;
-    border-bottom: 5px solid #fff;
-}
-.selected::before {
-    content: '';
-    border: 5px solid transparent;
-    border-top: 5px solid #fff;
-    border-right: 5px solid #fff;
-    position: absolute;
-    bottom: -10px;
-    right: 0;
-}
-
-.carList .list:hover {
-    text-shadow: 1px 1px 5px grey;
-    transform: scale(1.01);
-    transition: all 0.2s linear;
-    cursor: pointer;
-}
-
-.carListContainer {
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    position: relative;
-    width: 320px;
-    display: flex;
-    flex-flow: column nowrap;
-}
-.pathListView {
-    padding: 0;
-    box-shadow: 3px 3px 10px 1px grey;
-    flex: 1;
-    width: 320px;
-    position: absolute;
-    bottom: 0;
-    left: -320px;
-    background-color: rgb(200, 200, 200);
-}
-.pathListView .View {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 0 2px;
-    position: relative;
-}
-.View .head_ext {
-    position: absolute;
-    top: -15%;
-    left: 2%;
-    color: #a30000;
-    font-size: 1rem;
-}
-.pathListView .emptyList {
-    height: 21.2rem;
-}
-.pathListView .View p,
-.pathListView .View .head {
-    margin: 0 0 5px 5px;
-}
 .popUpWrapp {
     position: fixed;
     top: 0;
@@ -278,40 +145,7 @@ h4.inputErrorCheck{
     color: red;
     margin: 5px 0 2px 0;
 }
-.pathListSelectedCar{
-    position: relative;
-    z-index: 0;
-}
-.pathListSelectedCar .table{
-    border: 1px solid grey;
-    border-collapse: collapse;
-}
-.pathListSelectedCar .table tr>td:first-child {
-    border-left: 1px solid #fff;;
-}
-.pathListSelectedCar .table tr>td:last-child {
-    border-left: none;
-}
-.pathListSelectedCar .table tr>td:nth-last-child(2) {
-    border-right: none;
-}
-.pathListSelectedCar .table>thead>tr {
-   background-color: #80808080;
-}
-.pathListSelectedCar .table>tbody>tr:hover {
-   background-color: #80808080;
-   transition: all 0.3 linear;
-}
-.pathListSelectedCar th,
-.pathListSelectedCar td {
-    border: 1px solid grey;
-    text-align: center;
-    z-index: -1;
-}
-.pathListSelectedCar th {
-    cursor: pointer;
-    position: relative;
-}
+
 .anim-enter {
     margin-left: -500px;
 }
@@ -430,21 +264,11 @@ h4.inputErrorCheck{
     transition: all 0.2s linear;
     user-select: none;
 }
-.editable::after{
-        color: green;
-        content: "изменить";
-        margin-left: 20px;
-        font-size: 0.7rem;
-}
 .editable:hover {
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     transition: all 0.2s linear;
 }
-.editableTd::after {
-        color: green;
-        content: "...";
-        margin-left: 10px;
-}
+
 .selectTableRow{
     background-color: antiquewhite;
 }

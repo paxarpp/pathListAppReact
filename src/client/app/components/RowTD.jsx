@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import createObjectError from './createObjectError';
-import Button from '../components/Button';
+import Button from './Button';
+import Icon from './Icon';
 
 const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) => {
   const matchNames = createObjectError(path, error);
@@ -21,24 +22,42 @@ const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) =>
         className={!matchNames.first && matchNames.path ? 'inputError' : null}
         onDoubleClick={path.name !== null ? doubleClick('pathBegin', path.pathBegin) : null}
       >
-        {path.name !== null ? <span className="editableTd">{path.pathBegin}</span> : null}
+        {path.name !== null ? (
+          <span className="editableTd">
+            {path.pathBegin}
+            <Icon name="Create" color="green" size="16px" />
+          </span>
+        ) : null}
       </td>
       <td
         className={matchNames.first && matchNames.path ? 'inputError' : null}
         onDoubleClick={path.name !== null ? doubleClick('pathEnd', path.pathEnd) : null}
       >
-        {path.name !== null ? <span className="editableTd">{path.pathEnd}</span> : null}
+        {path.name !== null ? (
+          <span className="editableTd">
+            {path.pathEnd}
+            <Icon name="Create" color="green" size="16px" />
+          </span>
+        ) : null}
       </td>
       <td>{path.milleage}</td>
       <td
         className={!matchNames.first && matchNames.fuel ? 'inputError' : null}
         onDoubleClick={path.name !== null ? doubleClick('fuelBegin', path.fuelBegin) : null}
       >
-        {path.name !== null ? <span className="editableTd">{path.fuelBegin}</span> : null}
+        {path.name !== null ? (
+          <span className="editableTd">
+            {path.fuelBegin}
+            <Icon name="Create" color="green" size="16px" />
+          </span>
+        ) : null}
       </td>
       <td onDoubleClick={path.name !== null ? doubleClick('addFuel', path.addFuel) : null}>
         {path.name !== null ? (
-          <span className="editableTd">{path.addFuel}</span>
+          <span className="editableTd">
+            {path.addFuel}
+            <Icon name="Create" color="green" size="16px" />
+          </span>
         ) : (
           <span style={{ opacity: '0' }}>{'-'}</span>
         )}
@@ -48,7 +67,7 @@ const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) =>
       <td>
         {path.name !== null ? (
           <Button handler={deletePath(path)} styleButton="delit">
-            {String.fromCharCode(10006)}
+            <Icon name="Delete" color="red" />
           </Button>
         ) : null}
       </td>

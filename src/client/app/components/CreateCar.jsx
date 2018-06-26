@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import { saveCar, closeWindow } from '../actions/cars.js';
 import Button from './Button';
+import Header from './header';
 import fildNameCheckRule from './fildNameCheckRule.js';
 
 class CreateCar extends Component {
@@ -74,12 +76,12 @@ class CreateCar extends Component {
     return (
       <div className="popUpWrapp">
         <div className="popUp">
-          <div className="header">
-            <h2 className="headerText">Новая машина</h2>
+          <Header className="header">
+            <HeaderText>Новая машина</HeaderText>
             <Button handler={this.handleClose} styleButton="delit">
               {String.fromCharCode(10006)}
             </Button>
-          </div>
+          </Header>
           <div className="popUpContent">
             <h4 className="inputHeader">введите название автомобиля</h4>
             <input
@@ -190,5 +192,7 @@ CreateCar.propTypes = {
   close: PropTypes.func.isRequired,
   cars: PropTypes.array
 };
-
+const HeaderText = styled.h2`
+  margin-left: auto;
+`;
 export default connect(mapStateToProps, mapDispatchToProps)(CreateCar);
