@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-class Input extends Component {
-  render() {
-    const { placeholder, handler, value, ...props } = this.props;
-    return (
-      <Wrapper>
-        <InpWrap
-          {...props}
-          onChange={handler}
-          innerRef={input => {
-            this.inputRef = input;
-          }}
-        />
-        <LabelWrap onClick={() => this.inputRef.focus()} value={value}>
-          {placeholder}
-        </LabelWrap>
-      </Wrapper>
-    );
-  }
-}
+const Input = ({ placeholder, handler, value, ...props }) => {
+  let inputRef = {};
+  return (
+    <Wrapper>
+      <InpWrap
+        {...props}
+        onChange={handler}
+        innerRef={input => {
+          inputRef = input;
+        }}
+      />
+      <LabelWrap onClick={() => inputRef.focus()} value={value}>
+        {placeholder}
+      </LabelWrap>
+    </Wrapper>
+  );
+};
+
 Input.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.any,
