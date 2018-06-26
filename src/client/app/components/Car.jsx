@@ -2,15 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Button from './Button';
 import Icon from './Icon';
 
 const Car = ({ car, handler, selectedCar, deleteCarHandler }) => (
   <Wrap onClick={handler} selectedCar={selectedCar} name={car.name}>
     {car.name}
-    <Button handler={deleteCarHandler(car.name)} styleButton="delit">
-      <Icon name="Delete" color="red" />
-    </Button>
+    <Icon name="Delete" color="red" onClick={deleteCarHandler(car.name)} />
   </Wrap>
 );
 Car.propTypes = {

@@ -14,7 +14,7 @@ const App = () => {
       </div>
       <WrapperContent>
         <Content />
-        <Footer />
+        <Footer>&copy; {new Date().getFullYear()}</Footer>
       </WrapperContent>
     </Wrapper>
   );

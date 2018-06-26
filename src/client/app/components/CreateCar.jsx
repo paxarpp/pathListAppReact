@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { saveCar, closeWindow } from '../actions/cars.js';
 import Button from './Button';
+import { Primary } from './ButtonNew';
 import Header from './header';
 import fildNameCheckRule from './fildNameCheckRule.js';
 
@@ -164,12 +165,9 @@ class CreateCar extends Component {
           </div>
           {isWrong && <h3 className="inputError">ошибка введеных данных</h3>}
           <div className="footer">
-            <Button
-              handler={isWrong === false ? this.handleSubmit : null}
-              styleButton={isWrong === false ? 'submit' : 'disableButton'}
-            >
+            <Primary handlerClick={this.handleSubmit} disable={isWrong != false}>
               Сохранить
-            </Button>
+            </Primary>
           </div>
         </div>
       </div>

@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import CarList from '../components/CarList';
-import Button from '../components/Button';
+import { Primary } from '../components/ButtonNew';
+import Icon from '../components/Icon';
 import Header from '../components/header';
+import Footer from '../components/footer';
 import Confirm from '../components/Confirm';
 
 import { deleteCarToName, addNewCar, infoCarToName } from '../actions/cars.js';
@@ -70,15 +72,15 @@ class CarListContainer extends Component {
           carInfo={this.carInfo}
           error={error}
         />
-        <div className="footer">
-          <Button handler={this.handlerAddCar} styleButton="submit">
-            Добавить авто
-          </Button>
+        <Footer>
+          <Primary handlerClick={this.handlerAddCar}>
+            <Icon name="Add" />авто
+          </Primary>
 
-          <Button handler={this.handlerAddPath} styleButton="submit">
-            Добавить лист
-          </Button>
-        </div>
+          <Primary handlerClick={this.handlerAddPath}>
+            <Icon name="Add" />лист
+          </Primary>
+        </Footer>
       </WrapperCarListContainer>
     );
   }

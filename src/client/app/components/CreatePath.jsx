@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { savePath, checkError } from '../actions/pathLists.js';
 import { closeWindow } from '../actions/cars.js';
 import Button from './Button';
+import { Primary } from './ButtonNew';
 import Header from './header';
 import calculateFieldPath from './calculateFieldPath';
 import fildNamePathList from './fildNamePathList';
@@ -345,12 +346,9 @@ class CreatePath extends Component {
             {isWrongDuble && <h3 className="inputError">на эту дату лист уже есть</h3>}
           </div>
           <div className="footer">
-            <Button
-              handler={isWrong === false ? this.handleSubmit : null}
-              styleButton={isWrong === false ? 'submit' : 'disableButton'}
-            >
+            <Primary handlerClick={this.handleSubmit} disable={isWrong != false}>
               Сохранить
-            </Button>
+            </Primary>
           </div>
         </div>
       </div>

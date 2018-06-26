@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Footer = () => {
-  return <Wrap>&copy; {new Date().getFullYear()}</Wrap>;
+const Footer = ({children}) => {
+  return <Wrap>{children}</Wrap>;
 };
 const Wrap = styled.footer`
   display: flex;

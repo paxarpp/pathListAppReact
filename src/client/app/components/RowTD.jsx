@@ -64,13 +64,7 @@ const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) =>
       </td>
       <td>{path.deltaFuel}</td>
       <td className={matchNames.first && matchNames.fuel ? 'inputError' : null}>{path.fuelEnd}</td>
-      <td>
-        {path.name !== null ? (
-          <Button handler={deletePath(path)} styleButton="delit">
-            <Icon name="Delete" color="red" />
-          </Button>
-        ) : null}
-      </td>
+      <td>{path.name !== null ? <Icon name="Delete" color="red" onClick={deletePath(path)} /> : null}</td>
     </tr>
   );
 };
