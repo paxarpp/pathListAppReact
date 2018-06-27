@@ -58,9 +58,7 @@ const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) =>
             {path.addFuel}
             <WrapIcon name="Create" color="green" size="16px" />
           </span>
-        ) : (
-          <span style={{ opacity: '0' }}>{'-'}</span>
-        )}
+        ) : null}
       </td>
       <td>{path.deltaFuel}</td>
       <td className={matchNames.first && matchNames.fuel ? 'inputError' : null}>{path.fuelEnd}</td>

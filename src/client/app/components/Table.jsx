@@ -89,9 +89,12 @@ const WrapTable = styled.table`
     background-color: #2bbbad7a;
     height: 82px;
   }
+  tbody > tr {
+    height: 34px;
+    transition: all 0.3 linear;
+  }
   tbody > tr:hover {
     background-color: #2bbbad7a;
-    transition: all 0.3 linear;
   }
   th,
   td {
