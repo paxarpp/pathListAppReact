@@ -17,13 +17,6 @@ class TableContainer extends Component {
       name: ''
     };
   }
-  handlerPagination = page => {
-    this.setState({ page });
-  };
-  handlerTableSelect = path => () => {
-    const { pathInfo } = this.props;
-    pathInfo(path);
-  };
   UNSAFE_componentWillReceiveProps({ pathLists }) {
     const prevValue = this.state.pathListsCar.length === 0 ? null : this.state.pathListsCar[0].name;
     const newValue = pathLists.length === 0 ? null : pathLists[0].name;
@@ -93,9 +86,11 @@ class TableContainer extends Component {
         stringOnPage={stringOnPage}
         length={pathListsCar.length}
         tempArr={dataArr}
-        handlerPagination={this.handlerPagination}
+        handlerPagination={page => {
+          this.setState({ page });
+        }}
         handlerTableSort={this.handlerTableSort}
-        handlerTableSelect={this.handlerTableSelect}
+        handlerTableSelect={path => () => this.props.pathInfo(path)}
         choisePaginationString={this.choisePaginationString}
         doubleClick={this.props.doubleClick}
         deletePath={this.deletePath}

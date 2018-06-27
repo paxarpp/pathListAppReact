@@ -43,18 +43,6 @@ class CarListContainer extends Component {
       chError();
     }
   };
-  carInfo = name => () => {
-    const { carInfo } = this.props;
-    carInfo(name);
-  };
-  handlerAddCar = () => {
-    const { addCar } = this.props;
-    addCar();
-  };
-  handlerAddPath = () => {
-    const { addPath } = this.props;
-    addPath();
-  };
   render() {
     const { cars, selectedCar, pathLists, error } = this.props;
     const { popUpConfirm } = this.state;
@@ -69,15 +57,15 @@ class CarListContainer extends Component {
           pathLists={pathLists}
           cars={cars}
           deleteCarHandler={this.deleteCar}
-          carInfo={this.carInfo}
+          carInfo={name => () => this.props.carInfo(name)}
           error={error}
         />
         <Footer>
-          <Primary handlerClick={this.handlerAddCar}>
+          <Primary handlerClick={() => this.props.addCar()}>
             <Icon name="Add" />авто
           </Primary>
 
-          <Primary handlerClick={this.handlerAddPath}>
+          <Primary handlerClick={() => this.props.addPath()}>
             <Icon name="Add" />лист
           </Primary>
         </Footer>
