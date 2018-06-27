@@ -7,6 +7,7 @@ import { savePath, checkError } from '../actions/pathLists.js';
 import { closeWindow } from '../actions/cars.js';
 import { Primary } from './ButtonNew';
 import Icon from './Icon';
+import RadioButton from './RadioButton';
 import Input from './Input';
 import Header from './header';
 import Footer from './footer';
@@ -253,7 +254,7 @@ class CreatePath extends Component {
                 <InputHeader>поездка с прицепом ?</InputHeader>
                 <label>
                   Да
-                  <input
+                  <RadioButton
                     checked={extension === 'true'}
                     name={'extension'}
                     data-field-name={'extension'}
@@ -264,7 +265,7 @@ class CreatePath extends Component {
                 </label>
                 <label>
                   Нет
-                  <input
+                  <RadioButton
                     checked={extension === 'false'}
                     name={'extension'}
                     data-field-name={'extension'}
