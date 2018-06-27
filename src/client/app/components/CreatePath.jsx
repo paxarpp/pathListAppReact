@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { savePath, checkError } from '../actions/pathLists.js';
 import { closeWindow } from '../actions/cars.js';
@@ -249,7 +249,7 @@ class CreatePath extends Component {
                   return <option key={car.name}>{car.name}</option>;
                 })}
               </select>
-              <div className={constFuelChangeExt > 0 ? 'extensionChoise' : 'extensionChoiseNone'}>
+              <FuelChangeExt changeExt={constFuelChangeExt > 0}>
                 <InputHeader>поездка с прицепом ?</InputHeader>
                 <label>
                   Да
@@ -273,7 +273,7 @@ class CreatePath extends Component {
                     value={'false'}
                   />
                 </label>
-              </div>
+              </FuelChangeExt>
               <InputHeader>выберите дату начала путевки</InputHeader>
               <WrapInput
                 error={isWrong === 'dateBegin'}
@@ -383,13 +383,15 @@ const WrapIconV = styled(Icon)`
   top: 35px;
   right: 5px;
 `;
-const error = `
-  outline: 1px solid red;
-  opacity: 0.7;
-  transition: opacity 0.5s ease-in;
-`;
+const error = props =>
+  props.error &&
+  css`
+    outline: 1px solid red;
+    opacity: 0.7;
+    transition: opacity 0.5s ease-in;
+  `;
 const WrapInput = styled(Input)`
-  ${props => props.error && error};
+  ${error};
 `;
 const PopUp = styled.div`
   padding: 0;
@@ -423,27 +425,40 @@ const PopUpWrap = styled.div`
   background-color: rgba(202, 202, 202, 0.5);
   z-index: 999;
 `;
-const errorHeadResult = `
-  color: red;
-`;
+const errorHeadResult = props =>
+  props.error &&
+  css`
+    color: red;
+  `;
 const ResultHeader = styled.h4`
   margin: 5px 0 2px 0;
   border-bottom: 1px solid #00000080;
-  ${props => props.error && errorHeadResult};
+  ${errorHeadResult};
 `;
-const ColumnViewRow = `
-  width: 795px;
-  display: flex;
-`;
+const ColumnViewRow = props =>
+  !props.view &&
+  css`
+    width: 795px;
+    display: flex;
+  `;
 const ColumnView = styled.div`
   padding: 10px;
   box-sizing: border-box;
   width: 470px;
   transition: all 0.3s linear;
-  ${props => !props.view && ColumnViewRow};
+  ${ColumnViewRow};
 `;
+const ifRow = props =>
+  !props.view &&
+  css`
+    flex: 1;
+    padding: 5px;
+  `;
 const Row = styled.div`
-  ${props => !props.view && 'flex: 1;'};
-  ${props => !props.view && 'padding: 5px;'};
+  ${ifRow};
+`;
+const FuelChangeExt = styled.div`
+  display: ${props => (props.changeExt ? 'block' : 'none')};
+  background-color: #80808080;
 `;
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePath);

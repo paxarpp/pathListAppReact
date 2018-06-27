@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Input = ({ placeholder, handler, value, ...props }) => {
-  let inputRef = {};
+  let inputRef = React.createRef();
   return (
     <Wrapper>
-      <InpWrap {...props} onChange={handler} innerRef={input => (inputRef = input)} />
+      <InpWrap {...props} onChange={handler} innerRef={input => (inputRef = input)} value={value} />
       <LabelWrap onClick={() => inputRef.focus()} value={value}>
         {placeholder}
       </LabelWrap>
