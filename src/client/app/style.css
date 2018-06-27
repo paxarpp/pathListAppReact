@@ -60,20 +60,7 @@
     margin: 2px 0 5px 0;
     border-bottom: 1px solid #00000080;
 }
-.popUpConfirm{
-    width: 140px;
-    height: 60px;
-    border-radius: 10px;
-    box-shadow: 3px 3px 10px 1px grey;
-    position: absolute;
-    top: 45%;
-    right: 30%;
-    background-color: #fff;
-    z-index: 999;
-}
-.popUpConfirm>p {
-   margin: 0 1rem;
-}
+
 .confirm{
     color: green;
     margin: 0 1rem 0 2rem;
