@@ -100,7 +100,7 @@ class CreateCar extends Component {
               value={name}
             />
             <InputHeader>введите паспортный расход топлива</InputHeader>
-            <Input
+            <WrapInput
               error={isWrong === 'constFuelChange'}
               data-field-name={'constFuelChange'}
               type={'number'}
@@ -157,7 +157,7 @@ class CreateCar extends Component {
               />
             </label>
             {extension === 'true' ? (
-              <Input
+              <WrapInput
                 error={isWrong === 'constFuelChangeExt'}
                 data-field-name={'constFuelChangeExt'}
                 type={'number'}
