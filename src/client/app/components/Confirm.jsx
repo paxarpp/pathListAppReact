@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Button from '../components/Button';
+import Icon from './Icon';
 
 export default class Confirm extends Component {
   handlerConf = status => () => {
@@ -12,12 +12,8 @@ export default class Confirm extends Component {
     return (
       <div className="popUpConfirm">
         <p>Уверены ?</p>
-        <Button handler={this.handlerConf(true)} styleButton="confirm">
-          {String.fromCharCode(10003)}
-        </Button>
-        <Button handler={this.handlerConf(false)} styleButton="delit">
-          {String.fromCharCode(10006)}
-        </Button>
+        <Icon onClick={this.handlerConf(true)} color="green" name="Done" />
+        <Icon onClick={this.handlerConf(false)} color="red" name="Clear" />
       </div>
     );
   }
