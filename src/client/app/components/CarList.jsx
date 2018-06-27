@@ -28,7 +28,7 @@ CarList.propTypes = {
 const WrapperCarList = styled.div`
   width: 300px;
   padding: 50px 0 10px 20px;
-  background-color: #80808099;
+  background-color: #abf2eb7a;
   flex: 1;
 `;
 const List = styled.div`

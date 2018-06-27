@@ -13,7 +13,7 @@ const Wrap = styled.header`
   flex-flow: row nowrap;
   align-items: center;
   min-height: 50px;
-  background-color: grey;
+  background-color: #2bbbad7a;
   justify-content: center;
 `;
 export default Header;
