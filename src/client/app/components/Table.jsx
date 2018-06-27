@@ -86,11 +86,11 @@ const WrapTable = styled.table`
     border-right: none;
   }
   thead > tr {
-    background-color: #80808080;
+    background-color: #2bbbad7a;
     height: 82px;
   }
   tbody > tr:hover {
-    background-color: #80808080;
+    background-color: #2bbbad7a;
     transition: all 0.3 linear;
   }
   th,

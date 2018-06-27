@@ -196,12 +196,7 @@ h4.inputErrorCheck{
     background-color: rgba(202, 202, 202, 0.8);
     font-weight: 600;
 }
-.paginationBlock{
-    text-align: center;
-}
-.paginationBlock>button {
-    margin: 0 2px;
-}
+
 .iconSort{
     bottom: 0;
     display: flex;

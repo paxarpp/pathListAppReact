@@ -1,38 +1,72 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-export default class PaginationButton extends Component {
-  hendler = page => () => {
-    const { handlerPagination } = this.props;
-    handlerPagination(page);
-  };
-  render() {
-    const { length, page, stringOnPage } = this.props;
-    const pages = length % stringOnPage === 0 ? length / stringOnPage : Math.ceil(length / stringOnPage);
-    return (
-      <div className="paginationBlock">
-        {page <= 1 ? null : <button onClick={this.hendler(1)}>1</button>}
-        {page < 5 ? null : <span>...</span>}
-        {page - 10 <= 1 ? null : <button onClick={this.hendler(page - 10)}>{page - 10}</button>}
-        {page - 2 <= 1 ? null : <button onClick={this.hendler(page - 2)}>{page - 2}</button>}
-        {page - 1 <= 1 ? null : <button onClick={this.hendler(page - 1)}>{page - 1}</button>}
-        {pages <= 1 ? null : (
-          <button onClick={this.hendler(page)} className="selectPagination">
-            {page}
-          </button>
-        )}
-        {page + 1 >= pages ? null : <button onClick={this.hendler(page + 1)}>{page + 1}</button>}
-        {page + 2 >= pages ? null : <button onClick={this.hendler(page + 2)}>{page + 2}</button>}
-        {page + 10 >= pages ? null : <button onClick={this.hendler(page + 10)}>{page + 10}</button>}
-        {page > pages - 4 ? null : <span>...</span>}
-        {page + 1 > pages ? null : <button onClick={this.hendler(pages)}>{pages}</button>}
-      </div>
-    );
-  }
-}
+import { Float } from './ButtonNew';
+
+const PaginationButton = ({ handlerPagination, length, page, stringOnPage }) => {
+  const pages = length % stringOnPage === 0 ? length / stringOnPage : Math.ceil(length / stringOnPage);
+  return (
+    <Wrapper>
+      {page <= 1 ? null : (
+        <Float small handlerClick={() => handlerPagination(1)}>
+          1
+        </Float>
+      )}
+      {page < 5 ? null : <span>...</span>}
+      {page - 10 <= 1 ? null : (
+        <Float small handlerClick={() => handlerPagination(page - 10)}>
+          {page - 10}
+        </Float>
+      )}
+      {page - 2 <= 1 ? null : (
+        <Float small handlerClick={() => handlerPagination(page - 2)}>
+          {page - 2}
+        </Float>
+      )}
+      {page - 1 <= 1 ? null : (
+        <Float small handlerClick={() => handlerPagination(page - 1)}>
+          {page - 1}
+        </Float>
+      )}
+      {pages <= 1 ? null : (
+        <Float small handlerClick={() => handlerPagination(page)} className="selectPagination">
+          {page}
+        </Float>
+      )}
+      {page + 1 >= pages ? null : (
+        <Float small handlerClick={() => handlerPagination(page + 1)}>
+          {page + 1}
+        </Float>
+      )}
+      {page + 2 >= pages ? null : (
+        <Float small handlerClick={() => handlerPagination(page + 2)}>
+          {page + 2}
+        </Float>
+      )}
+      {page + 10 >= pages ? null : (
+        <Float small handlerClick={() => handlerPagination(page + 10)}>
+          {page + 10}
+        </Float>
+      )}
+      {page > pages - 4 ? null : <span>...</span>}
+      {page + 1 > pages ? null : (
+        <Float small handlerClick={() => handlerPagination(pages)}>
+          {pages}
+        </Float>
+      )}
+    </Wrapper>
+  );
+};
 PaginationButton.propTypes = {
   length: PropTypes.number.isRequired,
   page: PropTypes.number.isRequired,
   stringOnPage: PropTypes.number.isRequired,
   handlerPagination: PropTypes.func.isRequired
 };
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+`;
+export default PaginationButton;

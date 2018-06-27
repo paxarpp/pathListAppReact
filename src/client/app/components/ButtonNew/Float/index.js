@@ -114,7 +114,6 @@ const Main = styled.button`
   overflow: hidden;
   display: inline-block;
   color: #fff;
-  position: relative;
   overflow: hidden;
   z-index: 1;
   padding: 0;
@@ -140,14 +139,6 @@ const Main = styled.button`
     ${props =>
       !props.disable &&
       'box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2)'};
-  }
-  ${props => !props.children && ':before'} {
-    content: ' ';
-    position: absolute;
-  }
-  ${props => !props.children && ':after'} {
-    content: ' ';
-    position: absolute;
   }
   ${props => props.pulse && pulseStyle};
   :after {
