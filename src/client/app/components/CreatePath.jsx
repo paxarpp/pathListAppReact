@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components';
 import { savePath, checkError } from '../actions/pathLists.js';
 import { closeWindow } from '../actions/cars.js';
 import { Primary } from './ButtonNew';
+import Datepicker from './Datepicker';
 import Icon from './Icon';
 import RadioButton from './RadioButton';
 import Input from './Input';
@@ -19,7 +20,7 @@ class CreatePath extends Component {
   state = {
     name: '',
     fuel: '',
-    dateBegin: '',
+    dateBegin: `${new Date().getFullYear()} ${new Date().getMonth()} ${new Date().getDate()}`,
     pathBegin: '',
     pathEnd: '',
     milleage: 0,
@@ -34,7 +35,8 @@ class CreatePath extends Component {
     isWrongDuble: false,
     columnView: true,
     extension: 'false',
-    constFuelChangeExt: ''
+    constFuelChangeExt: '',
+    datepickerOpen: false
   };
   handleSubmit = e => {
     e.preventDefault();
@@ -227,7 +229,8 @@ class CreatePath extends Component {
       columnView,
       isWrongDuble,
       extension,
-      constFuelChangeExt
+      constFuelChangeExt,
+      datepickerOpen
     } = this.state;
     return (
       <PopUpWrap>
@@ -275,15 +278,22 @@ class CreatePath extends Component {
                   />
                 </label>
               </FuelChangeExt>
-              <InputHeader>выберите дату начала путевки</InputHeader>
-              <WrapInput
-                error={isWrong === 'dateBegin'}
-                data-field-name={'dateBegin'}
-                type={'date'}
-                handler={this.handleChange}
-                placeholder={'начало'}
-                value={dateBegin}
-              />
+              <div>
+                <InputHeader>выберите дату начала путевки</InputHeader>
+                <WrapSpan onClick={() => this.setState({ datepickerOpen: true })}>{dateBegin}</WrapSpan>
+                {datepickerOpen && (
+                  <Datepicker
+                    handlerClose={() => this.setState({ datepickerOpen: false })}
+                    handlerComplite={setupDate => () =>
+                      this.setState({
+                        datepickerOpen: false,
+                        dateBegin: `${setupDate.year}-${
+                          setupDate.month + 1 < 10 ? `0${setupDate.month + 1}` : setupDate.month + 1
+                        }-${setupDate.day < 10 ? `0${setupDate.day}` : setupDate.day}`
+                      })}
+                  />
+                )}
+              </div>
               <InputHeader>введите начальный пробег, км</InputHeader>
               <WrapInput
                 error={isWrong === 'pathBegin'}
@@ -425,6 +435,17 @@ const PopUpWrap = styled.div`
   bottom: 0;
   background-color: rgba(202, 202, 202, 0.5);
   z-index: 999;
+`;
+const WrapSpan = styled.span`
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #9e9e9e;
+  transition: border-bottom 0.3s linear;
+  :hover {
+    cursor: pointer;
+    border-bottom: 1px solid #26a69a;
+  }
 `;
 const errorHeadResult = props =>
   props.error &&
