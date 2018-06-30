@@ -29,11 +29,7 @@ const PaginationButton = ({ handlerPagination, length, page, stringOnPage }) => 
           {page - 1}
         </Float>
       )}
-      {pages <= 1 ? null : (
-        <Float small handlerClick={() => handlerPagination(page)} className="selectPagination">
-          {page}
-        </Float>
-      )}
+      {pages <= 1 ? null : <FloatSelect handlerClick={() => handlerPagination(page)}>{page}</FloatSelect>}
       {page + 1 >= pages ? null : (
         <Float small handlerClick={() => handlerPagination(page + 1)}>
           {page + 1}
@@ -68,5 +64,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
+`;
+const FloatSelect = styled(Float)`
+  font-weight: 600;
 `;
 export default PaginationButton;

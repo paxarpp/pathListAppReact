@@ -170,7 +170,7 @@ class CreateCar extends Component {
               />
             ) : null}
           </PopUpContent>
-          {isWrong && <h3 className="inputError">ошибка введеных данных</h3>}
+          {isWrong && <HeadError>ошибка введеных данных</HeadError>}
           <Footer>
             <Primary handlerClick={this.handleSubmit} disable={isWrong != false}>
               Сохранить
@@ -244,6 +244,10 @@ const error = `
   outline: 1px solid red;
   opacity: 0.7;
   transition: opacity 0.5s ease-in;
+`;
+const HeadError = styled.h3`
+  color: red;
+  margin: 5px 0 2px 0;
 `;
 const WrapInput = styled(Input)`
   ${props => props.error && error};

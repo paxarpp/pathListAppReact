@@ -48,7 +48,7 @@ class CarListContainer extends Component {
     const { popUpConfirm } = this.state;
     return (
       <WrapperCarListContainer>
-        <Header className="header">
+        <Header>
           <h3>Список Автомобилей</h3>
         </Header>
         {popUpConfirm && <Confirm handler={this.deleteCarConfirm} />}

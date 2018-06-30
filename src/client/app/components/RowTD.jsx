@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 import createObjectError from './createObjectError';
 import Icon from './Icon';
@@ -8,53 +8,50 @@ import Icon from './Icon';
 const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) => {
   const matchNames = createObjectError(path, error);
   return (
-    <tr
-      onClick={path.name !== null ? handler(path) : null}
-      className={selectPath.dateBegin === path.dateBegin ? 'selectTableRow' : null}
-    >
+    <WrapTr onClick={path.name !== null ? handler(path) : null} selected={selectPath.dateBegin === path.dateBegin}>
       {path.dateBegin === null ? <td /> : <td>{new Date(path.dateBegin).toLocaleDateString()}</td>}
       <td>{path.fuel}</td>
       <td>
         {path.constFuelChange}
-        <span className="extension">{path.extension === 'true' ? ' прицеп' : ''}</span>
+        <SpanExtension>{path.extension === 'true' ? ' прицеп' : ''}</SpanExtension>
       </td>
-      <td className={!matchNames.first && matchNames.path ? 'inputError' : null}>
+      <td>
         {path.name !== null ? (
-          <span className="editableTd">
-            {path.pathBegin}
+          <Fragment>
+            <Span error={!matchNames.first && matchNames.path}>{path.pathBegin}</Span>
             <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathBegin', path.pathBegin)} />
-          </span>
-        ) : null}
-      </td>
-      <td className={matchNames.first && matchNames.path ? 'inputError' : null}>
-        {path.name !== null ? (
-          <span className="editableTd">
-            {path.pathEnd}
-            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathEnd', path.pathEnd)} />
-          </span>
-        ) : null}
-      </td>
-      <td>{path.milleage}</td>
-      <td className={!matchNames.first && matchNames.fuel ? 'inputError' : null}>
-        {path.name !== null ? (
-          <span className="editableTd">
-            {path.fuelBegin}
-            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('fuelBegin', path.fuelBegin)} />
-          </span>
+          </Fragment>
         ) : null}
       </td>
       <td>
         {path.name !== null ? (
-          <span className="editableTd">
+          <Fragment>
+            <Span error={matchNames.first && matchNames.path}>{path.pathEnd}</Span>
+            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathEnd', path.pathEnd)} />
+          </Fragment>
+        ) : null}
+      </td>
+      <td>{path.milleage}</td>
+      <td>
+        {path.name !== null ? (
+          <Fragment>
+            <Span error={!matchNames.first && matchNames.fuel}>{path.fuelBegin}</Span>
+            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('fuelBegin', path.fuelBegin)} />
+          </Fragment>
+        ) : null}
+      </td>
+      <td>
+        {path.name !== null ? (
+          <span>
             {path.addFuel}
             <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('addFuel', path.addFuel)} />
           </span>
         ) : null}
       </td>
       <td>{path.deltaFuel}</td>
-      <td className={matchNames.first && matchNames.fuel ? 'inputError' : null}>{path.fuelEnd}</td>
+      <Td error={matchNames.first && matchNames.fuel}>{path.fuelEnd}</Td>
       <td>{path.name !== null ? <Icon name="Delete" color="red" onClick={deletePath(path)} /> : null}</td>
-    </tr>
+    </WrapTr>
   );
 };
 RowTD.propTypes = {
@@ -74,4 +71,40 @@ const WrapIcon = styled(Icon)`
     transform: scale(1.1);
   }
 `;
+const WrapTr = styled.tr`
+  background-color: ${props => props.selected && 'antiquewhite'};
+`;
+const SpanExtension = styled.span`
+  font-size: 0.7rem;
+  color: #920000;
+`;
+const tremor = keyframes`
+  0%{
+transform: translateX(0px);
+  }
+  33%{
+    transform: translateX(3px);
+  }
+  66%{
+    transform: translateX(0);
+  }
+  100%{
+    transform: translateX(-3px);
+  }
+`;
+const isError = props =>
+  props.error &&
+  css`
+    color: red;
+    font-weight: 600;
+    display: inline-block;
+    animation: ${tremor} 0.3s linear infinite;
+  `;
+const Span = styled.span`
+  ${isError};
+`;
+const Td = styled.td`
+  color: ${props => props.error && 'red'};
+`;
+
 export default RowTD;

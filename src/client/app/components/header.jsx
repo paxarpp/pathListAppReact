@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Header = ({ children }) => {
-  return <Wrap className="header">{children}</Wrap>;
+  return <Wrap>{children}</Wrap>;
 };
 Header.propTypes = {
   children: PropTypes.any
