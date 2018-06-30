@@ -5,9 +5,9 @@ import styled from 'styled-components';
 
 import { saveCar, closeWindow } from '../actions/cars.js';
 import Icon from './Icon';
-import Input from './Input';
 import { Primary } from './ButtonNew';
-import RadioButton from './RadioButton';
+import InputCarValue from './InputCarValue';
+import InputExtension from './InputExtension';
 import Header from './header';
 import Footer from './footer';
 import fildNameCheckRule from './fildNameCheckRule.js';
@@ -21,8 +21,7 @@ class CreateCar extends Component {
     constFuelChangeExt: '',
     isWrong: false
   };
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = () => {
     const { name, constFuelChange, fuel, extension, constFuelChangeExt } = this.state;
     const { addDataCar, cars, close } = this.props;
     const car = {
@@ -34,23 +33,19 @@ class CreateCar extends Component {
     };
     if (
       car.name === '' ||
+      car.name[0] === ' ' ||
       car.constFuelChange === '' ||
       +car.constFuelChange === 0 ||
       (extension === 'true' && car.constFuelChangeExt === '') ||
-      (extension === 'true' && +car.constFuelChangeExt === 0)
+      (extension === 'true' && +car.constFuelChangeExt === 0) ||
+      cars.some(elem => elem.name === car.name)
     ) {
       this.setState(() => ({
         isWrong: true
       }));
     } else {
-      if (cars.some(elem => elem.name === car.name)) {
-        this.setState(() => ({
-          isWrong: true
-        }));
-      } else {
-        addDataCar(car);
-        close('isNewCar');
-      }
+      addDataCar(car);
+      close('isNewCar');
     }
   };
   handleChange = e => {
@@ -74,101 +69,29 @@ class CreateCar extends Component {
       }
     );
   };
-
-  handleClose = e => {
-    const { close } = this.props;
-    e.preventDefault();
-    close('isNewCar');
-  };
-
   render() {
-    const { name, constFuelChange, isWrong, constFuelChangeExt, extension } = this.state;
+    const { name, fuel, constFuelChange, isWrong, constFuelChangeExt, extension } = this.state;
     return (
       <PopUpWrap>
         <PopUp>
           <WrapHeader>
             <HeaderText>Новая машина</HeaderText>
-            <WrapIcon onClick={this.handleClose} name="Clear" color="red" />
+            <WrapIcon onClick={() => this.props.close('isNewCar')} name="Clear" color="red" />
           </WrapHeader>
           <PopUpContent>
-            <InputHeader>введите название автомобиля</InputHeader>
-            <WrapInput
-              error={isWrong === 'name'}
-              data-field-name={'name'}
-              type={'text'}
-              handler={this.handleChange}
-              placeholder={'название'}
-              value={name}
+            <InputCarValue
+              name={name}
+              fuel={fuel}
+              isWrong={isWrong}
+              handleChange={this.handleChange}
+              constFuelChange={constFuelChange}
             />
-            <InputHeader>введите паспортный расход топлива</InputHeader>
-            <WrapInput
-              error={isWrong === 'constFuelChange'}
-              data-field-name={'constFuelChange'}
-              type={'number'}
-              handler={this.handleChange}
-              placeholder={'расход по паспорту на 100 км'}
-              value={constFuelChange}
-              step={'0.01'}
-              min={'0'}
+            <InputExtension
+              extension={extension}
+              isWrong={isWrong}
+              handleChange={this.handleChange}
+              constFuelChangeExt={constFuelChangeExt}
             />
-            <InputHeader>выберите тип топлива</InputHeader>
-            <label>
-              Бензин
-              <RadioButton
-                checked={this.state.fuel === 'AI'}
-                name={'fuel'}
-                data-field-name={'fuel'}
-                type={'radio'}
-                onChange={this.handleChange}
-                value={'AI'}
-              />
-            </label>
-            <label>
-              Дизель
-              <RadioButton
-                checked={this.state.fuel === 'DT'}
-                name={'fuel'}
-                data-field-name={'fuel'}
-                type={'radio'}
-                onChange={this.handleChange}
-                value={'DT'}
-              />
-            </label>
-            <InputHeader>возможено добавление прицепа ?</InputHeader>
-            <label>
-              Да
-              <RadioButton
-                checked={this.state.extension === 'true'}
-                name={'extension'}
-                data-field-name={'extension'}
-                type={'radio'}
-                onChange={this.handleChange}
-                value={'true'}
-              />
-            </label>
-            <label>
-              Нет
-              <RadioButton
-                checked={this.state.extension === 'false'}
-                name={'extension'}
-                data-field-name={'extension'}
-                type={'radio'}
-                onChange={this.handleChange}
-                value={'false'}
-              />
-            </label>
-            {extension === 'true' ? (
-              <WrapInput
-                error={isWrong === 'constFuelChangeExt'}
-                data-field-name={'constFuelChangeExt'}
-                type={'number'}
-                handler={this.handleChange}
-                placeholder={'расход по паспорту на 100 км с прицепом'}
-                value={constFuelChangeExt}
-                step={'0.01'}
-                min={'0'}
-              />
-            ) : null}
           </PopUpContent>
           {isWrong && <HeadError>ошибка введеных данных</HeadError>}
           <Footer>
@@ -222,9 +145,6 @@ const PopUp = styled.div`
     box-sizing: border-box;
   }
 `;
-const InputHeader = styled.h4`
-  margin: 5px 0 2px 0;
-`;
 const PopUpWrap = styled.div`
   position: fixed;
   top: 0;
@@ -240,16 +160,8 @@ const PopUpContent = styled.div`
   width: 470px;
   transition: all 0.3s linear;
 `;
-const error = `
-  outline: 1px solid red;
-  opacity: 0.7;
-  transition: opacity 0.5s ease-in;
-`;
 const HeadError = styled.h3`
   color: red;
   margin: 5px 0 2px 0;
-`;
-const WrapInput = styled(Input)`
-  ${props => props.error && error};
 `;
 export default connect(mapStateToProps, mapDispatchToProps)(CreateCar);

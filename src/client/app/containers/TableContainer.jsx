@@ -123,7 +123,7 @@ TableContainer.propTypes = {
     })
   ),
   pathLists: PropTypes.array,
-  selectPathList: PropTypes.object,
+  selectPathList: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   doubleClick: PropTypes.func,
   pathInfo: PropTypes.func,
   deletePath: PropTypes.func,

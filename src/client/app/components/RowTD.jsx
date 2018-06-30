@@ -60,7 +60,7 @@ RowTD.propTypes = {
   error: PropTypes.arrayOf(PropTypes.object),
   doubleClick: PropTypes.func,
   deletePath: PropTypes.func,
-  selectPath: PropTypes.object
+  selectPath: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 };
 const WrapIcon = styled(Icon)`
   position: absolute;

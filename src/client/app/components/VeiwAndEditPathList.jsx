@@ -34,7 +34,7 @@ const mapDispatchToProps = dispatch => {
 };
 VeiwAndEditPathList.propTypes = {
   close: PropTypes.func,
-  selectPathList: PropTypes.func,
+  selectPathList: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   doubleClick: PropTypes.func,
   error: PropTypes.arrayOf(PropTypes.object)
 };

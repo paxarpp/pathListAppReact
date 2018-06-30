@@ -1,14 +1,5 @@
 const createObjectError = (path, error) => {
-  const matchNames = Object.assign(
-    {},
-    { first: false },
-    {
-      fuel: false
-    },
-    {
-      path: false
-    }
-  );
+  const matchNames = Object.assign({}, { first: false }, { fuel: false }, { path: false });
 
   error.forEach(elem => {
     if (elem.name === path.name && elem.dateBegin === path.dateBegin) {

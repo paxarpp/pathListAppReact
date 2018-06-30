@@ -66,7 +66,7 @@ Table.propTypes = {
   handlerPagination: PropTypes.func,
   deletePath: PropTypes.func,
   pathLists: PropTypes.arrayOf(PropTypes.object),
-  selectPath: PropTypes.func,
+  selectPath: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   doubleClick: PropTypes.func
 };
 const WrapperPathListSelectedCar = styled.div`
