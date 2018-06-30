@@ -4,25 +4,18 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { closeWindow } from '../actions/cars.js';
-import Button from '../components/Button';
 import Header from '../components/header';
 import ViewPath from '../components/ViewPath';
+import Icon from './Icon';
 
 class VeiwAndEditPathList extends Component {
-  handleClose = e => {
-    const { close } = this.props;
-    e.preventDefault();
-    close('selectPathList');
-  };
   render() {
     const { selectPathList, error } = this.props;
     return (
       <PathListView>
         <Header>
           <HeaderText>Выбран путевой лист</HeaderText>
-          <Button handler={this.handleClose} styleButton="delit">
-            {String.fromCharCode(10006)}
-          </Button>
+          <WrapIcon onClick={() => this.props.close('selectPathList')} name="Clear" color="red" />
         </Header>
         <ViewPath path={selectPathList} error={error} doubleClick={this.props.doubleClick} />
       </PathListView>
@@ -57,5 +50,10 @@ const PathListView = styled.div`
   bottom: 50px;
   left: -320px;
   background-color: rgb(200, 200, 200);
+`;
+const WrapIcon = styled(Icon)`
+  position: absolute;
+  top: 5px;
+  right: 5px;
 `;
 export default connect(mapStateToProps, mapDispatchToProps)(VeiwAndEditPathList);

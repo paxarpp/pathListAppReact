@@ -1,23 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from '../components/Button';
-import IconSort from '../components/IconSort';
+import Icon from './Icon';
 
-export default class SortLink extends Component {
-  render() {
-    const { name, nameCell, reverse } = this.props;
-    return name === nameCell ? (
-      <Button handler={null} styleButton="sortView">
-        {reverse ? String.fromCharCode(9660) : String.fromCharCode(9650)}
-      </Button>
+const SortLink = ({ name, nameCell, reverse }) =>
+  name === nameCell ? (
+    reverse ? (
+      <Icon onClick={null} name="Arrow_Drop_Down" />
     ) : (
-      <IconSort />
-    );
-  }
-}
+      <Icon onClick={null} name="Arrow_Drop_Up" />
+    )
+  ) : (
+    <Icon onClick={null} name="UnfoldMore" />
+  );
 SortLink.propTypes = {
   nameCell: PropTypes.string,
   reverse: PropTypes.bool,
   name: PropTypes.string
 };
+
+export default SortLink;

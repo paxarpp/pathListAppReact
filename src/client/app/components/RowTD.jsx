@@ -18,45 +18,36 @@ const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) =>
         {path.constFuelChange}
         <span className="extension">{path.extension === 'true' ? ' прицеп' : ''}</span>
       </td>
-      <td
-        className={!matchNames.first && matchNames.path ? 'inputError' : null}
-        onDoubleClick={path.name !== null ? doubleClick('pathBegin', path.pathBegin) : null}
-      >
+      <td className={!matchNames.first && matchNames.path ? 'inputError' : null}>
         {path.name !== null ? (
           <span className="editableTd">
             {path.pathBegin}
-            <WrapIcon name="Create" color="green" size="16px" />
+            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathBegin', path.pathBegin)} />
           </span>
         ) : null}
       </td>
-      <td
-        className={matchNames.first && matchNames.path ? 'inputError' : null}
-        onDoubleClick={path.name !== null ? doubleClick('pathEnd', path.pathEnd) : null}
-      >
+      <td className={matchNames.first && matchNames.path ? 'inputError' : null}>
         {path.name !== null ? (
           <span className="editableTd">
             {path.pathEnd}
-            <WrapIcon name="Create" color="green" size="16px" />
+            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathEnd', path.pathEnd)} />
           </span>
         ) : null}
       </td>
       <td>{path.milleage}</td>
-      <td
-        className={!matchNames.first && matchNames.fuel ? 'inputError' : null}
-        onDoubleClick={path.name !== null ? doubleClick('fuelBegin', path.fuelBegin) : null}
-      >
+      <td className={!matchNames.first && matchNames.fuel ? 'inputError' : null}>
         {path.name !== null ? (
           <span className="editableTd">
             {path.fuelBegin}
-            <WrapIcon name="Create" color="green" size="16px" />
+            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('fuelBegin', path.fuelBegin)} />
           </span>
         ) : null}
       </td>
-      <td onDoubleClick={path.name !== null ? doubleClick('addFuel', path.addFuel) : null}>
+      <td>
         {path.name !== null ? (
           <span className="editableTd">
             {path.addFuel}
-            <WrapIcon name="Create" color="green" size="16px" />
+            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('addFuel', path.addFuel)} />
           </span>
         ) : null}
       </td>
@@ -78,5 +69,8 @@ const WrapIcon = styled(Icon)`
   position: absolute;
   top: 2px;
   right: 2px;
+  :hover {
+    transform: scale(1.1);
+  }
 `;
 export default RowTD;

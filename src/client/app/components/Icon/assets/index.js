@@ -88,5 +88,38 @@ export const icons = {
         d="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2L9.19,8.63L2,9.24l5.46,4.73L5.82,21L12,17.27z"
       />
     ]
+  },
+  UnfoldMore: {
+    viewBox: '0 0 24 24',
+    path: [
+      <path
+        key={'UnfoldMore'}
+        d="M12 5.83L15.17 9l1.41-1.41L12 3 7.41 7.59 8.83 9 12 5.83zm0 12.34L8.83 15l-1.41 1.41L12 21l4.59-4.59L15.17 15 12 18.17z"
+      />
+    ]
+  },
+  ExpandMore: {
+    viewBox: '0 0 24 24',
+    path: [<path key={'ExpandMore'} d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z" />]
+  },
+  ExpandLess: {
+    viewBox: '0 0 24 24',
+    path: [<path key={'ExpandLess'} d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z" />]
+  },
+  Arrow_Right: {
+    viewBox: '0 0 24 24',
+    path: [<path key={'Arrow_Right'} d="M10 17l5-5-5-5v10z" />]
+  },
+  Arrow_Left: {
+    viewBox: '0 0 24 24',
+    path: [<path key={'Arrow_Left'} d="M14 7l-5 5 5 5V7z" />]
+  },
+  Arrow_Drop_Up: {
+    viewBox: '0 0 24 24',
+    path: [<path key={'Arrow_Drop_Up'} d="M7 14l5-5 5 5z" />]
+  },
+  Arrow_Drop_Down: {
+    viewBox: '0 0 24 24',
+    path: [<path key={'Arrow_Drop_Down'} d="M7 10l5 5 5-5z" />]
   }
 };
