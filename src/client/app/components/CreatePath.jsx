@@ -285,9 +285,9 @@ class CreatePath extends Component {
                     handlerComplite={setupDate => () =>
                       this.setState({
                         datepickerOpen: false,
-                        dateBegin: `${setupDate.year}-${
-                          setupDate.month + 1 < 10 ? `0${setupDate.month + 1}` : setupDate.month + 1
-                        }-${setupDate.day < 10 ? `0${setupDate.day}` : setupDate.day}`
+                        dateBegin: `${setupDate.year}-${(setupDate.month + 1)
+                          .toString()
+                          .padStart(2, '0')}-${setupDate.day.toString().padStart(2, '0')}`
                       })}
                   />
                 )}
