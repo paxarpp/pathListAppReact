@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './style.css';
+import styled from 'styled-components';
 
 import Footer from './components/footer';
 import Content from './containers/content';
@@ -7,15 +7,32 @@ import CarListContainer from './containers/carListContainer';
 
 const App = () => {
   return (
-    <div className="wrapper">
-      <div className="wrapperMenu">
+    <Wrapper>
+      <div>
         <CarListContainer />
       </div>
-      <div className="wrapperContent">
+      <WrapperContent>
         <Content />
-        <Footer />
-      </div>
-    </div>
+        <Footer>&copy; {new Date().getFullYear()}</Footer>
+      </WrapperContent>
+    </Wrapper>
   );
 };
+const Wrapper = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-flow: row nowrap;
+  position: relative;
+  max-width: 1920px;
+  margin: 0 auto;
+`;
+const WrapperContent = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
+  width: 100%;
+  min-width: 1101px;
+`;
+
 export default App;

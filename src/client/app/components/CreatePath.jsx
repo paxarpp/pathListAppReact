@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
 
 import { savePath, checkError } from '../actions/pathLists.js';
 import { closeWindow } from '../actions/cars.js';
-import Button from './Button';
+import { Primary } from './ButtonNew';
+import Datepicker from './Datepicker';
+import Icon from './Icon';
+import RadioButton from './RadioButton';
+import Input from './Input';
+import Header from './header';
+import Footer from './footer';
 import calculateFieldPath from './calculateFieldPath';
 import fildNamePathList from './fildNamePathList';
 import fildNameCheckRule from './fildNameCheckRule.js';
@@ -13,7 +20,7 @@ class CreatePath extends Component {
   state = {
     name: '',
     fuel: '',
-    dateBegin: '',
+    dateBegin: `${new Date().getFullYear()} ${new Date().getMonth() + 1} ${new Date().getDate()}`,
     pathBegin: '',
     pathEnd: '',
     milleage: 0,
@@ -28,7 +35,8 @@ class CreatePath extends Component {
     isWrongDuble: false,
     columnView: true,
     extension: 'false',
-    constFuelChangeExt: ''
+    constFuelChangeExt: '',
+    datepickerOpen: false
   };
   handleSubmit = e => {
     e.preventDefault();
@@ -49,7 +57,6 @@ class CreatePath extends Component {
       ConsumptionFactoryFuel,
       addFuelWinter
     } = this.state;
-
     const { addDataPath, pathLists, close, chError } = this.props;
     const path = {
       name,
@@ -80,7 +87,7 @@ class CreatePath extends Component {
         this.setState({
           isWrongDuble: true
         });
-      } else if (path.milleage >= 0 && path.fuelEnd >= 0) {
+      } else if (path.milleage > 0 && path.fuelEnd > 0) {
         if (path.name) {
           addDataPath(calculateFieldPath(path));
           close('isNewPath');
@@ -119,7 +126,6 @@ class CreatePath extends Component {
         return car.name === value;
       })[0].constFuelChangeExt
     }));
-
     if (this.props.pathLists.filter(elem => elem.name === value).length !== 0) {
       this.setState(prev => ({
         ...prev,
@@ -205,12 +211,6 @@ class CreatePath extends Component {
     e.preventDefault();
     close('isNewPath');
   };
-  handleChangeView = () => {
-    const { columnView } = this.state;
-    this.setState({
-      columnView: !columnView
-    });
-  };
   render() {
     const { cars } = this.props;
     const {
@@ -227,34 +227,35 @@ class CreatePath extends Component {
       columnView,
       isWrongDuble,
       extension,
-      constFuelChangeExt
+      constFuelChangeExt,
+      datepickerOpen
     } = this.state;
     return (
-      <div className="popUpWrapp">
-        <div className="popUp">
-          <div className="header">
-            <h2 className="headerText">Новый лист</h2>
-            <Button handler={this.handleClose} styleButton="delit">
-              {String.fromCharCode(10006)}
-            </Button>
-            <Button handler={this.handleChangeView} styleButton="switchView">
-              {columnView ? String.fromCharCode(9654) : String.fromCharCode(9660)}
-            </Button>
-          </div>
-          <div className={columnView ? 'popUpContent' : 'popUpContentRow'}>
-            <div className={columnView ? null : 'row'}>
-              <h4 className="inputHeader">выберите автомобиль</h4>
-              <select data-field-name={'name'} value={name} onChange={this.handleChangeName}>
+      <PopUpWrap>
+        <PopUp>
+          <WrapHeader>
+            <HeaderText>Новый лист</HeaderText>
+            <WrapIcon onClick={this.handleClose} name="Clear" color="red" />
+            <WrapIconV
+              onClick={() => this.setState({ columnView: !columnView })}
+              name={columnView ? 'RightArrow' : 'LeftArrow'}
+              color="black"
+            />
+          </WrapHeader>
+          <ColumnView view={columnView}>
+            <Row view={columnView}>
+              <InputHeader>выберите автомобиль</InputHeader>
+              <WrapSelect data-field-name={'name'} value={name} onChange={this.handleChangeName}>
                 <option disabled />
                 {cars.map(car => {
                   return <option key={car.name}>{car.name}</option>;
                 })}
-              </select>
-              <div className={constFuelChangeExt > 0 ? 'extensionChoise' : 'extensionChoiseNone'}>
-                <h4 className="inputHeader">поездка с прицепом ?</h4>
+              </WrapSelect>
+              <FuelChangeExt changeExt={constFuelChangeExt > 0}>
+                <InputHeader>поездка с прицепом ?</InputHeader>
                 <label>
                   Да
-                  <input
+                  <RadioButton
                     checked={extension === 'true'}
                     name={'extension'}
                     data-field-name={'extension'}
@@ -265,7 +266,7 @@ class CreatePath extends Component {
                 </label>
                 <label>
                   Нет
-                  <input
+                  <RadioButton
                     checked={extension === 'false'}
                     name={'extension'}
                     data-field-name={'extension'}
@@ -274,84 +275,84 @@ class CreatePath extends Component {
                     value={'false'}
                   />
                 </label>
+              </FuelChangeExt>
+              <div>
+                <InputHeader>выберите дату начала путевки</InputHeader>
+                <WrapSpan onClick={() => this.setState({ datepickerOpen: true })}>{dateBegin}</WrapSpan>
+                {datepickerOpen && (
+                  <Datepicker
+                    handlerClose={() => this.setState({ datepickerOpen: false })}
+                    handlerComplite={setupDate => () =>
+                      this.setState({
+                        datepickerOpen: false,
+                        dateBegin: `${setupDate.year}-${
+                          setupDate.month + 1 < 10 ? `0${setupDate.month + 1}` : setupDate.month + 1
+                        }-${setupDate.day < 10 ? `0${setupDate.day}` : setupDate.day}`
+                      })}
+                  />
+                )}
               </div>
-              <h4 className="inputHeader">выберите дату начала путевки</h4>
-              <input
-                className={isWrong === 'dateBegin' ? 'inputErrorCheck' : null}
-                data-field-name={'dateBegin'}
-                type={'date'}
-                onChange={this.handleChange}
-                placeholder={'начало'}
-                value={dateBegin}
-              />
-              <h4 className="inputHeader">введите начальный пробег, км</h4>
-              <input
-                className={isWrong === 'pathBegin' ? 'inputErrorCheck' : null}
+              <InputHeader>введите начальный пробег, км</InputHeader>
+              <WrapInput
+                error={isWrong === 'pathBegin'}
                 data-field-name={'pathBegin'}
                 type={'number'}
-                onChange={this.handleChange}
+                handler={this.handleChange}
                 placeholder={'пробег, начало'}
                 value={pathBegin}
                 step={'1'}
                 min={'0'}
               />
-              <h4 className="inputHeader">введите конечный пробег, км</h4>
-              <input
-                className={isWrong === 'pathEnd' ? 'inputErrorCheck' : null}
+              <InputHeader>введите конечный пробег, км</InputHeader>
+              <WrapInput
+                error={isWrong === 'pathEnd'}
                 data-field-name={'pathEnd'}
                 type={'number'}
-                onChange={this.handleChange}
+                handler={this.handleChange}
                 placeholder={'пробег, конец'}
                 value={pathEnd}
                 step={'1'}
                 min={'0'}
               />
-              <h4 className={isWrong === 'milleage' ? 'inputErrorCheck' : 'resultHeader'}>
-                Пробег составил: {milleage} км
-              </h4>
-            </div>
-            <div className={columnView ? null : 'row'}>
-              <h4 className="inputHeader">введите начальное количество топлива, л</h4>
-              <input
-                className={isWrong === 'fuelBegin' ? 'inputErrorCheck' : null}
+              <ResultHeader error={isWrong === 'milleage'}>Пробег составил: {milleage} км</ResultHeader>
+            </Row>
+            <Row view={columnView}>
+              <InputHeader>введите начальное количество топлива, л</InputHeader>
+              <WrapInput
+                error={isWrong === 'fuelBegin'}
                 data-field-name={'fuelBegin'}
                 type={'number'}
-                onChange={this.handleChange}
+                handler={this.handleChange}
                 placeholder={'топливо, начало'}
                 value={fuelBegin}
                 step={'0.01'}
                 min={'0'}
               />
-              <h4 className="inputHeader">введите заправленное количество топлива, л</h4>
-              <input
+              <InputHeader>введите заправленное количество топлива, л</InputHeader>
+              <Input
                 data-field-name={'addFuel'}
                 type={'number'}
-                onChange={this.handleChange}
+                handler={this.handleChange}
                 placeholder={'топливо, заправка'}
                 value={addFuel}
                 step={'0.01'}
                 min={'0'}
               />
-              <h4 className={isWrong === 'fuelEnd' ? 'inputErrorCheck' : 'inputHeader'}>
-                конечное количество топлива {fuelEnd} л
-              </h4>
-              <h4 className="resultHeader">
+              <ResultHeader error={isWrong === 'fuelEnd'}>конечное количество топлива {fuelEnd} л</ResultHeader>
+              <ResultHeader>
                 {fildNamePathList['deltaFuel']}: {deltaFuel} л
-              </h4>
-            </div>
-            {isWrong && <h3 className="inputError">ошибка</h3>}
-            {isWrongDuble && <h3 className="inputError">на эту дату лист уже есть</h3>}
-          </div>
-          <div className="footer">
-            <Button
-              handler={isWrong === false ? this.handleSubmit : null}
-              styleButton={isWrong === false ? 'submit' : 'disableButton'}
-            >
+              </ResultHeader>
+            </Row>
+            {isWrong && <InputError>ошибка</InputError>}
+            {isWrongDuble && <InputError>на эту дату лист уже есть</InputError>}
+          </ColumnView>
+          <Footer>
+            <Primary handlerClick={this.handleSubmit} disable={isWrong != false}>
               Сохранить
-            </Button>
-          </div>
-        </div>
-      </div>
+            </Primary>
+          </Footer>
+        </PopUp>
+      </PopUpWrap>
     );
   }
 }
@@ -375,4 +376,117 @@ CreatePath.propTypes = {
   chError: PropTypes.func.isRequired,
   cars: PropTypes.arrayOf(PropTypes.object).isRequired
 };
+const HeaderText = styled.h2`
+  align-text: center;
+`;
+const WrapHeader = styled(Header)`
+  position: relative;
+`;
+const WrapIcon = styled(Icon)`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+`;
+const WrapIconV = styled(Icon)`
+  position: absolute;
+  top: 35px;
+  right: 5px;
+`;
+const error = props =>
+  props.error &&
+  css`
+    outline: 1px solid red;
+    opacity: 0.7;
+    transition: opacity 0.5s ease-in;
+  `;
+const WrapInput = styled(Input)`
+  ${error};
+`;
+const PopUp = styled.div`
+  padding: 0;
+  box-shadow: 3px 3px 10px 1px grey;
+  position: fixed;
+  top: 5%;
+  left: 30%;
+  box-sizing: border-box;
+  background-color: rgba(202, 202, 202, 0.8);
+  & input,
+  & label,
+  & select {
+    box-sizing: border-box;
+  }
+`;
+const InputHeader = styled.h4`
+  margin: 5px 0 2px 0;
+`;
+const InputError = styled.h3`
+  color: red;
+  font-weight: 600;
+  text-align: center;
+  margin: 5px 0 2px 0;
+`;
+const PopUpWrap = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(202, 202, 202, 0.5);
+  z-index: 999;
+`;
+const WrapSpan = styled.span`
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #9e9e9e;
+  transition: border-bottom 0.3s linear;
+  :hover {
+    cursor: pointer;
+    border-bottom: 1px solid #26a69a;
+  }
+`;
+const errorHeadResult = props =>
+  props.error &&
+  css`
+    color: red;
+  `;
+const ResultHeader = styled.h4`
+  margin: 5px 0 2px 0;
+  border-bottom: 1px solid #00000080;
+  ${errorHeadResult};
+`;
+const ColumnViewRow = props =>
+  !props.view &&
+  css`
+    width: 795px;
+    display: flex;
+  `;
+const ColumnView = styled.div`
+  padding: 10px;
+  box-sizing: border-box;
+  width: 470px;
+  transition: all 0.3s linear;
+  ${ColumnViewRow};
+`;
+const ifRow = props =>
+  !props.view &&
+  css`
+    flex: 1;
+    padding: 5px;
+  `;
+const Row = styled.div`
+  ${ifRow};
+  select {
+    width: 100^;
+    font-size: 1.5rem;
+  }
+`;
+const WrapSelect = styled.select`
+  width: 100%;
+  font-size: 1.5rem;
+`;
+const FuelChangeExt = styled.div`
+  display: ${props => (props.changeExt ? 'block' : 'none')};
+  background-color: #80808080;
+`;
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePath);

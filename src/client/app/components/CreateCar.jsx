@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import { saveCar, closeWindow } from '../actions/cars.js';
-import Button from './Button';
+import Icon from './Icon';
+import Input from './Input';
+import { Primary } from './ButtonNew';
+import RadioButton from './RadioButton';
+import Header from './header';
+import Footer from './footer';
 import fildNameCheckRule from './fildNameCheckRule.js';
 
 class CreateCar extends Component {
@@ -26,7 +32,13 @@ class CreateCar extends Component {
       extension,
       constFuelChangeExt: extension === 'true' ? constFuelChangeExt : ''
     };
-    if (car.name === '' || car.constFuelChange === '') {
+    if (
+      car.name === '' ||
+      car.constFuelChange === '' ||
+      +car.constFuelChange === 0 ||
+      (extension === 'true' && car.constFuelChangeExt === '') ||
+      (extension === 'true' && +car.constFuelChangeExt === 0)
+    ) {
       this.setState(() => ({
         isWrong: true
       }));
@@ -72,39 +84,37 @@ class CreateCar extends Component {
   render() {
     const { name, constFuelChange, isWrong, constFuelChangeExt, extension } = this.state;
     return (
-      <div className="popUpWrapp">
-        <div className="popUp">
-          <div className="header">
-            <h2 className="headerText">Новая машина</h2>
-            <Button handler={this.handleClose} styleButton="delit">
-              {String.fromCharCode(10006)}
-            </Button>
-          </div>
-          <div className="popUpContent">
-            <h4 className="inputHeader">введите название автомобиля</h4>
-            <input
-              className={isWrong === 'name' ? 'inputErrorCheck' : null}
+      <PopUpWrap>
+        <PopUp>
+          <WrapHeader>
+            <HeaderText>Новая машина</HeaderText>
+            <WrapIcon onClick={this.handleClose} name="Clear" color="red" />
+          </WrapHeader>
+          <PopUpContent>
+            <InputHeader>введите название автомобиля</InputHeader>
+            <WrapInput
+              error={isWrong === 'name'}
               data-field-name={'name'}
               type={'text'}
-              onChange={this.handleChange}
+              handler={this.handleChange}
               placeholder={'название'}
               value={name}
             />
-            <h4 className="inputHeader">введите паспортный расход топлива</h4>
-            <input
-              className={isWrong === 'constFuelChange' ? 'inputErrorCheck' : null}
+            <InputHeader>введите паспортный расход топлива</InputHeader>
+            <WrapInput
+              error={isWrong === 'constFuelChange'}
               data-field-name={'constFuelChange'}
               type={'number'}
-              onChange={this.handleChange}
+              handler={this.handleChange}
               placeholder={'расход по паспорту на 100 км'}
               value={constFuelChange}
               step={'0.01'}
               min={'0'}
             />
-            <h4 className="inputHeader">выберите тип топлива</h4>
+            <InputHeader>выберите тип топлива</InputHeader>
             <label>
               Бензин
-              <input
+              <RadioButton
                 checked={this.state.fuel === 'AI'}
                 name={'fuel'}
                 data-field-name={'fuel'}
@@ -115,7 +125,7 @@ class CreateCar extends Component {
             </label>
             <label>
               Дизель
-              <input
+              <RadioButton
                 checked={this.state.fuel === 'DT'}
                 name={'fuel'}
                 data-field-name={'fuel'}
@@ -124,10 +134,10 @@ class CreateCar extends Component {
                 value={'DT'}
               />
             </label>
-            <h4 className="inputHeader">возможено добавление прицепа ?</h4>
+            <InputHeader>возможено добавление прицепа ?</InputHeader>
             <label>
               Да
-              <input
+              <RadioButton
                 checked={this.state.extension === 'true'}
                 name={'extension'}
                 data-field-name={'extension'}
@@ -138,7 +148,7 @@ class CreateCar extends Component {
             </label>
             <label>
               Нет
-              <input
+              <RadioButton
                 checked={this.state.extension === 'false'}
                 name={'extension'}
                 data-field-name={'extension'}
@@ -148,29 +158,26 @@ class CreateCar extends Component {
               />
             </label>
             {extension === 'true' ? (
-              <input
-                className={isWrong === 'constFuelChangeExt' ? 'inputErrorCheck' : null}
+              <WrapInput
+                error={isWrong === 'constFuelChangeExt'}
                 data-field-name={'constFuelChangeExt'}
                 type={'number'}
-                onChange={this.handleChange}
+                handler={this.handleChange}
                 placeholder={'расход по паспорту на 100 км с прицепом'}
                 value={constFuelChangeExt}
                 step={'0.01'}
                 min={'0'}
               />
             ) : null}
-          </div>
-          {isWrong && <h3 className="inputError">ошибка введеных данных</h3>}
-          <div className="footer">
-            <Button
-              handler={isWrong === false ? this.handleSubmit : null}
-              styleButton={isWrong === false ? 'submit' : 'disableButton'}
-            >
+          </PopUpContent>
+          {isWrong && <HeadError>ошибка введеных данных</HeadError>}
+          <Footer>
+            <Primary handlerClick={this.handleSubmit} disable={isWrong != false}>
               Сохранить
-            </Button>
-          </div>
-        </div>
-      </div>
+            </Primary>
+          </Footer>
+        </PopUp>
+      </PopUpWrap>
     );
   }
 }
@@ -190,5 +197,59 @@ CreateCar.propTypes = {
   close: PropTypes.func.isRequired,
   cars: PropTypes.array
 };
-
+const HeaderText = styled.h2`
+  align-text: center;
+`;
+const WrapHeader = styled(Header)`
+  position: relative;
+`;
+const WrapIcon = styled(Icon)`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+`;
+const PopUp = styled.div`
+  padding: 0;
+  box-shadow: 3px 3px 10px 1px grey;
+  position: fixed;
+  top: 5%;
+  left: 30%;
+  box-sizing: border-box;
+  background-color: rgba(202, 202, 202, 0.8);
+  & input,
+  & label,
+  & select {
+    box-sizing: border-box;
+  }
+`;
+const InputHeader = styled.h4`
+  margin: 5px 0 2px 0;
+`;
+const PopUpWrap = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(202, 202, 202, 0.5);
+  z-index: 999;
+`;
+const PopUpContent = styled.div`
+  padding: 10px;
+  box-sizing: border-box;
+  width: 470px;
+  transition: all 0.3s linear;
+`;
+const error = `
+  outline: 1px solid red;
+  opacity: 0.7;
+  transition: opacity 0.5s ease-in;
+`;
+const HeadError = styled.h3`
+  color: red;
+  margin: 5px 0 2px 0;
+`;
+const WrapInput = styled(Input)`
+  ${props => props.error && error};
+`;
 export default connect(mapStateToProps, mapDispatchToProps)(CreateCar);

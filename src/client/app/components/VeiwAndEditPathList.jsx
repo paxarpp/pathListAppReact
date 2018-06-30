@@ -1,30 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import { closeWindow } from '../actions/cars.js';
-import Button from '../components/Button';
+import Header from '../components/header';
 import ViewPath from '../components/ViewPath';
+import Icon from './Icon';
 
 class VeiwAndEditPathList extends Component {
-  handleClose = e => {
-    const { close } = this.props;
-    e.preventDefault();
-    close('selectPathList');
-  };
   render() {
     const { selectPathList, error } = this.props;
     return (
-      <div className="pathListView">
-        <div className="header">
-          <h3 className="headerText">Выбран путевой лист</h3>
-          <Button handler={this.handleClose} styleButton="delit">
-            {String.fromCharCode(10006)}
-          </Button>
-        </div>
+      <PathListView>
+        <Header>
+          <HeaderText>Выбран путевой лист</HeaderText>
+          <WrapIcon onClick={() => this.props.close('selectPathList')} name="Clear" color="red" />
+        </Header>
         <ViewPath path={selectPathList} error={error} doubleClick={this.props.doubleClick} />
-        <div className="footer" />
-      </div>
+      </PathListView>
     );
   }
 }
@@ -44,5 +38,22 @@ VeiwAndEditPathList.propTypes = {
   doubleClick: PropTypes.func,
   error: PropTypes.arrayOf(PropTypes.object)
 };
-
+const HeaderText = styled.h2`
+  text-align: center;
+`;
+const PathListView = styled.div`
+  padding: 0;
+  box-shadow: 3px 3px 10px 1px grey;
+  flex: 1;
+  width: 320px;
+  position: absolute;
+  bottom: 50px;
+  left: -320px;
+  background-color: rgb(200, 200, 200);
+`;
+const WrapIcon = styled(Icon)`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+`;
 export default connect(mapStateToProps, mapDispatchToProps)(VeiwAndEditPathList);

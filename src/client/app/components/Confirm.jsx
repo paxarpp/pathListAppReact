@@ -1,27 +1,47 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from '../components/Button';
+import Icon from './Icon';
+import styled from 'styled-components';
 
-export default class Confirm extends Component {
-  handlerConf = status => () => {
-    const { handler } = this.props;
-    handler(status);
-  };
-  render() {
-    return (
-      <div className="popUpConfirm">
-        <p>Уверены ?</p>
-        <Button handler={this.handlerConf(true)} styleButton="confirm">
-          {String.fromCharCode(10003)}
-        </Button>
-        <Button handler={this.handlerConf(false)} styleButton="delit">
-          {String.fromCharCode(10006)}
-        </Button>
-      </div>
-    );
-  }
-}
+const Confirm = ({ handler }) => (
+  <PopUpConfirm>
+    <p>Уверены ?</p>
+    <LeftIcon onClick={() => handler(true)} color="green" name="Done" />
+    <RightIcon onClick={() => handler(false)} color="red" name="Clear" />
+  </PopUpConfirm>
+);
+
 Confirm.propTypes = {
   handler: PropTypes.func.isRequired
 };
+const PopUpConfirm = styled.div`
+  width: 140px;
+  height: 60px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px 1px grey;
+  position: absolute;
+  top: 45%;
+  right: 30%;
+  background-color: #fff;
+  z-index: 999;
+  > p {
+    margin: 0 1rem;
+  }
+`;
+const animHover = `
+  translate: opacity 0.3s;
+  opacity: 0.7;
+  :hover {
+    opacity: 1;
+  }
+`;
+const LeftIcon = styled(Icon)`
+  margin-left: 10px;
+  ${animHover};
+`;
+const RightIcon = styled(Icon)`
+  margin-left: 70px;
+  ${animHover};
+`;
+export default Confirm;

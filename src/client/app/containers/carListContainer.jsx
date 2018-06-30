@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import CarList from '../components/CarList';
-import Button from '../components/Button';
+import { Primary } from '../components/ButtonNew';
+import Icon from '../components/Icon';
+import Header from '../components/header';
+import Footer from '../components/footer';
 import Confirm from '../components/Confirm';
 
 import { deleteCarToName, addNewCar, infoCarToName } from '../actions/cars.js';
@@ -39,45 +43,33 @@ class CarListContainer extends Component {
       chError();
     }
   };
-  carInfo = name => () => {
-    const { carInfo } = this.props;
-    carInfo(name);
-  };
-  handlerAddCar = () => {
-    const { addCar } = this.props;
-    addCar();
-  };
-  handlerAddPath = () => {
-    const { addPath } = this.props;
-    addPath();
-  };
   render() {
     const { cars, selectedCar, pathLists, error } = this.props;
     const { popUpConfirm } = this.state;
     return (
-      <div className="carListContainer">
-        <div className="header">
+      <WrapperCarListContainer>
+        <Header>
           <h3>Список Автомобилей</h3>
-        </div>
+        </Header>
         {popUpConfirm && <Confirm handler={this.deleteCarConfirm} />}
         <CarList
           selectedCar={selectedCar}
           pathLists={pathLists}
           cars={cars}
           deleteCarHandler={this.deleteCar}
-          carInfo={this.carInfo}
+          carInfo={name => () => this.props.carInfo(name)}
           error={error}
         />
-        <div className="footer">
-          <Button handler={this.handlerAddCar} styleButton="submit">
-            Добавить авто
-          </Button>
+        <Footer>
+          <Primary handlerClick={() => this.props.addCar()}>
+            <Icon name="Add" />авто
+          </Primary>
 
-          <Button handler={this.handlerAddPath} styleButton="submit">
-            Добавить лист
-          </Button>
-        </div>
-      </div>
+          <Primary handlerClick={() => this.props.addPath()}>
+            <Icon name="Add" />лист
+          </Primary>
+        </Footer>
+      </WrapperCarListContainer>
     );
   }
 }
@@ -109,4 +101,13 @@ CarListContainer.propTypes = {
   addCar: PropTypes.func,
   addPath: PropTypes.func
 };
+const WrapperCarListContainer = styled.div`
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 320px;
+  display: flex;
+  flex-flow: column nowrap;
+`;
 export default connect(mapStateToProps, mapDispatchToProps)(CarListContainer);
