@@ -36,7 +36,8 @@ class CreateCar extends Component {
       car.name === '' ||
       car.constFuelChange === '' ||
       +car.constFuelChange === 0 ||
-      (extension && +constFuelChangeExt === 0)
+      (extension === 'true' && car.constFuelChangeExt === '') ||
+      (extension === 'true' && +car.constFuelChangeExt === 0)
     ) {
       this.setState(() => ({
         isWrong: true

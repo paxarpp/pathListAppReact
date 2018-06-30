@@ -20,7 +20,7 @@ class CreatePath extends Component {
   state = {
     name: '',
     fuel: '',
-    dateBegin: `${new Date().getFullYear()} ${new Date().getMonth()} ${new Date().getDate()}`,
+    dateBegin: `${new Date().getFullYear()} ${new Date().getMonth() + 1} ${new Date().getDate()}`,
     pathBegin: '',
     pathEnd: '',
     milleage: 0,
@@ -57,7 +57,6 @@ class CreatePath extends Component {
       ConsumptionFactoryFuel,
       addFuelWinter
     } = this.state;
-
     const { addDataPath, pathLists, close, chError } = this.props;
     const path = {
       name,
@@ -88,7 +87,7 @@ class CreatePath extends Component {
         this.setState({
           isWrongDuble: true
         });
-      } else if (path.milleage >= 0 && path.fuelEnd >= 0) {
+      } else if (path.milleage > 0 && path.fuelEnd > 0) {
         if (path.name) {
           addDataPath(calculateFieldPath(path));
           close('isNewPath');
@@ -127,7 +126,6 @@ class CreatePath extends Component {
         return car.name === value;
       })[0].constFuelChangeExt
     }));
-
     if (this.props.pathLists.filter(elem => elem.name === value).length !== 0) {
       this.setState(prev => ({
         ...prev,
@@ -478,6 +476,10 @@ const ifRow = props =>
   `;
 const Row = styled.div`
   ${ifRow};
+  select {
+    width: 100^;
+    font-size: 1.5rem;
+  }
 `;
 const FuelChangeExt = styled.div`
   display: ${props => (props.changeExt ? 'block' : 'none')};
