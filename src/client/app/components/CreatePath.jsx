@@ -245,12 +245,12 @@ class CreatePath extends Component {
           <ColumnView view={columnView}>
             <Row view={columnView}>
               <InputHeader>выберите автомобиль</InputHeader>
-              <select data-field-name={'name'} value={name} onChange={this.handleChangeName}>
+              <WrapSelect data-field-name={'name'} value={name} onChange={this.handleChangeName}>
                 <option disabled />
                 {cars.map(car => {
                   return <option key={car.name}>{car.name}</option>;
                 })}
-              </select>
+              </WrapSelect>
               <FuelChangeExt changeExt={constFuelChangeExt > 0}>
                 <InputHeader>поездка с прицепом ?</InputHeader>
                 <label>
@@ -480,6 +480,10 @@ const Row = styled.div`
     width: 100^;
     font-size: 1.5rem;
   }
+`;
+const WrapSelect = styled.select`
+  width: 100%;
+  font-size: 1.5rem;
 `;
 const FuelChangeExt = styled.div`
   display: ${props => (props.changeExt ? 'block' : 'none')};
