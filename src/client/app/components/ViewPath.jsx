@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import fildNamePathList from './fildNamePathList';
 import createObjectError from './createObjectError';
@@ -25,48 +25,39 @@ class ViewPath extends PureComponent {
         <p>
           {fildNamePathList['dateBegin']}: {new Date(path.dateBegin).toLocaleDateString()}
         </p>
-        <p
-          onDoubleClick={doubleClick('pathBegin', path.pathBegin)}
-          className={!matchNames.first && matchNames.path ? 'inputError' : null}
-        >
-          <span className="editable">
+        <Paragraph error={!matchNames.first && matchNames.path}>
+          <span>
             {fildNamePathList['pathBegin']}: {path.pathBegin} км
-            <Icon name="Create" color="green" size="16px" />
+            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathBegin', path.pathBegin)} />
           </span>
-        </p>
-        <p
-          onDoubleClick={doubleClick('pathEnd', path.pathEnd)}
-          className={matchNames.first && matchNames.path ? 'inputError' : null}
-        >
-          <span className="editable">
+        </Paragraph>
+        <Paragraph error={matchNames.first && matchNames.path}>
+          <span>
             {fildNamePathList['pathEnd']}: {path.pathEnd} км
-            <Icon name="Create" color="green" size="16px" />
+            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathEnd', path.pathEnd)} />
           </span>
-        </p>
+        </Paragraph>
         <p>
           {fildNamePathList['milleage']}: {path.milleage} км
         </p>
-        <p
-          onDoubleClick={doubleClick('fuelBegin', path.fuelBegin)}
-          className={!matchNames.first && matchNames.fuel ? 'inputError' : null}
-        >
-          <span className="editable">
+        <Paragraph error={!matchNames.first && matchNames.fuel}>
+          <span>
             {fildNamePathList['fuelBegin']}: {path.fuelBegin} л
-            <Icon name="Create" color="green" size="16px" />
+            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('fuelBegin', path.fuelBegin)} />
           </span>
-        </p>
-        <p onDoubleClick={doubleClick('addFuel', path.addFuel)}>
-          <span className="editable">
+        </Paragraph>
+        <p>
+          <span>
             {fildNamePathList['addFuel']}: {path.addFuel} л
-            <Icon name="Create" color="green" size="16px" />
+            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('addFuel', path.addFuel)} />
           </span>
         </p>
         <p>
           {fildNamePathList['deltaFuel']}: {path.deltaFuel} л
         </p>
-        <p className={matchNames.first && matchNames.fuel ? 'inputError' : null}>
+        <Paragraph error={matchNames.first && matchNames.fuel}>
           {fildNamePathList['fuelEnd']}: {path.fuelEnd} л
-        </p>
+        </Paragraph>
       </View>
     );
   }
@@ -99,5 +90,22 @@ const EmptyList = styled.div`
 `;
 const Head = styled.h4`
   margin: 0 0 5px 5px;
+`;
+const WrapIcon = styled(Icon)`
+  margin-left: 2rem;
+  transition: transform 0.2s linear;
+  :hover {
+    transform: scale(1.1);
+  }
+`;
+const isError = props =>
+  props.error &&
+  css`
+    color: red;
+    font-weight: 600;
+    text-align: center;
+  `;
+const Paragraph = styled.p`
+  ${isError};
 `;
 export default ViewPath;

@@ -69,6 +69,7 @@ const WrapIcon = styled(Icon)`
   position: absolute;
   top: 2px;
   right: 2px;
+  transition: transform 0.2s linear;
   :hover {
     transform: scale(1.1);
   }

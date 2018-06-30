@@ -241,16 +241,7 @@ h4.inputErrorCheck{
     font-size: 1.5rem;
     text-align: center;
 }
-.editableTd,
-.editable {
-    cursor: pointer;
-    transition: all 0.2s linear;
-    user-select: none;
-}
-.editable:hover {
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-    transition: all 0.2s linear;
-}
+
 
 .selectTableRow{
     background-color: antiquewhite;

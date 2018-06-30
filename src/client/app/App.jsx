@@ -1,5 +1,4 @@
 import React from 'react';
-import style from './style.css';
 import styled from 'styled-components';
 
 import Footer from './components/footer';
@@ -33,6 +32,7 @@ const WrapperContent = styled.div`
   flex-flow: column nowrap;
   position: relative;
   width: 100%;
+  min-width: 1101px;
 `;
 
 export default App;
