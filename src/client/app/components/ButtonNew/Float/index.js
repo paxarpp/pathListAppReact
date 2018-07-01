@@ -36,7 +36,7 @@ Add.propTypes = {
 };
 ButtonFloat.propTypes = {
   handlerClick: PropTypes.func,
-  children: PropTypes.string,
+  children: PropTypes.any,
   large: PropTypes.bool,
   second: PropTypes.bool,
   danger: PropTypes.bool,

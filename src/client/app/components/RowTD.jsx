@@ -80,16 +80,19 @@ const SpanExtension = styled.span`
 `;
 const tremor = keyframes`
   0%{
-transform: translateX(0px);
+transform: translateX(0);
   }
-  33%{
+  25%{
     transform: translateX(3px);
   }
-  66%{
+  50%{
     transform: translateX(0);
   }
-  100%{
+  75%{
     transform: translateX(-3px);
+  }
+  100%{
+    transform: translateX(0);
   }
 `;
 const isError = props =>
