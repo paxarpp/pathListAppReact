@@ -365,7 +365,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addDataPath: path => savePath(dispatch, path),
-    close: isNewPath => closeWindow(dispatch, isNewPath),
+    close: nameWindow => closeWindow(dispatch, nameWindow),
     chError: () => checkError(dispatch)
   };
 };

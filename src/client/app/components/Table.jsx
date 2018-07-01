@@ -53,7 +53,17 @@ const Table = ({
   </WrapperPathListSelectedCar>
 );
 Table.propTypes = {
-  error: PropTypes.arrayOf(PropTypes.object),
+  error: PropTypes.arrayOf(
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        path: PropTypes.object,
+        first: PropTypes.bool,
+        last: PropTypes.bool,
+        errorPath: PropTypes.bool,
+        errorFuel: PropTypes.bool
+      })
+    )
+  ),
   page: PropTypes.number,
   stringOnPage: PropTypes.number,
   length: PropTypes.number,

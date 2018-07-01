@@ -23,7 +23,17 @@ CarList.propTypes = {
   selectedCar: PropTypes.string,
   deleteCarHandler: PropTypes.func,
   carInfo: PropTypes.func,
-  error: PropTypes.arrayOf(PropTypes.object)
+  error: PropTypes.arrayOf(
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        path: PropTypes.object,
+        first: PropTypes.bool,
+        last: PropTypes.bool,
+        errorPath: PropTypes.bool,
+        errorFuel: PropTypes.bool
+      })
+    )
+  )
 };
 const WrapperCarList = styled.div`
   width: 300px;

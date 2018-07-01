@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import fildNamePathList from './fildNamePathList';
-import createObjectError from './createObjectError';
 import Icon from './Icon';
 
 class ViewPath extends PureComponent {
   render() {
-    const { path, error, doubleClick } = this.props;
-    const matchNames = createObjectError(path, error);
+    const { path, doubleClick } = this.props;
     return path.name === null || path.name === undefined ? (
       <EmptyList />
     ) : (
@@ -25,13 +23,13 @@ class ViewPath extends PureComponent {
         <p>
           {fildNamePathList['dateBegin']}: {new Date(path.dateBegin).toLocaleDateString()}
         </p>
-        <Paragraph error={!matchNames.first && matchNames.path}>
+        <Paragraph error={path.first && path.errorPath}>
           <span>
             {fildNamePathList['pathBegin']}: {path.pathBegin} км
             <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathBegin', path.pathBegin)} />
           </span>
         </Paragraph>
-        <Paragraph error={matchNames.first && matchNames.path}>
+        <Paragraph error={path.last && path.errorPath}>
           <span>
             {fildNamePathList['pathEnd']}: {path.pathEnd} км
             <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathEnd', path.pathEnd)} />
@@ -40,7 +38,7 @@ class ViewPath extends PureComponent {
         <p>
           {fildNamePathList['milleage']}: {path.milleage} км
         </p>
-        <Paragraph error={!matchNames.first && matchNames.fuel}>
+        <Paragraph error={path.first && path.errorFuel}>
           <span>
             {fildNamePathList['fuelBegin']}: {path.fuelBegin} л
             <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('fuelBegin', path.fuelBegin)} />
@@ -55,7 +53,7 @@ class ViewPath extends PureComponent {
         <p>
           {fildNamePathList['deltaFuel']}: {path.deltaFuel} л
         </p>
-        <Paragraph error={matchNames.first && matchNames.fuel}>
+        <Paragraph error={path.last && path.errorFuel}>
           {fildNamePathList['fuelEnd']}: {path.fuelEnd} л
         </Paragraph>
       </View>

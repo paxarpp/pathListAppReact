@@ -2,62 +2,58 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css, keyframes } from 'styled-components';
 
-import createObjectError from './createObjectError';
 import Icon from './Icon';
 
-const RowTD = ({ path, handler, error, doubleClick, deletePath, selectPath }) => {
-  const matchNames = createObjectError(path, error);
-  return (
-    <WrapTr onClick={path.name !== null ? handler(path) : null} selected={selectPath.dateBegin === path.dateBegin}>
-      {path.dateBegin === null ? <td /> : <td>{new Date(path.dateBegin).toLocaleDateString()}</td>}
-      <td>{path.fuel}</td>
-      <td>
-        {path.constFuelChange}
-        <SpanExtension>{path.extension === 'true' ? ' прицеп' : ''}</SpanExtension>
-      </td>
-      <td>
-        {path.name !== null ? (
-          <Fragment>
-            <Span error={!matchNames.first && matchNames.path}>{path.pathBegin}</Span>
-            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathBegin', path.pathBegin)} />
-          </Fragment>
-        ) : null}
-      </td>
-      <td>
-        {path.name !== null ? (
-          <Fragment>
-            <Span error={matchNames.first && matchNames.path}>{path.pathEnd}</Span>
-            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathEnd', path.pathEnd)} />
-          </Fragment>
-        ) : null}
-      </td>
-      <td>{path.milleage}</td>
-      <td>
-        {path.name !== null ? (
-          <Fragment>
-            <Span error={!matchNames.first && matchNames.fuel}>{path.fuelBegin}</Span>
-            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('fuelBegin', path.fuelBegin)} />
-          </Fragment>
-        ) : null}
-      </td>
-      <td>
-        {path.name !== null ? (
-          <span>
-            {path.addFuel}
-            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('addFuel', path.addFuel)} />
-          </span>
-        ) : null}
-      </td>
-      <td>{path.deltaFuel}</td>
-      <Td error={matchNames.first && matchNames.fuel}>{path.fuelEnd}</Td>
-      <td>{path.name !== null ? <Icon name="Delete" color="red" onClick={deletePath(path)} /> : null}</td>
-    </WrapTr>
-  );
-};
+const RowTD = ({ path, handler, doubleClick, deletePath, selectPath }) => (
+  <WrapTr onClick={path.name !== null ? handler(path) : null} selected={selectPath.dateBegin === path.dateBegin}>
+    {path.dateBegin === null ? <td /> : <td>{new Date(path.dateBegin).toLocaleDateString()}</td>}
+    <td>{path.fuel}</td>
+    <td>
+      {path.constFuelChange}
+      <SpanExtension>{path.extension === 'true' ? ' прицеп' : ''}</SpanExtension>
+    </td>
+    <td>
+      {path.name !== null ? (
+        <Fragment>
+          <Span error={path.first && path.errorPath}>{path.pathBegin}</Span>
+          <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathBegin', path.pathBegin)} />
+        </Fragment>
+      ) : null}
+    </td>
+    <td>
+      {path.name !== null ? (
+        <Fragment>
+          <Span error={path.last && path.errorPath}>{path.pathEnd}</Span>
+          <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathEnd', path.pathEnd)} />
+        </Fragment>
+      ) : null}
+    </td>
+    <td>{path.milleage}</td>
+    <td>
+      {path.name !== null ? (
+        <Fragment>
+          <Span error={path.first && path.errorFuel}>{path.fuelBegin}</Span>
+          <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('fuelBegin', path.fuelBegin)} />
+        </Fragment>
+      ) : null}
+    </td>
+    <td>
+      {path.name !== null ? (
+        <span>
+          {path.addFuel}
+          <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('addFuel', path.addFuel)} />
+        </span>
+      ) : null}
+    </td>
+    <td>{path.deltaFuel}</td>
+    <Td error={path.last && path.errorFuel}>{path.fuelEnd}</Td>
+    <td>{path.name !== null ? <Icon name="Delete" color="red" onClick={deletePath(path)} /> : null}</td>
+  </WrapTr>
+);
+
 RowTD.propTypes = {
   path: PropTypes.object,
   handler: PropTypes.func,
-  error: PropTypes.arrayOf(PropTypes.object),
   doubleClick: PropTypes.func,
   deletePath: PropTypes.func,
   selectPath: PropTypes.oneOfType([PropTypes.string, PropTypes.object])

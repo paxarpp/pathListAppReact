@@ -115,12 +115,15 @@ const mapDispatchToProps = dispatch => {
 };
 TableContainer.propTypes = {
   error: PropTypes.arrayOf(
-    PropTypes.shape({
-      path: PropTypes.object,
-      first: PropTypes.bool,
-      errorPath: PropTypes.bool,
-      errorFuel: PropTypes.bool
-    })
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        path: PropTypes.object,
+        first: PropTypes.bool,
+        last: PropTypes.bool,
+        errorPath: PropTypes.bool,
+        errorFuel: PropTypes.bool
+      })
+    )
   ),
   pathLists: PropTypes.array,
   selectPathList: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),

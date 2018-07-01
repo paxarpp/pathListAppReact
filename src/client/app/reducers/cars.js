@@ -138,7 +138,7 @@ export const reducer = handleActions(
     [closeWindowDispatch]: (state, action) => {
       return {
         ...state,
-        [action.payload]: ''
+        [action.payload]: false
       };
     },
     [loadLocalStorageDispatch]: (state, action) => {

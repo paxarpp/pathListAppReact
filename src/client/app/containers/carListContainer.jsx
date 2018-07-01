@@ -96,7 +96,7 @@ CarListContainer.propTypes = {
   selectedCar: PropTypes.string,
   deleteCar: PropTypes.func,
   chError: PropTypes.func,
-  error: PropTypes.arrayOf(PropTypes.object),
+  error: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
   carInfo: PropTypes.func,
   addCar: PropTypes.func,
   addPath: PropTypes.func
