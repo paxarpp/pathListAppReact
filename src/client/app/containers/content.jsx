@@ -106,7 +106,7 @@ Content.propTypes = {
   isNewPath: PropTypes.bool,
   selectedCar: PropTypes.string,
   pathLists: PropTypes.array,
-  selectPathList: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  selectPathList: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.object]),
   saveUpdate: PropTypes.func,
   load: PropTypes.func,
   chError: PropTypes.func

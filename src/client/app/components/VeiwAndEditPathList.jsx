@@ -36,7 +36,7 @@ VeiwAndEditPathList.propTypes = {
   close: PropTypes.func,
   selectPathList: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   doubleClick: PropTypes.func,
-  error: PropTypes.arrayOf(PropTypes.object)
+  error: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object))
 };
 const HeaderText = styled.h2`
   text-align: center;

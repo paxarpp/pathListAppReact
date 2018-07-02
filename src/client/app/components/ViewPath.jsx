@@ -63,7 +63,7 @@ class ViewPath extends PureComponent {
 ViewPath.propTypes = {
   path: PropTypes.object,
   doubleClick: PropTypes.func,
-  error: PropTypes.arrayOf(PropTypes.object)
+  error: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object))
 };
 const View = styled.div`
   display: flex;
