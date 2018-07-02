@@ -452,7 +452,6 @@ const errorHeadResult = props =>
   `;
 const ResultHeader = styled.h4`
   margin: 5px 0 2px 0;
-  border-bottom: 1px solid #00000080;
   ${errorHeadResult};
 `;
 const ColumnViewRow = props =>
