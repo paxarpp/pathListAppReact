@@ -5,14 +5,19 @@ import PropTypes from 'prop-types';
 import Car from './Car.jsx';
 import CountErr from '../components/CountErr';
 
+const prepareCount = (error, car) => {
+  const arr = error
+    .filter(el => el.find(elem => elem.name === car.name) && el)
+    .map(el => el.filter(path => (path.errorFuel || path.errorPath) && path));
+  return arr[0] ? arr[0].length : 0;
+};
+
 const CarList = ({ cars, selectedCar, deleteCarHandler, error, carInfo }) => (
   <WrapperCarList>
     {cars.map(car => (
       <List key={car.name}>
         <Car selectedCar={selectedCar} car={car} handler={carInfo(car.name)} deleteCarHandler={deleteCarHandler} />
-        {error.find(elem => elem.name === car.name) ? (
-          <CountErr count={error.filter(elem => elem.name === car.name).length / 2} />
-        ) : null}
+        {prepareCount(error, car) != 0 && <CountErr count={prepareCount(error, car) / 2} />}
       </List>
     ))}
   </WrapperCarList>

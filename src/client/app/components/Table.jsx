@@ -48,8 +48,7 @@ const Table = ({
       </tbody>
     </WrapTable>
     <PaginationButton length={length} page={page} stringOnPage={stringOnPage} handlerPagination={handlerPagination} />
-    {pathLists.length ? <Count count={pathLists.length} position="top" /> : null}
-    {error.length ? <Count text={'ошибок: '} count={error.length / 2} position="bottom" /> : null}
+    {pathLists.length ? <Count count={pathLists.length} position="bottom" /> : null}
   </WrapperPathListSelectedCar>
 );
 Table.propTypes = {
