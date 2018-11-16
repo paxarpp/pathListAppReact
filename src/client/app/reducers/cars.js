@@ -67,9 +67,7 @@ export const reducer = handleActions(
         ...state,
         selectedCar: state.selectedCar === action.payload ? null : action.payload,
         pathLists: state.pathLists
-          .filter(path => {
-            return path.name === action.payload;
-          })
+          .filter(path => path.name === action.payload)
           .sort((a, b) => {
             if (a.dateBegin < b.dateBegin) {
               return -1;
@@ -79,11 +77,7 @@ export const reducer = handleActions(
               return 0;
             }
           })
-          .concat(
-            state.pathLists.filter(path => {
-              return path.name !== action.payload;
-            })
-          )
+          .concat(state.pathLists.filter(path => path.name !== action.payload))
       };
     },
     [infoPathReducer]: (state, action) => {
@@ -95,12 +89,8 @@ export const reducer = handleActions(
     [deleteCarReducer]: (state, action) => {
       return {
         ...state,
-        cars: state.cars.filter(car => {
-          return car.name !== action.payload;
-        }),
-        pathLists: state.pathLists.filter(path => {
-          return path.name !== action.payload;
-        })
+        cars: state.cars.filter(car => car.name !== action.payload),
+        pathLists: state.pathLists.filter(path => path.name !== action.payload)
       };
     },
     [addCarReducer]: (state, action) => {
@@ -118,9 +108,9 @@ export const reducer = handleActions(
     [deletePathReducer]: (state, action) => {
       return {
         ...state,
-        pathLists: state.pathLists.filter(path => {
-          return path.name !== action.payload.name || path.dateBegin !== action.payload.dateBegin;
-        })
+        pathLists: state.pathLists.filter(
+          path => path.name !== action.payload.name || path.dateBegin !== action.payload.dateBegin
+        )
       };
     },
     [addPathReducer]: (state, action) => {

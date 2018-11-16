@@ -18,6 +18,7 @@ class Content extends Component {
     field: null,
     value: null
   };
+
   doubleClick = (field, value) => event => {
     const coordX = event.clientX;
     const coordY = event.clientY;
@@ -28,6 +29,7 @@ class Content extends Component {
       value: value
     });
   };
+
   handlerConf = status => e => {
     if (status) {
       const { saveUpdate } = this.props;
@@ -41,6 +43,7 @@ class Content extends Component {
       this.clearClick(e);
     }
   };
+
   clearClick = event => {
     event.preventDefault();
     this.setState({
@@ -50,16 +53,19 @@ class Content extends Component {
       value: null
     });
   };
+
   onChange = e => {
     this.setState({
       value: Math.round(+e.currentTarget.value * 100) / 100
     });
   };
+
   componentDidMount() {
     const { load, chError } = this.props;
     load();
     chError();
   }
+
   render() {
     const { isNewCar, isNewPath, selectedCar, selectPathList, pathLists } = this.props;
     const { field } = this.state;
@@ -85,6 +91,7 @@ class Content extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     isNewCar: state.isNewCar,
@@ -101,6 +108,7 @@ const mapDispatchToProps = dispatch => {
     saveUpdate: result => saveUpdateData(dispatch, result)
   };
 };
+
 Content.propTypes = {
   isNewCar: PropTypes.bool,
   isNewPath: PropTypes.bool,
@@ -116,4 +124,5 @@ const Container = styled.div`
   display: flex;
   flex-flow: row wrap;
 `;
+
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

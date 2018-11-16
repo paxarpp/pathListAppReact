@@ -2,9 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const Footer = ({ children }) => {
-  return <Wrap>{children}</Wrap>;
-};
+const Footer = ({ children }) => <Wrap>{children}</Wrap>;
+
 Footer.propTypes = {
   children: PropTypes.any
 };
@@ -16,4 +15,5 @@ const Wrap = styled.footer`
   background-color: #2bbbad7a;
   justify-content: center;
 `;
+
 export default Footer;

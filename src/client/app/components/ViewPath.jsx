@@ -60,6 +60,7 @@ class ViewPath extends PureComponent {
     );
   }
 }
+
 ViewPath.propTypes = {
   path: PropTypes.object,
   doubleClick: PropTypes.func,
@@ -106,4 +107,5 @@ const isError = props =>
 const Paragraph = styled.p`
   ${isError};
 `;
+
 export default ViewPath;

@@ -15,4 +15,5 @@ const fildNamePathList = {
   constFuelChangeExt: 'паспортный расход на 100км с прицепом',
   extension: 'возможно наличие прицепа'
 };
+
 export default fildNamePathList;

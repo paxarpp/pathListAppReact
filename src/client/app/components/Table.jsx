@@ -32,25 +32,24 @@ const Table = ({
         <RowTH handlerTable={handlerTableSort} reverse={reverse} name={name} />
       </thead>
       <tbody>
-        {tempArr.map((path, indx) => {
-          return (
-            <RowTD
-              path={path}
-              key={path.dateBegin + indx}
-              handler={handlerTableSelect}
-              error={error}
-              doubleClick={doubleClick}
-              deletePath={deletePath}
-              selectPath={selectPath}
-            />
-          );
-        })}
+        {tempArr.map((path, indx) => (
+          <RowTD
+            path={path}
+            key={path.dateBegin + indx}
+            handler={handlerTableSelect}
+            error={error}
+            doubleClick={doubleClick}
+            deletePath={deletePath}
+            selectPath={selectPath}
+          />
+        ))}
       </tbody>
     </WrapTable>
     <PaginationButton length={length} page={page} stringOnPage={stringOnPage} handlerPagination={handlerPagination} />
     {pathLists.length ? <Count count={pathLists.length} position="bottom" /> : null}
   </WrapperPathListSelectedCar>
 );
+
 Table.propTypes = {
   error: PropTypes.arrayOf(
     PropTypes.arrayOf(
@@ -116,4 +115,5 @@ const WrapTable = styled.table`
     position: relative;
   }
 `;
+
 export default Table;

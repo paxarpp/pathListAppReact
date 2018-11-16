@@ -44,6 +44,7 @@ const InputExtension = ({ extension, handleChange, isWrong, constFuelChangeExt }
     )}
   </Fragment>
 );
+
 InputExtension.propTypes = {
   extension: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   handleChange: PropTypes.func.isRequired,
@@ -62,4 +63,5 @@ const error = `
 const WrapInput = styled(Input)`
   ${props => props.error && error};
 `;
+
 export default InputExtension;

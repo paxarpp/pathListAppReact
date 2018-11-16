@@ -13,6 +13,7 @@ import Confirm from '../components/Confirm';
 import { deleteCarToName, addNewCar, infoCarToName } from '../actions/cars.js';
 import { checkError, addNewPath } from '../actions/pathLists.js';
 import saveToLocalStorage from '../components/saveToLocalStorage.js';
+
 class CarListContainer extends Component {
   constructor(props) {
     super(props);
@@ -21,16 +22,19 @@ class CarListContainer extends Component {
       name: ''
     };
   }
+
   componentDidUpdate() {
     const { cars, pathLists } = this.props;
     saveToLocalStorage(cars, pathLists);
   }
+
   deleteCar = name => () => {
     this.setState({
       popUpConfirm: true,
       name
     });
   };
+
   deleteCarConfirm = status => {
     const { deleteCar, chError } = this.props;
     const { name } = this.state;
@@ -43,6 +47,7 @@ class CarListContainer extends Component {
       chError();
     }
   };
+
   render() {
     const { cars, selectedCar, pathLists, error } = this.props;
     const { popUpConfirm } = this.state;
@@ -64,7 +69,6 @@ class CarListContainer extends Component {
           <Primary handlerClick={() => this.props.addCar()}>
             <Icon name="Add" />авто
           </Primary>
-
           <Primary handlerClick={() => this.props.addPath()}>
             <Icon name="Add" />лист
           </Primary>
@@ -73,6 +77,7 @@ class CarListContainer extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     cars: state.cars,
@@ -90,6 +95,7 @@ const mapDispatchToProps = dispatch => {
     addPath: () => addNewPath(dispatch)
   };
 };
+
 CarListContainer.propTypes = {
   cars: PropTypes.arrayOf(PropTypes.object),
   pathLists: PropTypes.arrayOf(PropTypes.object),
@@ -110,4 +116,5 @@ const WrapperCarListContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
 `;
+
 export default connect(mapStateToProps, mapDispatchToProps)(CarListContainer);

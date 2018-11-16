@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -8,20 +8,16 @@ import Header from '../components/header';
 import ViewPath from '../components/ViewPath';
 import Icon from './Icon';
 
-class VeiwAndEditPathList extends Component {
-  render() {
-    const { selectPathList, error } = this.props;
-    return (
-      <PathListView>
-        <Header>
-          <HeaderText>Выбран путевой лист</HeaderText>
-          <WrapIcon onClick={() => this.props.close('selectPathList')} name="Clear" color="red" />
-        </Header>
-        <ViewPath path={selectPathList} error={error} doubleClick={this.props.doubleClick} />
-      </PathListView>
-    );
-  }
-}
+const VeiwAndEditPathList = ({ selectPathList, error, close, doubleClick }) => (
+  <PathListView>
+    <Header>
+      <HeaderText>Выбран путевой лист</HeaderText>
+      <WrapIcon onClick={() => close('selectPathList')} name="Clear" color="red" />
+    </Header>
+    <ViewPath path={selectPathList} error={error} doubleClick={doubleClick} />
+  </PathListView>
+);
+
 const mapStateToProps = state => {
   return {
     error: state.error
@@ -32,6 +28,7 @@ const mapDispatchToProps = dispatch => {
     close: selectPathList => closeWindow(dispatch, selectPathList)
   };
 };
+
 VeiwAndEditPathList.propTypes = {
   close: PropTypes.func,
   selectPathList: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -56,4 +53,5 @@ const WrapIcon = styled(Icon)`
   top: 5px;
   right: 5px;
 `;
+
 export default connect(mapStateToProps, mapDispatchToProps)(VeiwAndEditPathList);
