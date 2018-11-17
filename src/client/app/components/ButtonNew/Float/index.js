@@ -1,25 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 const Add = ({ color = '#fff', size = 24 }) => (
-  <svg
-    version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
-    x="0px"
-    y="0px"
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill={color}
-  >
-    <g id="Bounding_Boxes">
-      <g id="ui_x5F_spec_x5F_header_copy_3" display="none" />
+  <svg x="0px" y="0px" width={size} height={size} viewBox="0 0 24 24" fill={color}>
+    <g>
       <path fill="none" d="M0,0h24v24H0V0z" />
     </g>
-    <g id="Sharp">
-      <g id="ui_x5F_spec_x5F_header_copy_4" display="none" />
+    <g>
       <path d="M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6V13z" />
     </g>
   </svg>
@@ -76,19 +64,19 @@ const ripple = keyframes`
   }
 }
 `;
-const large = `
+const large = css`
   height: 56px;
   width: 56px;
 `;
-const small = `
+const small = css`
   height: 32px;
   width: 32px;
 `;
-const norm = `
+const norm = css`
   height: 40px;
   width: 40px;
 `;
-const pulseStyle = `
+const pulseStyle = css`
   overflow: visible;
   position: relative;
   &:before {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 const Flat = ({ children, handlerClick, disable, ...props }) => (
   <Main onClick={disable ? null : handlerClick} {...props} disable={disable}>
@@ -68,26 +68,26 @@ const rippleSec = keyframes`
   }
 }
 `;
-const large = `
+const large = css`
   height: 54px;
   line-height: 54px;
   font-size: 16px;
   padding: 0 28px;
 `;
 
-const small = `
+const small = css`
   height: 32px;
   line-height: 32px;
   font-size: 13px;
   padding: 0 14px;
 `;
-const norm = `
+const norm = css`
   height: 36px;
   line-height: 36px;
   padding: 0 16px;
   font-size: 14px;
 `;
-const disabledBtn = `
+const disabledBtn = css`
   pointer-events: none;
   background-color: #DFDFDF !important;
   -webkit-box-shadow: none;
