@@ -17,7 +17,7 @@ const CarList = ({ cars, selectedCar, deleteCarHandler, error, carInfo }) => (
     {cars.map(car => (
       <List key={car.name}>
         <Car selectedCar={selectedCar} car={car} handler={carInfo(car.name)} deleteCarHandler={deleteCarHandler} />
-        {prepareCount(error, car) != 0 && <CountErr count={prepareCount(error, car) / 2} />}
+        {prepareCount(error, car) !== 0 && <CountErr count={prepareCount(error, car) / 2} />}
       </List>
     ))}
   </WrapperCarList>

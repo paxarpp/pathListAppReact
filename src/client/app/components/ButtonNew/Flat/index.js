@@ -89,10 +89,10 @@ const norm = css`
 `;
 const disabledBtn = css`
   pointer-events: none;
-  background-color: #DFDFDF !important;
+  background-color: #dfdfdf !important;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #9F9F9F !important;
+  color: #9f9f9f !important;
   cursor: default;
 `;
 const Main = styled.button`

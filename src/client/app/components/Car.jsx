@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Icon from './Icon';
 
@@ -10,13 +10,15 @@ const Car = ({ car, handler, selectedCar, deleteCarHandler }) => (
     <Icon name="Delete" color="red" onClick={deleteCarHandler(car.name)} />
   </Wrap>
 );
+
 Car.propTypes = {
   car: PropTypes.object,
   selectedCar: PropTypes.string,
   handler: PropTypes.func,
   deleteCarHandler: PropTypes.func
 };
-const selected = `
+
+const selected = css`
   background-color: #fff;
   width: 100%;
   border-radius: 20px 0 0 20px;
@@ -41,6 +43,7 @@ const selected = `
     right: 0;
   }
 `;
+
 const Wrap = styled.div`
   display: flex;
   justify-content: space-between;
@@ -49,4 +52,5 @@ const Wrap = styled.div`
   padding-left: 1rem;
   ${props => props.selectedCar === props.name && selected};
 `;
+
 export default Car;

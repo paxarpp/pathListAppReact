@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css, keyframes } from 'styled-components';
+import { ifNotDisabled, ifNotDisabledHover } from '../constants';
 
 const ButtonMain = ({ children, handlerClick, disable, ...props }) => (
   <Main onClick={disable ? null : handlerClick} {...props} disable={disable}>
@@ -51,6 +52,7 @@ const norm = css`
   padding: 0 16px;
   font-size: 14px;
 `;
+
 const Main = styled.button`
   margin: 5px;
   position: relative;
@@ -65,24 +67,15 @@ const Main = styled.button`
   vertical-align: middle;
   text-decoration: none;
   color: #fff;
-  background-color: #26a69a;
-  background-color: ${props => props.danger && '#ff5454'};
-  background-color: ${props => props.second && '#aaa'};
-  background-color: ${props => props.disable && '#e5e5e5'};
+  background-color: ${props =>
+    props.danger ? '#ff5454' : props.second ? '#aaa' : props.disable ? '#e5e5e5' : '#26a69a'};
   text-align: center;
   letter-spacing: 0.5px;
   transition: background-color 0.3s ease-out;
-  cursor: ${props => !props.disable && 'pointer'};
   outline: none;
-  ${props =>
-    !props.disable &&
-    'box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2)'};
+  ${ifNotDisabled};
   :hover {
-    ${props => !props.disable && 'background-color:'} ${props =>
-      (props.danger && 'red') || (props.second && '#aab') || '#2bbbad'};
-    ${props =>
-      !props.disable &&
-      'box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2)'};
+    ${ifNotDisabledHover};
   }
   :after {
     content: '';

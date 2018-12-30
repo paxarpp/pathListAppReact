@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css, keyframes } from 'styled-components';
+import { ifNotDisabled, ifNotDisabledHover } from '../constants';
 
 const Add = ({ color = '#fff', size = 24 }) => (
   <svg x="0px" y="0px" width={size} height={size} viewBox="0 0 24 24" fill={color}>
@@ -18,10 +19,12 @@ const ButtonFloat = ({ children, handlerClick, disable, ...props }) => (
     {children ? children : <Add />}
   </Main>
 );
+
 Add.propTypes = {
   color: PropTypes.string,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
+
 ButtonFloat.propTypes = {
   handlerClick: PropTypes.func,
   children: PropTypes.any,
@@ -32,6 +35,7 @@ ButtonFloat.propTypes = {
   small: PropTypes.bool,
   disable: PropTypes.bool
 };
+
 const pulseAnimation = keyframes`
   0% {
     opacity: 1;
@@ -49,6 +53,7 @@ const pulseAnimation = keyframes`
             transform: scale(1.5);
   }
 `;
+
 const ripple = keyframes`
   0% {
     transform: scale(0, 0);
@@ -64,18 +69,22 @@ const ripple = keyframes`
   }
 }
 `;
+
 const large = css`
   height: 56px;
   width: 56px;
 `;
+
 const small = css`
   height: 32px;
   width: 32px;
 `;
+
 const norm = css`
   height: 40px;
   width: 40px;
 `;
+
 const pulseStyle = css`
   overflow: visible;
   position: relative;
@@ -97,6 +106,7 @@ const pulseStyle = css`
     z-index: -1;
   }
 `;
+
 const Main = styled.button`
   position: relative;
   overflow: hidden;
@@ -105,28 +115,19 @@ const Main = styled.button`
   overflow: hidden;
   z-index: 1;
   padding: 0;
-  background-color: #26a69a;
-  background-color: ${props => props.danger && '#ff5454'};
-  background-color: ${props => props.second && '#aaa'};
-  background-color: ${props => props.disable && '#e5e5e5'};
+  background-color: ${props =>
+    props.danger ? '#ff5454' : props.second ? '#aaa' : props.disable ? '#e5e5e5' : '#26a69a'};
   border-radius: 50%;
   transition: background-color 0.3s;
-  cursor: ${props => !props.disable && 'pointer'};
   vertical-align: middle;
   border: none;
   outline: none;
   ${props => !props.large && !props.small && norm};
   ${props => props.large && large};
   ${props => props.small && small};
-  ${props =>
-    !props.disable &&
-    'box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2)'};
+  ${ifNotDisabled};
   :hover {
-    ${props => !props.disable && 'background-color:'} ${props =>
-      (props.danger && 'red') || (props.second && '#aab') || '#2bbbad'};
-    ${props =>
-      !props.disable &&
-      'box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2)'};
+    ${ifNotDisabledHover};
   }
   ${props => props.pulse && pulseStyle};
   :after {
