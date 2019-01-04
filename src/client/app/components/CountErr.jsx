@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const CountErr = ({ count }) => (
-  <Wrap>
-    <Span>{count}</Span>
-  </Wrap>
-);
+const CountErr = ({ count }) =>
+  count === 0 ? null : (
+    <Wrap>
+      <Span>{count}</Span>
+    </Wrap>
+  );
 CountErr.propTypes = {
   count: PropTypes.number
 };

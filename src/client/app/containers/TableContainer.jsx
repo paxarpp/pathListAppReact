@@ -6,6 +6,7 @@ import Table from '../components/Table';
 import paginationData from '../components/paginationData';
 import prepareNullstringForTable from '../components/prepareNullstringForTable';
 import { infoPathToName, deletePathToName, checkError } from '../actions/pathLists.js';
+
 class TableContainer extends Component {
   constructor(props) {
     super(props);
@@ -18,9 +19,10 @@ class TableContainer extends Component {
     };
   }
   UNSAFE_componentWillReceiveProps({ pathLists }) {
-    const prevValue = this.state.pathListsCar.length === 0 ? null : this.state.pathListsCar[0].name;
+    const { pathListsCar } = this.state;
+    const prevValue = pathListsCar.length === 0 ? null : pathListsCar[0].name;
     const newValue = pathLists.length === 0 ? null : pathLists[0].name;
-    if (prevValue !== newValue || this.state.pathListsCar.length !== pathLists.length) {
+    if (prevValue !== newValue || pathListsCar.length !== pathLists.length) {
       this.setState(prev => ({
         ...prev,
         pathListsCar: pathLists
@@ -29,38 +31,14 @@ class TableContainer extends Component {
   }
   handlerTableSort = name => {
     if (name) {
-      const { reverse } = this.state;
-      if (reverse) {
-        const { pathListsCar } = this.state;
-        this.setState({
-          pathListsCar: pathListsCar.slice().sort((a, b) => {
-            if (b[name] > a[name]) {
-              return 1;
-            } else if (b[name] < a[name]) {
-              return -1;
-            } else {
-              return 0;
-            }
-          }),
-          reverse: !reverse,
-          name
-        });
-      } else {
-        const { pathListsCar } = this.state;
-        this.setState({
-          pathListsCar: pathListsCar.slice().sort((a, b) => {
-            if (b[name] > a[name]) {
-              return -1;
-            } else if (b[name] < a[name]) {
-              return 1;
-            } else {
-              return 0;
-            }
-          }),
-          reverse: !reverse,
-          name
-        });
-      }
+      const { reverse, pathListsCar } = this.state;
+      const _rev = reverse ? -1 : 1;
+
+      this.setState({
+        pathListsCar: pathListsCar.slice().sort(this._sorting(name, _rev)),
+        reverse: !reverse,
+        name
+      });
     }
   };
   choisePaginationString = e => {
@@ -74,6 +52,25 @@ class TableContainer extends Component {
     deletePath(path);
     chError();
   };
+
+  _sorting = (name, rev) => (a, b) => {
+    if (b[name] > a[name]) {
+      return 1 * rev;
+    } else if (b[name] < a[name]) {
+      return -1 * rev;
+    } else {
+      return 0;
+    }
+  };
+
+  handlerTableSelect = path => () => {
+    this.props.pathInfo(path);
+  };
+
+  hendlerPagination = page => {
+    this.setState({ page });
+  };
+
   render() {
     const { page, stringOnPage, pathListsCar, reverse, name } = this.state;
     const dataArr = prepareNullstringForTable(paginationData(page, stringOnPage, pathListsCar), stringOnPage);
@@ -86,11 +83,9 @@ class TableContainer extends Component {
         stringOnPage={stringOnPage}
         length={pathListsCar.length}
         tempArr={dataArr}
-        handlerPagination={page => {
-          this.setState({ page });
-        }}
+        handlerPagination={this.hendlerPagination}
         handlerTableSort={this.handlerTableSort}
-        handlerTableSelect={path => () => this.props.pathInfo(path)}
+        handlerTableSelect={this.handlerTableSelect}
         choisePaginationString={this.choisePaginationString}
         doubleClick={this.props.doubleClick}
         deletePath={this.deletePath}
