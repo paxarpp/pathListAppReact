@@ -121,7 +121,7 @@ CreateCar.propTypes = {
   cars: PropTypes.array
 };
 const HeaderText = styled.h2`
-  align-text: center;
+  text-align: center;
 `;
 const WrapHeader = styled(Header)`
   position: relative;
