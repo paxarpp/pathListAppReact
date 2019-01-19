@@ -49,7 +49,7 @@ class CarListContainer extends Component {
   };
 
   render() {
-    const { cars, selectedCar, pathLists, error } = this.props;
+    const { cars, selectedCar, error } = this.props;
     const { popUpConfirm } = this.state;
     return (
       <WrapperCarListContainer>
@@ -59,7 +59,6 @@ class CarListContainer extends Component {
         {popUpConfirm && <Confirm handler={this.deleteCarConfirm} />}
         <CarList
           selectedCar={selectedCar}
-          pathLists={pathLists}
           cars={cars}
           deleteCarHandler={this.deleteCar}
           carInfo={name => () => this.props.carInfo(name)}

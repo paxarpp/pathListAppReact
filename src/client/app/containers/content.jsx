@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
+import { createSelector } from 'reselect';
 import CreateCar from '../components/CreateCar';
 import CreatePath from '../components/CreatePath';
 import TableContainer from './TableContainer';
@@ -38,10 +38,8 @@ class Content extends Component {
         [field]: value
       };
       saveUpdate(result);
-      this.clearClick(e);
-    } else {
-      this.clearClick(e);
     }
+    this.clearClick(e);
   };
 
   clearClick = event => {
@@ -67,17 +65,14 @@ class Content extends Component {
   }
 
   render() {
-    const { isNewCar, isNewPath, selectedCar, selectPathList, pathLists } = this.props;
+    const { isNewCar, isNewPath, selectPathList, pathLists } = this.props;
     const { field } = this.state;
     return (
       <Container onContextMenu={this.clearClick}>
         {isNewCar && <CreateCar />}
         {isNewPath && <CreatePath />}
         {selectPathList && <VeiwAndEditPathList selectPathList={selectPathList} doubleClick={this.doubleClick} />}
-        <TableContainer
-          doubleClick={this.doubleClick}
-          pathLists={pathLists.filter(path => path.name === selectedCar)}
-        />
+        <TableContainer doubleClick={this.doubleClick} pathLists={pathLists} />
         {field && (
           <PopUpInput
             coordX={this.state.coordX}
@@ -93,12 +88,14 @@ class Content extends Component {
 }
 
 const mapStateToProps = state => {
+  const pathList = state => state.pathLists;
+  const selectedCar = state => state.selectedCar;
+  const pathLists = createSelector(pathList, selectedCar, (list, car) => list.filter(path => path.name === car));
   return {
     isNewCar: state.isNewCar,
     isNewPath: state.isNewPath,
-    selectedCar: state.selectedCar,
     selectPathList: state.selectPathList,
-    pathLists: state.pathLists
+    pathLists: pathLists(state)
   };
 };
 const mapDispatchToProps = dispatch => {
