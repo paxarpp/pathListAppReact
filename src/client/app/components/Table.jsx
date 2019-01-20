@@ -73,7 +73,7 @@ Table.propTypes = {
   handlerTableSort: PropTypes.func,
   handlerPagination: PropTypes.func,
   deletePath: PropTypes.func,
-  pathLists: PropTypes.arrayOf(PropTypes.object),
+  pathLists: PropTypes.array,
   selectPath: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.object]),
   doubleClick: PropTypes.func
 };

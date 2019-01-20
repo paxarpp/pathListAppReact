@@ -83,6 +83,7 @@ class CreatePath extends Component {
       });
     } else {
       if (
+        pathLists[path.name] &&
         pathLists[path.name].some(elem => {
           return elem.dateBegin === path.dateBegin;
         })
@@ -372,7 +373,7 @@ CreatePath.propTypes = {
   cars: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 const HeaderText = styled.h2`
-  align-text: center;
+  text-align: center;
 `;
 const WrapHeader = styled(Header)`
   position: relative;

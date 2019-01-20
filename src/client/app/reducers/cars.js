@@ -73,7 +73,7 @@ export const reducer = handleActions(
         selectedCar: state.selectedCar === action.payload ? null : action.payload,
         pathLists: {
           ...state.pathLists,
-          [action.payload]: [
+          [action.payload]: state.pathLists[action.payload] && [
             ...state.pathLists[action.payload].sort((a, b) => {
               if (a.dateBegin < b.dateBegin) {
                 return -1;
@@ -94,10 +94,16 @@ export const reducer = handleActions(
       };
     },
     [deleteCarReducer]: (state, action) => {
+      const pathLists = {};
+      Object.keys(state.pathLists)
+        .filter(key => key !== action.payload)
+        .map(key => {
+          pathLists[key] = [...state.pathLists[key]];
+        });
       return {
         ...state,
         cars: state.cars.filter(car => car.name !== action.payload),
-        pathLists: state.pathLists.filter(path => path.name !== action.payload)
+        pathLists
       };
     },
     [addCarReducer]: (state, action) => {
@@ -115,9 +121,12 @@ export const reducer = handleActions(
     [deletePathReducer]: (state, action) => {
       return {
         ...state,
-        pathLists: state.pathLists.filter(
-          path => path.name !== action.payload.name || path.dateBegin !== action.payload.dateBegin
-        )
+        pathLists: {
+          ...state.pathLists,
+          [action.payload.name]: state.pathLists[action.payload.name].filter(
+            path => path.dateBegin !== action.payload.dateBegin
+          )
+        }
       };
     },
     [addPathReducer]: (state, action) => {

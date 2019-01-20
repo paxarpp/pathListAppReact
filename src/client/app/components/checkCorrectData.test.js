@@ -17,8 +17,8 @@ test('check no error', () => {
       extension: 'true'
     }
   ];
-  const pathLists = [
-    {
+  const pathLists = {
+    test1: [{
       name: 'test1',
       fuel: 'AI',
       constFuelChange: 20,
@@ -51,8 +51,8 @@ test('check no error', () => {
       addFuelWinter: '',
       constFuelChangeExt: '',
       extension: 'false'
-    },
-    {
+    }],
+    test2: [{
       name: 'test2',
       fuel: 'DT',
       constFuelChange: 30,
@@ -68,8 +68,8 @@ test('check no error', () => {
       addFuelWinter: '',
       constFuelChangeExt: '',
       extension: 'false'
-    }
-  ];
+    }]
+  };
   const result = [
     [
       {
@@ -152,8 +152,9 @@ test('check 2error', () => {
       extension: 'false'
     }
   ];
-  const pathLists = [
-    {
+  const pathLists = {
+    test1: [
+      {
       name: 'test1',
       fuel: 'AI',
       constFuelChange: 20,
@@ -186,8 +187,8 @@ test('check 2error', () => {
       addFuelWinter: '',
       constFuelChangeExt: '',
       extension: 'false'
-    },
-    {
+    }],
+    test2: [{
       name: 'test2',
       fuel: 'DT',
       constFuelChange: 30,
@@ -203,8 +204,8 @@ test('check 2error', () => {
       addFuelWinter: '',
       constFuelChangeExt: '',
       extension: 'false'
-    }
-  ];
+    }]
+  };
   const result = [
     [
       {

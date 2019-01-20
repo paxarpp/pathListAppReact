@@ -26,7 +26,7 @@ export const loadLocalStorage = dispatch => {
   try {
     const obj = {};
     obj.cars = localStorage.hasOwnProperty('cars') ? JSON.parse(localStorage.getItem('cars')) : [];
-    obj.pathLists = localStorage.hasOwnProperty('pathLists') ? JSON.parse(localStorage.getItem('pathLists')) : [];
+    obj.pathLists = localStorage.hasOwnProperty('pathLists') ? JSON.parse(localStorage.getItem('pathLists')) : {};
     dispatch(loadLocalStorageDispatch(obj));
   } catch (err) {
     alert('ошибка при загрузке данных, попробуйте перезапустить программу', err);

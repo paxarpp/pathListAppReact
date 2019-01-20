@@ -1,5 +1,5 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   devtool: 'source-map',
   entry: path.join(__dirname, 'src', 'client', 'app', 'index.jsx'),
@@ -9,24 +9,26 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx']
+    // ['.ts', '.tsx', '.js', '.jsx']
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css'
-    })
-  ],
+  // plugins: [
+  //   new MiniCssExtractPlugin({
+  //     filename: '[name].css',
+  //     chunkFilename: '[id].css'
+  //   })
+  // ],
   module: {
     rules: [
       {
         test: /\.jsx?/,
+        // test: /\.(ts|js)x?$/,
         include: path.join(__dirname, 'src', 'client', 'app'),
         use: 'babel-loader'
-      },
-      {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
       }
+      // {
+      //   test: /\.css$/,
+      //   use: [MiniCssExtractPlugin.loader, 'css-loader']
+      // }
     ]
   },
   devServer: {

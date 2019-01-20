@@ -109,8 +109,8 @@ const mapDispatchToProps = dispatch => {
 Content.propTypes = {
   isNewCar: PropTypes.bool,
   isNewPath: PropTypes.bool,
-  selectedCar: PropTypes.string,
-  pathLists: PropTypes.object,
+  selectedCar: PropTypes.array,
+  pathLists: PropTypes.array,
   selectPathList: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.object]),
   saveUpdate: PropTypes.func,
   load: PropTypes.func,

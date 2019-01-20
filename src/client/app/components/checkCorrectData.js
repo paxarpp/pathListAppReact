@@ -1,7 +1,6 @@
 const checkCorrectData = (cars, pathLists) => {
-  return cars
-    .map(car => pathLists[car.name])
-    .map(el => el.sort((a, b) => (a.dateBegin < b.dateBegin ? -1 : 1)))
+  return Object.keys(pathLists)
+    .map(el => (!pathLists[el] ? [] : pathLists[el].sort((a, b) => (a.dateBegin < b.dateBegin ? -1 : 1))))
     .map(el =>
       el.map(path => {
         path.errorPath = false;
