@@ -90,7 +90,7 @@ class Content extends Component {
 const mapStateToProps = state => {
   const pathList = state => state.pathLists;
   const selectedCar = state => state.selectedCar;
-  const pathLists = createSelector(pathList, selectedCar, (list, car) => list.filter(path => path.name === car));
+  const pathLists = createSelector(pathList, selectedCar, (list, car) => (list[car] ? list[car] : []));
   return {
     isNewCar: state.isNewCar,
     isNewPath: state.isNewPath,
@@ -110,7 +110,7 @@ Content.propTypes = {
   isNewCar: PropTypes.bool,
   isNewPath: PropTypes.bool,
   selectedCar: PropTypes.string,
-  pathLists: PropTypes.array,
+  pathLists: PropTypes.object,
   selectPathList: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.object]),
   saveUpdate: PropTypes.func,
   load: PropTypes.func,

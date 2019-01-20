@@ -83,8 +83,8 @@ class CreatePath extends Component {
       });
     } else {
       if (
-        pathLists.some(elem => {
-          return elem.name === path.name && elem.dateBegin === path.dateBegin;
+        pathLists[path.name].some(elem => {
+          return elem.dateBegin === path.dateBegin;
         })
       ) {
         this.setState({
@@ -129,35 +129,27 @@ class CreatePath extends Component {
         return car.name === value;
       })[0].constFuelChangeExt
     }));
-    if (this.props.pathLists.filter(elem => elem.name === value).length !== 0) {
+    if (this.props.pathLists[value].length !== 0) {
       this.setState(prev => ({
         ...prev,
-        pathBegin: this.props.pathLists
-          .filter(elem => {
-            return elem.name === prev.name;
-          })
-          .sort((a, b) => {
-            if (a.dateBegin > b.dateBegin) {
-              return -1;
-            } else if (a.dateBegin < b.dateBegin) {
-              return 1;
-            } else {
-              return 0;
-            }
-          })[0].pathEnd,
-        fuelBegin: this.props.pathLists
-          .filter(elem => {
-            return elem.name === prev.name;
-          })
-          .sort((a, b) => {
-            if (a.dateBegin > b.dateBegin) {
-              return -1;
-            } else if (a.dateBegin < b.dateBegin) {
-              return 1;
-            } else {
-              return 0;
-            }
-          })[0].fuelEnd
+        pathBegin: this.props.pathLists[prev.name].sort((a, b) => {
+          if (a.dateBegin > b.dateBegin) {
+            return -1;
+          } else if (a.dateBegin < b.dateBegin) {
+            return 1;
+          } else {
+            return 0;
+          }
+        })[0].pathEnd,
+        fuelBegin: this.props.pathLists[prev.name].sort((a, b) => {
+          if (a.dateBegin > b.dateBegin) {
+            return -1;
+          } else if (a.dateBegin < b.dateBegin) {
+            return 1;
+          } else {
+            return 0;
+          }
+        })[0].fuelEnd
       }));
     } else {
       this.setState(prev => ({
@@ -374,7 +366,7 @@ const mapDispatchToProps = dispatch => {
 };
 CreatePath.propTypes = {
   addDataPath: PropTypes.func.isRequired,
-  pathLists: PropTypes.arrayOf(PropTypes.object).isRequired,
+  pathLists: PropTypes.object.isRequired,
   close: PropTypes.func.isRequired,
   chError: PropTypes.func.isRequired,
   cars: PropTypes.arrayOf(PropTypes.object).isRequired
@@ -479,7 +471,7 @@ const ifRow = props =>
 const Row = styled.div`
   ${ifRow};
   select {
-    width: 100^;
+    width: 100%;
     font-size: 1.5rem;
   }
 `;

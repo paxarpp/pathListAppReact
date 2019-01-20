@@ -97,7 +97,7 @@ const mapDispatchToProps = dispatch => {
 
 CarListContainer.propTypes = {
   cars: PropTypes.arrayOf(PropTypes.object),
-  pathLists: PropTypes.arrayOf(PropTypes.object),
+  pathLists: PropTypes.object,
   selectedCar: PropTypes.string,
   deleteCar: PropTypes.func,
   chError: PropTypes.func,
