@@ -1,6 +1,10 @@
 import fildNamePathList from './fildNamePathList';
 
-const prepareNullstringForTable = (newArr, stringOnPage) => {
+interface T {
+  name: string;
+}
+
+const prepareNullstringForTable: (newArr: T[], stringOnPage: number) => T[] = (newArr, stringOnPage) => {
   const newObj = {};
   for (const field in fildNamePathList) {
     newObj[field] = null;

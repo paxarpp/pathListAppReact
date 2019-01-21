@@ -90,7 +90,11 @@ class Content extends Component {
 const mapStateToProps = state => {
   const pathList = state => state.pathLists;
   const selectedCar = state => state.selectedCar;
-  const pathLists = createSelector(pathList, selectedCar, (list, car) => (list[car] ? list[car] : []));
+  const pathLists = createSelector(
+    pathList,
+    selectedCar,
+    (list, car) => (list[car] ? list[car] : [])
+  );
   return {
     isNewCar: state.isNewCar,
     isNewPath: state.isNewPath,
@@ -122,4 +126,7 @@ const Container = styled.div`
   flex-flow: row wrap;
 `;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Content);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Content);
