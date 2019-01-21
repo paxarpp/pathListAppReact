@@ -4,10 +4,20 @@ import styled from 'styled-components';
 import Footer from './components/footer';
 import Content from './containers/content';
 import CarListContainer from './containers/carListContainer';
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    padding: 0;
+    margin: 0;
+    font-size: 22px;
+  }
+`;
 
 const App = () => {
   return (
     <Wrapper>
+      <GlobalStyle />
       <div>
         <CarListContainer />
       </div>

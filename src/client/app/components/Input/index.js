@@ -6,7 +6,7 @@ const Input = ({ placeholder, handler, value, ...props }) => {
   let inputRef = React.createRef();
   return (
     <Wrapper>
-      <InpWrap {...props} onChange={handler} innerRef={input => (inputRef = input)} value={value} />
+      <InpWrap {...props} onChange={handler} ref={input => (inputRef = input)} value={value} />
       <LabelWrap onClick={() => inputRef.focus()} value={value}>
         {placeholder}
       </LabelWrap>
