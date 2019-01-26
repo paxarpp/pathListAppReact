@@ -1,4 +1,6 @@
-const saveToLocalStorage = (cars, pathLists) => {
+import { IPath, ICar } from '../components/interfaces';
+
+const saveToLocalStorage = (cars: ICar[], pathLists: IPath[]) => {
   try {
     localStorage.setItem('cars', JSON.stringify(cars));
     localStorage.setItem('pathLists', JSON.stringify(pathLists));

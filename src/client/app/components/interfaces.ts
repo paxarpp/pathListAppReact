@@ -8,6 +8,8 @@ export interface IPath {
     milleage: number; 
     pathBegin: number; 
     pathEnd: number; 
+    dateBegin: number; 
+    dateEnd: number; 
     addFuelWinter: number; 
     ConsumptionFactoryFuel: number;
 }

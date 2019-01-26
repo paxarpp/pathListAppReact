@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { closeWindow } from '../actions/cars.js';
+import { closeWindow } from '../actions/cars';
 import Header from '../components/header';
 import ViewPath from '../components/ViewPath';
 import Icon from './Icon';
@@ -54,4 +54,7 @@ const WrapIcon = styled(Icon)`
   right: 5px;
 `;
 
-export default connect(mapStateToProps, mapDispatchToProps)(VeiwAndEditPathList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VeiwAndEditPathList);

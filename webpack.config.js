@@ -19,6 +19,6 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: path.join(__dirname, 'src', 'client', 'public'),
+    contentBase: path.join(__dirname, 'src', 'client', 'public')
   }
 };

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Table from '../components/Table';
 import paginationData from '../components/paginationData';
 import prepareNullstringForTable from '../components/prepareNullstringForTable';
-import { infoPathToName, deletePathToName, checkError } from '../actions/pathLists.js';
+import { infoPathToName, deletePathToName, checkError } from '../actions/pathLists';
 
 class TableContainer extends Component {
   constructor(props) {
@@ -128,4 +128,7 @@ TableContainer.propTypes = {
   chError: PropTypes.func
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TableContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TableContainer);
