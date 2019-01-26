@@ -1,9 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
+interface IProp {
+  name: string;
+  nameCell: string;
+  reverse: boolean;
+}
 
 import Icon from './Icon';
 
-const SortLink = ({ name, nameCell, reverse }) =>
+const SortLink = ({ name, nameCell, reverse }:IProp) =>
   name === nameCell ? (
     reverse ? (
       <Icon onClick={null} name="Arrow_Drop_Down" />
@@ -13,10 +18,5 @@ const SortLink = ({ name, nameCell, reverse }) =>
   ) : (
     <Icon onClick={null} name="UnfoldMore" />
   );
-SortLink.propTypes = {
-  nameCell: PropTypes.string,
-  reverse: PropTypes.bool,
-  name: PropTypes.string
-};
 
 export default SortLink;

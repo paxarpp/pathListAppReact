@@ -164,4 +164,7 @@ const HeadError = styled.h3`
   color: red;
   margin: 5px 0 2px 0;
 `;
-export default connect(mapStateToProps, mapDispatchToProps)(CreateCar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateCar);

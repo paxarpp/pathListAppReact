@@ -1,4 +1,6 @@
-const calculateFieldPath = path => {
+import { IPath } from './interfaces';
+
+const calculateFieldPath = (path: IPath) => {
   path.addFuel = Math.round(+path.addFuel * 100) / 100;
   path.constFuelChange = Math.round(+path.constFuelChange * 100) / 100;
   path.constFuelChangeExt = Math.round(+path.constFuelChangeExt * 100) / 100;

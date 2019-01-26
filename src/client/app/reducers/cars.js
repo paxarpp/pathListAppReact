@@ -41,7 +41,7 @@ export const reducer = handleActions(
               const nextPath = { ...path, ...action.payload };
               nextPath.milleage = Math.round((+nextPath.pathEnd - +nextPath.pathBegin) * 100) / 100;
               nextPath.ConsumptionFactoryFuel =
-                Math.round(+nextPath.milleage * +nextPath.constFuelChange / 100 * 100) / 100;
+                Math.round(((+nextPath.milleage * +nextPath.constFuelChange) / 100) * 100) / 100;
               nextPath.fuelEnd =
                 Math.round(
                   (+nextPath.fuelBegin +

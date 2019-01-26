@@ -1,0 +1,28 @@
+export interface IPath {
+    addFuel: number;
+    constFuelChange: number; 
+    constFuelChangeExt: number; 
+    deltaFuel: number; 
+    fuelBegin: number; 
+    fuelEnd: number; 
+    milleage: number; 
+    pathBegin: number; 
+    pathEnd: number; 
+    addFuelWinter: number; 
+    ConsumptionFactoryFuel: number;
+}
+
+export interface ICar {
+    name: string;
+    constFuelChange: number;
+    fuel: string;
+    extension: boolean;
+    constFuelChangeExt: number;
+}
+
+export interface IError extends IPath {
+    errorPath: boolean;
+    errorFuel: boolean;
+    first: boolean;
+    last: boolean;
+}
