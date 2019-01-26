@@ -10,9 +10,9 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import Confirm from '../components/Confirm';
 
-import { deleteCarToName, addNewCar, infoCarToName } from '../actions/cars.js';
-import { checkError, addNewPath } from '../actions/pathLists.js';
-import saveToLocalStorage from '../components/saveToLocalStorage.js';
+import { deleteCarToName, addNewCar, infoCarToName } from '../actions/cars';
+import { checkError, addNewPath } from '../actions/pathLists';
+import saveToLocalStorage from '../components/saveToLocalStorage';
 
 class CarListContainer extends Component {
   constructor(props) {

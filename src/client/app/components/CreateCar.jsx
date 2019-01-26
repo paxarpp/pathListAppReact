@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { saveCar, closeWindow } from '../actions/cars.js';
+import { saveCar, closeWindow } from '../actions/cars';
 import Icon from './Icon';
 import { Primary } from './ButtonNew';
 import InputCarValue from './InputCarValue';
 import InputExtension from './InputExtension';
 import Header from './header';
 import Footer from './footer';
-import fildNameCheckRule from './fildNameCheckRule.js';
+import fildNameCheckRule from './fildNameCheckRule';
 
 class CreateCar extends Component {
   state = {

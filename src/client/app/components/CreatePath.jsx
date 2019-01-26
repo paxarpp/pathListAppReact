@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-import { savePath, checkError } from '../actions/pathLists.js';
-import { closeWindow } from '../actions/cars.js';
+import { savePath, checkError } from '../actions/pathLists';
+import { closeWindow } from '../actions/cars';
 import { Primary } from './ButtonNew';
 import Datepicker from './Datepicker';
 import Icon from './Icon';
@@ -14,7 +14,7 @@ import Header from './header';
 import Footer from './footer';
 import calculateFieldPath from './calculateFieldPath';
 import fildNamePathList from './fildNamePathList';
-import fildNameCheckRule from './fildNameCheckRule.js';
+import fildNameCheckRule from './fildNameCheckRule';
 
 class CreatePath extends Component {
   state = {
@@ -189,8 +189,8 @@ class CreatePath extends Component {
       ...prev,
       ConsumptionFactoryFuel:
         prev.extension === 'true'
-          ? Math.round(+prev.milleage * +prev.constFuelChangeExt / 100 * 100) / 100
-          : Math.round(+prev.milleage * +prev.constFuelChange / 100 * 100) / 100
+          ? Math.round(((+prev.milleage * +prev.constFuelChangeExt) / 100) * 100) / 100
+          : Math.round(((+prev.milleage * +prev.constFuelChange) / 100) * 100) / 100
     }));
     this.setState(prev => ({
       ...prev,
@@ -484,4 +484,7 @@ const FuelChangeExt = styled.div`
   display: ${props => (props.changeExt ? 'block' : 'none')};
   background-color: #80808080;
 `;
-export default connect(mapStateToProps, mapDispatchToProps)(CreatePath);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreatePath);
