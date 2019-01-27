@@ -1,22 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-
+import { ICar } from './interfaces';
 import Icon from './Icon';
 
-const Car = ({ car, handler, selectedCar, deleteCarHandler }) => (
-  <Wrap onClick={handler} selectedCar={selectedCar} name={car.name}>
+interface IProp {
+  car: ICar;
+  selectedCar: string;
+  handler: (h: any) => any;
+  deleteCarHandler: (name: string) => any;
+};
+
+interface WrapProp {
+  isSelectedCar: boolean;
+};
+
+const Car = ({ car, handler, selectedCar, deleteCarHandler }: IProp) => (
+  <Wrap onClick={handler} isSelectedCar={selectedCar === car.name}>
     {car.name}
     <Icon name="Delete" color="red" onClick={deleteCarHandler(car.name)} />
   </Wrap>
 );
-
-Car.propTypes = {
-  car: PropTypes.object,
-  selectedCar: PropTypes.string,
-  handler: PropTypes.func,
-  deleteCarHandler: PropTypes.func
-};
 
 const selected = css`
   background-color: #fff;
@@ -50,7 +53,7 @@ const Wrap = styled.div`
   width: 100%;
   align-items: center;
   padding-left: 1rem;
-  ${props => props.selectedCar === props.name && selected};
+  ${(props: WrapProp) => props.isSelectedCar && selected};
 `;
 
 export default Car;

@@ -12,7 +12,7 @@ const CountErr = ({ count }: IProp) =>
     </Wrap>
   );
 
-const Wrap = styled('span')`
+const Wrap = styled.span`
   overflow: hidden;
   position: absolute;
   left: -18px;
@@ -21,7 +21,7 @@ const Wrap = styled('span')`
   font-size: 0.7rem;
   line-height: 2.5rem;
 `;
-const Span = styled('span')`
+const Span = styled.span`
   text-align: center;
   padding: 4px 10px;
   border-radius: 50%;

@@ -13,7 +13,7 @@ const checkCorrectData = (cars: ICar, pathLists: IPath[]):IError[] => {
       })
     )
     .map(el =>
-      el.map((path: IError, indx) => {
+      el.map((path: IError, indx: number) => {
         if (el[indx + 1]) {
           if (path.pathEnd !== el[indx + 1].pathBegin) {
             path.errorPath = true;

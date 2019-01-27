@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/paxarpp/lessons#readme",
   "dependencies": {
+    "@types/react": "^16.7.21",
+    "@types/styled-components": "^4.1.6",
     "babel-eslint": "^10.0.1",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",

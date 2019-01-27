@@ -12,6 +12,7 @@ export interface IPath {
     dateEnd: number; 
     addFuelWinter: number; 
     ConsumptionFactoryFuel: number;
+    name: string;
 }
 
 export interface ICar {

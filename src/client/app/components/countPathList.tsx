@@ -1,19 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-const Count = ({ count, position, text }) => (
+interface IProps {
+  count: number;
+  position: string;
+  text: string;
+}
+
+interface IisPosition {
+  position: string;
+}
+
+const Count = ({ count, position, text }: IProps) => (
   <CounterWrap position={position}>
     {text}
     <Span>{count}</Span>
   </CounterWrap>
 );
-Count.propTypes = {
-  count: PropTypes.number,
-  position: PropTypes.string,
-  text: PropTypes.string
-};
-const isPosition = props =>
+
+const isPosition = (props: IisPosition)=>
   props.position === 'top'
     ? css`
         right: 96px;
@@ -23,6 +28,7 @@ const isPosition = props =>
         right: 10px;
         bottom: -30px;
       `;
+
 const CounterWrap = styled.span`
   overflow: hidden;
   position: absolute;
@@ -30,6 +36,7 @@ const CounterWrap = styled.span`
   font-size: 0.7rem;
   line-height: 2.5rem;
 `;
+
 const Span = styled.span`
   text-align: center;
   padding: 4px 10px;
@@ -37,4 +44,5 @@ const Span = styled.span`
   font-size: 1.5rem;
   background-color: rgba(202, 202, 202, 0.8);
 `;
+
 export default Count;

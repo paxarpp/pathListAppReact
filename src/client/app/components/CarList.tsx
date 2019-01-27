@@ -1,18 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-
-import Car from './Car.jsx';
+import Car from './Car';
 import CountErr from '../components/CountErr';
+import { IError, ICar } from './interfaces';
 
-const prepareCount = (error, car) => {
+interface IProps {
+  cars: ICar[];
+  selectedCar: string;
+  deleteCarHandler: () => void;
+  carInfo: (name: string) => any;
+  error: IError[][];
+}
+
+const prepareCount = (error: IError[][], car: ICar) => {
   const arr = error
-    .filter(el => el.find(elem => elem.name === car.name) && el)
+    .filter((el)=> el.find(elem => elem.name === car.name) && el)
     .map(el => el.filter(path => (path.errorFuel || path.errorPath) && path));
   return arr[0] ? arr[0].length : 0;
 };
 
-const CarList = ({ cars, selectedCar, deleteCarHandler, error, carInfo }) => (
+const CarList = ({ cars, selectedCar, deleteCarHandler, error, carInfo }: IProps) => (
   <WrapperCarList>
     {cars.map(car => (
       <List key={car.name}>
@@ -23,29 +30,13 @@ const CarList = ({ cars, selectedCar, deleteCarHandler, error, carInfo }) => (
   </WrapperCarList>
 );
 
-CarList.propTypes = {
-  cars: PropTypes.arrayOf(PropTypes.object),
-  selectedCar: PropTypes.string,
-  deleteCarHandler: PropTypes.func,
-  carInfo: PropTypes.func,
-  error: PropTypes.arrayOf(
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        path: PropTypes.object,
-        first: PropTypes.bool,
-        last: PropTypes.bool,
-        errorPath: PropTypes.bool,
-        errorFuel: PropTypes.bool
-      })
-    )
-  )
-};
 const WrapperCarList = styled.div`
   width: 300px;
   padding: 50px 0 10px 20px;
   background-color: #abf2eb7a;
   flex: 1;
 `;
+
 const List = styled.div`
   display: flex;
   cursor: pointer;
@@ -59,4 +50,5 @@ const List = styled.div`
     cursor: pointer;
   }
 `;
+
 export default CarList;
