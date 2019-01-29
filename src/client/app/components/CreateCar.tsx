@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
 import { saveCar, closeWindow } from '../actions/cars';
 import Icon from './Icon';
 import { Primary } from './ButtonNew';
@@ -11,17 +9,33 @@ import InputExtension from './InputExtension';
 import Header from './header';
 import Footer from './footer';
 import fildNameCheckRule from './fildNameCheckRule';
+import { ICar } from './interfaces';
 
-class CreateCar extends Component {
+interface IProps {
+  addDataCar: (car: ICar) => void;
+  cars: ICar[];
+  close: (s: string) => void;
+}
+interface IState {
+  name: string;
+  constFuelChange: number;
+  fuel: string;
+  extension: boolean;
+  constFuelChangeExt: number;
+  isWrong: boolean | string;
+}
+
+class CreateCar extends Component<IProps, IState> {
   state = {
     name: '',
-    constFuelChange: '',
+    constFuelChange: null,
     fuel: 'AI',
-    extension: 'false',
-    constFuelChangeExt: '',
+    extension: false,
+    constFuelChangeExt: null,
     isWrong: false
   };
-  handleSubmit = () => {
+
+  public handleSubmit = () => {
     const { name, constFuelChange, fuel, extension, constFuelChangeExt } = this.state;
     const { addDataCar, cars, close } = this.props;
     const car = {
@@ -29,15 +43,15 @@ class CreateCar extends Component {
       constFuelChange,
       fuel,
       extension,
-      constFuelChangeExt: extension === 'true' ? constFuelChangeExt : ''
+      constFuelChangeExt: extension ? constFuelChangeExt : null
     };
     if (
       car.name === '' ||
       car.name[0] === ' ' ||
-      car.constFuelChange === '' ||
+      !car.constFuelChange ||
       +car.constFuelChange === 0 ||
-      (extension === 'true' && car.constFuelChangeExt === '') ||
-      (extension === 'true' && +car.constFuelChangeExt === 0) ||
+      (extension && !car.constFuelChangeExt) ||
+      (extension && +car.constFuelChangeExt === 0) ||
       cars.some(elem => elem.name === car.name)
     ) {
       this.setState(() => ({
@@ -48,35 +62,47 @@ class CreateCar extends Component {
       close('isNewCar');
     }
   };
-  handleChange = e => {
+
+  public handleChange = (e: any) => {
     const value = e.currentTarget.value;
-    const fieldName = e.currentTarget.dataset.fieldName;
+    const fieldName: string = e.currentTarget.dataset.fieldName;
     this.setState(
       prev => ({
         ...prev,
         [fieldName]: value
       }),
-      () => {
-        if (fildNameCheckRule[fieldName].test(this.state[fieldName])) {
-          this.setState({
-            isWrong: false
-          });
-        } else {
-          this.setState({
-            isWrong: fieldName
-          });
-        }
-      }
+      this.cbError(fieldName)
     );
   };
-  render() {
+
+  public close = () => {
+    const { close } = this.props;
+    close('isNewCar');
+  }
+
+  private cbError(fieldName: string): () => void {
+    return () => {
+      if (fildNameCheckRule[fieldName].test(this.state[fieldName])) {
+        this.setState({
+          isWrong: false
+        });
+      }
+      else {
+        this.setState({
+          isWrong: fieldName
+        });
+      }
+    };
+  }
+
+  public render() {
     const { name, fuel, constFuelChange, isWrong, constFuelChangeExt, extension } = this.state;
     return (
       <PopUpWrap>
         <PopUp>
           <WrapHeader>
             <HeaderText>Новая машина</HeaderText>
-            <WrapIcon onClick={() => this.props.close('isNewCar')} name="Clear" color="red" />
+            <WrapIcon onClick={this.close} name="Clear" color="red" />
           </WrapHeader>
           <PopUpContent>
             <InputCarValue
@@ -95,7 +121,7 @@ class CreateCar extends Component {
           </PopUpContent>
           {isWrong && <HeadError>ошибка введеных данных</HeadError>}
           <Footer>
-            <Primary handlerClick={this.handleSubmit} disable={isWrong != false}>
+            <Primary handlerClick={this.handleSubmit} disable={isWrong !== false}>
               Сохранить
             </Primary>
           </Footer>
@@ -106,8 +132,8 @@ class CreateCar extends Component {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    addDataCar: car => saveCar(dispatch, car),
-    close: isNewCar => closeWindow(dispatch, isNewCar)
+    addDataCar: (car: ICar) => saveCar(dispatch, car),
+    close: (isNewCar: string) => closeWindow(dispatch, isNewCar)
   };
 };
 const mapStateToProps = state => {
@@ -115,22 +141,21 @@ const mapStateToProps = state => {
     cars: state.cars
   };
 };
-CreateCar.propTypes = {
-  addDataCar: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired,
-  cars: PropTypes.array
-};
+
 const HeaderText = styled.h2`
   text-align: center;
 `;
+
 const WrapHeader = styled(Header)`
   position: relative;
 `;
+
 const WrapIcon = styled(Icon)`
   position: absolute;
   top: 5px;
   right: 5px;
 `;
+
 const PopUp = styled.div`
   padding: 0;
   box-shadow: 3px 3px 10px 1px grey;
@@ -145,6 +170,7 @@ const PopUp = styled.div`
     box-sizing: border-box;
   }
 `;
+
 const PopUpWrap = styled.div`
   position: fixed;
   top: 0;
@@ -154,16 +180,19 @@ const PopUpWrap = styled.div`
   background-color: rgba(202, 202, 202, 0.5);
   z-index: 999;
 `;
+
 const PopUpContent = styled.div`
   padding: 10px;
   box-sizing: border-box;
   width: 470px;
   transition: all 0.3s linear;
 `;
+
 const HeadError = styled.h3`
   color: red;
   margin: 5px 0 2px 0;
 `;
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
