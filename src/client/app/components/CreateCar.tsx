@@ -10,10 +10,11 @@ import Header from './header';
 import Footer from './footer';
 import fildNameCheckRule from './fildNameCheckRule';
 import { ICar } from './interfaces';
+import { createSelector } from 'reselect';
 
 interface IProps {
   addDataCar: (car: ICar) => void;
-  cars: ICar[];
+  carsName: string[];
   close: (s: string) => void;
 }
 interface IState {
@@ -37,7 +38,8 @@ class CreateCar extends Component<IProps, IState> {
 
   public handleSubmit = () => {
     const { name, constFuelChange, fuel, extension, constFuelChangeExt } = this.state;
-    const { addDataCar, cars, close } = this.props;
+    const { addDataCar, carsName, close } = this.props;
+    const isDubble = carsName.some(elem => elem === name);
     const car = {
       name,
       constFuelChange,
@@ -52,7 +54,7 @@ class CreateCar extends Component<IProps, IState> {
       +car.constFuelChange === 0 ||
       (extension && !car.constFuelChangeExt) ||
       (extension && +car.constFuelChangeExt === 0) ||
-      cars.some(elem => elem.name === car.name)
+      isDubble
     ) {
       this.setState(() => ({
         isWrong: true
@@ -137,8 +139,12 @@ const mapDispatchToProps = dispatch => {
   };
 };
 const mapStateToProps = state => {
+  const selectorCarsName = createSelector(
+    () => state.cars.map((car: ICar): string => car.name),
+    names => [...names],
+  )
   return {
-    cars: state.cars
+    carsName: selectorCarsName(state)
   };
 };
 
