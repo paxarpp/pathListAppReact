@@ -1,12 +1,21 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
+import React from 'react';
+import styled, { css } from 'styled-components';
 import Input from './Input';
 import RadioButton from './RadioButton';
 
-const InputExtension = ({ extension, handleChange, isWrong, constFuelChangeExt }) => (
-  <Fragment>
+interface IProps {
+  extension: string | boolean;
+  handleChange: (e:any) => void;
+  isWrong: string | boolean;
+  constFuelChangeExt: string;
+}
+
+interface IError {
+  error: boolean;
+}
+
+const InputExtension = ({ extension, handleChange, isWrong, constFuelChangeExt }: IProps) => (
+  <>
     <InputHeader>возможено добавление прицепа ?</InputHeader>
     <label>
       Да
@@ -42,26 +51,21 @@ const InputExtension = ({ extension, handleChange, isWrong, constFuelChangeExt }
         min={'0'}
       />
     )}
-  </Fragment>
+  </>
 );
-
-InputExtension.propTypes = {
-  extension: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  handleChange: PropTypes.func.isRequired,
-  isWrong: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  constFuelChangeExt: PropTypes.string
-};
 
 const InputHeader = styled.h4`
   margin: 5px 0 2px 0;
 `;
-const error = `
+
+const ErrorStyle = css`
   outline: 1px solid red;
   opacity: 0.7;
   transition: opacity 0.5s ease-in;
 `;
+
 const WrapInput = styled(Input)`
-  ${props => props.error && error};
+  ${({error}: IError) => error && ErrorStyle};
 `;
 
 export default InputExtension;

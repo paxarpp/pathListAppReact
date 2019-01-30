@@ -1,12 +1,22 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
+import React from 'react';
+import styled, { css } from 'styled-components';
 import Input from './Input';
 import RadioButton from './RadioButton';
 
-const InputCarValue = ({ name, fuel, handleChange, isWrong, constFuelChange }) => (
-  <Fragment>
+interface IProps {
+  fuel: string;
+  name: string;
+  handleChange: (e: any) => void;
+  isWrong: string | boolean;
+  constFuelChange: number;
+}
+
+interface IError {
+  error: boolean;
+}
+
+const InputCarValue = ({ name, fuel, handleChange, isWrong, constFuelChange }: IProps) => (
+  <>
     <InputHeader>введите название автомобиля</InputHeader>
     <WrapInput
       error={isWrong === 'name'}
@@ -50,25 +60,21 @@ const InputCarValue = ({ name, fuel, handleChange, isWrong, constFuelChange }) =
         value={'DT'}
       />
     </label>
-  </Fragment>
+  </>
 );
-InputCarValue.propTypes = {
-  fuel: PropTypes.string,
-  name: PropTypes.string,
-  handleChange: PropTypes.func.isRequired,
-  isWrong: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  constFuelChange: PropTypes.string
-};
 
 const InputHeader = styled.h4`
   margin: 5px 0 2px 0;
 `;
-const error = `
+
+const ErrorStyle = css`
   outline: 1px solid red;
   opacity: 0.7;
   transition: opacity 0.5s ease-in;
 `;
+
 const WrapInput = styled(Input)`
-  ${props => props.error && error};
+  ${({error}: IError) => error && ErrorStyle};
 `;
+
 export default InputCarValue;

@@ -1,12 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
-const Footer = ({ children }) => <Wrap>{children}</Wrap>;
+const Footer = ({ children }: any) => <Wrap>{children}</Wrap>;
 
-Footer.propTypes = {
-  children: PropTypes.any
-};
 const Wrap = styled.footer`
   display: flex;
   flex-flow: row nowrap;

@@ -1,18 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
-const RadioButton = ({ children, name, ...props }) => (
+interface IProps {
+  children?: string;
+  name: string;
+  type: string;
+  gap?: boolean;
+  checked?: boolean;
+  onChange?: (e: any) => void;
+  value: string;
+}
+interface IGap {
+  gap?: boolean;
+}
+
+const RadioButton = ({ children, name, ...props }: IProps) => (
   <Label>
     <Input {...props} type="radio" name={name} />
     <Span>{children}</Span>
   </Label>
 );
 
-RadioButton.propTypes = {
-  children: PropTypes.string,
-  name: PropTypes.string.isRequired
-};
 const Label = styled.label`
   font-size: 0.8rem;
   color: #9e9e9e;
@@ -31,7 +39,7 @@ const Input = styled.input`
   }
   :checked + span:after,
   :checked + span:before {
-    background-color: ${props => !props.gap && '#26a69a'};
+    background-color: ${({gap}: IGap) => !gap && '#26a69a'};
     transform: scale(1.02);
     border-radius: 50%;
   }
@@ -40,11 +48,11 @@ const Input = styled.input`
     border: 2px solid #5a5a5a;
   }
   :checked + span:before {
-    border: ${props => (props.gap ? '2px solid #26a69a' : '2px solid transparent')};
+    border: ${({gap}: IGap) => (gap ? '2px solid #26a69a' : '2px solid transparent')};
   }
   :checked + span:after {
-    background-color: ${props => props.gap && '#26a69a'};
-    transform: ${props => (props.gap ? 'scale(0.5)' : 'scale(1.02)')};
+    background-color: ${({gap}: IGap) => gap && '#26a69a'};
+    transform: ${({gap}: IGap) => (gap ? 'scale(0.5)' : 'scale(1.02)')};
   }
   :disabled:not(:checked) + span:before,
   :disabled:checked + span:before {
@@ -57,12 +65,13 @@ const Input = styled.input`
   :disabled:checked + span:after {
     background-color: rgba(0, 0, 0, 0.42);
     border-color: #949494;
-    ${props => props.gap && 'border: none'};
+    ${({gap}: IGap) => gap && 'border: none'};
   }
   :disabled:checked + span:before {
-    border: ${props => props.gap && '2px solid rgba(0, 0, 0, 0.42)'};
+    border: ${({gap}: IGap) => gap && '2px solid rgba(0, 0, 0, 0.42)'};
   }
 `;
+
 const Span = styled.span`
   position: relative;
   padding-left: 35px;
