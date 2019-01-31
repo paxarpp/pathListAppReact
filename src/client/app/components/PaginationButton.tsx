@@ -1,10 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
 import { Float } from './ButtonNew';
 
-const pageButton = (handler, pageNumber) => {
+interface IProps {
+  length: number;
+  page: number;
+  stringOnPage: number;
+  handlerPagination: (page: number) => void;
+}
+
+const pageButton = (handler: (pageNumber: number) => void, pageNumber: number) => {
   return (
     <Float small handlerClick={() => handler(pageNumber)}>
       {pageNumber}
@@ -12,7 +17,7 @@ const pageButton = (handler, pageNumber) => {
   );
 };
 
-const PaginationButton = ({ handlerPagination, length, page, stringOnPage }) => {
+const PaginationButton = ({ handlerPagination, length, page, stringOnPage }: IProps) => {
   const pages = length % stringOnPage === 0 ? length / stringOnPage : Math.ceil(length / stringOnPage);
   return (
     <Wrapper>
@@ -31,17 +36,12 @@ const PaginationButton = ({ handlerPagination, length, page, stringOnPage }) => 
   );
 };
 
-PaginationButton.propTypes = {
-  length: PropTypes.number.isRequired,
-  page: PropTypes.number.isRequired,
-  stringOnPage: PropTypes.number.isRequired,
-  handlerPagination: PropTypes.func.isRequired
-};
 const Wrapper = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
 `;
+
 const FloatSelect = styled(Float)`
   font-weight: 600;
 `;

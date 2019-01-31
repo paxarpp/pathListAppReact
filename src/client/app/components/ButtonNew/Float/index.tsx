@@ -1,9 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css, keyframes } from 'styled-components';
 import { ifNotDisabled, ifNotDisabledHover } from '../constants';
 
-const Add = ({ color = '#fff', size = 24 }) => (
+interface IMainBG extends IBFloat {}
+
+interface IAdd {
+  color?: string;
+  size?: string | number;
+}
+
+interface IBFloat {
+  handlerClick?: () => void;
+  children?: any;
+  large?: boolean;
+  second?: boolean;
+  danger?: boolean;
+  pulse?: boolean;
+  small?: boolean;
+  disable?: boolean;
+}
+
+const Add = ({ color = '#fff', size = 24 }: IAdd) => (
   <svg x="0px" y="0px" width={size} height={size} viewBox="0 0 24 24" fill={color}>
     <g>
       <path fill="none" d="M0,0h24v24H0V0z" />
@@ -14,43 +31,24 @@ const Add = ({ color = '#fff', size = 24 }) => (
   </svg>
 );
 
-const ButtonFloat = ({ children, handlerClick, disable, ...props }) => (
+const ButtonFloat = ({ children, handlerClick, disable, ...props }: IBFloat) => (
   <Main onClick={disable ? null : handlerClick} {...props} disable={disable}>
     {children ? children : <Add />}
   </Main>
 );
 
-Add.propTypes = {
-  color: PropTypes.string,
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-};
-
-ButtonFloat.propTypes = {
-  handlerClick: PropTypes.func,
-  children: PropTypes.any,
-  large: PropTypes.bool,
-  second: PropTypes.bool,
-  danger: PropTypes.bool,
-  pulse: PropTypes.bool,
-  small: PropTypes.bool,
-  disable: PropTypes.bool
-};
-
 const pulseAnimation = keyframes`
   0% {
     opacity: 1;
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
   }
   50% {
     opacity: 0;
-    -webkit-transform: scale(1.5);
-            transform: scale(1.5);
+    transform: scale(1.5);
   }
   100% {
     opacity: 0;
-    -webkit-transform: scale(1.5);
-            transform: scale(1.5);
+    transform: scale(1.5);
   }
 `;
 
@@ -98,10 +96,7 @@ const pulseStyle = css`
     left: 0;
     background-color: inherit;
     border-radius: inherit;
-    -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
-    transition: opacity 0.3s, -webkit-transform 0.3s;
     transition: opacity 0.3s, transform 0.3s;
-    transition: opacity 0.3s, transform 0.3s, -webkit-transform 0.3s;
     animation: ${pulseAnimation} 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
     z-index: -1;
   }
@@ -115,21 +110,21 @@ const Main = styled.button`
   overflow: hidden;
   z-index: 1;
   padding: 0;
-  background-color: ${props =>
+  background-color: ${(props:IMainBG) =>
     props.danger ? '#ff5454' : props.second ? '#aaa' : props.disable ? '#e5e5e5' : '#26a69a'};
   border-radius: 50%;
   transition: background-color 0.3s;
   vertical-align: middle;
   border: none;
   outline: none;
-  ${props => !props.large && !props.small && norm};
-  ${props => props.large && large};
-  ${props => props.small && small};
+  ${(props:IMainBG) => !props.large && !props.small && norm};
+  ${(props:IMainBG) => props.large && large};
+  ${(props:IMainBG) => props.small && small};
   ${ifNotDisabled};
   :hover {
     ${ifNotDisabledHover};
   }
-  ${props => props.pulse && pulseStyle};
+  ${(props:IMainBG) => props.pulse && pulseStyle};
   :after {
     content: '';
     position: absolute;
@@ -144,7 +139,7 @@ const Main = styled.button`
     transform-origin: 50% 50%;
   }
   :focus:not(:active)::after {
-    animation: ${props => !props.disable && ripple} 1s ease-out;
+    animation: ${(props:IMainBG) => !props.disable && ripple} 1s ease-out;
   }
 `;
 
