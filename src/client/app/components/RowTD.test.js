@@ -39,7 +39,14 @@ test('RowTD view, not error not select', () => {
     }
   ];
   const component = renderer.create(
-    <RowTD handler={() => {}} doubleClick={() => {}} deletePath={() => {}} selectPath={{}} error={error} path={path} />
+    <RowTD
+      handler={() => {}}
+      doubleClick={() => {}}
+      deletePath={() => {}}
+      selectPath={{}}
+      error={error}
+      path={path}
+    />
   );
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -81,7 +88,14 @@ test('RowTD view, error not select', () => {
     }
   ];
   const component = renderer.create(
-    <RowTD handler={() => {}} doubleClick={() => {}} deletePath={() => {}} selectPath={{}} error={error} path={path} />
+    <RowTD
+      handler={() => {}}
+      doubleClick={() => {}}
+      deletePath={() => {}}
+      selectPath={{}}
+      error={error}
+      path={path}
+    />
   );
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();

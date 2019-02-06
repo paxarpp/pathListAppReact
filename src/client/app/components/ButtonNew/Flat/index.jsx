@@ -128,7 +128,13 @@ const Main = styled.button`
     transform-origin: 50% 50%;
   }
   :focus:not(:active)::after {
-    animation: ${props => (!props.disable && props.danger ? rippleRed : props.second ? rippleSec : ripple)} 1s ease-out;
+    animation: ${props =>
+        !props.disable && props.danger
+          ? rippleRed
+          : props.second
+          ? rippleSec
+          : ripple}
+      1s ease-out;
   }
 `;
 

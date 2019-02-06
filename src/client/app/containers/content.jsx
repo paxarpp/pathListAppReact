@@ -23,10 +23,10 @@ class Content extends Component {
     const coordX = event.clientX;
     const coordY = event.clientY;
     this.setState({
-      coordX: coordX,
-      coordY: coordY,
-      field: field,
-      value: value
+      coordX,
+      coordY,
+      field,
+      value
     });
   };
 
@@ -53,9 +53,8 @@ class Content extends Component {
   };
 
   onChange = e => {
-    this.setState({
-      value: Math.round(+e.currentTarget.value * 100) / 100
-    });
+    const value = Math.round(+e.currentTarget.value * 100) / 100;
+    this.setState({ value });
   };
 
   componentDidMount() {
@@ -71,7 +70,12 @@ class Content extends Component {
       <Container onContextMenu={this.clearClick}>
         {isNewCar && <CreateCar />}
         {isNewPath && <CreatePath />}
-        {selectPathList && <VeiwAndEditPathList selectPathList={selectPathList} doubleClick={this.doubleClick} />}
+        {selectPathList && (
+          <VeiwAndEditPathList
+            selectPathList={selectPathList}
+            doubleClick={this.doubleClick}
+          />
+        )}
         <TableContainer doubleClick={this.doubleClick} pathLists={pathLists} />
         {field && (
           <PopUpInput
@@ -115,7 +119,11 @@ Content.propTypes = {
   isNewPath: PropTypes.bool,
   selectedCar: PropTypes.array,
   pathLists: PropTypes.array,
-  selectPathList: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.object]),
+  selectPathList: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.object
+  ]),
   saveUpdate: PropTypes.func,
   load: PropTypes.func,
   chError: PropTypes.func

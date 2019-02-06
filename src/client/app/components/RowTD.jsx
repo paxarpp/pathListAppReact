@@ -5,18 +5,32 @@ import styled, { css, keyframes } from 'styled-components';
 import Icon from './Icon';
 
 const RowTD = ({ path, handler, doubleClick, deletePath, selectPath }) => (
-  <WrapTr onClick={path.name !== null ? handler(path) : null} selected={selectPath.dateBegin === path.dateBegin}>
-    {path.dateBegin === null ? <td /> : <td>{new Date(path.dateBegin).toLocaleDateString()}</td>}
+  <WrapTr
+    onClick={path.name !== null ? handler(path) : null}
+    selected={selectPath.dateBegin === path.dateBegin}
+  >
+    {path.dateBegin === null ? (
+      <td />
+    ) : (
+      <td>{new Date(path.dateBegin).toLocaleDateString()}</td>
+    )}
     <td>{path.fuel}</td>
     <td>
       {path.constFuelChange}
-      <SpanExtension>{path.extension === 'true' ? ' прицеп' : ''}</SpanExtension>
+      <SpanExtension>
+        {path.extension === 'true' ? ' прицеп' : ''}
+      </SpanExtension>
     </td>
     <td>
       {path.name !== null ? (
         <Fragment>
           <Span error={path.first && path.errorPath}>{path.pathBegin}</Span>
-          <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathBegin', path.pathBegin)} />
+          <WrapIcon
+            name="Create"
+            color="green"
+            size="16px"
+            onClick={doubleClick('pathBegin', path.pathBegin)}
+          />
         </Fragment>
       ) : null}
     </td>
@@ -24,7 +38,12 @@ const RowTD = ({ path, handler, doubleClick, deletePath, selectPath }) => (
       {path.name !== null ? (
         <Fragment>
           <Span error={path.last && path.errorPath}>{path.pathEnd}</Span>
-          <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathEnd', path.pathEnd)} />
+          <WrapIcon
+            name="Create"
+            color="green"
+            size="16px"
+            onClick={doubleClick('pathEnd', path.pathEnd)}
+          />
         </Fragment>
       ) : null}
     </td>
@@ -33,7 +52,12 @@ const RowTD = ({ path, handler, doubleClick, deletePath, selectPath }) => (
       {path.name !== null ? (
         <Fragment>
           <Span error={path.first && path.errorFuel}>{path.fuelBegin}</Span>
-          <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('fuelBegin', path.fuelBegin)} />
+          <WrapIcon
+            name="Create"
+            color="green"
+            size="16px"
+            onClick={doubleClick('fuelBegin', path.fuelBegin)}
+          />
         </Fragment>
       ) : null}
     </td>
@@ -41,13 +65,22 @@ const RowTD = ({ path, handler, doubleClick, deletePath, selectPath }) => (
       {path.name !== null ? (
         <span>
           {path.addFuel}
-          <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('addFuel', path.addFuel)} />
+          <WrapIcon
+            name="Create"
+            color="green"
+            size="16px"
+            onClick={doubleClick('addFuel', path.addFuel)}
+          />
         </span>
       ) : null}
     </td>
     <td>{path.deltaFuel}</td>
     <Td error={path.last && path.errorFuel}>{path.fuelEnd}</Td>
-    <td>{path.name !== null ? <Icon name="Delete" color="red" onClick={deletePath(path)} /> : null}</td>
+    <td>
+      {path.name !== null ? (
+        <Icon name="Delete" color="red" onClick={deletePath(path)} />
+      ) : null}
+    </td>
   </WrapTr>
 );
 
@@ -56,7 +89,11 @@ RowTD.propTypes = {
   handler: PropTypes.func,
   doubleClick: PropTypes.func,
   deletePath: PropTypes.func,
-  selectPath: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.object])
+  selectPath: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.object
+  ])
 };
 const WrapIcon = styled(Icon)`
   position: absolute;

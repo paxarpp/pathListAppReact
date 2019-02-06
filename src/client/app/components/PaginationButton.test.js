@@ -7,7 +7,12 @@ test('PaginationButton empty', () => {
   const page = 0;
   const stringOnPage = 20;
   const component = renderer.create(
-    <PaginationButton length={length} page={page} stringOnPage={stringOnPage} handlerPagination={() => {}} />
+    <PaginationButton
+      length={length}
+      page={page}
+      stringOnPage={stringOnPage}
+      handlerPagination={() => {}}
+    />
   );
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -17,7 +22,12 @@ test('PaginationButton 100etc', () => {
   const page = 1;
   const stringOnPage = 20;
   const component = renderer.create(
-    <PaginationButton length={length} page={page} stringOnPage={stringOnPage} handlerPagination={() => {}} />
+    <PaginationButton
+      length={length}
+      page={page}
+      stringOnPage={stringOnPage}
+      handlerPagination={() => {}}
+    />
   );
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -27,7 +37,12 @@ test('PaginationButton 500etc', () => {
   const page = 10;
   const stringOnPage = 20;
   const component = renderer.create(
-    <PaginationButton length={length} page={page} stringOnPage={stringOnPage} handlerPagination={() => {}} />
+    <PaginationButton
+      length={length}
+      page={page}
+      stringOnPage={stringOnPage}
+      handlerPagination={() => {}}
+    />
   );
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -37,7 +52,12 @@ test('PaginationButton 400etc', () => {
   const page = 20;
   const stringOnPage = 20;
   const component = renderer.create(
-    <PaginationButton length={length} page={page} stringOnPage={stringOnPage} handlerPagination={() => {}} />
+    <PaginationButton
+      length={length}
+      page={page}
+      stringOnPage={stringOnPage}
+      handlerPagination={() => {}}
+    />
   );
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();

@@ -5,7 +5,11 @@ import PropTypes from 'prop-types';
 import Table from '../components/Table';
 import paginationData from '../components/paginationData';
 import prepareNullstringForTable from '../components/prepareNullstringForTable';
-import { infoPathToName, deletePathToName, checkError } from '../actions/pathLists';
+import {
+  infoPathToName,
+  deletePathToName,
+  checkError
+} from '../actions/pathLists';
 
 class TableContainer extends Component {
   constructor(props) {
@@ -47,6 +51,7 @@ class TableContainer extends Component {
       stringOnPage: +value
     });
   };
+
   deletePath = path => () => {
     const { deletePath, chError } = this.props;
     deletePath(path);
@@ -73,7 +78,10 @@ class TableContainer extends Component {
 
   render() {
     const { page, stringOnPage, pathListsCar, reverse, name } = this.state;
-    const dataArr = prepareNullstringForTable(paginationData(page, stringOnPage, pathListsCar), stringOnPage);
+    const dataArr = prepareNullstringForTable(
+      paginationData(page, stringOnPage, pathListsCar),
+      stringOnPage
+    );
     return dataArr.length === 0 ? null : (
       <Table
         error={this.props.error}
@@ -121,7 +129,11 @@ TableContainer.propTypes = {
     )
   ),
   pathLists: PropTypes.array,
-  selectPathList: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.object]),
+  selectPathList: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.object
+  ]),
   doubleClick: PropTypes.func,
   pathInfo: PropTypes.func,
   deletePath: PropTypes.func,
