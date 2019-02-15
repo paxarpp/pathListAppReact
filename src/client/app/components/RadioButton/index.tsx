@@ -8,7 +8,7 @@ interface IProps {
   gap?: boolean;
   checked?: boolean;
   onChange?: (e: any) => void;
-  value: string;
+  value: any;
 }
 interface IGap {
   gap?: boolean;

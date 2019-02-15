@@ -16,6 +16,7 @@ interface IProps {
   addDataCar: (car: ICar) => void;
   carsName: string[];
   close: (s: string) => void;
+  USER_FETCH: (s: string) => void;
 }
 interface IState {
   name: string;
@@ -135,7 +136,7 @@ class CreateCar extends Component<IProps, IState> {
 const mapDispatchToProps = dispatch => {
   return {
     addDataCar: (car: ICar) => saveCar(dispatch, car),
-    close: (isNewCar: string) => closeWindow(dispatch, isNewCar)
+    close: (isNewCar: string) => closeWindow(dispatch, isNewCar),
   };
 };
 const mapStateToProps = state => {

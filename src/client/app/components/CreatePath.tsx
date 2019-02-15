@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import { savePath, checkError } from '../actions/pathLists';
@@ -15,32 +14,71 @@ import Footer from './footer';
 import calculateFieldPath from './calculateFieldPath';
 import fildNamePathList from './fildNamePathList';
 import fildNameCheckRule from './fildNameCheckRule';
+import { IPath, ICar } from './interfaces';
 
-class CreatePath extends Component {
-  state = {
-    name: '',
-    fuel: '',
-    dateBegin: `${new Date().getFullYear()}-${(new Date().getMonth() + 1).toString().padStart(2, '0')}-${new Date()
-      .getDate()
-      .toString()
-      .padStart(2, '0')}`,
-    pathBegin: '',
-    pathEnd: '',
-    milleage: 0,
-    fuelBegin: '',
-    fuelEnd: '',
-    addFuel: '',
-    deltaFuel: 0,
-    addFuelWinter: 0,
-    constFuelChange: '',
-    ConsumptionFactoryFuel: '',
-    isWrong: false,
-    isWrongDuble: false,
-    columnView: true,
-    extension: 'false',
-    constFuelChangeExt: '',
-    datepickerOpen: false
-  };
+interface IchangeExt {
+  changeExt: boolean;
+}
+interface IProps {
+  addDataPath: (path: IPath) => void;
+  pathLists: IPath;
+  close: (nameWindow: string) => void;
+  chError: () => void;
+  cars: ICar[];
+}
+interface IState {
+  name: string;
+  fuel: string;
+  dateBegin: string;
+  pathBegin: number;
+  pathEnd: number;
+  milleage: number;
+  fuelBegin: number;
+  fuelEnd: number;
+  addFuel: number;
+  deltaFuel: number;
+  addFuelWinter: number;
+  constFuelChange: number;
+  ConsumptionFactoryFuel: number;
+  isWrong: string | boolean;
+  isWrongDuble: boolean;
+  columnView: boolean;
+  extension: boolean;
+  constFuelChangeExt: number;
+  datepickerOpen: boolean;
+}
+
+class CreatePath extends Component<IProps, IState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      fuel: '',
+      dateBegin: `${new Date().getFullYear()}-${(new Date().getMonth() + 1)
+        .toString()
+        .padStart(2, '0')}-${new Date()
+        .getDate()
+        .toString()
+        .padStart(2, '0')}`,
+      pathBegin: null,
+      pathEnd: null,
+      milleage: 0,
+      fuelBegin: null,
+      fuelEnd: null,
+      addFuel: null,
+      deltaFuel: 0,
+      addFuelWinter: 0,
+      constFuelChange: null,
+      ConsumptionFactoryFuel: null,
+      isWrong: false,
+      isWrongDuble: false,
+      columnView: true,
+      extension: false,
+      constFuelChangeExt: null,
+      datepickerOpen: false
+    };
+  }
+  
   handleSubmit = e => {
     e.preventDefault();
     const {
@@ -72,7 +110,8 @@ class CreatePath extends Component {
       addFuel,
       deltaFuel,
       fuel,
-      constFuelChange: extension === 'true' ? constFuelChangeExt : constFuelChange,
+      constFuelChange:
+        extension ? constFuelChangeExt : constFuelChange,
       extension,
       ConsumptionFactoryFuel,
       addFuelWinter
@@ -188,18 +227,34 @@ class CreatePath extends Component {
     this.setState(prev => ({
       ...prev,
       ConsumptionFactoryFuel:
-        prev.extension === 'true'
-          ? Math.round(((+prev.milleage * +prev.constFuelChangeExt) / 100) * 100) / 100
-          : Math.round(((+prev.milleage * +prev.constFuelChange) / 100) * 100) / 100
+        prev.extension ?
+        Math.round(
+              ((+prev.milleage * +prev.constFuelChangeExt) / 100) * 100
+            ) / 100
+          : Math.round(((+prev.milleage * +prev.constFuelChange) / 100) * 100) /
+            100
     }));
     this.setState(prev => ({
       ...prev,
       fuelEnd:
-        Math.round((+prev.fuelBegin + +prev.addFuel + +prev.addFuelWinter - +prev.ConsumptionFactoryFuel) * 100) / 100
+        Math.round(
+          (+prev.fuelBegin +
+            +prev.addFuel +
+            +prev.addFuelWinter -
+            +prev.ConsumptionFactoryFuel) *
+            100
+        ) / 100
     }));
     this.setState(prev => ({
       ...prev,
-      deltaFuel: Math.round((+prev.fuelBegin + +prev.addFuel + +prev.addFuelWinter - +prev.fuelEnd) * 100) / 100
+      deltaFuel:
+        Math.round(
+          (+prev.fuelBegin +
+            +prev.addFuel +
+            +prev.addFuelWinter -
+            +prev.fuelEnd) *
+            100
+        ) / 100
     }));
   };
   handleClose = e => {
@@ -241,7 +296,11 @@ class CreatePath extends Component {
           <ColumnView view={columnView}>
             <Row view={columnView}>
               <InputHeader>выберите автомобиль</InputHeader>
-              <WrapSelect data-field-name={'name'} value={name} onChange={this.handleChangeName}>
+              <WrapSelect
+                data-field-name={'name'}
+                value={name}
+                onChange={this.handleChangeName}
+              >
                 <option disabled />
                 {cars.map(car => {
                   return <option key={car.name}>{car.name}</option>;
@@ -252,38 +311,47 @@ class CreatePath extends Component {
                 <label>
                   Да
                   <RadioButton
-                    checked={extension === 'true'}
+                    checked={extension}
                     name={'extension'}
                     data-field-name={'extension'}
                     type={'radio'}
                     onChange={this.handleChange}
-                    value={'true'}
+                    value={true}
                   />
                 </label>
                 <label>
                   Нет
                   <RadioButton
-                    checked={extension === 'false'}
+                    checked={!extension}
                     name={'extension'}
                     data-field-name={'extension'}
                     type={'radio'}
                     onChange={this.handleChange}
-                    value={'false'}
+                    value={false}
                   />
                 </label>
               </FuelChangeExt>
               <div>
                 <InputHeader>выберите дату начала путевки</InputHeader>
-                <WrapSpan onClick={() => this.setState({ datepickerOpen: true })}>{dateBegin}</WrapSpan>
+                <WrapSpan
+                  onClick={() => this.setState({ datepickerOpen: true })}
+                >
+                  {dateBegin}
+                </WrapSpan>
                 {datepickerOpen && (
                   <Datepicker
-                    handlerClose={() => this.setState({ datepickerOpen: false })}
+                    handlerClose={() =>
+                      this.setState({ datepickerOpen: false })
+                    }
                     handlerComplite={setupDate => () =>
                       this.setState({
                         datepickerOpen: false,
                         dateBegin: `${setupDate.year}-${(setupDate.month + 1)
                           .toString()
-                          .padStart(2, '0')}-${setupDate.day.toString().padStart(2, '0')}`
+                          .padStart(
+                            2,
+                            '0'
+                          )}-${setupDate.day.toString().padStart(2, '0')}`
                       })}
                   />
                 )}
@@ -310,7 +378,9 @@ class CreatePath extends Component {
                 step={'1'}
                 min={'0'}
               />
-              <ResultHeader error={isWrong === 'milleage'}>Пробег составил: {milleage} км</ResultHeader>
+              <ResultHeader error={isWrong === 'milleage'}>
+                Пробег составил: {milleage} км
+              </ResultHeader>
             </Row>
             <Row view={columnView}>
               <InputHeader>введите начальное количество топлива, л</InputHeader>
@@ -324,7 +394,9 @@ class CreatePath extends Component {
                 step={'0.01'}
                 min={'0'}
               />
-              <InputHeader>введите заправленное количество топлива, л</InputHeader>
+              <InputHeader>
+                введите заправленное количество топлива, л
+              </InputHeader>
               <Input
                 data-field-name={'addFuel'}
                 type={'number'}
@@ -334,7 +406,9 @@ class CreatePath extends Component {
                 step={'0.01'}
                 min={'0'}
               />
-              <ResultHeader error={isWrong === 'fuelEnd'}>конечное количество топлива {fuelEnd} л</ResultHeader>
+              <ResultHeader error={isWrong === 'fuelEnd'}>
+                конечное количество топлива {fuelEnd} л
+              </ResultHeader>
               <ResultHeader>
                 {fildNamePathList['deltaFuel']}: {deltaFuel} л
               </ResultHeader>
@@ -343,7 +417,10 @@ class CreatePath extends Component {
             {isWrongDuble && <InputError>на эту дату лист уже есть</InputError>}
           </ColumnView>
           <Footer>
-            <Primary handlerClick={this.handleSubmit} disable={isWrong != false}>
+            <Primary
+              handlerClick={this.handleSubmit}
+              disable={isWrong != false}
+            >
               Сохранить
             </Primary>
           </Footer>
@@ -365,13 +442,7 @@ const mapDispatchToProps = dispatch => {
     chError: () => checkError(dispatch)
   };
 };
-CreatePath.propTypes = {
-  addDataPath: PropTypes.func.isRequired,
-  pathLists: PropTypes.object.isRequired,
-  close: PropTypes.func.isRequired,
-  chError: PropTypes.func.isRequired,
-  cars: PropTypes.arrayOf(PropTypes.object).isRequired
-};
+
 const HeaderText = styled.h2`
   text-align: center;
 `;
@@ -481,7 +552,7 @@ const WrapSelect = styled.select`
   font-size: 1.5rem;
 `;
 const FuelChangeExt = styled.div`
-  display: ${props => (props.changeExt ? 'block' : 'none')};
+  display: ${({changeExt}: IchangeExt) => (changeExt ? 'block' : 'none')};
   background-color: #80808080;
 `;
 export default connect(
