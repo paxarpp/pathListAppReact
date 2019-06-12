@@ -104,7 +104,7 @@ const WrapIcon = styled(Icon)`
     transform: scale(1.1);
   }
 `;
-const WrapTr = styled.tr`
+const WrapTr = styled.tr<{selected: boolean}>`
   background-color: ${props => props.selected && 'antiquewhite'};
 `;
 const SpanExtension = styled.span`
@@ -130,7 +130,7 @@ transform: translateX(0);
 `;
 const isError = props =>
   props.error &&
-  css`
+  css<{error: boolean}>`
     color: red;
     font-weight: 600;
     display: inline-block;
@@ -139,7 +139,7 @@ const isError = props =>
 const Span = styled.span`
   ${isError};
 `;
-const Td = styled.td`
+const Td = styled.td<{error: boolean}>`
   color: ${props => props.error && 'red'};
 `;
 
