@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
 import Icon from './Icon';
 
-const PopUpInput = ({ coordX, coordy, value, onChange, handlerConf }) => {
+interface IProps {
+  coordX: number;
+  coordy: number;
+  value: string;
+  onChange: () => void;
+  handlerConf: (b: boolean) => void;
+}
+
+const PopUpInput = ({ coordX, coordy, value, onChange, handlerConf }: IProps) => {
   const left = coordX - 150;
   const top = coordy - 60;
   return (
@@ -18,17 +25,17 @@ const PopUpInput = ({ coordX, coordy, value, onChange, handlerConf }) => {
 PopUpInput.propTypes = {
   coordX: PropTypes.number.isRequired,
   coordy: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   handlerConf: PropTypes.func.isRequired
 };
 const WrapIcon = styled(Icon)`
   margin: 0 10px;
 `;
-const Wrapper = styled.div`
+const Wrapper = styled.div<{top: number, left: number}>`
   position: fixed;
-  top: ${props => props.top}px;
-  left: ${props => props.left}px;
+  top: ${({top}) => top}px;
+  left: ${({left}) => left}px;
   display: flex;
   flex-flow: row wrap;
   box-shadow: 2px 2px 10px 1px #00000080;
