@@ -111,9 +111,9 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    pathInfo: path => infoPathToName(dispatch, path),
-    deletePath: name => deletePathToName(dispatch, name),
-    chError: () => checkError(dispatch)
+    pathInfo: path => dispatch(infoPathToName(path)),
+    deletePath: name => dispatch(deletePathToName(name)),
+    chError: () => dispatch(checkError())
   };
 };
 TableContainer.propTypes = {

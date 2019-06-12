@@ -8,7 +8,7 @@ import CreatePath from '../components/CreatePath';
 import TableContainer from './TableContainer';
 import VeiwAndEditPathList from '../components/VeiwAndEditPathList';
 import PopUpInput from '../components/PopUpInput';
-import { loadLocalStorage } from '../actions/cars';
+import { initLoad } from '../actions/cars';
 import { checkError, saveUpdateData } from '../actions/pathLists';
 
 class Content extends Component {
@@ -108,9 +108,12 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    load: () => loadLocalStorage(dispatch),
-    chError: () => checkError(dispatch),
-    saveUpdate: result => saveUpdateData(dispatch, result)
+    load: () => dispatch(initLoad()),
+    chError: () => dispatch(checkError()),
+    saveUpdate: result => {
+      dispatch(saveUpdateData(result));
+      dispatch(checkError());
+    }
   };
 };
 

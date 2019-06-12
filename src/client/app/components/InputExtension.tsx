@@ -4,7 +4,7 @@ import Input from './Input';
 import RadioButton from './RadioButton';
 
 interface IProps {
-  extension: string | boolean;
+  extension: boolean;
   handleChange: (e:any) => void;
   isWrong: string | boolean;
   constFuelChangeExt: string;
@@ -20,26 +20,26 @@ const InputExtension = ({ extension, handleChange, isWrong, constFuelChangeExt }
     <label>
       Да
       <RadioButton
-        checked={extension === 'true'}
+        checked={extension}
         name={'extension'}
         data-field-name={'extension'}
         type={'radio'}
         onChange={handleChange}
-        value={'true'}
+        value={true}
       />
     </label>
     <label>
       Нет
       <RadioButton
-        checked={extension === 'false'}
+        checked={!extension}
         name={'extension'}
         data-field-name={'extension'}
         type={'radio'}
         onChange={handleChange}
-        value={'false'}
+        value={false}
       />
     </label>
-    {extension === 'true' && (
+    {extension && (
       <WrapInput
         error={isWrong === 'constFuelChangeExt'}
         data-field-name={'constFuelChangeExt'}

@@ -1,6 +1,6 @@
-import { IPath, ICar, IError } from './interfaces';
+import { IPath, ICar, IError, IPathLists } from './interfaces';
 
-const checkCorrectData = (cars: ICar, pathLists: IPath[]):IError[] => {
+const checkCorrectData = (cars: ICar[], pathLists: IPathLists):IError[][] => {
   return Object.keys(pathLists)
     .map(el => (!pathLists[el] ? [] : pathLists[el].sort((a, b) => (a.dateBegin < b.dateBegin ? -1 : 1))))
     .map(el =>

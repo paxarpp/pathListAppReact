@@ -23,14 +23,14 @@ interface IState {
   constFuelChange: number;
   fuel: string;
   extension: boolean;
-  constFuelChangeExt: number;
+  constFuelChangeExt: number | null;
   isWrong: boolean | string;
 }
 
 class CreateCar extends Component<IProps, IState> {
   state = {
     name: '',
-    constFuelChange: null,
+    constFuelChange: 0,
     fuel: 'AI',
     extension: false,
     constFuelChangeExt: null,
@@ -135,8 +135,8 @@ class CreateCar extends Component<IProps, IState> {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    addDataCar: (car: ICar) => saveCar(dispatch, car),
-    close: (isNewCar: string) => closeWindow(dispatch, isNewCar),
+    addDataCar: (car: ICar) => dispatch(saveCar(car)),
+    close: (isNewCar: string) => dispatch(closeWindow(isNewCar)),
   };
 };
 const mapStateToProps = state => {

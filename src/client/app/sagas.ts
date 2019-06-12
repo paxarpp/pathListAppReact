@@ -1,19 +1,47 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import saveToLocalStorage from './components/saveToLocalStorage';
+import { SAVE_LOCAL_STORAGE, INIT_LOAD_LOCAL_STORAGE } from './constants';
+import {
+  saveLocalStorageBeginAction,
+  saveLocalStorageSuccessedAction,
+  saveLocalStorageFailedAction,
+  loadLocalStorage
+} from './actions/cars';
 
-function* fetchUser({payload}) {
-  console.log(payload)
+function* saveToLS({ payload: { cars, pathLists } }) {
   try {
-    
-    yield put({ type: 'USER_FETCH_SUCCEEDED', nameWindow: payload });
-    // yield saveToLocalStorage([{}], [{}]); // достучаться до стора
+    yield put(saveLocalStorageBeginAction());
+    yield call(saveToLocalStorage, cars, pathLists);
+    yield put(saveLocalStorageSuccessedAction());
   } catch (e) {
-    yield put({ type: 'USER_FETCH_FAILED', message: e.message });
+    yield put(saveLocalStorageFailedAction(e.message));
+  }
+}
+function* loadFromLS() {
+  const obj = { cars: null, pathLists: null };
+    obj.cars = localStorage.hasOwnProperty('cars')
+      ? JSON.parse(localStorage.getItem('cars'))
+      : [];
+    obj.pathLists = localStorage.hasOwnProperty('pathLists')
+      ? JSON.parse(localStorage.getItem('pathLists'))
+      : {};
+  return obj;
+}
+
+function* initLoad() {
+  try {
+    const response = yield call(loadFromLS);
+    yield put(loadLocalStorage(response));
+  } catch (err) {
+    alert(
+      `ошибка при загрузке данных, попробуйте перезапустить программу. ${err}`
+    );
   }
 }
 
 function* mySaga() {
-  yield takeEvery('CLOSE_WINDOW_DISPATCH', fetchUser);
+  yield takeEvery(SAVE_LOCAL_STORAGE, saveToLS);
+  yield takeEvery(INIT_LOAD_LOCAL_STORAGE, initLoad);
 }
 
 function* rootSaga() {

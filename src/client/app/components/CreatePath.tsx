@@ -14,14 +14,14 @@ import Footer from './footer';
 import calculateFieldPath from './calculateFieldPath';
 import fildNamePathList from './fildNamePathList';
 import fildNameCheckRule from './fildNameCheckRule';
-import { IPath, ICar } from './interfaces';
+import { IPathBase, ICar } from './interfaces';
 
 interface IchangeExt {
   changeExt: boolean;
 }
 interface IProps {
-  addDataPath: (path: IPath) => void;
-  pathLists: IPath;
+  addDataPath: (path: IPathBase) => void;
+  pathLists: IPathBase;
   close: (nameWindow: string) => void;
   chError: () => void;
   cars: ICar[];
@@ -44,7 +44,7 @@ interface IState {
   isWrongDuble: boolean;
   columnView: boolean;
   extension: boolean;
-  constFuelChangeExt: number;
+  constFuelChangeExt: number | null;
   datepickerOpen: boolean;
 }
 
@@ -56,9 +56,11 @@ class CreatePath extends Component<IProps, IState> {
       fuel: '',
       dateBegin: `${new Date().getFullYear()}-${(new Date().getMonth() + 1)
         .toString()
+        // @ts-ignore
         .padStart(2, '0')}-${new Date()
         .getDate()
         .toString()
+        // @ts-ignore
         .padStart(2, '0')}`,
       pathBegin: null,
       pathEnd: null,
@@ -169,7 +171,7 @@ class CreatePath extends Component<IProps, IState> {
         return car.name === value;
       })[0].constFuelChangeExt
     }));
-    if (this.props.pathLists[value].length !== 0) {
+    if (this.props.pathLists[value] && this.props.pathLists[value].length !== 0) {
       this.setState(prev => ({
         ...prev,
         pathBegin: this.props.pathLists[prev.name].sort((a, b) => {
@@ -437,9 +439,9 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    addDataPath: path => savePath(dispatch, path),
-    close: nameWindow => closeWindow(dispatch, nameWindow),
-    chError: () => checkError(dispatch)
+    addDataPath: path => dispatch(savePath(path)),
+    close: nameWindow => dispatch(closeWindow(nameWindow)),
+    chError: () => dispatch(checkError())
   };
 };
 

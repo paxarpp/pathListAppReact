@@ -12,7 +12,11 @@ const VeiwAndEditPathList = ({ selectPathList, error, close, doubleClick }) => (
   <PathListView>
     <Header>
       <HeaderText>Выбран путевой лист</HeaderText>
-      <WrapIcon onClick={() => close('selectPathList')} name="Clear" color="red" />
+      <WrapIcon
+        onClick={() => close('selectPathList')}
+        name="Clear"
+        color="red"
+      />
     </Header>
     <ViewPath path={selectPathList} error={error} doubleClick={doubleClick} />
   </PathListView>
@@ -25,7 +29,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    close: selectPathList => closeWindow(dispatch, selectPathList)
+    close: selectPathList => dispatch(closeWindow(selectPathList))
   };
 };
 

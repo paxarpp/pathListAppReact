@@ -7,7 +7,7 @@ import Icon from './Icon';
 const RowTD = ({ path, handler, doubleClick, deletePath, selectPath }) => (
   <WrapTr
     onClick={path.name !== null ? handler(path) : null}
-    selected={selectPath.dateBegin === path.dateBegin}
+    selected={selectPath && selectPath.dateBegin === path.dateBegin}
   >
     {path.dateBegin === null ? (
       <td />

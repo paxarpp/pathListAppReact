@@ -1,43 +1,49 @@
 import { handleActions } from 'redux-actions';
-import { IPath, ICar, IError } from '../components/interfaces';
+import { IPath, ICar, IError, IPathLists } from '../components/interfaces';
 import checkCorrectData from '../components/checkCorrectData';
 
 import {
-  deleteCarReducer,
-  addCarReducer,
-  setIsNewCar,
-  closeWindowDispatch,
-  InfoCarReducer,
-  loadLocalStorageDispatch
-} from '../actions/cars';
-import {
-  deletePathReducer,
-  addPathReducer,
-  setIsNewPath,
-  infoPathReducer,
-  checkErrorPath,
-  saveUpdateDataR
-} from '../actions/pathLists';
+  DELETE_CAR_TO_NAME,
+  SAVE_CAR,
+  SET_IS_NEW_CAR,
+  CLOSE_WINDOW,
+  INFO_CAR_TO_NAME,
+  LOAD_LOCAL_STORAGE,
+  DELETE_PATH_REDUCER,
+  ADD_PATH_REDUCER,
+  SET_IS_NEW_PATH,
+  INFO_PATH_REDUCER,
+  CHECK_ERROR_PATH, 
+  SAVE_UPDATE_DATA 
+} from '../constants';
 
 interface IAction {
   type: string;
   payload?: any;
 }
+interface IState {
+  cars: ICar[];
+  pathLists: IPathLists;
+  error: IError[];
+  isNewCar: boolean;
+  isNewPath: boolean;
+  selectedCar: string;
+  selectPathList?: IPath;
+}
 
-const initialState = {
+const initialState: IState = {
   cars: <ICar[]>[],
   pathLists: {},
   error: <IError[]>[],
   isNewCar: <boolean>false,
   isNewPath: <boolean>false,
   selectedCar: <string>'',
-  selectPathList: <string>''
+  selectPathList: null
 };
 
 export const reducer = handleActions(
   {
-    [saveUpdateDataR]: (state, action: IAction) => {
-      return {
+    [SAVE_UPDATE_DATA]: (state: IState, action: IAction) => ({
         ...state,
         pathLists: {
           ...state.pathLists,
@@ -64,22 +70,18 @@ export const reducer = handleActions(
             return path;
           })
         }
-      };
-    },
-    [checkErrorPath]: state => {
-      return {
+      }),
+    [CHECK_ERROR_PATH]: (state: IState) => ({
         ...state,
-        error: <IError[]>checkCorrectData(state.cars, state.pathLists)
-      };
-    },
-    [InfoCarReducer]: (state, action: IAction) => {
-      return {
+        error: <IError[][]>checkCorrectData(state.cars, state.pathLists)
+      }),
+    [INFO_CAR_TO_NAME]: (state, { payload }: { payload: string }) => ({
         ...state,
-        selectedCar: state.selectedCar === action.payload ? null : action.payload,
+        selectedCar: state.selectedCar === payload ? null : payload,
         pathLists: {
           ...state.pathLists,
-          [action.payload]: state.pathLists[action.payload] && [
-            ...state.pathLists[action.payload].sort((a: IPath, b: IPath) => {
+          [payload]: state.pathLists[payload] && [
+            ...state.pathLists[payload].sort((a: IPath, b: IPath) => {
               if (a.dateBegin < b.dateBegin) {
                 return -1;
               } else if (a.dateBegin > b.dateBegin) {
@@ -90,41 +92,30 @@ export const reducer = handleActions(
             })
           ]
         }
-      };
-    },
-    [infoPathReducer]: (state, action: IAction) => {
-      return {
+      }),
+    [INFO_PATH_REDUCER]: (state, action: IAction) => ({
         ...state,
         selectPathList: action.payload
-      };
-    },
-    [deleteCarReducer]: (state, action: IAction) => {
+      }),
+    [DELETE_CAR_TO_NAME]: (state, { payload }: { payload: string }) => {
       const pathLists = {};
       Object.keys(state.pathLists)
-        .filter(key => key !== action.payload)
+        .filter(key => key !== payload)
         .map(key => {
           pathLists[key] = [...state.pathLists[key]];
         });
       return {
         ...state,
-        cars: state.cars.filter((car: ICar) => car.name !== action.payload),
+        cars: state.cars.filter((car: ICar) => car.name !== payload),
         pathLists
       };
     },
-    [addCarReducer]: (state, action: IAction) => {
-      return {
+    [SAVE_CAR]: (state, { payload }: { payload: ICar} ) => ({
         ...state,
-        cars: state.cars.concat(action.payload)
-      };
-    },
-    [setIsNewCar]: state => {
-      return {
-        ...state,
-        isNewCar: true
-      };
-    },
-    [deletePathReducer]: (state, action: IAction) => {
-      return {
+        cars: state.cars.concat(payload)
+      }),
+    [SET_IS_NEW_CAR]: state => ({ ...state, isNewCar: true }),
+    [DELETE_PATH_REDUCER]: (state, action: IAction) => ({
         ...state,
         pathLists: {
           ...state.pathLists,
@@ -132,36 +123,27 @@ export const reducer = handleActions(
             (path: IPath) => path.dateBegin !== action.payload.dateBegin
           )
         }
-      };
-    },
-    [addPathReducer]: (state, action: IAction) => {
-      return {
+      }),
+    [ADD_PATH_REDUCER]: (state, { payload }) => ({
         ...state,
         pathLists: {
           ...state.pathLists,
-          [action.payload.name]: (state.pathLists[action.payload.name] || []).concat(action.payload)
+          [payload.name]: (state.pathLists[payload.name] || []).concat(payload)
         }
-      };
-    },
-    [setIsNewPath]: state => {
-      return {
+      }),
+    [SET_IS_NEW_PATH]: state => ({
         ...state,
         isNewPath: !state.isNewPath
-      };
-    },
-    [closeWindowDispatch]: (state, action: IAction) => {
-      return {
+      }),
+    [CLOSE_WINDOW]: (state, action: IAction) => ({
         ...state,
         [action.payload]: false
-      };
-    },
-    [loadLocalStorageDispatch]: (state, action: IAction) => {
-      return {
+    }),
+    [LOAD_LOCAL_STORAGE]: (state, action: IAction) => ({
         ...state,
         cars: action.payload.cars,
         pathLists: action.payload.pathLists
-      };
-    }
+      }),
   },
   initialState
 );

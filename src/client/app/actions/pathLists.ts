@@ -1,29 +1,18 @@
 import { createAction } from 'redux-actions';
 import { IPath } from '../components/interfaces';
+import {
+  INFO_PATH_REDUCER,
+  DELETE_PATH_REDUCER,
+  SET_IS_NEW_PATH,
+  ADD_PATH_REDUCER,
+  CHECK_ERROR_PATH,
+  SAVE_UPDATE_DATA
+} from '../constants';
 
-export const deletePathReducer = createAction('DELETE_PATH_REDUCER');
-export const addPathReducer = createAction('ADD_PATH_REDUCER');
-export const setIsNewPath = createAction('SET_IS_NEW_PATH');
-export const infoPathReducer = createAction('INFO_PATH_REDUCER');
-export const checkErrorPath = createAction('CHECK_ERROR_PATH');
-export const saveUpdateDataR = createAction('SAVE_UPDATE_DATA');
+export const infoPathToName = createAction(INFO_PATH_REDUCER, (name: string) => name);
+export const deletePathToName = createAction(DELETE_PATH_REDUCER, (path: IPath) => path);
+export const addNewPath = createAction(SET_IS_NEW_PATH, () => ({}));
+export const savePath = createAction(ADD_PATH_REDUCER, (path: IPath) => path);
 
-export const infoPathToName = (dispatch, name: string) => {
-  dispatch(infoPathReducer(name));
-};
-export const deletePathToName = (dispatch, path: IPath) => {
-  dispatch(deletePathReducer(path));
-};
-export const addNewPath = dispatch => {
-  dispatch(setIsNewPath());
-};
-export const savePath = (dispatch, path: IPath) => {
-  dispatch(addPathReducer(path));
-};
-export const checkError = dispatch => {
-  dispatch(checkErrorPath());
-};
-export const saveUpdateData = (dispatch, result) => {
-  dispatch(saveUpdateDataR(result));
-  dispatch(checkErrorPath());
-};
+export const checkError = createAction(CHECK_ERROR_PATH, () => ({}));
+export const saveUpdateData = createAction(SAVE_UPDATE_DATA, (result) => result);

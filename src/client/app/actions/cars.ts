@@ -1,40 +1,34 @@
 import { createAction } from 'redux-actions';
 import { IPath, ICar } from '../components/interfaces';
+import {
+  INFO_CAR_TO_NAME,
+  SET_IS_NEW_CAR,
+  DELETE_CAR_TO_NAME,
+  CLOSE_WINDOW,
+  SAVE_CAR,
+  LOAD_LOCAL_STORAGE,
+  SAVE_LOCAL_STORAGE,
+  SAVE_LOCALSTORAGE_BEGIN,
+  SAVE_LOCALSTORAGE_SUCCESSED,
+  SAVE_LOCALSTORAGE_FAILED,
+  INIT_LOAD_LOCAL_STORAGE
+} from '../constants';
 
 interface IObj {
   cars: ICar[];
   pathLists: IPath[];
 }
 
-export const deleteCarReducer = createAction('DELETE_CAR_REDUCER');
-export const addCarReducer = createAction('ADD_CAR_REDUCER');
-export const setIsNewCar = createAction('SET_IS_NEW_CAR');
-export const closeWindowDispatch = createAction('CLOSE_WINDOW_DISPATCH');
-export const InfoCarReducer = createAction('INFO_CAR_REDUCER');
-export const loadLocalStorageDispatch = createAction('LOAD_LOCAL_STORAGE_DISPATCH');
+export const infoCarToName = createAction(INFO_CAR_TO_NAME, (name: string) => name);
+export const deleteCarToName = createAction(DELETE_CAR_TO_NAME, (name: string) => name);
+export const addNewCar = createAction(SET_IS_NEW_CAR, () => ({}));
+export const saveCar = createAction(SAVE_CAR, (car: ICar) => car);
+export const closeWindow = createAction(CLOSE_WINDOW, (windowId: string) => windowId);
+export const loadLocalStorage = createAction(LOAD_LOCAL_STORAGE, (obj: IObj) => obj);
 
-export const infoCarToName = (dispatch, name: string) => {
-  dispatch(InfoCarReducer(name));
-};
-export const deleteCarToName = (dispatch, name: string) => {
-  dispatch(deleteCarReducer(name));
-};
-export const addNewCar = dispatch => {
-  dispatch(setIsNewCar());
-};
-export const saveCar = (dispatch, car: ICar) => {
-  dispatch(addCarReducer(car));
-};
-export const closeWindow = (dispatch, windowId: string) => {
-  dispatch(closeWindowDispatch(windowId));
-};
-export const loadLocalStorage = dispatch => {
-  try {
-    const obj: IObj = { cars: null, pathLists: null };
-    obj.cars = localStorage.hasOwnProperty('cars') ? JSON.parse(localStorage.getItem('cars')) : [];
-    obj.pathLists = localStorage.hasOwnProperty('pathLists') ? JSON.parse(localStorage.getItem('pathLists')) : {};
-    dispatch(loadLocalStorageDispatch(obj));
-  } catch (err) {
-    alert(`ошибка при загрузке данных, попробуйте перезапустить программу. ${err}`);
-  }
-};
+export const initLoad = createAction(INIT_LOAD_LOCAL_STORAGE, () => ({}));
+export const saveToLocalStorageAction = createAction(SAVE_LOCAL_STORAGE, (obj: IObj) => obj);
+
+export const saveLocalStorageBeginAction = createAction(SAVE_LOCALSTORAGE_BEGIN, () => ({}));
+export const saveLocalStorageSuccessedAction = createAction(SAVE_LOCALSTORAGE_SUCCESSED, () => ({}));
+export const saveLocalStorageFailedAction = createAction(SAVE_LOCALSTORAGE_FAILED, (message) => message);
