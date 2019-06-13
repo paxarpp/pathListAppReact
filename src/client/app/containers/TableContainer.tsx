@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import Table from '../components/Table';
 import paginationData from '../components/paginationData';
@@ -10,8 +9,27 @@ import {
   deletePathToName,
   checkError
 } from '../actions/pathLists';
+import { IPath, IError } from '../components/interfaces';
 
-class TableContainer extends Component {
+interface IProps {
+  error: IError[][];
+  pathLists: IPath[];
+  selectPathList: IPath | boolean | string;
+  doubleClick: () => void;
+  pathInfo: (path: IPath) => void;
+  deletePath: (path: IPath) => void;
+  chError: () => void;
+}
+
+interface IState {
+  stringOnPage: number;
+  page: number;
+  pathListsCar: IPath[];
+  reverse: boolean;
+  name: string;
+}
+
+class TableContainer extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -115,29 +133,6 @@ const mapDispatchToProps = dispatch => {
     deletePath: name => dispatch(deletePathToName(name)),
     chError: () => dispatch(checkError())
   };
-};
-TableContainer.propTypes = {
-  error: PropTypes.arrayOf(
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        path: PropTypes.object,
-        first: PropTypes.bool,
-        last: PropTypes.bool,
-        errorPath: PropTypes.bool,
-        errorFuel: PropTypes.bool
-      })
-    )
-  ),
-  pathLists: PropTypes.array,
-  selectPathList: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.string,
-    PropTypes.object
-  ]),
-  doubleClick: PropTypes.func,
-  pathInfo: PropTypes.func,
-  deletePath: PropTypes.func,
-  chError: PropTypes.func
 };
 
 export default connect(

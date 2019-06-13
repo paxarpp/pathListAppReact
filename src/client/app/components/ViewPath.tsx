@@ -1,11 +1,16 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-
 import fildNamePathList from './fildNamePathList';
 import Icon from './Icon';
+import { IPath, IError, ICar } from './interfaces';
 
-class ViewPath extends PureComponent {
+interface IProps {
+  path: IPath & ICar & IError;
+  doubleClick: (name: string, vvalue: number) => void;
+  error: IError[][];
+};
+
+class ViewPath extends PureComponent<IProps> {
   render() {
     const { path, doubleClick } = this.props;
     return path.name === null || path.name === undefined ? (
@@ -13,7 +18,7 @@ class ViewPath extends PureComponent {
     ) : (
       <View>
         <Head>{path.name}</Head>
-        <Head_ext>{path.extension === 'true' ? 'с прицепом' : ''}</Head_ext>
+        <Head_ext>{path.extension ? 'с прицепом' : ''}</Head_ext>
         <p>
           {fildNamePathList['fuel']}: {path.fuel}
         </p>
@@ -21,18 +26,29 @@ class ViewPath extends PureComponent {
           {fildNamePathList['constFuelChange']}: {path.constFuelChange} л
         </p>
         <p>
-          {fildNamePathList['dateBegin']}: {new Date(path.dateBegin).toLocaleDateString()}
+          {fildNamePathList['dateBegin']}:{' '}
+          {new Date(path.dateBegin).toLocaleDateString()}
         </p>
         <Paragraph error={path.first && path.errorPath}>
           <span>
             {fildNamePathList['pathBegin']}: {path.pathBegin} км
-            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathBegin', path.pathBegin)} />
+            <WrapIcon
+              name="Create"
+              color="green"
+              size="16px"
+              onClick={doubleClick('pathBegin', path.pathBegin)}
+            />
           </span>
         </Paragraph>
         <Paragraph error={path.last && path.errorPath}>
           <span>
             {fildNamePathList['pathEnd']}: {path.pathEnd} км
-            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('pathEnd', path.pathEnd)} />
+            <WrapIcon
+              name="Create"
+              color="green"
+              size="16px"
+              onClick={doubleClick('pathEnd', path.pathEnd)}
+            />
           </span>
         </Paragraph>
         <p>
@@ -41,13 +57,23 @@ class ViewPath extends PureComponent {
         <Paragraph error={path.first && path.errorFuel}>
           <span>
             {fildNamePathList['fuelBegin']}: {path.fuelBegin} л
-            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('fuelBegin', path.fuelBegin)} />
+            <WrapIcon
+              name="Create"
+              color="green"
+              size="16px"
+              onClick={doubleClick('fuelBegin', path.fuelBegin)}
+            />
           </span>
         </Paragraph>
         <p>
           <span>
             {fildNamePathList['addFuel']}: {path.addFuel} л
-            <WrapIcon name="Create" color="green" size="16px" onClick={doubleClick('addFuel', path.addFuel)} />
+            <WrapIcon
+              name="Create"
+              color="green"
+              size="16px"
+              onClick={doubleClick('addFuel', path.addFuel)}
+            />
           </span>
         </p>
         <p>
@@ -61,11 +87,6 @@ class ViewPath extends PureComponent {
   }
 }
 
-ViewPath.propTypes = {
-  path: PropTypes.object,
-  doubleClick: PropTypes.func,
-  error: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object))
-};
 const View = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -97,8 +118,8 @@ const WrapIcon = styled(Icon)`
     transform: scale(1.1);
   }
 `;
-const isError = props =>
-  props.error &&
+const isError = ({ error }) =>
+  error &&
   css`
     color: red;
     font-weight: 600;

@@ -1,14 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
 import { closeWindow } from '../actions/cars';
 import Header from '../components/header';
 import ViewPath from '../components/ViewPath';
 import Icon from './Icon';
+import { IPath, IError, ICar } from './interfaces';
 
-const VeiwAndEditPathList = ({ selectPathList, error, close, doubleClick }) => (
+interface IProps {
+  close: (name: string) => void;
+  selectPathList: IError & IPath & ICar;
+  doubleClick: () => void;
+  error: IError[][]
+};
+
+const VeiwAndEditPathList = ({ selectPathList, error, close, doubleClick }: IProps) => (
   <PathListView>
     <Header>
       <HeaderText>Выбран путевой лист</HeaderText>
@@ -33,12 +39,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-VeiwAndEditPathList.propTypes = {
-  close: PropTypes.func,
-  selectPathList: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  doubleClick: PropTypes.func,
-  error: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object))
-};
 const HeaderText = styled.h2`
   text-align: center;
 `;

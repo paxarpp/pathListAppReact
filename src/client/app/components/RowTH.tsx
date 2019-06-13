@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
 import fildNamePathList from './fildNamePathList';
 import SortLink from './SortLink';
 
-export default class RowTH extends Component {
+interface IProps {
+  handlerTable: (name: string) => void;
+  reverse: boolean;
+  name: string;
+};
+
+export default class RowTH extends Component<IProps> {
   handler = e => {
     const { handlerTable } = this.props;
     handlerTable(e.target.dataset.fieldName);
@@ -51,8 +55,3 @@ export default class RowTH extends Component {
     );
   }
 }
-RowTH.propTypes = {
-  handlerTable: PropTypes.func,
-  reverse: PropTypes.bool,
-  name: PropTypes.string
-};
