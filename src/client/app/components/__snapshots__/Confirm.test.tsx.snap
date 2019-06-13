@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component 1`] = `
+<div
+  className="sc-bwzfXH bLjXmI"
+>
+  <p>
+    Уверены ?
+  </p>
+  <svg
+    className="sc-htpNat gSEnPA sc-bdVaJa fVCJpx"
+    fill="green"
+    height={24}
+    onClick={[Function]}
+    width={24}
+    x="0px"
+    y="0px"
+  >
+    <path
+      d="M9,16.2L4.8,12l-1.4,1.4L9,19L21,7l-1.4-1.4L9,16.2z"
+    />
+  </svg>
+  <svg
+    className="sc-bxivhb ggtWBz sc-bdVaJa fVCJpx"
+    fill="red"
+    height={24}
+    onClick={[Function]}
+    viewBox="0 0 24 24"
+    width={24}
+    x="0px"
+    y="0px"
+  >
+    <path
+      d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41z"
+    />
+  </svg>
+</div>
+`;
