@@ -1,12 +1,29 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
 import RowTD from './RowTD';
 import RowTH from './RowTH';
 import PaginationButton from '../components/PaginationButton';
 import ChoisePaginationString from '../components/ChoisePaginationString';
 import Count from '../components/countPathList';
+import { IPath, IError, ICar } from './interfaces'
+
+interface IProps {
+  error: IError[][];
+  page: number;
+  stringOnPage: number;
+  length: number;
+  tempArr: any[];
+  reverse: boolean;
+  name: string;
+  choisePaginationString: (e: any) => void;
+  handlerTableSelect: (p: IPath) => () => void;
+  handlerTableSort: (name: any) => void;
+  handlerPagination: (page: number) => void;
+  deletePath: (p: IPath) => () => void;
+  pathLists: IPath[];
+  selectPath: IPath;
+  doubleClick: () => void;
+};
 
 const Table = ({
   page,
@@ -24,7 +41,7 @@ const Table = ({
   pathLists,
   selectPath,
   doubleClick
-}) => (
+}: IProps) => (
   <WrapperPathListSelectedCar>
     <ChoisePaginationString handler={choisePaginationString} />
     <WrapTable>
@@ -32,12 +49,11 @@ const Table = ({
         <RowTH handlerTable={handlerTableSort} reverse={reverse} name={name} />
       </thead>
       <tbody>
-        {tempArr.map((path, indx) => (
+        {(tempArr as (IPath & IError& ICar)[]).map((path, indx) => (
           <RowTD
             path={path}
             key={path.dateBegin + indx}
             handler={handlerTableSelect}
-            error={error}
             doubleClick={doubleClick}
             deletePath={deletePath}
             selectPath={selectPath}
@@ -57,37 +73,6 @@ const Table = ({
   </WrapperPathListSelectedCar>
 );
 
-Table.propTypes = {
-  error: PropTypes.arrayOf(
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        path: PropTypes.object,
-        first: PropTypes.bool,
-        last: PropTypes.bool,
-        errorPath: PropTypes.bool,
-        errorFuel: PropTypes.bool
-      })
-    )
-  ),
-  page: PropTypes.number,
-  stringOnPage: PropTypes.number,
-  length: PropTypes.number,
-  tempArr: PropTypes.array,
-  reverse: PropTypes.bool,
-  name: PropTypes.string,
-  choisePaginationString: PropTypes.func,
-  handlerTableSelect: PropTypes.func,
-  handlerTableSort: PropTypes.func,
-  handlerPagination: PropTypes.func,
-  deletePath: PropTypes.func,
-  pathLists: PropTypes.array,
-  selectPath: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.string,
-    PropTypes.object
-  ]),
-  doubleClick: PropTypes.func
-};
 const WrapperPathListSelectedCar = styled.div`
   position: relative;
   z-index: 0;

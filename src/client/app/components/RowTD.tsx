@@ -1,10 +1,18 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import styled, { css, keyframes } from 'styled-components';
-
 import Icon from './Icon';
+import { IPath, ICar, IError } from './interfaces';
 
-const RowTD = ({ path, handler, doubleClick, deletePath, selectPath }) => (
+interface IProps {
+  key: any;
+  path?: IPath & ICar & IError;
+  handler?: (p: IPath) => any;
+  doubleClick?: (a: string, b: number) => any;
+  deletePath: (p: IPath & ICar & IError) => any;
+  selectPath: IPath;
+};
+
+const RowTD = ({ path, handler, doubleClick, deletePath, selectPath }: IProps) => (
   <WrapTr
     onClick={path.name !== null ? handler(path) : null}
     selected={selectPath && selectPath.dateBegin === path.dateBegin}
@@ -18,7 +26,7 @@ const RowTD = ({ path, handler, doubleClick, deletePath, selectPath }) => (
     <td>
       {path.constFuelChange}
       <SpanExtension>
-        {path.extension === 'true' ? ' прицеп' : ''}
+        {path.extension ? ' прицеп' : ''}
       </SpanExtension>
     </td>
     <td>
@@ -84,17 +92,6 @@ const RowTD = ({ path, handler, doubleClick, deletePath, selectPath }) => (
   </WrapTr>
 );
 
-RowTD.propTypes = {
-  path: PropTypes.object,
-  handler: PropTypes.func,
-  doubleClick: PropTypes.func,
-  deletePath: PropTypes.func,
-  selectPath: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.string,
-    PropTypes.object
-  ])
-};
 const WrapIcon = styled(Icon)`
   position: absolute;
   top: 2px;
@@ -140,7 +137,7 @@ const Span = styled.span`
   ${isError};
 `;
 const Td = styled.td<{error: boolean}>`
-  color: ${props => props.error && 'red'};
+  color: ${({error}) => error && 'red'};
 `;
 
 export default RowTD;

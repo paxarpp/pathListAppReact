@@ -34,3 +34,20 @@ export interface IError extends IPath {
 export interface IPathLists {
   [key: string]: IPath[];
 };
+
+export interface ICoreState {
+  cars: ICar[];
+  pathLists: IPathLists;
+  error: IError[][];
+  isNewCar: boolean;
+  isNewPath: boolean;
+  selectedCar: string;
+  selectPathList?: IPath;
+}
+
+export interface IObj {
+  cars: ICar[];
+  pathLists: IPathLists;
+}
+
+export type IWindowId = 'isNewCar' | 'isNewPath' | 'selectPathList';

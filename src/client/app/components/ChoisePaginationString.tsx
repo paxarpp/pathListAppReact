@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface IProps {
-  handler: () => any;
+  handler: (e: any) => any;
 }
 
 const ChoisePaginationString = ({ handler }: IProps) => (

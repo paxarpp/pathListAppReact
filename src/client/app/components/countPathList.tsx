@@ -2,9 +2,9 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 interface IProps {
-  count: number;
-  position: string;
-  text: string;
+  count?: number;
+  position?: string;
+  text?: string;
 }
 
 interface IisPosition {

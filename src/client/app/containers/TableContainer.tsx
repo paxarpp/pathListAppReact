@@ -9,12 +9,12 @@ import {
   deletePathToName,
   checkError
 } from '../actions/pathLists';
-import { IPath, IError } from '../components/interfaces';
+import { IPath, IError, ICoreState } from '../components/interfaces';
 
 interface IProps {
   error: IError[][];
   pathLists: IPath[];
-  selectPathList: IPath | boolean | string;
+  selectPathList: IPath;
   doubleClick: () => void;
   pathInfo: (path: IPath) => void;
   deletePath: (path: IPath) => void;
@@ -121,7 +121,7 @@ class TableContainer extends Component<IProps, IState> {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state: ICoreState) => {
   return {
     error: state.error,
     selectPathList: state.selectPathList
