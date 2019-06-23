@@ -1,16 +1,29 @@
-const calculateFieldPath = (pathPrev) => {
+import { IPath } from './interfaces';
+
+const fieldNeedNumberRoundTwo = [
+  'addFuel',
+  'constFuelChange',
+  'fuelBegin',
+  'deltaFuel',
+  'fuelEnd',,
+  'addFuelWinter',
+  'ConsumptionFactoryFuel',
+];
+const fieldNeedNumberRound = [
+  'milleage',
+  'pathBegin',
+  'pathEnd',
+];
+
+const roundTwo = (value: IPath[keyof IPath]): number => Math.round(+value * 100) / 100;
+const round = (field: IPath[keyof IPath]): number => Math.round(+field);
+
+const calculateFieldPath = <T extends IPath>(pathPrev: T) => {
   const path = {...pathPrev};
-  path.addFuel = Math.round(+path.addFuel * 100) / 100;
-  path.constFuelChange = Math.round(+path.constFuelChange * 100) / 100;
-  path.constFuelChangeExt = path.constFuelChangeExt ? Math.round(+path.constFuelChangeExt * 100) / 100 : null;
-  path.deltaFuel = Math.round(+path.deltaFuel * 100) / 100;
-  path.fuelBegin = Math.round(+path.fuelBegin * 100) / 100;
-  path.fuelEnd = Math.round(+path.fuelEnd * 100) / 100;
-  path.milleage = Math.round(+path.milleage);
-  path.pathBegin = Math.round(+path.pathBegin);
-  path.pathEnd = Math.round(+path.pathEnd);
-  path.addFuelWinter = Math.round(+path.addFuelWinter * 100) / 100;
-  path.ConsumptionFactoryFuel = Math.round(+path.ConsumptionFactoryFuel * 100) / 100;
-  return path;
+  path.constFuelChangeExt = path.constFuelChangeExt ? roundTwo(path.constFuelChangeExt) : null;
+  fieldNeedNumberRoundTwo.map(key => path[key] = roundTwo(path[key]));
+  fieldNeedNumberRound.map(key => path[key] = round(path[key]));
+  return path; 
 };
+
 export default calculateFieldPath;

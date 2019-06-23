@@ -2,6 +2,8 @@ import calc from './calculateFieldPath';
 
 test('adds calculateFieldPath to equal correct Matn.round', () => {
   const path = {
+    dateBegin: '01-01-2021',
+    name: 'test',
     addFuel: '12.125',
     constFuelChange: 14.425,
     constFuelChangeExt: 125.1525,
@@ -15,6 +17,8 @@ test('adds calculateFieldPath to equal correct Matn.round', () => {
     ConsumptionFactoryFuel: '12.025'
   };
   const result = {
+    dateBegin: '01-01-2021',
+    name: 'test',
     addFuel: 12.13,
     constFuelChange: 14.43,
     constFuelChangeExt: 125.15,
