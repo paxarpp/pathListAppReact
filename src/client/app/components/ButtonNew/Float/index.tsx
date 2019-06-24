@@ -10,7 +10,7 @@ interface IAdd {
 }
 
 interface IBFloat {
-  handlerClick?: () => void;
+  handlerClick?: () => void | null;
   children?: any;
   large?: boolean;
   second?: boolean;
@@ -102,7 +102,7 @@ const pulseStyle = css`
   }
 `;
 
-const Main = styled.button`
+const Main = styled.button<IBFloat>`
   position: relative;
   overflow: hidden;
   display: inline-block;

@@ -1,23 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css, keyframes } from 'styled-components';
 import { ifNotDisabled, ifNotDisabledHover } from '../constants';
 
-const ButtonMain = ({ children, handlerClick, disable, ...props }) => (
+interface IProps {
+  handlerClick?: () => void | null;
+  children?: any;
+  large?: boolean;
+  second?: boolean;
+  danger?: boolean;
+  small?: boolean;
+  disable?: boolean;
+};
+const ButtonMain = ({ children, handlerClick, disable, ...props }: IProps) => (
   <Main onClick={disable ? null : handlerClick} {...props} disable={disable}>
     {children}
   </Main>
 );
 
-ButtonMain.propTypes = {
-  handlerClick: PropTypes.func || PropTypes.bool,
-  children: PropTypes.any,
-  large: PropTypes.bool,
-  second: PropTypes.bool,
-  danger: PropTypes.bool,
-  small: PropTypes.bool,
-  disable: PropTypes.bool
-};
 const ripple = keyframes`
   0% {
     transform: scale(0, 0);
@@ -53,7 +52,7 @@ const norm = css`
   font-size: 14px;
 `;
 
-const Main = styled.button`
+const Main = styled.button<IProps>`
   margin: 5px;
   position: relative;
   overflow: hidden;

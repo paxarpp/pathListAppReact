@@ -1,22 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css, keyframes } from 'styled-components';
 
-const Flat = ({ children, handlerClick, disable, ...props }) => (
+interface IProps {
+  handlerClick?: () => void;
+  children?: any;
+  large?: boolean;
+  second?: boolean;
+  danger?: boolean;
+  small?: boolean;
+  disable?: boolean;
+}
+
+const Flat = ({ children, handlerClick, disable, ...props }: IProps) => (
   <Main onClick={disable ? null : handlerClick} {...props} disable={disable}>
     {children}
   </Main>
 );
 
-Flat.propTypes = {
-  handlerClick: PropTypes.func || PropTypes.bool,
-  children: PropTypes.any,
-  large: PropTypes.bool,
-  second: PropTypes.bool,
-  danger: PropTypes.bool,
-  small: PropTypes.bool,
-  disable: PropTypes.bool
-};
 const ripple = keyframes`
   0% {
     background-color: #2bbbad;
@@ -68,20 +68,20 @@ const rippleSec = keyframes`
   }
 }
 `;
-const large = css`
+const largeStyle = css`
   height: 54px;
   line-height: 54px;
   font-size: 16px;
   padding: 0 28px;
 `;
 
-const small = css`
+const smallStyle = css`
   height: 32px;
   line-height: 32px;
   font-size: 13px;
   padding: 0 14px;
 `;
-const norm = css`
+const normStyle = css`
   height: 36px;
   line-height: 36px;
   padding: 0 16px;
@@ -95,15 +95,15 @@ const disabledBtn = css`
   color: #9f9f9f !important;
   cursor: default;
 `;
-const Main = styled.button`
+const Main = styled.button<IProps>`
   position: relative;
   overflow: hidden;
   border: none;
   border-radius: 2px;
   display: inline-block;
-  ${props => !props.large && !props.small && norm};
-  ${props => props.large && large};
-  ${props => props.small && small};
+  ${({ large, small }) => !large && !small && normStyle};
+  ${({ large }) => large && largeStyle};
+  ${({ small }) => small && smallStyle};
   text-transform: uppercase;
   vertical-align: middle;
   -webkit-tap-highlight-color: transparent;
@@ -111,9 +111,9 @@ const Main = styled.button`
   background-color: transparent;
   text-align: center;
   letter-spacing: 0.5px;
-  cursor: ${props => !props.disable && 'pointer'};
+  cursor: ${({ disable }) => !disable && 'pointer'};
   outline: none;
-  ${props => props.disable && disabledBtn};
+  ${({ disable }) => disable && disabledBtn};
   :after {
     content: '';
     position: absolute;
@@ -128,10 +128,10 @@ const Main = styled.button`
     transform-origin: 50% 50%;
   }
   :focus:not(:active)::after {
-    animation: ${props =>
-        !props.disable && props.danger
+    animation: ${({ disable, danger, second }) =>
+        !disable && danger
           ? rippleRed
-          : props.second
+          : second
           ? rippleSec
           : ripple}
       1s ease-out;
