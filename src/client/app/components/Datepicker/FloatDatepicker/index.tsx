@@ -1,18 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const ButtonFloat = ({ children, handlerClick, active, ...props }) => (
+interface IBase {
+  children: any;
+  active: boolean;
+};
+interface IProps extends IBase {
+  handlerClick: () => void;
+};
+const ButtonFloat = ({ children, handlerClick, active, ...props }: IProps) => (
   <Main onClick={handlerClick} {...props} active={active}>
     {children}
   </Main>
 );
-ButtonFloat.propTypes = {
-  handlerClick: PropTypes.func,
-  children: PropTypes.any,
-  active: PropTypes.bool
-};
-const Main = styled.button`
+const Main = styled.button<IBase>`
   position: relative;
   overflow: hidden;
   display: inline-block;

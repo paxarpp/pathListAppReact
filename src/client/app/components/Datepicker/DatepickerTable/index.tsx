@@ -1,13 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
+import { ISetupDate } from '../DatepickerDateDisplay';
 import Float from '../FloatDatepicker';
 
 const getMaxDayinMonth = (year, month) => {
   return 33 - new Date(new Date(year, month).getFullYear(), new Date(year, month).getMonth(), 33).getDate();
 };
 
+interface IProps {
+  handlerClick: () => void;
+  setupDate: ISetupDate;
+  year: number;
+  month: number;
+};
 const prepareArrayDay = (year, month, setupDate, handlerClick) => {
   const day = new Date(year, month, 1).getDay();
   const dayBegin = day === 0 ? 7 : day;
@@ -47,16 +52,6 @@ const DatepickerTable = ({ year, month, handlerClick, setupDate }) => {
       <tbody>{result.map((el, indx) => <tr key={`tr${indx}`}>{[...el]}</tr>)}</tbody>
     </Table>
   );
-};
-DatepickerTable.propTypes = {
-  handlerClick: PropTypes.func,
-  setupDate: PropTypes.shape({
-    year: PropTypes.number.isRequired,
-    month: PropTypes.number.isRequired,
-    day: PropTypes.number.isRequired
-  }),
-  year: PropTypes.number.isRequired,
-  month: PropTypes.number.isRequired
 };
 const Table = styled.table`
   width: 280px;

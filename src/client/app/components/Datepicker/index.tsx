@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-
 import DatepickerTable from './DatepickerTable';
 import DatepickerControls from './DatepickerControls';
 import DatepickerDateDisplay from './DatepickerDateDisplay';
 import DatepickerFooter from './DatepickerFooter';
 
-class DatePicker extends Component {
+interface IProps {
+  handlerClose: () => void;
+  handlerComplite: (setupDate: setupDate) => () => void;
+};
+type setupDate = {
+  year: number;
+  month: number;
+  day: number;
+};
+interface IState {
+  month: number;
+  year: number;
+  setupDate: setupDate;
+};
+class DatePicker extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -70,10 +82,6 @@ class DatePicker extends Component {
     );
   }
 }
-DatePicker.propTypes = {
-  handlerClose: PropTypes.func.isRequired,
-  handlerComplite: PropTypes.func.isRequired
-};
 const DatepickerModal = styled.div`
   position: fixed;
   left: 0;

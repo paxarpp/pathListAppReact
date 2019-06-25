@@ -1,29 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
-const Input = ({ placeholder, handler, value, ...props }) => {
-  let inputRef = React.createRef();
+interface IProps {
+  placeholder?: string;
+  value?: any;
+  handler?: () => void;
+};
+const Input = ({ placeholder, handler, value, ...props }: IProps) => {
+  const inputRef = React.createRef<HTMLInputElement>();
+  const node = inputRef.current!;
   return (
     <Wrapper>
       <InpWrap
         {...props}
         onChange={handler}
-        ref={input => (inputRef = input)}
+        ref={inputRef}
         value={value}
       />
-      <LabelWrap onClick={() => inputRef.focus()} value={value}>
+      <LabelWrap onClick={() => node.focus()} value={value}>
         {placeholder}
       </LabelWrap>
     </Wrapper>
   );
 };
 
-Input.propTypes = {
-  placeholder: PropTypes.string,
-  value: PropTypes.any,
-  handler: PropTypes.func
-};
 
 const InpWrap = styled.input`
   background-color: transparent;
@@ -54,10 +54,10 @@ const InpWrap = styled.input`
     border-bottom: 2px solid #26a69a;
   }
 `;
-const LabelWrap = styled.label`
+const LabelWrap = styled.label<IProps>`
   position: absolute;
-  top: ${props => (props.value ? '0' : '1rem')};
-  font-size: ${props => (props.value ? '0.7rem' : '1rem')};
+  top: ${({ value }) => value ? '0' : '1rem'};
+  font-size: ${({ value }) => value ? '0.7rem' : '1rem'};
   left: 0;
   color: #9e9e9e;
   transition: all 0.3s;

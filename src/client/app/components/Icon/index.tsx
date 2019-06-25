@@ -1,10 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
 import { icons } from './assets';
 
-const Icon = ({ name = 'defaultIcon', color = 'currentColor', size = 24, onClick, ...otherProps }) => {
+interface IProps {
+  name: string;
+  onClick: () => void;
+  color?: string;
+  size?: string | number;
+};
+const Icon = ({ name = 'defaultIcon', color = 'currentColor', size = 24, onClick, ...otherProps }: IProps) => {
   const icon = icons[name] ? icons[name] : icons['defaultIcon'];
   return (
     <Svg
@@ -21,14 +25,8 @@ const Icon = ({ name = 'defaultIcon', color = 'currentColor', size = 24, onClick
     </Svg>
   );
 };
-Icon.propTypes = {
-  name: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
-  color: PropTypes.string,
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-};
 
 const Svg = styled.svg`
-  cursor: ${props => props.onClick && 'pointer'};
+  cursor: ${({ onClick }) => onClick && 'pointer'};
 `;
 export default Icon;

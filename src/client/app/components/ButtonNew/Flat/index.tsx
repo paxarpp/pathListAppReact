@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
 interface IProps {
-  handlerClick?: () => void;
+  handlerClick?: (setupDate: any) => void;
   children?: any;
   large?: boolean;
   second?: boolean;
