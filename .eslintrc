@@ -25,8 +25,14 @@
     "plugins": [
       "prettier",
       "react",
-      "chai-friendly"
+      "chai-friendly",
+      "@typescript-eslint"
     ],
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
     "rules": {
       "quotes": [
         "error",

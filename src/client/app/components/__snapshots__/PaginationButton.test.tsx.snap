@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaginationButton 100etc 1`] = `
+<div
+  className="sc-bxivhb kqodyu"
+>
+  <button
+    className="sc-ifAKCX bLOlJY sc-bwzfXH bFVykN"
+    onClick={[Function]}
+  >
+    1
+  </button>
+  <button
+    className="sc-bwzfXH ixPAYQ"
+    onClick={[Function]}
+  >
+    2
+  </button>
+  <button
+    className="sc-bwzfXH ixPAYQ"
+    onClick={[Function]}
+  >
+    3
+  </button>
+  <span>
+    ...
+  </span>
+  <button
+    className="sc-bwzfXH ixPAYQ"
+    onClick={[Function]}
+  >
+    5
+  </button>
+</div>
+`;
+
+exports[`PaginationButton 400etc 1`] = `
+<div
+  className="sc-bxivhb kqodyu"
+>
+  <button
+    className="sc-bwzfXH ixPAYQ"
+    onClick={[Function]}
+  >
+    1
+  </button>
+  <span>
+    ...
+  </span>
+  <button
+    className="sc-bwzfXH ixPAYQ"
+    onClick={[Function]}
+  >
+    10
+  </button>
+  <button
+    className="sc-bwzfXH ixPAYQ"
+    onClick={[Function]}
+  >
+    18
+  </button>
+  <button
+    className="sc-bwzfXH ixPAYQ"
+    onClick={[Function]}
+  >
+    19
+  </button>
+  <button
+    className="sc-ifAKCX bLOlJY sc-bwzfXH bFVykN"
+    onClick={[Function]}
+  >
+    20
+  </button>
+</div>
+`;
+
+exports[`PaginationButton 500etc 1`] = `
+<div
+  className="sc-bxivhb kqodyu"
+>
+  <button
+    className="sc-bwzfXH ixPAYQ"
+    onClick={[Function]}
+  >
+    1
+  </button>
+  <span>
+    ...
+  </span>
+  <button
+    className="sc-bwzfXH ixPAYQ"
+    onClick={[Function]}
+  >
+    8
+  </button>
+  <button
+    className="sc-bwzfXH ixPAYQ"
+    onClick={[Function]}
+  >
+    9
+  </button>
+  <button
+    className="sc-ifAKCX bLOlJY sc-bwzfXH bFVykN"
+    onClick={[Function]}
+  >
+    10
+  </button>
+  <button
+    className="sc-bwzfXH ixPAYQ"
+    onClick={[Function]}
+  >
+    11
+  </button>
+  <button
+    className="sc-bwzfXH ixPAYQ"
+    onClick={[Function]}
+  >
+    12
+  </button>
+  <button
+    className="sc-bwzfXH ixPAYQ"
+    onClick={[Function]}
+  >
+    20
+  </button>
+  <span>
+    ...
+  </span>
+  <button
+    className="sc-bwzfXH ixPAYQ"
+    onClick={[Function]}
+  >
+    25
+  </button>
+</div>
+`;
+
+exports[`PaginationButton empty 1`] = `
+<div
+  className="sc-bxivhb kqodyu"
+/>
+`;

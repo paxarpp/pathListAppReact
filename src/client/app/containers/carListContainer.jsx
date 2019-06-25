@@ -10,9 +10,13 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import Confirm from '../components/Confirm';
 
-import { deleteCarToName, addNewCar, infoCarToName } from '../actions/cars.js';
-import { checkError, addNewPath } from '../actions/pathLists.js';
-import saveToLocalStorage from '../components/saveToLocalStorage.js';
+import {
+  deleteCarToName,
+  addNewCar,
+  infoCarToName,
+  saveToLocalStorageAction
+} from '../actions/cars';
+import { checkError, addNewPath } from '../actions/pathLists';
 
 class CarListContainer extends Component {
   constructor(props) {
@@ -24,8 +28,8 @@ class CarListContainer extends Component {
   }
 
   componentDidUpdate() {
-    const { cars, pathLists } = this.props;
-    saveToLocalStorage(cars, pathLists);
+    const { cars, pathLists, saveToLocalStorage } = this.props;
+    saveToLocalStorage({ cars, pathLists });
   }
 
   deleteCar = name => () => {
@@ -66,10 +70,12 @@ class CarListContainer extends Component {
         />
         <Footer>
           <Primary handlerClick={() => this.props.addCar()}>
-            <Icon name="Add" />авто
+            <Icon name="Add" />
+            авто
           </Primary>
           <Primary handlerClick={() => this.props.addPath()}>
-            <Icon name="Add" />лист
+            <Icon name="Add" />
+            лист
           </Primary>
         </Footer>
       </WrapperCarListContainer>
@@ -87,19 +93,21 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    deleteCar: name => deleteCarToName(dispatch, name),
-    carInfo: name => infoCarToName(dispatch, name),
-    addCar: () => addNewCar(dispatch),
-    chError: () => checkError(dispatch),
-    addPath: () => addNewPath(dispatch)
+    deleteCar: name => dispatch(deleteCarToName(name)),
+    carInfo: name => dispatch(infoCarToName(name)),
+    addCar: () => dispatch(addNewCar()),
+    chError: () => dispatch(checkError()),
+    addPath: () => dispatch(addNewPath()),
+    saveToLocalStorage: obj => dispatch(saveToLocalStorageAction(obj))
   };
 };
 
 CarListContainer.propTypes = {
   cars: PropTypes.arrayOf(PropTypes.object),
-  pathLists: PropTypes.arrayOf(PropTypes.object),
+  pathLists: PropTypes.object,
   selectedCar: PropTypes.string,
   deleteCar: PropTypes.func,
+  saveToLocalStorage: PropTypes.func,
   chError: PropTypes.func,
   error: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
   carInfo: PropTypes.func,
@@ -116,4 +124,7 @@ const WrapperCarListContainer = styled.div`
   flex-flow: column nowrap;
 `;
 
-export default connect(mapStateToProps, mapDispatchToProps)(CarListContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CarListContainer);
