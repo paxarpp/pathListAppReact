@@ -90,7 +90,6 @@ const normStyle = css`
 const disabledBtn = css`
   pointer-events: none;
   background-color: #dfdfdf !important;
-  -webkit-box-shadow: none;
   box-shadow: none;
   color: #9f9f9f !important;
   cursor: default;
@@ -106,7 +105,6 @@ const Main = styled.button<IProps>`
   ${({ small }) => small && smallStyle};
   text-transform: uppercase;
   vertical-align: middle;
-  -webkit-tap-highlight-color: transparent;
   color: #343434;
   background-color: transparent;
   text-align: center;
