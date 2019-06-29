@@ -1,0 +1,82 @@
+module.exports = {
+  parser: "@typescript-eslint/parser",
+  extends: [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint"
+  ],
+  env: {
+    browser: true,
+    node: true,
+    worker: false,
+    amd: false,
+    mocha: true,
+    jasmine: false,
+    phantomjs: false,
+    jquery: false,
+    prototypejs: false,
+    shelljs: false,
+    meteor: false,
+    mongo: false,
+    applescript: false,
+    es6: true,
+    jest: true
+  },
+  // plugins: [
+  //   "prettier",
+  //   "react",
+  //   "chai-friendly",
+  //   "@typescript-eslint"
+  // ],
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true
+    },
+    sourceType: "module",
+    ecmaVersion: 2018
+  },
+  rules: {
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "no-extra-semi": 1,
+    "no-inner-declarations": 2,
+    "no-unused-vars": 2,
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": true,
+        "classes": true
+      }
+    ],
+    "curly": 2,
+    "no-eval": 2,
+    "no-extend-native": 2,
+    "no-new-wrappers": 2,
+    "no-with": 2,
+    "no-return-await": 2,
+    "no-undef": 2,
+    "no-unused-expressions": 0,
+    "chai-friendly/no-unused-expressions": 2,
+    "no-var": 2,
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "all",
+        "ignoreReadBeforeAssign": false
+      }
+    ],
+    "no-array-constructor": 2,
+    "no-new-object": 2,
+    "prettier/prettier": "error"
+  },
+  settings: {
+    react: {
+      version: "detect"
+    }
+  }
+}

@@ -3,7 +3,7 @@ import styled, { css, keyframes } from 'styled-components';
 import { ifNotDisabled, ifNotDisabledHover } from '../constants';
 
 interface IProps {
-  handlerClick?: () => void | null;
+  handlerClick?: (e: any) => void | null;
   children?: any;
   large?: boolean;
   second?: boolean;

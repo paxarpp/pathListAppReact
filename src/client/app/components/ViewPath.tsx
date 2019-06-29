@@ -6,7 +6,7 @@ import { IPath, IError, ICar } from './interfaces';
 
 interface IProps {
   path: IPath & ICar & IError;
-  doubleClick: (name: string, vvalue: number) => void;
+  doubleClick: (name: string, value: number) => () => void;
   error: IError[][];
 };
 

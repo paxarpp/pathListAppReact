@@ -14,7 +14,7 @@ import Footer from './footer';
 import calculateFieldPath from './calculateFieldPath';
 import fildNamePathList from './fildNamePathList';
 import fildNameCheckRule from './fildNameCheckRule';
-import { IPathBase, ICar } from './interfaces';
+import { IPathBase, ICar, IWindowId } from './interfaces';
 
 interface IchangeExt {
   changeExt: boolean;
@@ -49,18 +49,16 @@ interface IState {
 }
 
 class CreatePath extends Component<IProps, IState> {
-  constructor(props) {
+  constructor(props: IProps) {
     super(props);
     this.state = {
       name: '',
       fuel: '',
       dateBegin: `${new Date().getFullYear()}-${(new Date().getMonth() + 1)
         .toString()
-        // @ts-ignore
         .padStart(2, '0')}-${new Date()
         .getDate()
         .toString()
-        // @ts-ignore
         .padStart(2, '0')}`,
       pathBegin: null,
       pathEnd: null,
@@ -81,42 +79,17 @@ class CreatePath extends Component<IProps, IState> {
     };
   }
   
-  handleSubmit = e => {
+  public handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const {
-      name,
-      dateBegin,
-      pathBegin,
-      pathEnd,
-      milleage,
-      fuelBegin,
-      fuelEnd,
-      addFuel,
-      deltaFuel,
-      fuel,
       constFuelChange,
       constFuelChangeExt,
       extension,
-      ConsumptionFactoryFuel,
-      addFuelWinter
     } = this.state;
     const { addDataPath, pathLists, close, chError } = this.props;
     const path = {
-      name,
-      dateBegin,
-      pathBegin,
-      pathEnd,
-      milleage,
-      fuelBegin,
-      fuelEnd,
-      addFuel,
-      deltaFuel,
-      fuel,
-      constFuelChange:
-        extension ? constFuelChangeExt : constFuelChange,
-      extension,
-      ConsumptionFactoryFuel,
-      addFuelWinter
+      ...this.state,
+      constFuelChange: extension ? constFuelChangeExt : constFuelChange,
     };
     if (path.dateBegin === '') {
       this.setState({
@@ -125,9 +98,7 @@ class CreatePath extends Component<IProps, IState> {
     } else {
       if (
         pathLists[path.name] &&
-        pathLists[path.name].some(elem => {
-          return elem.dateBegin === path.dateBegin;
-        })
+        pathLists[path.name].some(elem => elem.dateBegin === path.dateBegin)
       ) {
         this.setState({
           isWrongDuble: true
@@ -151,9 +122,8 @@ class CreatePath extends Component<IProps, IState> {
       }
     }
   };
-  handleChangeName = e => {
-    const value = e.currentTarget.value;
-    const fieldName = e.currentTarget.dataset.fieldName;
+  public handleChangeName = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { value, dataset: { fieldName } } = e.currentTarget;
     const { cars } = this.props;
     this.setState(prev => ({
       ...prev,
@@ -201,7 +171,7 @@ class CreatePath extends Component<IProps, IState> {
       }));
     }
   };
-  handleChange = e => {
+  public handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
     const fieldName = e.currentTarget.dataset.fieldName;
     this.setState(
@@ -259,12 +229,12 @@ class CreatePath extends Component<IProps, IState> {
         ) / 100
     }));
   };
-  handleClose = e => {
+  public handleClose = (e: React.MouseEvent<HTMLElement, "onClick">) => {
     const { close } = this.props;
     e.preventDefault();
     close('isNewPath');
   };
-  render() {
+  public render() {
     const { cars } = this.props;
     const {
       name,
@@ -440,7 +410,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addDataPath: path => dispatch(savePath(path)),
-    close: nameWindow => dispatch(closeWindow(nameWindow)),
+    close: (nameWindow: IWindowId) => dispatch(closeWindow(nameWindow)),
     chError: () => dispatch(checkError())
   };
 };

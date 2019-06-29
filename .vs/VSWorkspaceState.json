@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\client",
+    "\\src\\client\\app",
+    "\\src\\client\\app\\components"
+  ],
+  "SelectedNode": "\\src\\client\\app\\components\\CreatePath.tsx",
+  "PreviewInSolutionExplorer": false
+}

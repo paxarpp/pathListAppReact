@@ -4,7 +4,7 @@ import styled from 'styled-components';
 interface IProps {
   placeholder?: string;
   value?: any;
-  handler?: () => void;
+  handler?: (e: any) => void;
 };
 const Input = ({ placeholder, handler, value, ...props }: IProps) => {
   const inputRef = React.createRef<HTMLInputElement>();

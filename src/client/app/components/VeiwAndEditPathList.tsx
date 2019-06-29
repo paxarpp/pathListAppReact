@@ -10,8 +10,8 @@ import { IPath, IError, ICar } from './interfaces';
 interface IProps {
   close: (name: string) => void;
   selectPathList: IError & IPath & ICar;
-  doubleClick: () => void;
-  error: IError[][]
+  doubleClick: (name: string, vvalue: number) => () => void;
+  error: IError[][];
 };
 
 const VeiwAndEditPathList = ({ selectPathList, error, close, doubleClick }: IProps) => (
