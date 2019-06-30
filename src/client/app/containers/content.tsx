@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { createSelector } from 'reselect';
 import CreateCar from '../components/CreateCar';
@@ -11,12 +10,22 @@ import PopUpInput from '../components/PopUpInput';
 import { initLoad } from '../actions/cars';
 import { checkError, saveUpdateData } from '../actions/pathLists';
 
-class Content extends Component {
+interface IProps {
+  isNewCar: boolean;
+  isNewPath: boolean;
+  selectedCar: [];
+  pathLists: [];
+  selectPathList: boolean | string;
+  saveUpdate: () => void;
+  load: () => void;
+  chError: () => void;
+}
+class Content extends Component<any, any> {
   state = {
     coordX: null,
     coordY: null,
     field: null,
-    value: null
+    value: null,
   };
 
   doubleClick = (field, value) => event => {
@@ -26,7 +35,7 @@ class Content extends Component {
       coordX,
       coordY,
       field,
-      value
+      value,
     });
   };
 
@@ -35,7 +44,7 @@ class Content extends Component {
       const { saveUpdate } = this.props;
       const { field, value } = this.state;
       const result = {
-        [field]: value
+        [field]: value,
       };
       saveUpdate(result);
     }
@@ -48,7 +57,7 @@ class Content extends Component {
       coordX: null,
       coordY: null,
       field: null,
-      value: null
+      value: null,
     });
   };
 
@@ -113,24 +122,10 @@ const mapDispatchToProps = dispatch => {
     saveUpdate: result => {
       dispatch(saveUpdateData(result));
       dispatch(checkError());
-    }
+    },
   };
 };
 
-Content.propTypes = {
-  isNewCar: PropTypes.bool,
-  isNewPath: PropTypes.bool,
-  selectedCar: PropTypes.array,
-  pathLists: PropTypes.array,
-  selectPathList: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.string,
-    PropTypes.object
-  ]),
-  saveUpdate: PropTypes.func,
-  load: PropTypes.func,
-  chError: PropTypes.func
-};
 const Container = styled.div`
   flex: 1;
   display: flex;

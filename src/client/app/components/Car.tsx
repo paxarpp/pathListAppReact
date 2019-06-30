@@ -8,11 +8,11 @@ interface IProp {
   selectedCar: string;
   handler: (h: any) => any;
   deleteCarHandler: (name: string) => any;
-};
+}
 
-interface WrapProp {
+interface IWrapProp {
   isSelectedCar: boolean;
-};
+}
 
 const Car = ({ car, handler, selectedCar, deleteCarHandler }: IProp) => (
   <Wrap onClick={handler} isSelectedCar={selectedCar === car.name}>
@@ -53,7 +53,7 @@ const Wrap = styled.div`
   width: 100%;
   align-items: center;
   padding-left: 1rem;
-  ${(props: WrapProp) => props.isSelectedCar && selected};
+  ${({isSelectedCar}: {isSelectedCar: boolean}) => isSelectedCar && selected};
 `;
 
 export default Car;

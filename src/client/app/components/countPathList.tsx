@@ -18,7 +18,7 @@ const Count = ({ count, position, text }: IProps) => (
   </CounterWrap>
 );
 
-const isPosition = (props: IisPosition)=>
+const isPosition = (props: IisPosition) =>
   props.position === 'top'
     ? css`
         right: 96px;

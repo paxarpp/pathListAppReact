@@ -4,7 +4,7 @@ import { icons } from './assets';
 
 interface IProps {
   name: string;
-  onClick: () => void;
+  onClick?: () => void;
   color?: string;
   size?: string | number;
 };

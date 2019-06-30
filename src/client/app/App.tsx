@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import Footer from './components/footer';
 import Content from './containers/content';
 import CarListContainer from './containers/carListContainer';
@@ -14,20 +13,18 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const App = () => {
-  return (
-    <Wrapper>
-      <GlobalStyle />
-      <div>
-        <CarListContainer />
-      </div>
-      <WrapperContent>
-        <Content />
-        <Footer>&copy; {new Date().getFullYear()}</Footer>
-      </WrapperContent>
-    </Wrapper>
-  );
-};
+const App = () => (
+  <Wrapper>
+    <GlobalStyle />
+    <div>
+      <CarListContainer />
+    </div>
+    <WrapperContent>
+      <Content />
+      <Footer>&copy; {new Date().getFullYear()}</Footer>
+    </WrapperContent>
+  </Wrapper>
+);
 
 const Wrapper = styled.div`
   min-height: 100vh;

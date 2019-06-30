@@ -10,10 +10,9 @@ import rootSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const enhancer = composeEnhancers(
-  applyMiddleware(sagaMiddleware),
-);
+const composeEnhancers =
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware));
 
 const store = createStore(reducer, enhancer);
 

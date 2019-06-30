@@ -1,29 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
 import CarList from '../components/CarList';
 import { Primary } from '../components/ButtonNew';
 import Icon from '../components/Icon';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import Confirm from '../components/Confirm';
-
 import {
   deleteCarToName,
   addNewCar,
   infoCarToName,
-  saveToLocalStorageAction
+  saveToLocalStorageAction,
 } from '../actions/cars';
 import { checkError, addNewPath } from '../actions/pathLists';
 
-class CarListContainer extends Component {
+interface IProps {
+  cars: [];
+  pathLists: [];
+  selectedCar: string;
+  deleteCar: () => void;
+  saveToLocalStorage: () => void;
+  chError: () => void;
+  error: [];
+  carInfo: () => void;
+  addCar: () => void;
+  addPath: () => void;
+}
+class CarListContainer extends Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
       popUpConfirm: false,
-      name: ''
+      name: '',
     };
   }
 
@@ -35,7 +44,7 @@ class CarListContainer extends Component {
   deleteCar = name => () => {
     this.setState({
       popUpConfirm: true,
-      name
+      name,
     });
   };
 
@@ -44,7 +53,7 @@ class CarListContainer extends Component {
     const { name } = this.state;
     this.setState({
       popUpConfirm: false,
-      name: ''
+      name: '',
     });
     if (status) {
       deleteCar(name);
@@ -88,7 +97,7 @@ const mapStateToProps = state => {
     cars: state.cars,
     pathLists: state.pathLists,
     selectedCar: state.selectedCar,
-    error: state.error
+    error: state.error,
   };
 };
 const mapDispatchToProps = dispatch => {
@@ -98,22 +107,10 @@ const mapDispatchToProps = dispatch => {
     addCar: () => dispatch(addNewCar()),
     chError: () => dispatch(checkError()),
     addPath: () => dispatch(addNewPath()),
-    saveToLocalStorage: obj => dispatch(saveToLocalStorageAction(obj))
+    saveToLocalStorage: obj => dispatch(saveToLocalStorageAction(obj)),
   };
 };
 
-CarListContainer.propTypes = {
-  cars: PropTypes.arrayOf(PropTypes.object),
-  pathLists: PropTypes.object,
-  selectedCar: PropTypes.string,
-  deleteCar: PropTypes.func,
-  saveToLocalStorage: PropTypes.func,
-  chError: PropTypes.func,
-  error: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
-  carInfo: PropTypes.func,
-  addCar: PropTypes.func,
-  addPath: PropTypes.func
-};
 const WrapperCarListContainer = styled.div`
   padding: 0;
   height: 100%;

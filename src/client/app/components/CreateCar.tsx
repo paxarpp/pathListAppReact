@@ -9,14 +9,13 @@ import InputExtension from './InputExtension';
 import Header from './header';
 import Footer from './footer';
 import fildNameCheckRule from './fildNameCheckRule';
-import { ICar } from './interfaces';
+import { ICar, IWindowId } from './interfaces';
 import { createSelector } from 'reselect';
 
 interface IProps {
   addDataCar: (car: ICar) => void;
   carsName: string[];
   close: (s: string) => void;
-  USER_FETCH: (s: string) => void;
 }
 interface IState {
   name: string;
@@ -34,11 +33,17 @@ class CreateCar extends Component<IProps, IState> {
     fuel: 'AI',
     extension: false,
     constFuelChangeExt: null,
-    isWrong: false
+    isWrong: false,
   };
 
   public handleSubmit = () => {
-    const { name, constFuelChange, fuel, extension, constFuelChangeExt } = this.state;
+    const {
+      name,
+      constFuelChange,
+      fuel,
+      extension,
+      constFuelChangeExt,
+    } = this.state;
     const { addDataCar, carsName, close } = this.props;
     const isDubble = carsName.some(elem => elem === name);
     const car = {
@@ -46,7 +51,7 @@ class CreateCar extends Component<IProps, IState> {
       constFuelChange,
       fuel,
       extension,
-      constFuelChangeExt: extension ? constFuelChangeExt : null
+      constFuelChangeExt: extension ? constFuelChangeExt : null,
     };
     if (
       car.name === '' ||
@@ -58,7 +63,7 @@ class CreateCar extends Component<IProps, IState> {
       isDubble
     ) {
       this.setState(() => ({
-        isWrong: true
+        isWrong: true,
       }));
     } else {
       addDataCar(car);
@@ -72,7 +77,7 @@ class CreateCar extends Component<IProps, IState> {
     this.setState(
       prev => ({
         ...prev,
-        [fieldName]: value
+        [fieldName]: value,
       }),
       this.cbError(fieldName)
     );
@@ -81,25 +86,31 @@ class CreateCar extends Component<IProps, IState> {
   public close = () => {
     const { close } = this.props;
     close('isNewCar');
-  }
+  };
 
   private cbError(fieldName: string): () => void {
     return () => {
       if (fildNameCheckRule[fieldName].test(this.state[fieldName])) {
         this.setState({
-          isWrong: false
+          isWrong: false,
         });
-      }
-      else {
+      } else {
         this.setState({
-          isWrong: fieldName
+          isWrong: fieldName,
         });
       }
     };
   }
 
   public render() {
-    const { name, fuel, constFuelChange, isWrong, constFuelChangeExt, extension } = this.state;
+    const {
+      name,
+      fuel,
+      constFuelChange,
+      isWrong,
+      constFuelChangeExt,
+      extension,
+    } = this.state;
     return (
       <PopUpWrap>
         <PopUp>
@@ -124,7 +135,10 @@ class CreateCar extends Component<IProps, IState> {
           </PopUpContent>
           {isWrong && <HeadError>ошибка введеных данных</HeadError>}
           <Footer>
-            <Primary handlerClick={this.handleSubmit} disable={isWrong !== false}>
+            <Primary
+              handlerClick={this.handleSubmit}
+              disable={isWrong !== false}
+            >
               Сохранить
             </Primary>
           </Footer>
@@ -136,16 +150,16 @@ class CreateCar extends Component<IProps, IState> {
 const mapDispatchToProps = dispatch => {
   return {
     addDataCar: (car: ICar) => dispatch(saveCar(car)),
-    close: (isNewCar: string) => dispatch(closeWindow(isNewCar)),
+    close: (isNewCar: IWindowId) => dispatch(closeWindow(isNewCar)),
   };
 };
 const mapStateToProps = state => {
   const selectorCarsName = createSelector(
     () => state.cars.map((car: ICar): string => car.name),
-    names => [...names],
-  )
+    names => [...names]
+  );
   return {
-    carsName: selectorCarsName(state)
+    carsName: selectorCarsName(state),
   };
 };
 

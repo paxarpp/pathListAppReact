@@ -9,9 +9,10 @@ interface IProps {
   isWrong: string | boolean;
   constFuelChangeExt: string;
 }
-
-interface IError {
+interface IWrapInput {
   error: boolean;
+  handle: (e:any) => void;
+  value: any;
 }
 
 const InputExtension = ({ extension, handleChange, isWrong, constFuelChangeExt }: IProps) => (
@@ -64,8 +65,8 @@ const ErrorStyle = css`
   transition: opacity 0.5s ease-in;
 `;
 
-const WrapInput = styled(Input)`
-  ${({error}: IError) => error && ErrorStyle};
+const WrapInput = styled(Input)<IWrapInput>`
+  ${({error}) => error && ErrorStyle};
 `;
 
 export default InputExtension;

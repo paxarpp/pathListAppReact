@@ -1,21 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["es6", "es2017", "es2015", "dom"],
-    "jsx":"react",
-    "outDir": "dist",
-    "rootDir": "src",
-    "module": "commonjs",
-    "declaration": true,
-    "noImplicitAny": true,
-    "removeComments": true,
-    "sourceMap": true,
-    "esModuleInterop": true
+    "composite": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-  ]
+  "files": [],
+  "include": [],
+  "references": [{ "path": "./tsconfig.test.json" }]
 }
