@@ -57,9 +57,9 @@ class CreatePath extends Component<IProps, IState> {
       dateBegin: `${new Date().getFullYear()}-${(new Date().getMonth() + 1)
         .toString()
         .padStart(2, '0')}-${new Date()
-        .getDate()
-        .toString()
-        .padStart(2, '0')}`,
+          .getDate()
+          .toString()
+          .padStart(2, '0')}`,
       pathBegin: null,
       pathEnd: null,
       milleage: 0,
@@ -75,10 +75,10 @@ class CreatePath extends Component<IProps, IState> {
       columnView: true,
       extension: false,
       constFuelChangeExt: null,
-      datepickerOpen: false
+      datepickerOpen: false,
     };
   }
-  
+
   public handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const {
@@ -122,12 +122,16 @@ class CreatePath extends Component<IProps, IState> {
       }
     }
   };
+
   public handleChangeName = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { value, dataset: { fieldName } } = e.currentTarget;
+    const {
+      value,
+      dataset: { fieldName }
+    } = e.currentTarget;
     const { cars } = this.props;
     this.setState(prev => ({
       ...prev,
-      [fieldName]: value
+      [fieldName]: value,
     }));
     this.setState(prev => ({
       ...prev,
@@ -171,6 +175,7 @@ class CreatePath extends Component<IProps, IState> {
       }));
     }
   };
+
   public handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
     const fieldName = e.currentTarget.dataset.fieldName;
@@ -200,11 +205,11 @@ class CreatePath extends Component<IProps, IState> {
       ...prev,
       ConsumptionFactoryFuel:
         prev.extension ?
-        Math.round(
-              ((+prev.milleage * +prev.constFuelChangeExt) / 100) * 100
-            ) / 100
+          Math.round(
+            ((+prev.milleage * +prev.constFuelChangeExt) / 100) * 100
+          ) / 100
           : Math.round(((+prev.milleage * +prev.constFuelChange) / 100) * 100) /
-            100
+          100
     }));
     this.setState(prev => ({
       ...prev,
@@ -214,7 +219,7 @@ class CreatePath extends Component<IProps, IState> {
             +prev.addFuel +
             +prev.addFuelWinter -
             +prev.ConsumptionFactoryFuel) *
-            100
+          100
         ) / 100
     }));
     this.setState(prev => ({
@@ -225,7 +230,7 @@ class CreatePath extends Component<IProps, IState> {
             +prev.addFuel +
             +prev.addFuelWinter -
             +prev.fuelEnd) *
-            100
+          100
         ) / 100
     }));
   };
@@ -524,7 +529,7 @@ const WrapSelect = styled.select`
   font-size: 1.5rem;
 `;
 const FuelChangeExt = styled.div`
-  display: ${({changeExt}: IchangeExt) => (changeExt ? 'block' : 'none')};
+  display: ${({ changeExt }: IchangeExt) => (changeExt ? 'block' : 'none')};
   background-color: #80808080;
 `;
 export default connect(
